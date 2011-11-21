@@ -95,3 +95,51 @@ function get_country_name($iso3) {
     return $row['name'];
 }
 
+function get_pledge_information($iso3, $conditional, $year) {
+    // Protect against injection
+    $conditional_bool = $conditional ? 1 : 0;
+    $iso3_3lett = substr($iso3, 0, 3);
+    $year_checked = intval($year);
+    $sql = 'SELECT * FROM pledge WHERE conditional=' . $conditional_bool . ' AND iso3="' . $iso3_3lett . '" AND by_year=' . $year_checked . ';';
+    $result = query_db($sql);
+    $row = mysql_fetch_array($result, MYSQL_ASSOC);
+    mysql_free_result($result);
+    return $row;
+}
+
+function get_gdrs_information($pledge_info, $pathway) {
+    if (!$pledge_info) {
+        return NULL;
+    }
+    // First, get the parameter values used by the database
+    $req =& new HTTP_Request("http://gdrights.org/calculator_dev/api/?q=params");
+    $req->setMethod(HTTP_REQUEST_METHOD_GET);
+    if (!PEAR::isError($req->sendRequest())) {
+         $params = json_decode($req->getResponseBody());
+    } else {
+        $params = NULL;
+    }
+    
+    // Announce that we'd like to free up memory before reusing the variable
+    unset($req);
+    
+    // Build up API query
+    $req =& new HTTP_Request("http://gdrights.org/calculator_dev/api/");
+    $req->setMethod(HTTP_REQUEST_METHOD_POST);
+    if ($pledge_info['rel_to_year']) {
+        $years = $pledge_info['rel_to_year'] . "," . $pledge_info['by_year'];
+    } else {
+        $years = $pledge_info['by_year'];
+    }
+    $req->addPostData("years", $years);
+    $req->addPostData("countries", $pledge_info['iso3']);
+    $req->addPostData("emergency_path", $pathway);
+    if (!PEAR::isError($req->sendRequest())) {
+         $response = json_decode($req->getResponseBody());
+    } else {
+        $response = NULL;
+    }
+    
+    return $response;
+}
+

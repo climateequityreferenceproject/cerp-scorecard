@@ -13,10 +13,14 @@ if ($_POST) {
     $params['min_target_year'] = get_min_target_year($_POST['country'], $_POST['conditional']);
     $params['country_name'] = get_country_name($_POST['country']);
     $params['ambition'] = $pathway_label[array_search($_POST['ambition'], $pathway_id)];
+    
+    $pledge_info = get_pledge_information($_POST['country'], $_POST['conditional'], $params['min_target_year']);
 } else {
     $params['min_target_year'] = NULL;
     $params['country_name'] = NULL;
     $params['ambition'] = NULL;
+    
+    $pledge_info = NULL;
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -62,21 +66,7 @@ if ($_POST) {
             <p>of its fair share in <?php echo $params['min_target_year'] ?>, assuming <?php echo strtolower($params['ambition']) ?> global ambition.</p>
             <p id="more_options"><a href="#">I want more options for this calculation</a></p>
         </div>
-        <?php
-
-
-        $req =& new HTTP_Request("http://gdrights.org/calculator_dev/api/");
-        $req->setMethod(HTTP_REQUEST_METHOD_POST);
-        $req->addPostData("years", "2020");
-        $req->addPostData("countries", "USA");
-        if (!PEAR::isError($req->sendRequest())) {
-             $response = json_decode($req->getResponseBody());
-        } else {
-            $response = "";
-        }
-
-        print_r($response);
-        ?>
         
+        <?php print_r(get_gdrs_information($pledge_info, $_POST['ambition'])); ?>
     </body>
 </html>
