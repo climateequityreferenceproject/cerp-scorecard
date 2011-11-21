@@ -49,7 +49,7 @@ if ($_POST['conditional'] && $_POST['country']) {
             <p>has pledged to do</p>
             <div id="commitment">XX%</div>
             <p>of its fair share in <?php echo $min_target_year ?>, assuming TYPE global ambition.</p>
-            <div id="more_options"><a href="">I want more options for this calculation</a></div>
+            <p id="more_options"><a href="#">I want more options for this calculation</a></p>
         </div>
         <?php
 
