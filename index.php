@@ -37,27 +37,30 @@ if ($_POST) {
         <h1>Climate Equity Scorecard</h1>
         <div id="more_info"><a href="#">more information about climate equity scorecards</a></div>
         <form name="settings" method="post">
-            <input type="hidden" name="settings" />
-            <ul id="settings">
+            
+            <ul>
+                
                 <li id="country">
                     <select id="country" name="country">
                         <?php echo avail_countries_options() ?>
                     </select>
                 </li>
                 <li id="ambition">
-                    <a class="definition" href="#">Level of Global Ambition</a>
-                    <ul class="radio">
-                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['low'] ?>"/> <?php echo $pathway_label['low'] ?></label></li>
-                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['med'] ?>" checked="checked" /> <?php echo $pathway_label['med'] ?></label></li>
-                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['high'] ?>"/> <?php echo $pathway_label['high'] ?></label></li>
-                    </ul>
+                    <fieldset>
+                        <legend><a class="definition" href="#">Level of Global Ambition</a></legend>
+
+                        <li><label for="ambition"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $pathway_id['low'] ?>"/> <?php echo $pathway_label['low'] ?></label></li>
+                        <li><label><input type="radio" name="ambition" id="ambition-med" value="<?php echo $pathway_id['med'] ?>" checked="checked" /> <?php echo $pathway_label['med'] ?></label></li>
+                        <li><label><input type="radio" name="ambition" id="ambition-high" value="<?php echo $pathway_id['high'] ?>"/> <?php echo $pathway_label['high'] ?></label></li>
+                    </fieldset>
                 </li>
                 <li id="pledge_type">
-                    <a class="definition" href="#">Type of Pledge</a>
-                    <ul class="radio">
+                    <fieldset>
+                        <legend><a class="definition" href="#">Type of Pledge</a></legend>
+                    
                         <li><label><input type="radio" name="conditional" value="0" checked="checked" /> Unconditional</label></li>
                         <li><label><input type="radio" name="conditional" value="1"/> Conditional</label></li>
-                    </ul>
+                    </fieldset>
                 </li>
             </ul>
             <input type="submit" value="run" />
