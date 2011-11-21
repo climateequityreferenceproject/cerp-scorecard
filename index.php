@@ -15,12 +15,16 @@ if ($_POST) {
     $params['ambition'] = $pathway_label[array_search($_POST['ambition'], $pathway_id)];
     
     $pledge_info = get_pledge_information($_POST['country'], $_POST['conditional'], $params['min_target_year']);
+    $effort_array = get_gdrs_information($pledge_info, $_POST['ambition']);
+    $effort = $effort_array['dom_pledge'];
 } else {
     $params['min_target_year'] = NULL;
     $params['country_name'] = NULL;
     $params['ambition'] = NULL;
     
     $pledge_info = NULL;
+    $effort_array = NULL;
+    $effort = NULL;
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -62,11 +66,10 @@ if ($_POST) {
         <div id="summary">
             <div id="country_name"><?php echo $params['country_name'] ?></div>
             <p>has pledged to do</p>
-            <div id="commitment">XX%</div>
+            <div id="commitment"><?php echo number_format($effort) ?>%</div>
             <p>of its fair share in <?php echo $params['min_target_year'] ?>, assuming <?php echo strtolower($params['ambition']) ?> global ambition.</p>
             <p id="more_options"><a href="#">I want more options for this calculation</a></p>
         </div>
-        
-        <?php print_r(get_gdrs_information($pledge_info, $_POST['ambition'])); ?>
+
     </body>
 </html>
