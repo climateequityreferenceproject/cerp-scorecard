@@ -43,8 +43,8 @@ if ($_POST) {
                 <li id="ambition">
                     <a class="definition" href="#">Level of Global Ambition</a>
                     <ul class="radio">
-                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['low'] ?>"/> <?php echo $pathway_label['low'] ?></label></li>
-                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['med'] ?>" checked="checked" /> <?php echo $pathway_label['med'] ?></label></li>
+                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['low'] ?>" checked="checked" /> <?php echo $pathway_label['low'] ?></label></li>
+                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['med'] ?>"/> <?php echo $pathway_label['med'] ?></label></li>
                         <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['high'] ?>"/> <?php echo $pathway_label['high'] ?></label></li>
                     </ul>
                 </li>
