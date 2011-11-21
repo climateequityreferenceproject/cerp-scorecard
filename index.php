@@ -16,7 +16,7 @@ if ($_POST['conditional'] && $_POST['country']) {
     </head>
     <body>
         <h1>Climate Equity Scorecard</h1>
-        <div id="more_info"><a href="">more information about climate equity scorecards</a></div>
+        <div id="more_info"><a href="#">more information about climate equity scorecards</a></div>
         <form name="settings" method="post">
             <input type="hidden" name="settings" />
             <ul id="settings">
@@ -26,7 +26,7 @@ if ($_POST['conditional'] && $_POST['country']) {
                     </select>
                 </li>
                 <li id="ambition">
-                    <a class="definition" href="">Level of Global Ambition</a>
+                    <a class="definition" href="#">Level of Global Ambition</a>
                     <ul class="radio">
                         <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['low'] ?>"/> Low</label></li>
                         <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['med'] ?>" checked="checked" /> Moderate</label></li>
@@ -34,7 +34,7 @@ if ($_POST['conditional'] && $_POST['country']) {
                     </ul>
                 </li>
                 <li id="pledge_type">
-                    <a class="definition" href="">Type of Pledge</a>
+                    <a class="definition" href="#">Type of Pledge</a>
                     <ul class="radio">
                         <li><label><input type="radio" name="conditional" value="0" checked="checked" /> Unconditional</label></li>
                         <li><label><input type="radio" name="conditional" value="1"/> Conditional</label></li>
