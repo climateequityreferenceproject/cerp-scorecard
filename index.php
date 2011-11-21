@@ -2,10 +2,21 @@
 include("functions.php");
 
 $pathway_id = get_pathways(array('low'=>'cum_1000GtCO2', 'med'=>'cum_750GtCO2', 'high'=>'Hansen'));
+$pathway_label = array(
+    'low' => 'Low',
+    'med' => 'Moderate',
+    'high' => 'High'
+);
 
-$min_target_year = NULL;
-if ($_POST['conditional'] && $_POST['country']) {
-    $min_target_year = get_min_target_year($_POST['country'], $_POST['conditional']); 
+$params = array();
+if ($_POST) {
+    $params['min_target_year'] = get_min_target_year($_POST['country'], $_POST['conditional']);
+    $params['country_name'] = get_country_name($_POST['country']);
+    $params['ambition'] = $pathway_label[array_search($_POST['ambition'], $pathway_id)];
+} else {
+    $params['min_target_year'] = NULL;
+    $params['country_name'] = NULL;
+    $params['ambition'] = NULL;
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -28,9 +39,9 @@ if ($_POST['conditional'] && $_POST['country']) {
                 <li id="ambition">
                     <a class="definition" href="#">Level of Global Ambition</a>
                     <ul class="radio">
-                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['low'] ?>"/> Low</label></li>
-                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['med'] ?>" checked="checked" /> Moderate</label></li>
-                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['high'] ?>"/> High</label></li>
+                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['low'] ?>"/> <?php echo $pathway_label['low'] ?></label></li>
+                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['med'] ?>" checked="checked" /> <?php echo $pathway_label['med'] ?></label></li>
+                        <li><label><input type="radio" name="ambition" value="<?php echo $pathway_id['high'] ?>"/> <?php echo $pathway_label['high'] ?></label></li>
                     </ul>
                 </li>
                 <li id="pledge_type">
@@ -45,10 +56,10 @@ if ($_POST['conditional'] && $_POST['country']) {
         </form>
         
         <div id="summary">
-            <div id="country_name">COUNTRY</div>
+            <div id="country_name"><?php echo $params['country_name'] ?></div>
             <p>has pledged to do</p>
             <div id="commitment">XX%</div>
-            <p>of its fair share in <?php echo $min_target_year ?>, assuming TYPE global ambition.</p>
+            <p>of its fair share in <?php echo $params['min_target_year'] ?>, assuming <?php echo strtolower($params['ambition']) ?> global ambition.</p>
             <p id="more_options"><a href="#">I want more options for this calculation</a></p>
         </div>
         <?php

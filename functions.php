@@ -85,3 +85,13 @@ function get_min_target_year($iso3, $conditional) {
     return $row['year'];
 }
 
+function get_country_name($iso3) {
+    // To protect against SQL injection, force iso3 to be three first characters
+    $iso3_3lett = substr($iso3, 0, 3);
+    $sql = 'SELECT name FROM country WHERE iso3="' . $iso3_3lett . '";';
+    $result = query_db($sql);
+    $row = mysql_fetch_array($result, MYSQL_ASSOC);
+    mysql_free_result($result);
+    return $row['name'];
+}
+
