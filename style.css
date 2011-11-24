@@ -136,10 +136,11 @@ button {  width: auto; overflow: visible; }
 header { padding:1em 0; }
 #more_info { text-align:right; }
 #main { padding:2em 0; }
-#settings { float:left; padding:20px; width:240px; }
+#settings { float:left; margin:0 40px 1em 0; padding:20px; width:240px; }
 fieldset { padding:0 10px 0.75em; }
 
-#results { float:left; margin-left:40px; width:506px; }
+#results { float:left; width:506px; }
+#graph { width:100% }
 #summary { margin:1em 0; padding:0.5em 20px 1em; }
 
 p { margin-top:1.2em; }
@@ -148,16 +149,17 @@ label { padding:0 1em 0 0.25em; }
 select { margin-top:0.5em; }
 #submit { margin-top:1.5em; }
 
-#international, #domestic, #gap { float:left; height:60px; margin-bottom:1em; }
+#graph { height:60px; margin-bottom:1em; }
+#international, #domestic, #gap  { float:left; height:60px; }
 #key { clear:both; }
 #key p { margin-top:0.25em; }
 #key p span { display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px; }
 #summary p { margin-top:0; }
 
 /* these three are hard-coded for now, later will be dynamic, based on results */
-#international { width:75px; }
-#domestic { width:150px; }
-#gap { width:275px; }
+#international { width:15%; }
+#domestic { width:30%; }
+#gap { width:55% }
 
 
 /* color ***************************************/
@@ -181,9 +183,9 @@ legend a, legend a:active, legend a:visited { color: #444; }
 
 .international { background:#4d59a4; }
 .domestic { background:#8ebd7f; }
-.gap { background:#e6ebe6; }
-.international, .domestic, .gap { border:1px solid #666; }
-#domestic, #gap { border-left:none; }
+#graph, .gap { background:#e6ebe6; } /* gap background */
+/* .international, .domestic, .gap { border:1px solid #666; }
+#domestic, #gap { border-left:none; } */
 
 #summary { background-color:#ffce73; }
 
@@ -286,7 +288,7 @@ h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, legend { font-family: Pro
 em { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 h1 em, h2 em, h3 em, strong em { font-family: ProximaNovaBoldItalic, "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-h1 { font-size:250%; }
+h1 { font-size:250%; line-height:1; }
 h2, #summary { font-size:150%; }
 #country_name, #commitment { font-size:200%; }
 #summary p#more_options { font-size:65%; margin-top:1em; }
@@ -356,7 +358,10 @@ a.definition { background: url(img/info-icon.gif) center right no-repeat; displa
 /* Grade-A Mobile Browsers (Opera Mobile, Mobile Safari, Android Chrome)
    consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
 @media screen and (max-device-width: 480px) {
-  #container, header { width:480px; }
+    body { line-height:1.2; }
+    #container, header, #settings, #results { float:none; margin-left:0; margin-right:0; width:96%; }
+    #container { padding:0 0 0 2%; }
+    #settings { margin-right:0; }
 
   /* Uncomment if you don't want iOS and WinMobile to mobile-optimize the text for you: j.mp/textsizeadjust */
   /* html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
