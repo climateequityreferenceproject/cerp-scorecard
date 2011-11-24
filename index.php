@@ -32,6 +32,7 @@ if ($_POST) {
     <head profile="http://gmpg.org/xfn/11">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Climate Equity Scorecard</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <h1>Climate Equity Scorecard</h1>
