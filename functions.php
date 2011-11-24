@@ -52,7 +52,7 @@ function avail_countries_options() {
 
 // $pathways is an array of the type array('label' => 'short_code', ...): returns 'label'=>'id'
 function get_pathways($pathways) {
-    $req =& new HTTP_Request("http://gdrights.org/calculator_dev/api/?q=pathways");
+    $req =& new HTTP_Request("http://gdrights.org/calculator/api/?q=pathways");
     $req->setMethod(HTTP_REQUEST_METHOD_GET);
     if (!PEAR::isError($req->sendRequest())) {
          $response = json_decode($req->getResponseBody());
@@ -112,7 +112,7 @@ function get_gdrs_information($pledge_info, $pathway) {
         return NULL;
     }
     // First, get the parameter values used by the database
-    $req =& new HTTP_Request("http://gdrights.org/calculator_dev/api/?q=params");
+    $req =& new HTTP_Request("http://gdrights.org/calculator/api/?q=params");
     $req->setMethod(HTTP_REQUEST_METHOD_GET);
     if (!PEAR::isError($req->sendRequest())) {
          $params = (array) json_decode($req->getResponseBody());
@@ -127,7 +127,7 @@ function get_gdrs_information($pledge_info, $pathway) {
     unset($req);
     
     // Build up API query
-    $req =& new HTTP_Request("http://gdrights.org/calculator_dev/api/");
+    $req =& new HTTP_Request("http://gdrights.org/calculator/api/");
     $req->setMethod(HTTP_REQUEST_METHOD_POST);
     if ($pledge_info['rel_to_year']) {
         $years = $pledge_info['rel_to_year'] . "," . $pledge_info['by_year'];
