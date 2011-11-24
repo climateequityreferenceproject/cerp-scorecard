@@ -38,17 +38,17 @@
     <div id="container" class="group">
     <header>
         <h1>Climate Equity Scorecard</h1>
-        <p id="more_info"><a href="#">more information about climate equity scorecards</a></p>
+        <p id="more_info"><a href="#">more information about climate equity scorecards &#187;</a></p>
     </header>
     <div id="main" role="main" class="group">
         <form name="settings" id="settings" method="post">
-            Select a country (or group) below to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.
+            Select a country or group below to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.
             <ul>
                 <li class="setting">
                     <fieldset>
                         <legend>Country or Group</legend>
                         <select id="country" name="country">
-                            <option>country and group list</option>
+                            <option>China</option>
                         </select>
                     </fieldset>
                 </li>
@@ -76,18 +76,28 @@
         <div id="results" class="group">
               
             <div id="graph" class="group">
-                <div id="international"></div>
-                <div id="domestic"></div>
-                <div id="shortfall"></div>
+                <div id="international" class="international"></div>
+                <div id="domestic" class="domestic"></div>
+                <div id="gap" class="gap"></div>
+                <div id="key">
+                    <p><span class="international"></span>[15%] <a class="definition" href="#">pledged international support</a></p>
+                    <p><span class="domestic"></span>[30%] <a class="definition" href="#">pledged domestic effort</a></p>
+                    <p><span class="gap"></span>[55%] <a class="definition" href="#">gap</a></p>
+                </div>
             </div>
 
             <div id="summary">
-                <p><span id="country_name">[country_name]</span><br />
+                <p><span id="country_name">China</span><br />
                 has pledged to do<br />
-                <span id="commitment">[effort]%</span><br />
-                of its fair share in [year], <br />
+                <span id="commitment">45%</span><br />
+                of its <a class="definition" href="#">fair share</a> in [year], <br />
                 assuming [level] global ambition.</p>
-                <p><small id="more_options"><a href="#">I want more options for this calculation</a></small></p>
+                <p id="more_options"><a href="#">I want more options for this calculation &#187;</a></p>
+            </div>
+            
+            <div id="details">
+                <h2>Details about this pledge</h2>
+                <p class="first">This result reflects... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore...</p>
             </div>
         </div>
     </div>

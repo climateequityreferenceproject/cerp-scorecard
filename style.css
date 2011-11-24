@@ -53,7 +53,7 @@ input, select { vertical-align: middle; }
  */
 
 body { font:16px/1.4 sans-serif; *font-size:medium; } /* Hack retained to preserve specificity */
-select, input, textarea, button { font:90% sans-serif; }
+select, input, textarea, button { font:99% sans-serif; }
 
 /* Normalize monospace sizing:
    en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome */
@@ -96,7 +96,7 @@ textarea { overflow: auto; } /* www.sitepoint.com/blogs/2010/08/20/ie-remove-tex
 .ie6 legend, .ie7 legend { margin-left: -7px; } 
 
 /* Align checkboxes, radios, text inputs with their label by: Thierry Koblentz tjkdesign.com/ez-css/css/base.css  */
-input[type="radio"] { vertical-align: text-bottom; }
+/* input[type="radio"] { vertical-align: text-bottom; } */
 input[type="checkbox"] { vertical-align: bottom; }
 .ie7 input[type="checkbox"] { vertical-align: baseline; }
 .ie6 input { vertical-align: text-bottom; }
@@ -123,11 +123,6 @@ button {  width: auto; overflow: visible; }
    code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
 .ie7 img { -ms-interpolation-mode: bicubic; }
 
-/**
- * You might tweak these..
- */
-
-
 
 
 /****************************************************************************************
@@ -136,30 +131,68 @@ button {  width: auto; overflow: visible; }
  * Author: Tyler Kemp-Benedict
  */
  
-/* layout *****************/
-#container { width:940px; margin:10px auto; }
+/* layout ***************************************/
+#container { width:826px; margin:10px auto; }
 header { padding:1em 0; }
+#more_info { text-align:right; }
 #main { padding:2em 0; }
 #settings { float:left; padding:20px; width:240px; }
-#results { float:left; margin-left:40px; padding:0 10px; width:500px; }
-#summary { margin:1.5em 0; padding:5px 20px 1em; }
-p, #submit { margin-top:1.2em; }
 fieldset { padding:0 10px 0.75em; }
+
+#results { float:left; margin-left:40px; width:506px; }
+#summary { margin:1em 0; padding:0.5em 20px 1em; }
+
+p { margin-top:1.2em; }
 legend { padding-top:2em; }
 label { padding:0 1em 0 0.25em; }
 select { margin-top:0.5em; }
-#international, #domestic, #shortfall { float:left; height:60px; }
+#submit { margin-top:1.5em; }
+
+#international, #domestic, #gap { float:left; height:60px; margin-bottom:1em; }
+#key { clear:both; }
+#key p { margin-top:0.25em; }
+#key p span { display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px; }
+#summary p { margin-top:0; }
 
 /* these three are hard-coded for now, later will be dynamic, based on results */
 #international { width:75px; }
 #domestic { width:150px; }
-#shortfall { width:275px; }
+#gap { width:275px; }
 
 
-/* typography *****************/
+/* color ***************************************/
+body { background:#fff; }
+body, select, input, textarea { color: #444; }
+h1, h2, h3, #country_name, #commitment { color:#4d59a4; }
+header { border-bottom: 6px solid #ffce73; }
+form { background:#e6ebe6; }
+fieldset { background:#fff; }
+
+/* These selection declarations have to be separate
+   No text-shadow: twitter.com/miketaylr/status/12228805301   */
+::-moz-selection{ background: #dd6e4c; color:#fff; text-shadow: none; }
+::selection { background: #dd6e4c; color:#fff; text-shadow: none; }
+/* j.mp/webkit-tap-highlight-color */
+a:link { -webkit-tap-highlight-color: #dd6e4c; }
+
+a, a:active, a:visited { color:#666; }
+a:hover { color:#dd6e4c; }
+legend a, legend a:active, legend a:visited { color: #444; }
+
+.international { background:#4d59a4; }
+.domestic { background:#8ebd7f; }
+.gap { background:#e6ebe6; }
+.international, .domestic, .gap { border:1px solid #666; }
+#domestic, #gap { border-left:none; }
+
+#summary { background-color:#ffce73; }
+
+
+/* typography ***************************************/
 
 /* h1, h2, h3, h4, h5, h6 { font-weight: bold; } */
 
+/*
 @font-face {
     font-family: 'ProximaNovaRegular';
     src: url('fonts/proximanova-reg-webfont.eot');
@@ -170,7 +203,6 @@ select { margin-top:0.5em; }
     font-weight: normal;
     font-style: normal;
 }
-
 @font-face {
     font-family: 'ProximaNovaRegularItalic';
     src: url('fonts/proximanova-regit-webfont.eot');
@@ -180,33 +212,30 @@ select { margin-top:0.5em; }
          url('fonts/proximanova-regit-webfont.svg#ProximaNovaRegularItalic') format('svg');
     font-weight: normal;
     font-style: normal;
-}
-
+} */
 
 /*
 @font-face {
-    font-family: 'ProximaNovaExtrabold';
-    src: url('fonts/proximanova-xbold-webfont.eot');
-    src: url('fonts/proximanova-xbold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/proximanova-xbold-webfont.woff') format('woff'),
-         url('fonts/proximanova-xbold-webfont.ttf') format('truetype'),
-         url('fonts/proximanova-xbold-webfont.svg#ProximaNovaExtrabold') format('svg');
+    font-family: 'ProximaNovaSemibold';
+    src: url('fonts/proximanova-sbold-webfont.eot');
+    src: url('fonts/proximanova-sbold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/proximanova-sbold-webfont.woff') format('woff'),
+         url('fonts/proximanova-sbold-webfont.ttf') format('truetype'),
+         url('fonts/proximanova-sbold-webfont.svg#ProximaNovaSemibold') format('svg');
     font-weight: normal;
     font-style: normal;
 }
-
 @font-face {
-    font-family: 'ProximaNovaExtraboldItalic';
-    src: url('fonts/proximanova-xboldit-webfont.eot');
-    src: url('fonts/proximanova-xboldit-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/proximanova-xboldit-webfont.woff') format('woff'),
-         url('fonts/proximanova-xboldit-webfont.ttf') format('truetype'),
-         url('fonts/proximanova-xboldit-webfont.svg#ProximaNovaExtraboldItalic') format('svg');
+    font-family: 'ProximaNovaSemiboldItalic';
+    src: url('fonts/proximanova-sboldit-webfont.eot');
+    src: url('fonts/proximanova-sboldit-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/proximanova-sboldit-webfont.woff') format('woff'),
+         url('fonts/proximanova-sboldit-webfont.ttf') format('truetype'),
+         url('fonts/proximanova-sboldit-webfont.svg#ProximaNovaSemiboldItalic') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 */
-
 
 @font-face {
     font-family: 'ProximaNovaBold';
@@ -217,9 +246,7 @@ select { margin-top:0.5em; }
          url('fonts/proximanova-bold-webfont.svg#ProximaNovaBold') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
-
 @font-face {
     font-family: 'ProximaNovaBoldItalic';
     src: url('fonts/proximanova-boldit-webfont.eot');
@@ -233,23 +260,22 @@ select { margin-top:0.5em; }
 
 /*
 @font-face {
-    font-family: 'ProximaNovaSemibold';
-    src: url('fonts/proximanova-sbold-webfont.eot');
-    src: url('fonts/proximanova-sbold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/proximanova-sbold-webfont.woff') format('woff'),
-         url('fonts/proximanova-sbold-webfont.ttf') format('truetype'),
-         url('fonts/proximanova-sbold-webfont.svg#ProximaNovaSemibold') format('svg');
+    font-family: 'ProximaNovaExtrabold';
+    src: url('fonts/proximanova-xbold-webfont.eot');
+    src: url('fonts/proximanova-xbold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/proximanova-xbold-webfont.woff') format('woff'),
+         url('fonts/proximanova-xbold-webfont.ttf') format('truetype'),
+         url('fonts/proximanova-xbold-webfont.svg#ProximaNovaExtrabold') format('svg');
     font-weight: normal;
     font-style: normal;
 }
-
 @font-face {
-    font-family: 'ProximaNovaSemiboldItalic';
-    src: url('fonts/proximanova-sboldit-webfont.eot');
-    src: url('fonts/proximanova-sboldit-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/proximanova-sboldit-webfont.woff') format('woff'),
-         url('fonts/proximanova-sboldit-webfont.ttf') format('truetype'),
-         url('fonts/proximanova-sboldit-webfont.svg#ProximaNovaSemiboldItalic') format('svg');
+    font-family: 'ProximaNovaExtraboldItalic';
+    src: url('fonts/proximanova-xboldit-webfont.eot');
+    src: url('fonts/proximanova-xboldit-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/proximanova-xboldit-webfont.woff') format('woff'),
+         url('fonts/proximanova-xboldit-webfont.ttf') format('truetype'),
+         url('fonts/proximanova-xboldit-webfont.svg#ProximaNovaExtraboldItalic') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -260,47 +286,23 @@ h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, legend { font-family: Pro
 em { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 h1 em, h2 em, h3 em, strong em { font-family: ProximaNovaBoldItalic, "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-h1 { font-size: 250%; }
-h2, #summary { font-size: 150%; }
-#country_name, #commitment { font-size: 200%; }
-#summary small { font-size: 70%; }
+h1 { font-size:250%; }
+h2, #summary { font-size:150%; }
+#country_name, #commitment { font-size:200%; }
+#summary p#more_options { font-size:65%; margin-top:1em; }
+p.first { margin-top:0.25em; }
 
 a, a:active, a:visited { border-bottom: 1px solid transparent; text-decoration: none; }
 a:hover { border-bottom: 1px dotted #036; }
 
 
-/* color *****************/
-body { background:#fff; }
-body, select, input, textarea { color: #444; }
-h1, h2, h3, #country_name, #commitment { color:#4D59A4; }
-header { border-bottom: 6px solid #ffce73; }
-form { background:#e6ebe6; }
-fieldset { background:#fff; }
+/* miscellaneous ***************************************/
+a.definition { background: url(img/info-icon.gif) center right no-repeat; display:inline-block; padding-right: 16px; }
 
-/* These selection declarations have to be separate
-   No text-shadow: twitter.com/miketaylr/status/12228805301   */
-::-moz-selection{ background: #dd6e4c; color:#fff; text-shadow: none; }
-::selection { background: #dd6e4c; color:#fff; text-shadow: none; }
-/* j.mp/webkit-tap-highlight-color */
-a:link { -webkit-tap-highlight-color: #dd6e4c; }
-
-a, a:active, a:visited { color: #4D59A4; }
-a:hover { color: #036; }
-
-legend a, legend a:active, legend a:visited { color: #444; }
-
-#international { background:#6b87c3; }
-#domestic { background:#8ebd7f; }
-#shortfall { background:#e6ebe6; }
-
-#summary { background-color:#ffce73; }
-
-
-
-/* miscellaneous *****************/
-/*.definition span:after { content: url("img/info-icon.gif"); padding-left:0.25em; }*/
-a.definition { background: url(/img/info-icon.gif) center right no-repeat; display:inline-block; padding-right: 14px; }
-
+#submit {display: block;text-indent: -5000px;width: 200px!important;height: 47px;background-image:url(img/send-button-sprite.png)!important;background-repeat: no-repeat;border: 0px!important;padding: 0px!important; }
+#submit {background-position: 0 0;}
+#submit:hover {background-position: 0 -47px;}
+#submit:active {background-position: 0 -47px;}
 
 /****************************************************************************************/
 
