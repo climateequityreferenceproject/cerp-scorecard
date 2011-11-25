@@ -1,5 +1,6 @@
 <?php
-include("functions.php");
+include_once("functions.php");
+include("scorecard_results.php");
 
 $pathway_id = get_pathways(array('low'=>'IPCC_likely', 'med'=>'AOSIS', 'high'=>'Hansen'));
 $pathway_label = array(
@@ -8,23 +9,12 @@ $pathway_label = array(
     'high' => 'High'
 );
 
-$params = array();
+
 if ($_POST) {
-    $params['min_target_year'] = get_min_target_year($_POST['country'], $_POST['conditional']);
-    $params['country_name'] = get_country_name($_POST['country']);
-    $params['ambition'] = $pathway_label[array_search($_POST['ambition'], $pathway_id)];
-    
-    $pledge_info = get_pledge_information($_POST['country'], $_POST['conditional'], $params['min_target_year']);
-    $effort_array = get_gdrs_information($pledge_info, $_POST['ambition']);
-    $effort = $effort_array['dom_pledge'] + $effor_array['intl_pledge'];
+    $html = get_results($_POST, $pathway_id, $pathway_label);
 } else {
-    $params['min_target_year'] = NULL;
-    $params['country_name'] = NULL;
-    $params['ambition'] = NULL;
-    
-    $pledge_info = NULL;
-    $effort_array = NULL;
-    $effort = NULL;
+    $html = '<p>Select a country or group at left to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.</p>';
+   
 }
 ?>
 <!doctype html>
@@ -69,8 +59,8 @@ if ($_POST) {
         <p id="more_info"><a href="#">more information about climate equity scorecards &#187;</a></p>
     </header>
     <div id="main" role="main" class="group">
-        <form name="settings" id="settings" method="post">
-            Select a country or group below to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.
+        <form name="settings" id="settings" method="post" autocomplete="off" >
+            
             <ul>
                 <li class="setting">
                     <fieldset>
@@ -100,28 +90,8 @@ if ($_POST) {
         </form>
         
         <div id="results" class="group">
-            <div id="summary">
-                <p class="first"><span id="country_name"><?php echo $params['country_name'] ?></span> 
-                has pledged to do 
-                <span id="commitment"><?php echo number_format($effort) ?>%</span> 
-                of its <a class="definition" href="#">fair share</a> in <?php echo $params['min_target_year'] ?>, 
-                assuming <?php echo strtolower($params['ambition']) ?> global ambition.</p>
-            </div>
-            <div id="graph" class="group">
-                <div id="international" class="international"></div>
-                <div id="domestic" class="domestic"></div>
-                <div id="gap" class="gap"></div>
-           </div>
-            <div id="key" class="group">
-                <p><span class="international"></span><?php echo number_format($effort_array['intl_pledge']); ?>% <a class="definition" href="#">pledged international support</a></p>
-                <p><span class="domestic"></span><?php echo number_format($effort_array['dom_pledge']); ?>% <a class="definition" href="#">pledged domestic effort</a></p>
-                <p><span class="gap"></span><?php echo number_format($effort_array['gap']); ?>% <a class="definition" href="#">gap</a></p>
-            </div>
-            <p id="more_options"><a href="#">more options for this calculation &#187;</a></p>
-            <div id="details">
-                <h2>Details about this pledge</h2>
-                <p class="first">[details text from pledge database: This result reflects... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore...]</p>
-            </div>
+            <?php echo $html; ?>
+
         </div> <!--! end of #results -->
     </div> <!--! end of #main -->
     <footer>
