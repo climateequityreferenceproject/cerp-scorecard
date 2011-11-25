@@ -16,7 +16,7 @@ if ($_POST) {
     
     $pledge_info = get_pledge_information($_POST['country'], $_POST['conditional'], $params['min_target_year']);
     $effort_array = get_gdrs_information($pledge_info, $_POST['ambition']);
-    $effort = $effort_array['dom_pledge'];
+    $effort = $effort_array['dom_pledge'] + $effor_array['intl_pledge'];
 } else {
     $params['min_target_year'] = NULL;
     $params['country_name'] = NULL;
@@ -113,9 +113,9 @@ if ($_POST) {
                 <div id="gap" class="gap"></div>
            </div>
             <div id="key" class="group">
-                <p><span class="international"></span>[15%] <a class="definition" href="#">pledged international support</a></p>
-                <p><span class="domestic"></span>[30%] <a class="definition" href="#">pledged domestic effort</a></p>
-                <p><span class="gap"></span>[55%] <a class="definition" href="#">gap</a></p>
+                <p><span class="international"></span><?php echo number_format($effort_array['intl_pledge']); ?>% <a class="definition" href="#">pledged international support</a></p>
+                <p><span class="domestic"></span><?php echo number_format($effort_array['dom_pledge']); ?>% <a class="definition" href="#">pledged domestic effort</a></p>
+                <p><span class="gap"></span><?php echo number_format($effort_array['gap']); ?>% <a class="definition" href="#">gap</a></p>
             </div>
             <p id="more_options"><a href="#">more options for this calculation &#187;</a></p>
             <div id="details">

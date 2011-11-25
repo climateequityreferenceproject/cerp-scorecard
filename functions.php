@@ -201,8 +201,9 @@ function get_gdrs_information($pledge_info, $pathway) {
 */   
     
     //$pledged_reduction = min(max(0, $pledged_reduction), $gdrs_reduction);
+    $retval['intl_pledge'] = 0; // TODO: find out from authors how to get international pledges
     $retval['dom_pledge'] = 100.0 * $pledged_reduction/$gdrs_reduction;
-    $retval['gap'] = 100.0 - $retval['dom_pledge'];
+    $retval['gap'] = 100.0 - $retval['dom_pledge'] - $retval['intl_pledge'];
     
     return $retval;
 }
