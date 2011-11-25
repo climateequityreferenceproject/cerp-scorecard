@@ -11,13 +11,10 @@
         $pledge_info = get_pledge_information($post_params['country'], $post_params['conditional'], $params['min_target_year']);
         $effort_array = get_gdrs_information($pledge_info, $post_params['ambition']);
         $effort = number_format($effort_array['dom_pledge'] + $effort_array['intl_pledge']);
-        print_r($effort_array);
-        echo 'blah';
         foreach ($effort_array as $key => $val) {
             $effort_int[$key] = number_format($val);
         }
         $iso3 = $post_params['country'];
-    
 
         $retval = '<div id="summary">';
         $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';

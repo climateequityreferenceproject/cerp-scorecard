@@ -25,7 +25,7 @@ function query_db($query) {
     return $result;
 }
 
-function avail_countries_options() {
+function avail_countries_options($iso3=NULL) {
     $db = db_connect();
     
     $sql = "SELECT pledge.iso3 AS iso3, name FROM country, pledge WHERE pledge.iso3 = country.iso3 ORDER BY name;";
@@ -41,7 +41,13 @@ function avail_countries_options() {
     $keys = array();
     while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
         if (!in_array($row['iso3'], $keys, true)) {
-            $html .= '<option value=' . $row['iso3'] . '>'  . $row['name'] . '</option>';
+            if ($row['iso3']===$iso3) {
+                $sel_string = ' selected = "selected"';
+            } else {
+                $sel_string = '';
+            }
+                
+            $html .= '<option value=' . $row['iso3'] . $sel_string . '>'  . $row['name'] . '</option>';
             $keys[] = $row['iso3'];
         }
     }
