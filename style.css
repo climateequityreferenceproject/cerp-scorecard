@@ -132,29 +132,24 @@ button {  width: auto; overflow: visible; }
  */
  
 /* layout ***************************************/
-#container { width:826px; margin:10px auto; }
-header { padding:1em 0; }
-#more_info { text-align:right; }
-#main { padding:2em 0; }
-#settings { float:left; margin:0 40px 1em 0; padding:20px; width:240px; }
+#container { width:90%; margin:2% auto; }
+header { padding:1em 0 1.5em 0; }
+#settings { float:left; margin:0 30px 1em 0; padding:20px; width:30%; min-width:220px; }
 fieldset { padding:0 10px 0.75em; }
-
-#results { float:left; width:506px; }
-#graph { width:100% }
-#summary { margin:1em 0; padding:0.5em 20px 1em; }
 
 p { margin-top:1.2em; }
 legend { padding-top:2em; }
-label { padding:0 1em 0 0.25em; }
+label { display:block; padding:0 0.75em 0 0.25em; }
 select { margin-top:0.5em; }
-#submit { margin-top:1.5em; }
+#submit { margin:1.75em auto 0; }
 
-#graph { height:60px; margin-bottom:1em; }
+#results { float:left; padding:0 1.5em 1.5em 1.5em; width:50%; min-width:220px; }
+#summary { margin:1em 0; }
+#graph { height:60px; margin-bottom:1em; width:100% }
 #international, #domestic, #gap  { float:left; height:60px; }
 #key { clear:both; }
-#key p { margin-top:0.25em; }
+#key p { line-height:1; margin-top:0.5em; }
 #key p span { display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px; }
-#summary p { margin-top:0; }
 
 /* these three are hard-coded for now, later will be dynamic, based on results */
 #international { width:15%; }
@@ -163,81 +158,32 @@ select { margin-top:0.5em; }
 
 
 /* color ***************************************/
-body { background:#fff; }
-body, select, input, textarea { color: #444; }
-h1, h2, h3, #country_name, #commitment { color:#4d59a4; }
-header { border-bottom: 6px solid #ffce73; }
-form { background:#e6ebe6; }
-fieldset { background:#fff; }
+body {background:#fff;}
+body, select, input, textarea {color:#444;}
+h1, h2, h3, #country_name, #commitment {color:#4d59a4;}
+form {background:#e6ebe6;}
+fieldset {background:#fff;}
 
 /* These selection declarations have to be separate
    No text-shadow: twitter.com/miketaylr/status/12228805301   */
-::-moz-selection{ background: #dd6e4c; color:#fff; text-shadow: none; }
-::selection { background: #dd6e4c; color:#fff; text-shadow: none; }
+::-moz-selection{background:#dd6e4c; color:#fff; text-shadow:none;}
+::selection {background:#dd6e4c; color:#fff; text-shadow:none;}
 /* j.mp/webkit-tap-highlight-color */
-a:link { -webkit-tap-highlight-color: #dd6e4c; }
+a:link {-webkit-tap-highlight-color:#dd6e4c;}
 
-a, a:active, a:visited { color:#666; }
-a:hover { color:#dd6e4c; }
-legend a, legend a:active, legend a:visited { color: #444; }
+a, a:active, a:visited {color:#666;}
+a:hover {color:#dd6e4c;}
+legend a, legend a:active, legend a:visited {color: #444;}
 
-.international { background:#4d59a4; }
-.domestic { background:#8ebd7f; }
-#graph, .gap { background:#e6ebe6; } /* gap background */
-/* .international, .domestic, .gap { border:1px solid #666; }
-#domestic, #gap { border-left:none; } */
-
-#summary { background-color:#ffce73; }
+.international {background:#4d59a4;}
+.domestic {background:#8ebd7f;}
+#graph, .gap {background:#ffce73;}
+#results {border:6px solid #ffce73; -moz-border-radius:15px; border-radius:15px;}
 
 
 /* typography ***************************************/
 
-/* h1, h2, h3, h4, h5, h6 { font-weight: bold; } */
-
-/*
-@font-face {
-    font-family: 'ProximaNovaRegular';
-    src: url('fonts/proximanova-reg-webfont.eot');
-    src: url('fonts/proximanova-reg-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/proximanova-reg-webfont.woff') format('woff'),
-         url('fonts/proximanova-reg-webfont.ttf') format('truetype'),
-         url('fonts/proximanova-reg-webfont.svg#ProximaNovaRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'ProximaNovaRegularItalic';
-    src: url('fonts/proximanova-regit-webfont.eot');
-    src: url('fonts/proximanova-regit-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/proximanova-regit-webfont.woff') format('woff'),
-         url('fonts/proximanova-regit-webfont.ttf') format('truetype'),
-         url('fonts/proximanova-regit-webfont.svg#ProximaNovaRegularItalic') format('svg');
-    font-weight: normal;
-    font-style: normal;
-} */
-
-/*
-@font-face {
-    font-family: 'ProximaNovaSemibold';
-    src: url('fonts/proximanova-sbold-webfont.eot');
-    src: url('fonts/proximanova-sbold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/proximanova-sbold-webfont.woff') format('woff'),
-         url('fonts/proximanova-sbold-webfont.ttf') format('truetype'),
-         url('fonts/proximanova-sbold-webfont.svg#ProximaNovaSemibold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'ProximaNovaSemiboldItalic';
-    src: url('fonts/proximanova-sboldit-webfont.eot');
-    src: url('fonts/proximanova-sboldit-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/proximanova-sboldit-webfont.woff') format('woff'),
-         url('fonts/proximanova-sboldit-webfont.ttf') format('truetype'),
-         url('fonts/proximanova-sboldit-webfont.svg#ProximaNovaSemiboldItalic') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-*/
+/* h1, h2, h3, h4, h5, h6, strong { font-weight: bold; } */
 
 @font-face {
     font-family: 'ProximaNovaBold';
@@ -260,54 +206,33 @@ legend a, legend a:active, legend a:visited { color: #444; }
     font-style: normal;
 }
 
-/*
-@font-face {
-    font-family: 'ProximaNovaExtrabold';
-    src: url('fonts/proximanova-xbold-webfont.eot');
-    src: url('fonts/proximanova-xbold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/proximanova-xbold-webfont.woff') format('woff'),
-         url('fonts/proximanova-xbold-webfont.ttf') format('truetype'),
-         url('fonts/proximanova-xbold-webfont.svg#ProximaNovaExtrabold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'ProximaNovaExtraboldItalic';
-    src: url('fonts/proximanova-xboldit-webfont.eot');
-    src: url('fonts/proximanova-xboldit-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/proximanova-xboldit-webfont.woff') format('woff'),
-         url('fonts/proximanova-xboldit-webfont.ttf') format('truetype'),
-         url('fonts/proximanova-xboldit-webfont.svg#ProximaNovaExtraboldItalic') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-*/
+body {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, legend {font-family:ProximaNovaBold, "Helvetica Neue", Helvetica, Arial, sans-serif;}
+em {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {font-family:ProximaNovaBoldItalic, "Helvetica Neue", Helvetica, Arial, sans-serif;}
 
-body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, legend { font-family: ProximaNovaBold, "Helvetica Neue", Helvetica, Arial, sans-serif; }
-em { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-h1 em, h2 em, h3 em, strong em { font-family: ProximaNovaBoldItalic, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+h1 {font-size:250%; line-height:1;}
+h2, #summary {font-size:150%;}
+h2 {margin-top:0.75em;}
+#country_name, #commitment {font-size:200%;}
+#summary p#more_options {font-size:65%; margin-top:2em;}
+.first {margin-top:0.25em;}
+#results .first {margin-top:0;}
 
-h1 { font-size:250%; line-height:1; }
-h2, #summary { font-size:150%; }
-#country_name, #commitment { font-size:200%; }
-#summary p#more_options { font-size:65%; margin-top:1em; }
-p.first { margin-top:0.25em; }
-
-a, a:active, a:visited { border-bottom: 1px solid transparent; text-decoration: none; }
-a:hover { border-bottom: 1px dotted #036; }
+a, a:active, a:visited {border-bottom:1px solid transparent; text-decoration: none;}
+a:hover {border-bottom:1px dotted #036;}
 
 
 /* miscellaneous ***************************************/
-a.definition { background: url(img/info-icon.gif) center right no-repeat; display:inline-block; padding-right: 16px; }
+a.definition { background: url(img/info-icon.gif) center right no-repeat; padding-right: 16px; }
 
-#submit {display: block;text-indent: -5000px;width: 200px!important;height: 47px;background-image:url(img/send-button-sprite.png)!important;background-repeat: no-repeat;border: 0px!important;padding: 0px!important; }
+#submit {display:block; text-indent:-5000px; width:200px!important; height:47px; background-image:url(img/send-button-sprite.png)!important; background-repeat:no-repeat; border:0px!important; padding:0px!important; }
 #submit {background-position: 0 0;}
 #submit:hover {background-position: 0 -47px;}
 #submit:active {background-position: 0 -47px;}
 
-/****************************************************************************************/
 
+/****************************************************************************************/
 
 /**
  * Non-semantic helper classes: please define your styles before this section.
@@ -361,7 +286,8 @@ a.definition { background: url(img/info-icon.gif) center right no-repeat; displa
     body { line-height:1.2; }
     #container, header, #settings, #results { float:none; margin-left:0; margin-right:0; width:96%; }
     #container { padding:0 0 0 2%; }
-    #settings { margin-right:0; }
+    #settings { margin-right:0; width:100%; }
+    #results { border:none; padding:0; width:100%; }
 
   /* Uncomment if you don't want iOS and WinMobile to mobile-optimize the text for you: j.mp/textsizeadjust */
   /* html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */

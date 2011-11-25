@@ -1,3 +1,32 @@
+<?php
+include("functions.php");
+
+$pathway_id = get_pathways(array('low'=>'IPCC_likely', 'med'=>'AOSIS', 'high'=>'Hansen'));
+$pathway_label = array(
+    'low' => 'Low',
+    'med' => 'Moderate',
+    'high' => 'High'
+);
+
+$params = array();
+if ($_POST) {
+    $params['min_target_year'] = get_min_target_year($_POST['country'], $_POST['conditional']);
+    $params['country_name'] = get_country_name($_POST['country']);
+    $params['ambition'] = $pathway_label[array_search($_POST['ambition'], $pathway_id)];
+    
+    $pledge_info = get_pledge_information($_POST['country'], $_POST['conditional'], $params['min_target_year']);
+    $effort_array = get_gdrs_information($pledge_info, $_POST['ambition']);
+    $effort = $effort_array['dom_pledge'];
+} else {
+    $params['min_target_year'] = NULL;
+    $params['country_name'] = NULL;
+    $params['ambition'] = NULL;
+    
+    $pledge_info = NULL;
+    $effort_array = NULL;
+    $effort = NULL;
+}
+?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
@@ -12,7 +41,7 @@
        More info: h5bp.com/b/378 -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>scorecard layout test</title>
+  <title>Climate Equity Scorecard Test</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -32,8 +61,7 @@
        Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
        For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
-    
-    
+  </head>  
   <body class="group">
     <div id="container" class="group">
     <header>
@@ -48,16 +76,16 @@
                     <fieldset>
                         <legend>Country or Group</legend>
                         <select id="country" name="country">
-                            <option>China</option>
+                        <?php echo avail_countries_options() ?>
                         </select>
                     </fieldset>
                 </li>
                 <li class="setting">
                     <fieldset id="ambition">
                         <legend><a class="definition" href="#"><span>Level of Global Ambition</span></a></legend>
-                            <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="low"/> low</label>
-                            <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="med" checked="checked" /> med</label>
-                            <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="high"/> high</label>
+                            <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $pathway_id['low'] ?>"/> <?php echo $pathway_label['low'] ?></label>
+                            <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $pathway_id['med'] ?>" checked="checked" /> <?php echo $pathway_label['med'] ?></label>
+                            <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $pathway_id['high'] ?>"/> <?php echo $pathway_label['high'] ?></label>
                     </fieldset>
                 </li>
                 <li class="setting">
@@ -73,30 +101,33 @@
             <input type="submit" value="get score" id="submit" />
         </form>
         
-        <div id="results" class="group card">
+        <div id="results" class="group">
             <div id="summary">
-                <p class="first"><span id="country_name">China</span> 
-                has pledged to do 
-                <span id="commitment">45%</span> 
-                of its <a class="definition" href="#">fair share</a> in [year], 
-                assuming [level] global ambition.</p>
+                <p><span id="country_name"><?php echo $params['country_name'] ?></span><br />
+                has pledged to do<br />
+                <span id="commitment"><?php echo number_format($effort) ?>%</span><br />
+                of its <a class="definition" href="#">fair share</a> in <?php echo $params['min_target_year'] ?>, <br />
+                assuming <?php echo strtolower($params['ambition']) ?> global ambition.</p>
             </div>
+              
             <div id="graph" class="group">
                 <div id="international" class="international"></div>
                 <div id="domestic" class="domestic"></div>
                 <div id="gap" class="gap"></div>
-            </div>
+           </div>
             <div id="key" class="group">
                 <p><span class="international"></span>[15%] <a class="definition" href="#">pledged international support</a></p>
                 <p><span class="domestic"></span>[30%] <a class="definition" href="#">pledged domestic effort</a></p>
                 <p><span class="gap"></span>[55%] <a class="definition" href="#">gap</a></p>
+                <p id="more_options"><a href="#">I want more options for this calculation &#187;</a></p>
             </div>
-            <p id="more_options"><a href="#">more options for this calculation &#187;</a></p>            <div id="details">
-            <h2>Details about this pledge</h2>
-            <p class="first">[details text from pledge database: This result reflects... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore...]</p>
+            
+            <div id="details">
+                <h2>Details about this pledge</h2>
+                <p class="first">[details text from pledge database: This result reflects... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore...]</p>
             </div>
-        </div> <!--! end of #results -->
-    </div> <!--! end of #main -->
+        </div>
+    </div>
     <footer>
 
     </footer>
