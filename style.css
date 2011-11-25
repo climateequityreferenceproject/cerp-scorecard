@@ -132,29 +132,29 @@ button {  width: auto; overflow: visible; }
  */
  
 /* layout ***************************************/
-#container { width:90%; margin:2% auto; }
-header { padding:1em 0 1.5em 0; }
-#settings { float:left; margin:0 30px 1em 0; padding:20px; width:30%; min-width:220px; }
-fieldset { padding:0 10px 0.75em; }
+#container {margin:2% auto; min-width:700px; width:90%;}
+header {padding:1em 0 1.5em 0;}
+#settings {float:left; margin:0 30px 1em 0; padding:20px; min-width:220px; width:30%;}
+fieldset {padding:0 10px 0.75em;}
 
-p { margin-top:1.2em; }
-legend { padding-top:2em; }
-label { display:block; padding:0 0.75em 0 0.25em; }
-select { margin-top:0.5em; }
-#submit { margin:1.75em auto 0; }
+p {margin-top:1.2em;}
+legend {padding-top:2em;}
+label {display:block; padding:0 0.75em 0 0.25em;}
+select {margin-top:0.5em;}
+#submit {margin:1.75em auto 0;}
 
-#results { float:left; padding:0 1.5em 1.5em 1.5em; width:50%; min-width:220px; }
-#summary { margin:1em 0; }
-#graph { height:60px; margin-bottom:1em; width:100% }
-#international, #domestic, #gap  { float:left; height:60px; }
-#key { clear:both; }
-#key p { line-height:1; margin-top:0.5em; }
-#key p span { display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px; }
+#results {float:left; padding:0 1.5em 1.5em 1.5em; min-width:220px; width:50%;}
+#summary {margin:1em 0;}
+#graph { height:60px; margin-bottom:1em; width:100%}
+#international, #domestic, #gap  {float:left; height:60px;}
+#key {clear:both;}
+#key p {line-height:1; margin-top:0.5em;}
+#key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
 
 /* these three are hard-coded for now, later will be dynamic, based on results */
-#international { width:15%; }
-#domestic { width:30%; }
-#gap { width:55% }
+#international {width:15%;}
+#domestic {width:30%;}
+#gap {width:55%}
 
 
 /* color ***************************************/
@@ -284,10 +284,9 @@ a.definition { background: url(img/info-icon.gif) center right no-repeat; paddin
    consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
 @media screen and (max-device-width: 480px) {
     body { line-height:1.2; }
-    #container, header, #settings, #results { float:none; margin-left:0; margin-right:0; width:96%; }
-    #container { padding:0 0 0 2%; }
-    #settings { margin-right:0; width:100%; }
-    #results { border:none; padding:0; width:100%; }
+    #container, header, #settings, #results { float:none; margin-left:0; margin-right:0; min-width:140px; width:auto; }
+    #container { padding:0 2% 0 2%; }
+    #results { border:none; padding:0; }
 
   /* Uncomment if you don't want iOS and WinMobile to mobile-optimize the text for you: j.mp/textsizeadjust */
   /* html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
