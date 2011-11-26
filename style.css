@@ -144,10 +144,11 @@ select {margin-top:0.5em;}
 #submit {margin:1.75em auto 0;}
 
 #results {float:left; padding:0 1.5em 1.5em 1.5em; min-width:220px; width:50%;}
-#summary {margin:1em 0;}
-#graph { height:60px; width:100%}
+#summary {margin:1em 0 0.25em;}
+#graph { /*height:60px;*/ width:100%}
+/* ids for the next set are only for layout-test.html, not in live scorecard, where only classes are used */
 #international, #domestic, #gap, 
-#graph .intl, #graph .dom, #graph .gap {float:left; height:60px; margin-bottom:0.5em;}
+#graph .intl, #graph .dom, #graph .gap {float:left; height:40px; margin-bottom:0.5em;}
 #key {clear:both; margin-top:0.5em;}
 #key p {line-height:1; margin-top:0.5em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
