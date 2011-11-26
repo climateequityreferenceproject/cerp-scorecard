@@ -24,15 +24,26 @@
         }
         $details = $pledge_info['details'];
         $effort_array = get_gdrs_information($pledge_info, $post_params['ambition']);
-        $effort = number_format($effort_array['dom_pledge'] + $effort_array['intl_pledge']);
+        $effort_val = $effort_array['dom_pledge'] + $effort_array['intl_pledge'];
+        $effort = number_format($effort_val);
+        if ($effort_val < 0) {
+            $retval = '<div id="summary">';
+            $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';
+            $retval .= 'has pledged emissions in  ' . $params['min_target_year'] . '  that exceed expected, ';
+            $retval .= 'business-as-usual, emissions by <span id="commitment">';
+            $retval .= number_format(100.0 * $effort_array['pledge_over_bau']) . '%</span></p></div>';
+            return $retval;
+        }
         foreach ($effort_array as $key => $val) {
             $effort_int[$key] = number_format($val);
         }
         $iso3 = $post_params['country'];
+        
+        $condition_string = $post_params['conditional'] ? 'conditionally' : 'unconditionally';
 
         $retval = '<div id="summary">';
         $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';
-        $retval .= 'has pledged to do <span id="commitment">' . $effort . '%</span> ';
+        $retval .= 'has pledged ' . $condition_string . ' to do <span id="commitment">' . $effort . '%</span> ';
         $retval .= 'of its <a class="definition" href="#">fair share</a> in ' . $params['min_target_year'] . ', '; 
         $retval .= 'assuming ' . $ambition . ' global ambition.</p></div>';
         
