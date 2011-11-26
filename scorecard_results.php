@@ -8,6 +8,7 @@
         'med' => 'Moderate',
         'high' => 'High'
     );
+    $results_default = '<p>Select a country or group to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.</p>';
     
     function get_results($post_params, $pathway_id, $pathway_label) {
         $params = array();
@@ -53,8 +54,12 @@ EOHTML2;
 return $retval;
 }
 
-if (isset($_POST['ajax'])) {
-     echo get_results($_POST, $pathway_id, $pathway_label);
+if (isset($_POST['ajax']) ) {
+     if ($_POST['country']!=='none') {
+        echo get_results($_POST, $pathway_id, $pathway_label);
+    } else {
+        echo $results_default;
+    }
 }
 
 ?>

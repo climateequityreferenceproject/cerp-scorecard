@@ -2,10 +2,10 @@
 include_once("functions.php");
 include("scorecard_results.php");
 
-if ($_POST) {
+if ($_POST && ($_POST['country']!=='none')) {
     $html = get_results($_POST, $pathway_id, $pathway_label);
 } else {
-    $html = '<p>Select a country or group to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.</p>';
+    $html = $results_default;
 }
 ?>
 <!doctype html>
@@ -59,9 +59,11 @@ if ($_POST) {
                         <legend>Country or Group</legend>
                         <select id="country" name="country">
                         <?php
-                        if (isset($_POST['country'])) {
+                        if (isset($_POST['country']) && ($_POST['country']!=='none')) {
+                            echo '<option value="none">make a selection</option>';
                             echo avail_countries_options($_POST['country']);
                         } else {
+                            echo '<option value="none" selected="selected">make a selection</option>';
                             echo avail_countries_options();
                         }?>
                         </select>
