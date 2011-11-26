@@ -216,3 +216,26 @@ function get_gdrs_information($pledge_info, $pathway) {
     return $retval;
 }
 
+function draw_bars_get_remainder($pledge,$class) {
+    for ($i = $pledge; $i >= 100; $i -= 100) {
+        echo '<div class="' . $class . '" style="width:100%"></div>';
+    }     
+    echo '<div class="' . $class . '" style="width:' . $pledge . '%"></div>';
+    return (100 - $pledge);
+}
+
+function draw_graph($pledge1,$class1,$pledge2,$class2,$gap) {
+    if (($pledge1 + $pledge2) >= 100) {
+        $gap = 0;
+    }
+    $remainder_pledge1 = draw_bars_get_remainder($pledge1,$class1);
+    if ($pledge2 <= $remainder_pledge1) {
+        echo '<div class="' . $class2 . '" style="width:' . $pledge2 . '%"></div>';
+    } else {
+        echo '<div class="' . $class2 . '" style="width:' . $remainder_pledge1 . '%"></div>';
+        $pledge2 = $pledge2 - $remainder_pledge1;
+        $remainder_pledge2 = draw_bars_get_remainder($pledge2,$class2);
+        echo '<div class="' . $class2 . '" style="width:' . $remainder_pledge2 . '%"></div>';
+    }
+    echo '<div class="gap" style="width:' . $gap . '%"></div>';        
+}
