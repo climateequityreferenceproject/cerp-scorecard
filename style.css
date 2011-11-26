@@ -152,9 +152,9 @@ select {margin-top:0.5em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
 
 /* these three are hard-coded for now, later will be dynamic, based on results */
-#international {width:15%;}
-#domestic {width:30%;}
-#gap {width:55%}
+#international {width:0%;}
+#domestic {width:0%;}
+#gap {width:0%}
 
 
 /* color ***************************************/

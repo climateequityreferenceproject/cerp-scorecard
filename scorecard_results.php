@@ -24,12 +24,12 @@
 $retval .= <<<EOHTML1
             </div>
             <div id="graph" class="group">
-                <div id="international" class="international"></div>
-                <div id="domestic" class="domestic"></div>
-                <div id="gap" class="gap"></div>
-           </div>
-            <div id="key" class="group">
+                <div id="international" class="international" style="width:
 EOHTML1;
+        $retval .= $effort_int['intl_pledge'] . '%"></div> <div id="domestic" class="domestic" style="width:';
+        $retval .= $effort_int['dom_pledge'] . '%"</div> <div id="gap" class="gap" style="width:';
+        $retval .= $effort_int['gap'] . '%"</div> </div> <!-- end #graph -->';
+        $retval .= '<div id="key" class="group">';
         $retval .= '<p><span class="international"></span> ' . $effort_int['intl_pledge'] . '% <a class="definition" href="#">pledged international support</a></p>';
         $retval .= '<p><span class="domestic"></span> ' . $effort_int['dom_pledge'] . '% <a class="definition" href="#">pledged domestic effort</a></p>';
         $retval .= '<p><span class="gap"></span> ' . $effort_int['gap'] . '% <a class="definition" href="#">gap</a></p>';
