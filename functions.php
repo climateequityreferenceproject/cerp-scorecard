@@ -246,3 +246,14 @@ function draw_graph($pledge1,$class1,$pledge2,$class2,$gap) {
     $retval .= '<div class="gap" style="width:' . $gap . '%"></div>';
     return $retval;
 }
+
+function clean_text($string) {
+    $retval = trim($string);
+    // Remove trailing punctuation
+    $end = substr($retval, -1);
+    while (in_array($end, array('.', ',', ';', '?', '!'))) {
+        $retval = trim(substr($retval, 0, -1));
+        $end = substr($retval, -1);
+    }
+    return $retval;
+}
