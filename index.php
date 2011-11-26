@@ -2,13 +2,6 @@
 include_once("functions.php");
 include("scorecard_results.php");
 
-$pathway_id = get_pathways(array('low'=>'IPCC_likely', 'med'=>'AOSIS', 'high'=>'Hansen'));
-$pathway_label = array(
-    'low' => 'Low',
-    'med' => 'Moderate',
-    'high' => 'High'
-);
-
 if ($_POST) {
     $html = get_results($_POST, $pathway_id, $pathway_label);
 } else {
@@ -51,6 +44,7 @@ if ($_POST) {
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
   </head>  
   <body class="group">
+    <div id="loading"></div>
     <div id="container" class="group">
     <header>
         <h1>Climate Equity Scorecard</h1>
@@ -142,6 +136,7 @@ if ($_POST) {
   <!-- scripts concatenated and minified via ant build script-->
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
+  <script src="js/scorecard.js"></script>
   <!-- end scripts-->
 
 	

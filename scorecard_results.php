@@ -1,5 +1,14 @@
 <?php
     include_once('functions.php');
+    
+    // TODO: this isn't the best style, to have "bare" variables like this: wrap in a function
+    $pathway_id = get_pathways(array('low'=>'IPCC_likely', 'med'=>'AOSIS', 'high'=>'Hansen'));
+    $pathway_label = array(
+        'low' => 'Low',
+        'med' => 'Moderate',
+        'high' => 'High'
+    );
+    
     function get_results($post_params, $pathway_id, $pathway_label) {
         $params = array();
 
@@ -43,4 +52,9 @@ $retval .= <<<EOHTML2
 EOHTML2;
 return $retval;
 }
-            ?>
+
+if ($_POST) {
+    echo get_results($_POST, $pathway_id, $pathway_label);
+}
+
+?>

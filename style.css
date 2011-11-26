@@ -230,7 +230,11 @@ a.definition { background: url(img/info-icon.gif) center right no-repeat; paddin
 #submit {background-position: 0 0;}
 #submit:hover {background-position: 0 -47px;}
 #submit:active {background-position: 0 -47px;}
-
+#loading { 
+	margin:300px 50% auto;
+	position:fixed;
+        
+}
 
 /****************************************************************************************/
 
