@@ -217,12 +217,13 @@ function get_gdrs_information($pledge_info, $pathway) {
 }
 
 function draw_bars_get_remainder($pledge,$class) {
+    $html = '';
     for ($i = $pledge; $i >= 100; $i -= 100) {
-        $html = '<div class="' . $class . '" style="width:100%"></div>';
+        $html .= '<div class="' . $class . '" style="width:100%"></div>';
     }     
-    $html .= '<div class="' . $class . '" style="width:' . $pledge . '%"></div>';
+    $html .= '<div class="' . $class . '" style="width:' . $i . '%"></div>';
     return array(
-        'remainder' => (100 - $pledge),
+        'remainder' => (100 - $i),
         'html' => $html
     );
 }
@@ -231,16 +232,16 @@ function draw_graph($pledge1,$class1,$pledge2,$class2,$gap) {
     if (($pledge1 + $pledge2) >= 100) {
         $gap = 0;
     }
-    $bar_info = draw_bars_get_remainder($pledge1,$class1);
-    $remainder_pledge1 = $bar_info['remainder'];
-    $retval = $bar_info['html'];
+    $bar_info1 = draw_bars_get_remainder($pledge1,$class1);
+    $retval = $bar_info1['html'];
+    $remainder_pledge1 = $bar_info1['remainder'];
     if ($pledge2 <= $remainder_pledge1) {
         $retval .= '<div class="' . $class2 . '" style="width:' . $pledge2 . '%"></div>';
     } else {
         $retval .= '<div class="' . $class2 . '" style="width:' . $remainder_pledge1 . '%"></div>';
         $pledge2 = $pledge2 - $remainder_pledge1;
-        $remainder_pledge2 = draw_bars_get_remainder($pledge2,$class2);
-        $retval .= '<div class="' . $class2 . '" style="width:' . $remainder_pledge2 . '%"></div>';
+        $bar_info2 = draw_bars_get_remainder($pledge2,$class2);
+        $retval .= $bar_info2['html'];
     }
     $retval .= '<div class="gap" style="width:' . $gap . '%"></div>';
     return $retval;
