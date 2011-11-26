@@ -22,7 +22,15 @@
         if (!$pledge_info) {
             return '<div id="summary"><p class="first"><span id="country_name">' . $params['country_name'] . '</span> has not made ' . ($post_params['conditional'] ? 'a conditional' : 'an unconditional') . ' pledge.</p></div>';
         }
-        $details = $pledge_info['details'];
+        // Process details a bit: we have no control over this text
+        $details = trim($pledge_info['details']);
+        // Remove trailing punctuation
+        $details_end = substr($details, -1);
+        while (in_array($details_end, array('.', ',', ';', '?', '!'))) {
+            $details = trim(substr($details, 0, -1));
+            $details_end = substr($details, -1);
+        }
+        
         $effort_array = get_gdrs_information($pledge_info, $post_params['ambition']);
         $effort_val = $effort_array['dom_pledge'] + $effort_array['intl_pledge'];
         $effort = number_format($effort_val);
@@ -64,7 +72,7 @@ $retval .= <<<EOHTML1
 EOHTML1;
         $retval .= '<p class="first">' . $effort_array['pledge_description'];
         if ($details) {
-            $retval .= ' This pledge assumes: ' . $details . '</p></div>';
+            $retval .= ' This pledge assumes: ' . $details . '.</p></div>';
         }
 
 return $retval;
