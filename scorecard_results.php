@@ -65,7 +65,7 @@
         $retval .= '<p><span class="dom"></span> ' . $dom . '% <a class="definition" href="#">pledged domestic effort</a></p>';
         $retval .= '<p><span class="gap"></span> ' . $gap . '% <a class="definition" href="#">gap</a></p></div><!-- end #key -->';
 $retval .= <<<EOHTML1
-            <p id="more_options"><a href="http://gdrights.org/calculator_dev/?iso3=$iso3">more results for this country &#187;</a></p>
+            <p id="more_options"><a href="http://gdrights.org/calculator_dev/?iso3=$iso3" target="_blank">more results for this country &#187;</a></p>
     <div id="details">
                 <h2>Details about this pledge</h2>
 EOHTML1;
