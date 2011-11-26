@@ -42,7 +42,7 @@ function avail_countries_options($iso3=NULL) {
     while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
         if (!in_array($row['iso3'], $keys, true)) {
             if ($row['iso3']===$iso3) {
-                $sel_string = ' selected = "selected"';
+                $sel_string = ' selected="selected"';
             } else {
                 $sel_string = '';
             }

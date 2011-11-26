@@ -76,16 +76,45 @@ if ($_POST) {
                 <li class="setting">
                     <fieldset id="ambition">
                         <legend><a class="definition" href="#"><span>Level of Global Ambition</span></a></legend>
-                        <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $pathway_id['low'] ?>"/> <?php echo $pathway_label['low'] ?></label>
-                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $pathway_id['med'] ?>" checked="checked" /> <?php echo $pathway_label['med'] ?></label>
-                        <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $pathway_id['high'] ?>"/> <?php echo $pathway_label['high'] ?></label>
+                        <?php // TODO: this is stupid, why is this repeated? what happened to DRY? ?>
+                        <?php 
+                        if (isset($_POST['ambition'])) {
+                            foreach ($pathway_id as $key => $val) {
+                                if ($val===$_POST['ambition']) {
+                                    $checked_string[$key] = 'checked="checked"';
+                                } else {
+                                    $checked_string[$key] = '';
+                                }
+                            }
+                        } else {
+                            $checked_string['low'] = '';
+                            $checked_string['med'] = 'checked="checked"';
+                            $checked_string['high'] = '';
+                        }
+                        ?>
+                        <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $pathway_id['low'] ?>" <?php echo $checked_string['low']; ?> /> <?php echo $pathway_label['low'] ?></label>
+                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $pathway_id['med'] ?>" <?php echo $checked_string['med']; ?> /> <?php echo $pathway_label['med'] ?></label>
+                        <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $pathway_id['high'] ?>" <?php echo $checked_string['high']; ?> /> <?php echo $pathway_label['high'] ?></label>
                     </fieldset>
                 </li>
                 <li class="setting">
                      <fieldset id="pledge_type">
                          <legend><a class="definition" href="#">Type of Pledge</a></legend>
-                         <label for="conditional-no"><input type="radio" name="conditional" id="conditional-no" value="0" checked="checked" /> Unconditional</label>
-                         <label for="conditional-yes"><input type="radio" name="conditional" id="conditional-yes" value="1"/> Conditional</label>
+                        <?php 
+                        if (isset($_POST['conditional'])) {
+                            if ($_POST['conditional']) {
+                                $checked_string['yes'] = 'checked="checked"';                           
+                                $checked_string['no'] = '';
+                            } else {
+                                $checked_string['no'] = 'checked="checked"';                           
+                                $checked_string['yes'] = '';
+                            }
+                        } else {
+                            $checked_string['no'] = 'checked="checked"';                           
+                            $checked_string['yes'] = '';                        }
+                        ?>                         
+                         <label for="conditional-no"><input type="radio" name="conditional" id="conditional-no" value="0" <?php echo $checked_string['no']; ?> /> Unconditional</label>
+                         <label for="conditional-yes"><input type="radio" name="conditional" id="conditional-yes" value="1" <?php echo $checked_string['yes']; ?> /> Conditional</label>
                      </fieldset>
                 </li>
             </ul>
