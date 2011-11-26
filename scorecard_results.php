@@ -19,6 +19,9 @@
         $ambition = strtolower($params['ambition']);
 
         $pledge_info = get_pledge_information($post_params['country'], $post_params['conditional'], $params['min_target_year']);
+        if (!$pledge_info) {
+            return '<p>' . $params['country_name'] . ' has not made ' . ($post_params['conditional'] ? 'a conditional' : 'an unconditional') . ' pledge.</p>';
+        }
         $effort_array = get_gdrs_information($pledge_info, $post_params['ambition']);
         $effort = number_format($effort_array['dom_pledge'] + $effort_array['intl_pledge']);
         foreach ($effort_array as $key => $val) {
