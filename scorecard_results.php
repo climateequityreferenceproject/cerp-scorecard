@@ -76,8 +76,12 @@ $retval .= <<<EOHTML1
 EOHTML1;
         $retval .= '<p class="first">' . $effort_array['pledge_description'];
         if ($details) {
-            $retval .= ' This pledge assumes: ' . $details . '.</p></div>';
+            $retval .= ' This pledge assumes: ' . $details . '.</p>';
         }
+        if ($source) {
+            $retval .= '<p class="source">Source: ' . $source . '.</p>';            
+        }
+        $retval .= '</div>';
 
 return $retval;
 }

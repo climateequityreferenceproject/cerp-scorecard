@@ -213,8 +213,10 @@ h2, #summary {font-size:150%;}
 h2 {margin-top:0.75em;}
 #country_name, #commitment {font-size:200%;}
 #summary p#more_options {font-size:65%; margin-top:2em;}
-.first {margin-top:0.25em;}
+.first, p.source {margin-top:0.25em;}
 #results .first {margin-top:0;}
+.source {font-size:80%;}
+
 
 a, a:active, a:visited {border-bottom:1px solid transparent; text-decoration: none;}
 a:hover {border-bottom:1px dotted #036;}
