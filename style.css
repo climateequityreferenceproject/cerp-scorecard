@@ -147,7 +147,7 @@ select {margin-top:0.5em;}
 #summary {margin:1em 0;}
 #graph { height:60px; width:100%}
 #international, #domestic, #gap, 
-#graph.intl, #graph.dom, #graph.gap {float:left; height:60px; margin-bottom:0.5em;} 
+#graph .intl, #graph .dom, #graph .gap {float:left; height:60px; margin-bottom:0.5em;}
 #key {clear:both; margin-top:0.5em;}
 #key p {line-height:1; margin-top:0.5em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
@@ -176,8 +176,8 @@ a, a:active, a:visited {color:#666;}
 a:hover {color:#dd6e4c;}
 legend a, legend a:active, legend a:visited {color: #444;}
 
-.international {background:#4d59a4;}
-.domestic {background:#8ebd7f;}
+.intl {background:#4d59a4;}
+.dom {background:#8ebd7f;}
 .gap {background:#ffce73;}
 #results {border:6px solid #ffce73; -moz-border-radius:15px; border-radius:15px;}
 

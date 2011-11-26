@@ -60,14 +60,13 @@
         } else {
             $retval .= '</div>';
             $retval .= '<div id="graph" class="group">';
-            $retval .= '<div id="international" class="international" style="width:' . $intl . '%"></div> ';
-            $retval .= '<div id="domestic" class="domestic" style="width:' . $dom . '%"></div> ';
-            $retval .= '<div id="gap" class="gap" style="width:' . $gap . '%"></div></div><!-- end #graph -->';
+            $retval .= draw_graph($intl,'intl',$dom,'dom',$gap); 
+            $retval .= '</div><!-- end #graph -->';
         }
         
         $retval .= '<div id="key" class="group">';
-        $retval .= '<p><span class="international"></span> ' . $intl . '% <a class="definition" href="#">pledged international support</a></p>';
-        $retval .= '<p><span class="domestic"></span> ' . $dom . '% <a class="definition" href="#">pledged domestic effort</a></p>';
+        $retval .= '<p><span class="intl"></span> ' . $intl . '% <a class="definition" href="#">pledged international support</a></p>';
+        $retval .= '<p><span class="dom"></span> ' . $dom . '% <a class="definition" href="#">pledged domestic effort</a></p>';
         $retval .= '<p><span class="gap"></span> ' . $gap . '% <a class="definition" href="#">gap</a></p></div><!-- end #key -->';
 $retval .= <<<EOHTML1
             <p id="more_options"><a href="http://gdrights.org/calculator_dev/?iso3=$iso3">more results for this country &#187;</a></p>
