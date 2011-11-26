@@ -12,7 +12,7 @@ $pathway_label = array(
 if ($_POST) {
     $html = get_results($_POST, $pathway_id, $pathway_label);
 } else {
-    $html = '<p>Select a country or group at left to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.</p>';
+    $html = '<p>Select a country or group to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.</p>';
 }
 ?>
 <!doctype html>
