@@ -136,7 +136,7 @@ button {  width: auto; overflow: visible; }
 header {padding:1em 0 1.5em 0;}
 p {margin-top:1.2em;}
 
-#settings {float:left; margin:0 30px 1em 0; padding:20px; min-width:220px; width:30%;}
+#settings {float:left; margin:0 30px 1em 0; padding: 0 20px 1.5em 20px; min-width:220px; width:30%;}
 fieldset {padding:0 10px 0.75em;}
 legend {padding-top:2em;}
 label {display:block; padding:0 0.75em 0 0.25em;}
@@ -151,7 +151,7 @@ select {margin-top:0.5em;}
 #key p {line-height:1; margin-top:0.5em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
 
-/* these three are hard-coded for now, later will be dynamic, based on results */
+/* these three are hard-coded for initial load, will be dynamic based on effort results */
 #international {width:0%;}
 #domestic {width:0%;}
 #gap {width:0%}
@@ -177,7 +177,7 @@ legend a, legend a:active, legend a:visited {color: #444;}
 
 .international {background:#4d59a4;}
 .domestic {background:#8ebd7f;}
-#graph, .gap {background:#ffce73;}
+.gap {background:#ffce73;}
 #results {border:6px solid #ffce73; -moz-border-radius:15px; border-radius:15px;}
 
 

@@ -60,10 +60,10 @@ if ($_POST && ($_POST['country']!=='none')) {
                         <select id="country" name="country">
                         <?php
                         if (isset($_POST['country']) && ($_POST['country']!=='none')) {
-                            echo '<option value="none">make a selection</option>';
+                            echo '<option value="none">-Select-</option>';
                             echo avail_countries_options($_POST['country']);
                         } else {
-                            echo '<option value="none" selected="selected">make a selection</option>';
+                            echo '<option value="none" selected="selected">-Select-</option>';
                             echo avail_countries_options();
                         }?>
                         </select>

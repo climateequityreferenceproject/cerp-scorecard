@@ -20,7 +20,7 @@
 
         $pledge_info = get_pledge_information($post_params['country'], $post_params['conditional'], $params['min_target_year']);
         if (!$pledge_info) {
-            return '<p>' . $params['country_name'] . ' has not made ' . ($post_params['conditional'] ? 'a conditional' : 'an unconditional') . ' pledge.</p>';
+            return '<div id="summary"><p class="first"><span id="country_name">' . $params['country_name'] . '</span> has not made ' . ($post_params['conditional'] ? 'a conditional' : 'an unconditional') . ' pledge.</p></div>';
         }
         $details = $pledge_info['details'];
         $effort_array = get_gdrs_information($pledge_info, $post_params['ambition']);
@@ -34,30 +34,27 @@
         $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';
         $retval .= 'has pledged to do <span id="commitment">' . $effort . '%</span> ';
         $retval .= 'of its <a class="definition" href="#">fair share</a> in ' . $params['min_target_year'] . ', '; 
-        $retval .= 'assuming ' . $ambition . ' global ambition.</p>';
-$retval .= <<<EOHTML1
-            </div>
-            <div id="graph" class="group">
-                <div id="international" class="international" style="width:
-EOHTML1;
-        $retval .= $effort_int['intl_pledge'] . '%"></div> <div id="domestic" class="domestic" style="width:';
-        $retval .= $effort_int['dom_pledge'] . '%"></div> <div id="gap" class="gap" style="width:';
-        $retval .= $effort_int['gap'] . '%"></div> </div> <!-- end #graph -->';
+        $retval .= 'assuming ' . $ambition . ' global ambition.</p></div>';
+        
+        $retval .= '<div id="graph" class="group">';
+        $retval .= '<div id="international" class="international" style="width:' . $effort_int['intl_pledge'] . '%"></div> ';
+        $retval .= '<div id="domestic" class="domestic" style="width:' . $effort_int['dom_pledge'] . '%"></div> ';
+        $retval .= '<div id="gap" class="gap" style="width:' . $effort_int['gap'] . '%"></div></div><!-- end #graph -->';
+        
         $retval .= '<div id="key" class="group">';
         $retval .= '<p><span class="international"></span> ' . $effort_int['intl_pledge'] . '% <a class="definition" href="#">pledged international support</a></p>';
         $retval .= '<p><span class="domestic"></span> ' . $effort_int['dom_pledge'] . '% <a class="definition" href="#">pledged domestic effort</a></p>';
-        $retval .= '<p><span class="gap"></span> ' . $effort_int['gap'] . '% <a class="definition" href="#">gap</a></p>';
-$retval .= <<<EOHTML2
-        </div>
+        $retval .= '<p><span class="gap"></span> ' . $effort_int['gap'] . '% <a class="definition" href="#">gap</a></p></div><!-- end #key -->';
+$retval .= <<<EOHTML1
             <p id="more_options"><a href="http://gdrights.org/calculator_dev/?iso3=$iso3">more results for this country &#187;</a></p>
-EOHTML2;
+EOHTML1;
 if ($details !== "") {
-$retval .= <<<EOHTML3
+$retval .= <<<EOHTML2
     <div id="details">
                 <h2>Details about this pledge</h2>
                 <p class="first">This pledge assumes: $details</p>
             </div>
-EOHTML3;
+EOHTML2;
 }
 
 return $retval;
