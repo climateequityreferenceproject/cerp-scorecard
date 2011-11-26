@@ -59,15 +59,13 @@
         $retval .= '<p><span class="gap"></span> ' . $effort_int['gap'] . '% <a class="definition" href="#">gap</a></p></div><!-- end #key -->';
 $retval .= <<<EOHTML1
             <p id="more_options"><a href="http://gdrights.org/calculator_dev/?iso3=$iso3">more results for this country &#187;</a></p>
-EOHTML1;
-if ($details !== "") {
-$retval .= <<<EOHTML2
     <div id="details">
                 <h2>Details about this pledge</h2>
-                <p class="first">This pledge assumes: $details</p>
-            </div>
-EOHTML2;
-}
+EOHTML1;
+        $retval .= '<p class="first">' . $effort_array['pledge_description'];
+        if ($details) {
+            $retval .= ' This pledge assumes: ' . $details . '</p></div>';
+        }
 
 return $retval;
 }

@@ -176,19 +176,27 @@ function get_gdrs_information($pledge_info, $pathway) {
         default:
             // Shouldn't get here
     }
+    $description = 'Pledge to reduce ';
+    $by_factor = $pledge_info['reduction_percent'];
     switch ($pledge_info['quantity']) {
         case 'absolute':
+            $description .= 'total emissions by by ' . $by_factor . '% compared to ';
             if ($pledge_info['year_or_bau'] === 'bau') {
+                $description .= '<a class="definition" href="#">business-as-usual</a>';
                 $pledged_reduction = (1 - $factor) * $bau[$pledge_info['by_year']];
             } else {
+                $description .= $pledge_info['rel_to_year'];
                 $pledged_reduction = $bau[$pledge_info['by_year']] - $factor * $bau[$pledge_info['rel_to_year']];
             }
             break;
         case 'intensity':
+            $description .= '<a class="definition" href="#">emissions intensity</a> by ' . $by_factor . '% compared to ';
             if ($pledge_info['year_or_bau'] === 'bau') {
                 // This option actually makes no sense, but take care of it just in case:
+                $description .= '<a class="definition" href="#">business-as-usual</a>';
                 $pledged_reduction = (1 - $factor) * $bau[$pledge_info['by_year']];
             } else {
+                $description .= $pledge_info['rel_to_year'];
                 $scaled_emiss = $gdp[$pledge_info['by_year']] * $bau[$pledge_info['rel_to_year']]/$gdp[$pledge_info['rel_to_year']];
                 $pledged_reduction = $bau[$pledge_info['by_year']] - $factor * $scaled_emiss;
             }
@@ -198,6 +206,7 @@ function get_gdrs_information($pledge_info, $pathway) {
     }
     
     $retval['pledge_over_bau'] = 100 * (1 - $pledged_reduction/$bau[$pledge_info['by_year']]);
+    $retval['pledge_description'] = $description . '.';
     
     //$pledged_reduction = min(max(0, $pledged_reduction), $gdrs_reduction);
     $retval['intl_pledge'] = 0; // TODO: find out from authors how to get international pledges
