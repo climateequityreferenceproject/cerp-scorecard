@@ -56,7 +56,7 @@ if ($_POST && ($_POST['country']!=='none')) {
             <ul>
                 <li class="setting">
                     <fieldset>
-                        <legend>Country or Group</legend>
+                        <legend>Country</legend>
                         <select id="country" name="country">
                         <?php
                         if (isset($_POST['country']) && ($_POST['country']!=='none')) {

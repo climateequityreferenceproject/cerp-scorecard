@@ -9,7 +9,7 @@
         'high' => 'High'
     );
     
-    $results_default = '<p>Select a country or group to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.</p>';
+    $results_default = '<p>Select a country to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.</p>';
     
     function get_results($post_params, $pathway_id, $pathway_label) {
         $params = array();
