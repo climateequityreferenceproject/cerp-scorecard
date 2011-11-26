@@ -13,7 +13,7 @@ function submit() {
     $('#loading').show();
     $.post(
         "scorecard_results.php",
-        $('#settings').serialize(),
+        $('#settings').serialize() + "&ajax=ajax",
         function(data) {
             $('#results').html(data);
             $('#loading').hide();

@@ -53,8 +53,8 @@ EOHTML2;
 return $retval;
 }
 
-// if ($_POST) {
-//     echo get_results($_POST, $pathway_id, $pathway_label);
-// }
+if (isset($_POST['ajax'])) {
+     echo get_results($_POST, $pathway_id, $pathway_label);
+}
 
 ?>
