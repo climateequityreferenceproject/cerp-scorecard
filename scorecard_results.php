@@ -26,14 +26,6 @@
         $effort_array = get_gdrs_information($pledge_info, $post_params['ambition']);
         $effort_val = $effort_array['dom_pledge'] + $effort_array['intl_pledge'];
         $effort = number_format($effort_val);
-        if ($effort_val < 0) {
-            $retval = '<div id="summary">';
-            $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';
-            $retval .= 'has pledged emissions in  ' . $params['min_target_year'] . '  that exceed expected, ';
-            $retval .= 'business-as-usual, emissions by <span id="commitment">';
-            $retval .= number_format(100.0 * $effort_array['pledge_over_bau']) . '%</span></p></div>';
-            return $retval;
-        }
         foreach ($effort_array as $key => $val) {
             $effort_int[$key] = number_format($val);
         }
@@ -44,13 +36,22 @@
         $retval = '<div id="summary">';
         $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';
         $retval .= 'has pledged ' . $condition_string . ' to do <span id="commitment">' . $effort . '%</span> ';
-        $retval .= 'of its <a class="definition" href="#">fair share</a> in ' . $params['min_target_year'] . ', '; 
-        $retval .= 'assuming ' . $ambition . ' global ambition.</p></div>';
-        
-        $retval .= '<div id="graph" class="group">';
-        $retval .= '<div id="international" class="international" style="width:' . $effort_int['intl_pledge'] . '%"></div> ';
-        $retval .= '<div id="domestic" class="domestic" style="width:' . $effort_int['dom_pledge'] . '%"></div> ';
-        $retval .= '<div id="gap" class="gap" style="width:' . $effort_int['gap'] . '%"></div></div><!-- end #graph -->';
+        $retval .= 'of its <a class="definition" href="#">fair share</a> ';
+        $retval .= 'in ' . $params['min_target_year'] . ', '; 
+        $retval .= 'assuming ' . $ambition . ' global ambition.</p>';
+        if ($effort_val < 0) {
+            $retval .= '<p>The level of effort is negative because ' . $params['country_name'];
+            $retval .= ' has pledged emissions in  ' . $params['min_target_year'] . '  that exceed ';
+            $retval .= '<a class="definition" href="#">business-as-usual emissions</a> by ';
+            $retval .= $effort_int['pledge_over_bau'] . '%.</p>';
+            $retval .= '</div>';
+        } else {
+            $retval .= '</div>';
+            $retval .= '<div id="graph" class="group">';
+            $retval .= '<div id="international" class="international" style="width:' . $effort_int['intl_pledge'] . '%"></div> ';
+            $retval .= '<div id="domestic" class="domestic" style="width:' . $effort_int['dom_pledge'] . '%"></div> ';
+            $retval .= '<div id="gap" class="gap" style="width:' . $effort_int['gap'] . '%"></div></div><!-- end #graph -->';
+        }
         
         $retval .= '<div id="key" class="group">';
         $retval .= '<p><span class="international"></span> ' . $effort_int['intl_pledge'] . '% <a class="definition" href="#">pledged international support</a></p>';

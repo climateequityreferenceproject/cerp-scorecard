@@ -197,7 +197,7 @@ function get_gdrs_information($pledge_info, $pathway) {
             // Shouldn't reach here
     }
     
-    $retval['pledge_over_bau'] = 1 - $pledged_reduction/$bau[$pledge_info['by_year']];
+    $retval['pledge_over_bau'] = 100 * (1 - $pledged_reduction/$bau[$pledge_info['by_year']]);
     
     //$pledged_reduction = min(max(0, $pledged_reduction), $gdrs_reduction);
     $retval['intl_pledge'] = 0; // TODO: find out from authors how to get international pledges
