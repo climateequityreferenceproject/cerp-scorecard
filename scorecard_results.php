@@ -60,6 +60,7 @@
         } else {
             $retval .= '</div>';
             $retval .= '<div id="graph" class="group">';
+            $retval .= '<p id="fair-share">100% of fair share</p>';
             $retval .= draw_graph($intl,'intl',$dom,'dom',$gap); 
             $retval .= '</div><!-- end #graph -->';
         }

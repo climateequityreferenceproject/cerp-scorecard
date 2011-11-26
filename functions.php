@@ -180,7 +180,7 @@ function get_gdrs_information($pledge_info, $pathway) {
     $by_factor = $pledge_info['reduction_percent'];
     switch ($pledge_info['quantity']) {
         case 'absolute':
-            $description .= 'total emissions by by ' . $by_factor . '% compared to ';
+            $description .= 'total emissions by ' . $by_factor . '% compared to ';
             if ($pledge_info['year_or_bau'] === 'bau') {
                 $description .= '<a class="definition" href="#">business-as-usual</a>';
                 $pledged_reduction = (1 - $factor) * $bau[$pledge_info['by_year']];

@@ -152,11 +152,6 @@ select {margin-top:0.5em;}
 #key p {line-height:1; margin-top:0.5em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
 
-/* these three are hard-coded for initial load, will be dynamic based on effort results */
-#international {width:15%;}
-#domestic {width:30%;}
-#gap {width:55%}
-
 
 /* color ***************************************/
 body {background:#fff;}
@@ -214,6 +209,7 @@ h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {font-family:ProximaNovaBold
 
 h1 {font-size:250%; line-height:1;}
 h2, #summary {font-size:150%;}
+#summary {line-height:40px;}
 h2 {margin-top:0.75em;}
 #country_name, #commitment {font-size:200%;}
 #summary p#more_options {font-size:65%; margin-top:2em;}
@@ -225,16 +221,16 @@ a:hover {border-bottom:1px dotted #036;}
 
 
 /* miscellaneous ***************************************/
-a.definition { background: url(img/info-icon.gif) center right no-repeat; padding-right: 16px; }
+a.definition {background:url(img/info-icon.gif) center right no-repeat; padding-right: 16px;}
+#fair-share {background:url(img/arrow-lr.gif) 100% 85% no-repeat; margin:0; padding:0 12px 0 0; text-align:right;}
 
 #submit {display:block; text-indent:-5000px; width:200px!important; height:47px; background-image:url(img/send-button-sprite.png)!important; background-repeat:no-repeat; border:0px!important; padding:0px!important; }
 #submit {background-position: 0 0;}
 #submit:hover {background-position: 0 -47px;}
 #submit:active {background-position: 0 -47px;}
 #loading { 
-	margin:300px 50% auto;
-	position:fixed;
-        
+    margin:300px 50% auto;
+    position:fixed;
 }
 
 /****************************************************************************************/

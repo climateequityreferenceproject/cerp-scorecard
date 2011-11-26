@@ -41,7 +41,7 @@
     </header>
     <div id="main" role="main" class="group">
         <form name="settings" id="settings" method="post">
-            Select a country or group below to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.
+            <!-- Select a country or group below to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change. -->
             <ul>
                 <li class="setting">
                     <fieldset>
@@ -80,10 +80,13 @@
                 of its <a class="definition" href="#">fair share</a> in [year], 
                 assuming [level] global ambition.</p>
             </div>
-            <div id="graph" class="group">
-                <div id="international" class="intl"></div>
-                <div id="domestic" class="dom"></div>
-                <div id="gap" class="gap"></div> <!-- if pledge (sum) is >100%, gap width is 0, or there is no gap div. -->
+            <div id="graph" class="group" >
+                <!--<p id="fair-share" style="margin:0; padding:0; text-align:right;">100% of fair share <img src="img/arrow-lr.gif" width="11" height="11" alt=" " style="padding-right:2px;"/></p>-->
+                <p id="fair-share">100% of fair share</p>
+                <div id="international" class="intl" style="width:15%;"></div>
+                <div id="domestic" class="dom" style="width:85%;"></div>
+                <div class="dom" style="width:30%;"></div>
+                <div id="gap" class="gap" style="width:0%;"></div> <!-- if pledge (sum) is >100%, gap width is 0 -->
             </div>
             <div id="key" class="group">
                 <p><span class="intl"></span>[15%] <a class="definition" href="#">pledged international support</a></p>
