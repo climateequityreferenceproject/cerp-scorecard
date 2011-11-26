@@ -22,6 +22,7 @@
         if (!$pledge_info) {
             return '<p>' . $params['country_name'] . ' has not made ' . ($post_params['conditional'] ? 'a conditional' : 'an unconditional') . ' pledge.</p>';
         }
+        $details = $pledge_info['details'];
         $effort_array = get_gdrs_information($pledge_info, $post_params['ambition']);
         $effort = number_format($effort_array['dom_pledge'] + $effort_array['intl_pledge']);
         foreach ($effort_array as $key => $val) {
@@ -49,11 +50,16 @@ EOHTML1;
 $retval .= <<<EOHTML2
         </div>
             <p id="more_options"><a href="http://gdrights.org/calculator_dev/?iso3=$iso3">more results for this country &#187;</a></p>
-            <div id="details">
-                <h2>Details about this pledge</h2>
-                <p class="first">[details text from pledge database: This result reflects... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore...]</p>
-            </div>
 EOHTML2;
+if ($details !== "") {
+$retval .= <<<EOHTML3
+    <div id="details">
+                <h2>Details about this pledge</h2>
+                <p class="first">This pledge assumes: $details</p>
+            </div>
+EOHTML3;
+}
+
 return $retval;
 }
 
