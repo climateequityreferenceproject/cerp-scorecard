@@ -171,11 +171,11 @@ a, a:active, a:visited {color:#666;}
 a:hover {color:#dd6e4c;}
 legend a, legend a:active, legend a:visited {color: #444;}
 
-.intl {background:#4d59a4;}
+.intl {background:#707ac9;}
 .dom {background:#8ebd7f;}
 .gap {background:#ffce73;}
 #results {border:6px solid #ffce73; -moz-border-radius:15px; border-radius:15px;}
-
+#commitment.negative {color:#dd6e4c;}
 
 /* typography ***************************************/
 

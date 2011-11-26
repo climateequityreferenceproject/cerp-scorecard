@@ -42,7 +42,11 @@
 
         $retval = '<div id="summary">';
         $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';
-        $retval .= 'has pledged ' . $condition_string . ' to do <span id="commitment">' . $effort . '%</span> ';
+        $retval .= 'has pledged ' . $condition_string . ' to do <span id="commitment"';
+        if ($effort_val < 0) {
+            $retval .= ' class="negative"';
+        }
+        $retval .= '>' . $effort . '%</span> ';
         $retval .= 'of its <a class="definition" href="#">fair share</a> ';
         $retval .= 'in ' . $params['min_target_year'] . ', '; 
         $retval .= 'assuming ' . $ambition . ' global ambition.</p>';
