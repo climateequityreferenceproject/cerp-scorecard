@@ -195,16 +195,7 @@ function get_gdrs_information($pledge_info, $pathway) {
             break;
         default:
             // Shouldn't reach here
-    }
-    
-/*
-    echo "Pledged: " . $pledged_reduction;
-    echo '<br/><br/>';
-    echo "GDRs: " . $gdrs_reduction;
-    echo '<br/><br/>';
-    echo "Fraction: " . $factor;
-    echo '<br/><br/>';
-*/   
+    } 
     
     //$pledged_reduction = min(max(0, $pledged_reduction), $gdrs_reduction);
     $retval['intl_pledge'] = 0; // TODO: find out from authors how to get international pledges
