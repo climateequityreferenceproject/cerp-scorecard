@@ -50,12 +50,12 @@
         $retval .= 'of its <a class="definition" href="#">fair share</a> ';
         $retval .= 'in ' . $params['min_target_year'] . ', '; 
         $retval .= 'assuming ' . $ambition . ' global ambition.</p>';
+        $retval .= '</div>';
         if ($effort_val < 0) {
             $retval .= '<p>The level of effort is negative because ' . $params['country_name'];
             $retval .= ' has pledged emissions in  ' . $params['min_target_year'] . '  that exceed ';
             $retval .= '<a class="definition" href="#">business-as-usual emissions</a> by ';
             $retval .= $pledge_over_bau . '%.</p>';
-            $retval .= '</div>';
         } else {
             $retval .= '</div>';
             $retval .= '<div id="graph" class="group">';
