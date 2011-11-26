@@ -1,13 +1,3 @@
-<?php
-include_once("functions.php");
-include("scorecard_results.php");
-
-if ($_POST) {
-    $html = get_results($_POST, $pathway_id, $pathway_label);
-} else {
-    $html = '<p>Select a country or group to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.</p>';
-}
-?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
@@ -58,57 +48,23 @@ if ($_POST) {
                     <fieldset>
                         <legend>Country or Group</legend>
                         <select id="country" name="country">
-                        <?php
-                        if (isset($_POST['country'])) {
-                            echo avail_countries_options($_POST['country']);
-                        } else {
-                            echo avail_countries_options();
-                        }?>
-                        </select>
+                        <option value=AUS>Australia</option><option value=BLR>Belarus</option><option value=BRA>Brazil</option><option value=CAN>Canada</option><option value=CHK selected="selected">China</option><option value=CRI>Costa Rica</option><option value=HRV>Croatia</option><option value=ISL>Iceland</option><option value=IND>India</option><option value=IDN>Indonesia</option><option value=ISR>Israel</option><option value=JPN>Japan</option><option value=KAZ>Kazakhstan</option><option value=KOR>Korea, Rep.</option><option value=LIE>Liechtenstein</option><option value=MDV>Maldives</option><option value=MHL>Marshall Islands</option><option value=MEX>Mexico</option><option value=MDA>Moldova</option><option value=MCO>Monaco</option><option value=NZL>New Zealand</option><option value=NOR>Norway</option><option value=PNG>Papua New Guinea</option><option value=RUS>Russia</option><option value=SGP>Singapore</option><option value=ZAF>South Africa</option><option value=CHE>Switzerland</option><option value=UKR>Ukraine</option><option value=GBR>United Kingdom</option><option value=USA>United States</option>                        </select>
                     </fieldset>
                 </li>
                 <li class="setting">
                     <fieldset id="ambition">
                         <legend><a class="definition" href="#"><span>Level of Global Ambition</span></a></legend>
-                        <?php // TODO: this is stupid, why is this repeated? what happened to DRY? ?>
-                        <?php 
-                        if (isset($_POST['ambition'])) {
-                            foreach ($pathway_id as $key => $val) {
-                                if ($val===$_POST['ambition']) {
-                                    $checked_string[$key] = 'checked="checked"';
-                                } else {
-                                    $checked_string[$key] = '';
-                                }
-                            }
-                        } else {
-                            $checked_string['low'] = '';
-                            $checked_string['med'] = 'checked="checked"';
-                            $checked_string['high'] = '';
-                        }
-                        ?>
-                        <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $pathway_id['low'] ?>" <?php echo $checked_string['low']; ?> /> <?php echo $pathway_label['low'] ?></label>
-                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $pathway_id['med'] ?>" <?php echo $checked_string['med']; ?> /> <?php echo $pathway_label['med'] ?></label>
-                        <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $pathway_id['high'] ?>" <?php echo $checked_string['high']; ?> /> <?php echo $pathway_label['high'] ?></label>
+                                                                        <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="8"  /> Low</label>
+                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="7" checked="checked" /> Moderate</label>
+                        <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="4"  /> High</label>
                     </fieldset>
                 </li>
                 <li class="setting">
                      <fieldset id="pledge_type">
                          <legend><a class="definition" href="#">Type of Pledge</a></legend>
-                        <?php 
-                        if (isset($_POST['conditional'])) {
-                            if ($_POST['conditional']) {
-                                $checked_string['yes'] = 'checked="checked"';                           
-                                $checked_string['no'] = '';
-                            } else {
-                                $checked_string['no'] = 'checked="checked"';                           
-                                $checked_string['yes'] = '';
-                            }
-                        } else {
-                            $checked_string['no'] = 'checked="checked"';                           
-                            $checked_string['yes'] = '';                        }
-                        ?>                         
-                         <label for="conditional-no"><input type="radio" name="conditional" id="conditional-no" value="0" <?php echo $checked_string['no']; ?> /> Unconditional</label>
-                         <label for="conditional-yes"><input type="radio" name="conditional" id="conditional-yes" value="1" <?php echo $checked_string['yes']; ?> /> Conditional</label>
+                                                 
+                         <label for="conditional-no"><input type="radio" name="conditional" id="conditional-no" value="0" checked="checked" /> Unconditional</label>
+                         <label for="conditional-yes"><input type="radio" name="conditional" id="conditional-yes" value="1"  /> Conditional</label>
                      </fieldset>
                 </li>
             </ul>
@@ -116,8 +72,14 @@ if ($_POST) {
         </form>
         
         <div id="results" class="group">
-            <?php echo $html; ?>
-
+            <div id="summary"><p class="first"><span id="country_name">China</span> has pledged to do <span id="commitment">269%</span> of its <a class="definition" href="#">fair share</a> in 2020, assuming moderate global ambition.</p>            </div>
+            <div id="graph" class="group">
+                <div id="international" class="international" style="width:0%"></div> <div id="domestic" class="domestic" style="width:269%"</div> <div id="gap" class="gap" style="width:-169%"</div> </div> <!-- end #graph --><div id="key" class="group"><p><span class="international"></span> 0% <a class="definition" href="#">pledged international support</a></p><p><span class="domestic"></span> 269% <a class="definition" href="#">pledged domestic effort</a></p><p><span class="gap"></span> -169% <a class="definition" href="#">gap</a></p>        </div>
+            <p id="more_options"><a href="http://gdrights.org/calculator_dev/?iso3=CHK">more results for this country &#187;</a></p>
+            <div id="details">
+                <h2>Details about this pledge</h2>
+                <p class="first">[details text from pledge database: This result reflects... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore...]</p>
+            </div>
         </div> <!--! end of #results -->
     </div> <!--! end of #main -->
     <footer>
