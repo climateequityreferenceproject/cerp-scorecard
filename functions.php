@@ -28,7 +28,7 @@ function query_db($query) {
 function avail_countries_options($iso3=NULL) {
     $db = db_connect();
     
-    $sql = "SELECT pledge.iso3 AS iso3, name FROM country, pledge WHERE pledge.iso3 = country.iso3 ORDER BY name;";
+    $sql = "SELECT pledge.iso3 AS iso3, name FROM country, pledge WHERE pledge.iso3 = country.iso3 AND public = 1 ORDER BY name;";
     
     $result = mysql_query($sql, $db);
     if (!$result) {
