@@ -48,7 +48,7 @@ if ($_POST && ($_POST['country']!=='none')) {
     <div id="container" class="group">
     <header>
         <h1>Climate Equity Scorecard</h1>
-        <p id="more_info"><a href="#">more information about climate equity scorecards &#187;</a></p>
+        <p id="more_info"><a href="#">more information about climate equity scorecards</a> &#187;</p>
     </header>
     <div id="main" role="main" class="group">
         <form name="settings" id="settings" method="post" autocomplete="off" >
