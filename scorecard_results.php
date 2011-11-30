@@ -25,16 +25,17 @@
         }
         // Remove surrounding spaces and any ending punctuation: we have no control over this text, so clean it up a bit
         $details = clean_text($pledge_info['details']);
-        $source = clean_text($pledge_info['source']);
+        $source_dom = clean_text($pledge_info['source']);
+        $source_intl = clean_text($pledge_info['intl_source']);
         
         $effort_array = get_gdrs_information($pledge_info, $post_params['ambition']);
         $effort_val = $effort_array['dom_pledge'] + $effort_array['intl_pledge'];
         $effort = number_format($effort_val);
 
-        $intl = number_format($effort_array['intl_pledge']);
-        $dom = number_format($effort_array['dom_pledge']);
-        $gap = number_format($effort_array['gap']);
-        $pledge_over_bau = number_format($effort_array['pledge_over_bau']);
+        $intl = nice_number($effort_array['intl_pledge']);
+        $dom = nice_number($effort_array['dom_pledge']);
+        $gap = nice_number($effort_array['gap']);
+        $pledge_over_bau = nice_number($effort_array['pledge_over_bau']);
         
         $iso3 = $post_params['country'];
         
@@ -78,8 +79,11 @@ EOHTML1;
 /*        if ($details) {
             $retval .= ' This pledge assumes: ' . $details . '.</p>';
         }*/
-        if ($source) {
-            $retval .= '<p class="source">Source: ' . $source . '.</p>';            
+        if ($source_dom) {
+            $retval .= '<p class="source">Source for domestic effort: ' . $source_dom . '.</p>';            
+        }
+        if ($source_intl) {
+            $retval .= '<p class="source">Source for international support: ' . $source_intl . '.</p>';            
         }
         $retval .= '</div>';
 

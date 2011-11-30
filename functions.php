@@ -25,6 +25,43 @@ function query_db($query) {
     return $result;
 }
 
+function nice_number($val) {
+    if ($val > 0 && $val < 0.5) {
+        $val_string = "<0.5";
+    } elseif ($val < 0 && $val > -0.5) {
+        $val_string = ">-0.5";
+    } else {
+        $val_string = number_format($val);
+    }
+    return $val_string;
+}
+
+// Returns pledge in MtCO2e, based on pledged dollar amount and carbon price
+function get_intl_pledge($iso3, $year) {
+    if (!$iso3 || !$year) {
+        return array('intl_pledge' => NULL, 'intl_source' => NULL);
+    }
+    $sql = "SELECT iso3, pledge_mln_USD AS pledge, source FROM intl_pledge WHERE iso3='" . $iso3 . "'";
+    $result = query_db($sql);
+    $sources_array = array();
+    $pledge_mlnUSD = 0;
+    while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+        $pledge_mlnUSD += $row['pledge'];
+        $sources_array[] = $row['source'];
+    }
+    $sources = join("; ", $sources_array);
+    
+    $sql = "SELECT c_price_USD_per_tCO2e AS price FROM carbon_price WHERE year='" . $year . "'";
+    $result = query_db($sql);
+    // Only one row
+    $row = mysql_fetch_row($result);
+    $price = $row[0];
+    
+    $pledge_MtCO2e = $pledge_mlnUSD/$price;
+    
+    return array('intl_pledge' => $pledge_MtCO2e, 'intl_source' => $sources);
+}
+
 function avail_countries_options($iso3=NULL) {
     $db = db_connect();
     
@@ -110,7 +147,12 @@ function get_pledge_information($iso3, $conditional, $year) {
     $result = query_db($sql);
     $row = mysql_fetch_array($result, MYSQL_ASSOC);
     mysql_free_result($result);
-    return $row;
+    if (!$row) {
+        return NULL;
+    } else {
+        $intl_pledge = get_intl_pledge($iso3_3lett, $year_checked);
+        return $row + $intl_pledge;
+    }
 }
 
 function get_gdrs_information($pledge_info, $pathway) {
@@ -204,12 +246,11 @@ function get_gdrs_information($pledge_info, $pathway) {
         default:
             // Shouldn't reach here
     }
-    
     $retval['pledge_over_bau'] = 100 * (1 - $pledged_reduction/$bau[$pledge_info['by_year']]);
     $retval['pledge_description'] = $description . '.';
     
     //$pledged_reduction = min(max(0, $pledged_reduction), $gdrs_reduction);
-    $retval['intl_pledge'] = 0; // TODO: find out from authors how to get international pledges
+    $retval['intl_pledge'] = 100.0 * $pledge_info['intl_pledge']/$gdrs_reduction;
     $retval['dom_pledge'] = 100.0 * $pledged_reduction/$gdrs_reduction;
     $retval['gap'] = 100.0 - $retval['dom_pledge'] - $retval['intl_pledge'];
     
