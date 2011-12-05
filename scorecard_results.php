@@ -2,7 +2,7 @@
     include_once('functions.php');
     
     // TODO: this isn't the best style, to have "bare" variables like this: wrap in a function
-    $pathway_id = get_pathways(array('low'=>'IPCC_likely', 'med'=>'AOSIS', 'high'=>'Hansen'));
+    $pathway_id = get_pathways(array('low'=>'G8', 'med'=>'basic_experts', 'high'=>'AOSIS'));
     $pathway_label = array(
         'low' => 'Low',
         'med' => 'Moderate',

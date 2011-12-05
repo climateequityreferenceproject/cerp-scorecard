@@ -84,8 +84,8 @@ if ($_POST && ($_POST['country']!=='none')) {
                             }
                         } else {
                             $checked_string['low'] = '';
-                            $checked_string['med'] = 'checked="checked"';
-                            $checked_string['high'] = '';
+                            $checked_string['med'] = '';
+                            $checked_string['high'] = 'checked="checked"';
                         }
                         ?>
                         <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $pathway_id['low'] ?>" <?php echo $checked_string['low']; ?> /> <?php echo $pathway_label['low'] ?></label>

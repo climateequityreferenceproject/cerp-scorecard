@@ -272,6 +272,9 @@ function draw_bars_get_remainder($pledge,$class) {
 function draw_graph($pledge1,$class1,$pledge2,$class2,$gap) {
     if (($pledge1 + $pledge2) >= 100) {
         $gap = 0;
+    } else {
+        // In theory this is what it is, but was getting rounding errors
+        $gap = 100 - ($pledge1 + $pledge2);
     }
     $bar_info1 = draw_bars_get_remainder($pledge1,$class1);
     $retval = $bar_info1['html'];
