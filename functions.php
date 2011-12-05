@@ -269,7 +269,9 @@ function draw_bars_get_remainder($pledge,$class) {
     );
 }
 
-function draw_graph($pledge1,$class1,$pledge2,$class2,$gap) {
+function draw_graph($pledge1,$class1,$pledge2,$class2) {
+    $pledge1 = round($pledge1);
+    $pledge2 = round($pledge2);
     if (($pledge1 + $pledge2) >= 100) {
         $gap = 0;
     } else {
