@@ -1,7 +1,11 @@
 <?php
 function get_glossary_array() {
     $retval = array();
-    
+    $id = 'gloss_more_info';
+    $retval[$id]['label'] = 'More information about Climate Equity Scorecards';
+    $retval[$id]['text'] = <<<EOHTML
+            <p>Each of these "Equity Scorecards" offers a quick and easy look at one country’s formal international pledge to act to stabilize the climate. This pledge is expressed as a percentage of its “fair share” of the international effort that will be needed, as calculated within the Greenhouse Development Rights effort-sharing framework. The GDRs framework takes account of the mitigation gap between the current global emissions pathway and the emergency global emissions pathway that will be needed, as well as the responsibility and capacity of all countries to contribute the finance, technology, and general effort needed to close that gap.</p>
+EOHTML;
     $id = 'gloss_path';
     $retval[$id]['label'] = 'Pathway';
     $retval[$id]['text'] = <<<EOHTML
