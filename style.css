@@ -146,12 +146,13 @@ select {margin-top:0.5em;}
 #results {float:left; padding:0 1.5em 1.5em 1.5em; min-width:220px; width:50%;}
 #summary {margin:1em 0 0.25em;}
 #graph { /*height:60px;*/ width:100%}
-/* ids for the next set are only for layout-test.html, not in live scorecard, where only classes are used */
+/* ids for the first three are only for layout-test.html, not in live scorecard, where only classes are used */
 #international, #domestic, #gap, 
 #graph .intl, #graph .dom, #graph .gap {float:left; height:40px; margin-bottom:0.5em;}
 #key {clear:both; margin-top:0.5em;}
 #key p {line-height:1; margin-top:0.5em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
+.glossary #container {min-width:500px; max-width:900px;}
 
 
 /* color ***************************************/
@@ -168,7 +169,7 @@ fieldset {background:#fff;}
 /* j.mp/webkit-tap-highlight-color */
 a:link {-webkit-tap-highlight-color:#dd6e4c;}
 
-a, a:active, a:visited {color:#666;}
+a, a:active, a:visited {color:#777;}
 a:hover {color:#dd6e4c;}
 legend a, legend a:active, legend a:visited {color: #444;}
 
@@ -177,6 +178,13 @@ legend a, legend a:active, legend a:visited {color: #444;}
 .gap {background:#ffce73;}
 #results {border:6px solid #ffce73; -moz-border-radius:15px; border-radius:15px;}
 #commitment.negative {color:#dd6e4c;}
+
+.glossary #main {border-top:6px solid #ffce73;}
+.glossary p {margin-top:1em;}
+.glossary h2 {margin-top:1.5em;}
+.glossary a, .glossary a:active, .glossary a:visited {color:#a23b1e;}
+.glossary a:hover {color:#dd6e4c;}
+
 
 /* typography ***************************************/
 
@@ -218,10 +226,39 @@ h2 {margin-top:0.75em;}
 #results .first {margin-top:0;}
 .source {font-size:80%;}
 
-
 a, a:active, a:visited {border-bottom:1px solid transparent; text-decoration: none;}
 a:hover {border-bottom:1px dotted #036;}
 
+.glossary #container {font-size:90%;}
+dl
+{
+	border-bottom: 1px solid #999;
+	float: left;
+	margin: 1em 0 3em 0;
+	padding: 0;
+	width: 100%;
+}
+
+dt
+{
+	border-top: 1px solid #999;
+	clear: left;
+	float: left;
+	font-weight: bold;
+	margin: 0;
+	padding: 0.5em 0;
+	width: 15%;
+}
+
+dd
+{
+	border-top: 1px solid #999;
+	float: left;
+	margin: 0;
+	padding: 0.5em 0;
+	width: 85%;
+}
+.glossary div {clear:both;}
 
 /* miscellaneous ***************************************/
 a.definition, p#more_info a {background:url(img/info-icon.gif) center right no-repeat; padding-right: 16px;}
@@ -235,6 +272,7 @@ a.definition, p#more_info a {background:url(img/info-icon.gif) center right no-r
     margin:300px 50% auto;
     position:fixed;
 }
+
 
 /****************************************************************************************/
 
@@ -287,10 +325,11 @@ a.definition, p#more_info a {background:url(img/info-icon.gif) center right no-r
 /* Grade-A Mobile Browsers (Opera Mobile, Mobile Safari, Android Chrome)
    consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
 @media screen and (max-device-width: 480px) {
-    body { line-height:1.2; }
-    #container, header, #settings, #results { float:none; margin-left:0; margin-right:0; min-width:140px; width:auto; }
-    #container { padding:0 2% 0 2%; }
-    #results { border:none; padding:0; }
+    body {line-height:1.2;}
+    #container, .glossary #container, header, #settings, #results, dl, dt, dd {float:none; margin-left:0; margin-right:0; min-width:140px; width:auto;}
+    #container {padding:0 2% 0 2%;}
+    #results {border:none; padding:0;}
+    dd {border-top:none; padding-top:0;}
 
   /* Uncomment if you don't want iOS and WinMobile to mobile-optimize the text for you: j.mp/textsizeadjust */
   /* html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */

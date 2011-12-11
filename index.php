@@ -48,7 +48,7 @@ if ($_POST && ($_POST['country']!=='none')) {
     <div id="container" class="group">
     <header>
         <h1>Climate Equity Scorecard</h1>
-        <p id="more_info"><a href="#">more information about climate equity scorecards</a> &#187;</p>
+        <p id="more_info"><a href="glossary.php#gloss_more_info">more information about climate equity scorecards</a></p>
     </header>
     <div id="main" role="main" class="group">
         <form name="settings" id="settings" method="post" autocomplete="off" >
@@ -70,8 +70,8 @@ if ($_POST && ($_POST['country']!=='none')) {
                     </fieldset>
                 </li>
                 <li class="setting">
-                    <fieldset id="ambition">
-                        <legend><a class="definition" href="#"><span>Level of Global Ambition</span></a></legend>
+                    <fieldset id="pathway">
+                        <legend><a class="definition" href="glossary.php#gloss_path"><span>Pathway</span></a></legend>
                         <?php // TODO: this is stupid, why is this repeated? what happened to DRY? ?>
                         <?php 
                         if (isset($_POST['ambition'])) {
@@ -95,7 +95,7 @@ if ($_POST && ($_POST['country']!=='none')) {
                 </li>
                 <li class="setting">
                      <fieldset id="pledge_type">
-                         <legend><a class="definition" href="#">Type of Pledge</a></legend>
+                         <legend><a class="definition" href="glossary.php#gloss_pledge">Type of Pledge</a></legend>
                         <?php 
                         if (isset($_POST['conditional'])) {
                             if ($_POST['conditional']) {

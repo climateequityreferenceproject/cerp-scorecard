@@ -4,12 +4,12 @@
     // TODO: this isn't the best style, to have "bare" variables like this: wrap in a function
     $pathway_id = get_pathways(array('low'=>'G8', 'med'=>'basic_experts', 'high'=>'AOSIS'));
     $pathway_label = array(
-        'low' => 'Low',
-        'med' => 'Moderate',
-        'high' => 'High'
+        'low' => 'G8',
+        'med' => 'IPCC Likely',
+        'high' => 'AOSIS'
     );
     
-    $results_default = '<p>Select a country to see how its pledge measures up to its <a class="definition" href="#">fair share</a> of the global cost of mitigating climate change.</p>';
+    $results_default = '<p>Select a country to see how its pledge measures up to its <a class="definition" href="glossary.php#gloss_fair">fair share</a> of the global cost of mitigating climate change.</p>';
     
     function get_results($post_params, $pathway_id, $pathway_label) {
         $params = array();
@@ -17,7 +17,7 @@
         $params['min_target_year'] = get_min_target_year($post_params['country'], $post_params['conditional']);
         $params['country_name'] = get_country_name($post_params['country']);
         $params['ambition'] = $pathway_label[array_search($post_params['ambition'], $pathway_id)];
-        $ambition = strtolower($params['ambition']);
+        $ambition = $params['ambition'];
 
         $pledge_info = get_pledge_information($post_params['country'], $post_params['conditional'], $params['min_target_year']);
         if (!$pledge_info) {
@@ -48,14 +48,14 @@
             $retval .= ' class="negative"';
         }
         $retval .= '>' . $effort . '%</span> ';
-        $retval .= 'of its <a class="definition" href="#">fair share</a> ';
+        $retval .= 'of its <a class="definition" href="glossary.php#gloss_fair">fair share</a> ';
         $retval .= 'in ' . $params['min_target_year'] . ', '; 
-        $retval .= 'assuming ' . $ambition . ' global ambition.</p>';
+        $retval .= 'assuming the ' . $ambition . ' pathway.</p>';
         $retval .= '</div>';
         if ($effort_val < 0) {
             $retval .= '<p>The level of effort is negative because ' . $params['country_name'];
             $retval .= ' has pledged emissions in  ' . $params['min_target_year'] . '  that exceed ';
-            $retval .= '<a class="definition" href="#">business-as-usual emissions</a> by ';
+            $retval .= '<a class="definition" href="glossary.php#gloss_bau">business-as-usual emissions</a> by ';
             $retval .= $pledge_over_bau . '%.</p>';
         } else {
             $retval .= '</div>';
@@ -66,11 +66,11 @@
         }
         
         $retval .= '<div id="key" class="group">';
-        $retval .= '<p><span class="intl"></span> ' . $intl . '% <a class="definition" href="#">pledged international support</a></p>';
-        $retval .= '<p><span class="dom"></span> ' . $dom . '% <a class="definition" href="#">pledged domestic effort</a></p>';
-        $retval .= '<p><span class="gap"></span> ' . $gap . '% <a class="definition" href="#">gap</a></p></div><!-- end #key -->';
+        $retval .= '<p><span class="intl"></span> ' . $intl . '% <a class="definition" href="glossary.php#gloss_intl">pledged international support</a></p>';
+        $retval .= '<p><span class="dom"></span> ' . $dom . '% <a class="definition" href="glossary.php#gloss_dom">pledged domestic effort</a></p>';
+        $retval .= '<p><span class="gap"></span> ' . $gap . '% <a class="definition" href="glossary.php#gloss_gap">gap</a></p></div><!-- end #key -->';
 $retval .= <<<EOHTML1
-            <p id="more_options"><a href="http://gdrights.org/calculator_dev/?iso3=$iso3" target="_blank">more results for this country &#187;</a></p>
+            <h2 id="more_options"><a href="http://gdrights.org/calculator_dev/?iso3=$iso3" target="_blank">more results for this country &#187;</a></h2>
     <div id="details">
                 <h2>Details about this pledge</h2>
 EOHTML1;
