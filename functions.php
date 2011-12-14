@@ -224,7 +224,7 @@ function get_gdrs_information($pledge_info, $pathway) {
         case 'absolute':
             $description .= 'total emissions by ' . $by_factor . '% compared to ';
             if ($pledge_info['year_or_bau'] === 'bau') {
-                $description .= '<a class="definition" href="#">business-as-usual</a>';
+                $description .= '<a class="def_link" href="glossary.php#gloss_bau" target="_blank">business-as-usual</a>';
                 $pledged_reduction = (1 - $factor) * $bau[$pledge_info['by_year']];
             } else {
                 $description .= $pledge_info['rel_to_year'];
@@ -232,10 +232,10 @@ function get_gdrs_information($pledge_info, $pathway) {
             }
             break;
         case 'intensity':
-            $description .= '<a class="definition" href="#">emissions intensity</a> by ' . $by_factor . '% compared to ';
+            $description .= '<a class="def_link" href="glossary.php#gloss_ei" target="_blank">emissions intensity</a> by ' . $by_factor . '% compared to ';
             if ($pledge_info['year_or_bau'] === 'bau') {
                 // This option actually makes no sense, but take care of it just in case:
-                $description .= '<a class="definition" href="#">business-as-usual</a>';
+                $description .= '<a class="def_link" href="glossary.php#gloss_bau" target="_blank">business-as-usual</a>';
                 $pledged_reduction = (1 - $factor) * $bau[$pledge_info['by_year']];
             } else {
                 $description .= $pledge_info['rel_to_year'];

@@ -33,7 +33,8 @@ if ($_POST && ($_POST['country']!=='none')) {
 
   <!-- CSS: implied media=all -->
   <!-- CSS concatenated and minified via ant build script-->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/jquery-ui-1.8.16.custom.css">
   <!-- end CSS-->
 
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
@@ -48,7 +49,7 @@ if ($_POST && ($_POST['country']!=='none')) {
     <div id="container" class="group">
     <header>
         <h1>Climate Equity Scorecard</h1>
-        <p id="more_info"><a href="glossary.php#gloss_more_info">more information about climate equity scorecards</a></p>
+        <p id="more_info"><a class="def_link jqModalTest" href="glossary.php#gloss_more_info" target="_blank">more information about climate equity scorecards</a></p>
     </header>
     <div id="main" role="main" class="group">
         <form name="settings" id="settings" method="post" autocomplete="off" >
@@ -71,7 +72,7 @@ if ($_POST && ($_POST['country']!=='none')) {
                 </li>
                 <li class="setting">
                     <fieldset id="pathway">
-                        <legend><a class="definition" href="glossary.php#gloss_path"><span>Pathway</span></a></legend>
+                        <legend><a class="def_link" href="glossary.php#gloss_path" target="_blank"><span>Pathway</span></a></legend>
                         <?php // TODO: this is stupid, why is this repeated? what happened to DRY? ?>
                         <?php 
                         if (isset($_POST['ambition'])) {
@@ -95,7 +96,7 @@ if ($_POST && ($_POST['country']!=='none')) {
                 </li>
                 <li class="setting">
                      <fieldset id="pledge_type">
-                         <legend><a class="definition" href="glossary.php#gloss_pledge">Type of Pledge</a></legend>
+                         <legend><a class="def_link" href="glossary.php#gloss_pledge" target="_blank">Type of Pledge</a></legend>
                         <?php 
                         if (isset($_POST['conditional'])) {
                             if ($_POST['conditional']) {
@@ -119,8 +120,10 @@ if ($_POST && ($_POST['country']!=='none')) {
         
         <div id="results" class="group">
             <?php echo $html; ?>
-
         </div> <!--! end of #results -->
+        
+        <div id="popup"></div>
+        
     </div> <!--! end of #main -->
     <footer>
 
@@ -134,11 +137,15 @@ if ($_POST && ($_POST['country']!=='none')) {
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 
+  <!-- Grab dialog-optimmized jQueryUI locally if possible, fall back to Google CDN's complete jQueryUI, with a protocol relative URL -->
+  <script src="js/libs/jquery-ui-1.8.16.custom.min.js"></script>
+  <script>window.ui || document.write('<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"><\/script>')</script>
 
   <!-- scripts concatenated and minified via ant build script-->
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
   <script src="js/scorecard.js"></script>
+  <!-- <script src="js/jqModal.js"></script>-->
   <!-- end scripts-->
 
 	
