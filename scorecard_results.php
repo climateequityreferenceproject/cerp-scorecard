@@ -5,7 +5,7 @@
     $pathway_id = get_pathways(array('low'=>'G8', 'med'=>'basic_experts', 'high'=>'AOSIS'));
     $pathway_label = array(
         'low' => 'G8',
-        'med' => 'IPCC Likely',
+        'med' => 'BASIC Experts',
         'high' => 'AOSIS'
     );
     
@@ -59,6 +59,7 @@
             $retval .= $pledge_over_bau . '%.</p>';
         } else {
             $retval .= '<div id="graph" class="group">';
+            $retval .= '<img src="img/grid.gif" alt=" " />';
             $retval .= '<p id="fair-share">100% of fair share</p>';
             $retval .= draw_graph($effort_array['intl_pledge'],'intl',$effort_array['dom_pledge'],'dom'); 
             $retval .= '</div><!-- end #graph -->';
@@ -67,7 +68,10 @@
         $retval .= '<div id="key" class="group">';
         $retval .= '<p><span class="intl"></span> ' . $intl . '% <a class="def_link" href="glossary.php#gloss_intl" target="_blank">pledged international support</a></p>';
         $retval .= '<p><span class="dom"></span> ' . $dom . '% <a class="def_link" href="glossary.php#gloss_dom" target="_blank">pledged domestic effort</a></p>';
-        $retval .= '<p><span class="gap"></span> ' . $gap . '% <a class="def_link" href="glossary.php#gloss_gap" target="_blank">gap</a></p></div><!-- end #key -->';
+        if ($effort_val < 100) {
+            $retval .= '<p><span class="gap"></span> ' . $gap . '% <a class="def_link" href="glossary.php#gloss_gap" target="_blank">gap</a></p></div><!-- end #key -->';
+        }
+        
 $retval .= <<<EOHTML1
             <h2 id="more_options"><a href="http://gdrights.org/calculator_dev/?iso3=$iso3" target="_blank">more results for this country &#187;</a></h2>
     <div id="details">

@@ -7,29 +7,31 @@ $(function() {
     $('#loading').hide();
     $('#loading').html('<img src="img/spinner.gif" alt="loading indicator" />');
     
-    $('a.def_link').hover(
-        get_def_by_id//,
-        //function() {console.log("Leaving");}
+    $('a.def_link').click(
+        get_def_by_id
     );
         
    $('#popup').hide();
         
 });
 
-function get_def_by_id(event) {
-    href = $(event.currentTarget).attr("href");
+function get_def_by_id(e) {
+    href = $(e.currentTarget).attr("href");
     def_id = href.substr(href.lastIndexOf('#') + 1);
     
-    $.get('glossary_array.php', {id: def_id}, function(definition){
-       $('#popup').html(definition).dialog({
-			autoOpen: false,
-			// title: 'Dialog Title'
+    $.getJSON('glossary_array.php', {id: def_id}, function(definition){
+       $('#popup').html(definition.text).dialog({
+            autoOpen: false,
+            //position: ['right','bottom'],
+            //width: 460
+            title: definition.label
        });
-        
+       
        $('#popup').dialog('open');
-       //return false;
-       //console.log(definition)
+
     });
+    //return false;
+    e.preventDefault();
 }
 
 function submit() {
@@ -40,9 +42,8 @@ function submit() {
         function(data) {
             $('#results').html(data);
             $('#loading').hide();
-            $('a.def_link').hover(
-                get_def_by_id,
-                function() {console.log("Leaving");}
+            $('a.def_link').click(
+                get_def_by_id
             );
     });
 }

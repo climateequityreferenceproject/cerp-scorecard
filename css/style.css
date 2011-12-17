@@ -1,5 +1,5 @@
 /**
- * HTML5 ‚ú∞ Boilerplate
+ * HTML5 Boilerplate
  *
  * style.css contains a reset, font normalization and some base styles.
  *
@@ -9,7 +9,6 @@
  * - camendesign.com/design/
  * - praegnanz.de/weblog/htmlcssjs-kickstart
  */
-
 
 /**
  * html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
@@ -132,15 +131,15 @@ button {  width: auto; overflow: visible; }
  */
  
 /* layout ***************************************/
-#container {margin:2% auto; min-width:700px; width:90%;}
-header {padding:1em 0 1.5em 0;}
+#container {margin:0.5em auto; min-width:720px; width:90%;}
+header {padding:0.5em 0 1em 0;}
 p {margin-top:1.2em;}
 
-#settings {float:left; margin:0 30px 1em 0; padding: 0 20px 1.5em 20px; min-width:220px; width:30%;}
-fieldset {padding:0 10px 0.75em;}
-legend {padding-top:2em;}
+#settings {float:left; margin:0 30px 1em 0; padding: 0 18px 22px 18px; width:220px;}
+fieldset {padding:0 0 0.5em;}
+legend {padding-top:1em;}
 label {display:block; padding:0 0.75em 0 0.25em;}
-select {margin-top:0.5em;}
+select {margin-top:0.25em;}
 #submit {margin:1.75em auto 0;}
 
 #results {float:left; padding:0 1.5em 1.5em 1.5em; min-width:220px; width:50%;}
@@ -148,7 +147,10 @@ select {margin-top:0.5em;}
 #graph {width:100%}
 /* ids for the first three are only for layout-test.html, not in live scorecard, where only classes are used */
 #international, #domestic, #gap, 
-#graph .intl, #graph .dom, #graph .gap {float:left; height:40px; margin-bottom:0.5em;}
+#graph .intl, #graph .dom, #graph .gap {float:left; height:30px; margin-bottom:10px;}
+#graph {overflow:hidden; position:relative;}
+#graph img {left:0; position:absolute; top:20px; width:100%; z-index:-200;}
+
 #key {clear:both; margin-top:0.5em;}
 #key p {line-height:1; margin-top:0.5em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
@@ -158,8 +160,9 @@ select {margin-top:0.5em;}
 /* color ***************************************/
 body {background:#fff;}
 body, select, input, textarea {color:#444;}
-h1, h2, h3, #country_name, #commitment {color:#4d59a4;}
-form {background:#e6ebe6;}
+h1, h2, h3, #country_name, #commitment,
+legend, legend a, legend a:active, legend a:visited {color:#4d59a4;}
+/*form {background:#e6ebe6;} */
 fieldset {background:#fff;}
 
 /* These selection declarations have to be separate
@@ -170,21 +173,25 @@ fieldset {background:#fff;}
 a:link {-webkit-tap-highlight-color:#dd6e4c;}
 
 a, a:active, a:visited {color:#777;}
-a:hover {color:#dd6e4c;}
-legend a, legend a:active, legend a:visited {color: #444;}
+legend a, legend a:active, legend a:visited {color:#6b87c3;}
 
+#graph {border-left:2px solid #999;}
 .intl {background:#707ac9;}
 .dom {background:#8ebd7f;}
 .gap {background:#ffce73;}
-#results {border:6px solid #ffce73; -moz-border-radius:15px; border-radius:15px;}
-#commitment.negative {color:#dd6e4c;}
+#results {border:6px solid #ffce73;}
+#settings {border:6px solid #e6ebe6;}
+#settings, #results {-moz-border-radius:15px; border-radius:15px;}
+#commitment.negative {color:#dd6e4c; white-space:nowrap;}
 
 .glossary #main {border-top:6px solid #ffce73;}
 .glossary p {margin-top:1em;}
 .glossary h2 {margin-top:1.5em;}
-.glossary a, .glossary a:active, .glossary a:visited {color:#a23b1e;}
-.glossary a:hover {color:#dd6e4c;}
+.glossary a, .glossary a:active, .glossary a:visited,
+#more_options a, #more_options a:active, #more_options a:visited,
+.source a, .source a:active, .source a:visited {color:#a23b1e;}
 
+a:hover, legend a:hover, .glossary a:hover, #more_options a:hover, .source a:hover {color:#dd6e4c;}
 
 /* typography ***************************************/
 
@@ -222,6 +229,7 @@ h2, #summary {font-size:150%;}
 h2 {margin-top:0.75em;}
 #country_name, #commitment {font-size:200%;}
 #summary p#more_options {font-size:65%; margin-top:2em;}
+legend {font-size:125%;}
 .first, p.source {margin-top:0.25em;}
 #results .first {margin-top:0;}
 .source {font-size:80%;}
@@ -257,7 +265,7 @@ dd {
 
 /* miscellaneous ***************************************/
 a.def_link {background:url(../img/info-icon.gif) center right no-repeat; padding-right: 16px;}
-#fair-share {background:url(../img/arrow-lr.gif) 100% 85% no-repeat; margin:0; padding:0 12px 0 0; text-align:right;}
+#fair-share {background:transparent url(../img/arrow-lr.gif) 100% 85% no-repeat; margin:0; padding:0 12px 5px 0; text-align:right;}
 
 #submit {display:block; text-indent:-5000px; width:200px!important; height:47px; background-image:url(../img/send-button-sprite.png)!important; background-repeat:no-repeat; border:0px!important; padding:0px!important; }
 .js #submit {display:none;}
@@ -267,6 +275,7 @@ a.def_link {background:url(../img/info-icon.gif) center right no-repeat; padding
 #loading { 
     margin:300px 50% auto;
     position:fixed;
+    z-index:3000;
 }
 
 /****************************************************************************************/

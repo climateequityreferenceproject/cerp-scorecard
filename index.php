@@ -89,9 +89,9 @@ if ($_POST && ($_POST['country']!=='none')) {
                             $checked_string['high'] = 'checked="checked"';
                         }
                         ?>
-                        <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $pathway_id['low'] ?>" <?php echo $checked_string['low']; ?> /> <?php echo $pathway_label['low'] ?></label>
-                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $pathway_id['med'] ?>" <?php echo $checked_string['med']; ?> /> <?php echo $pathway_label['med'] ?></label>
                         <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $pathway_id['high'] ?>" <?php echo $checked_string['high']; ?> /> <?php echo $pathway_label['high'] ?></label>
+                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $pathway_id['med'] ?>" <?php echo $checked_string['med']; ?> /> <?php echo $pathway_label['med'] ?></label>
+                        <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $pathway_id['low'] ?>" <?php echo $checked_string['low']; ?> /> <?php echo $pathway_label['low'] ?></label>
                     </fieldset>
                 </li>
                 <li class="setting">

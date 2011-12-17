@@ -279,7 +279,7 @@ function draw_graph($pledge1,$class1,$pledge2,$class2) {
         $gap = 100 - ($pledge1 + $pledge2);
     }
     $bar_info1 = draw_bars_get_remainder($pledge1,$class1);
-    $retval = $bar_info1['html'];
+    $retval .= $bar_info1['html'];
     $remainder_pledge1 = $bar_info1['remainder'];
     if ($pledge2 <= $remainder_pledge1) {
         $retval .= '<div class="' . $class2 . '" style="width:' . $pledge2 . '%"></div>';

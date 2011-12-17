@@ -5,15 +5,16 @@ function get_glossary_array() {
     $retval[$id]['label'] = 'More information about Climate Equity Scorecards';
     $retval[$id]['text'] = <<<EOHTML
             <p>Each of these &#8220;Equity Scorecards&#8221; offers a quick and easy look at one country's formal international pledge to act to stabilize the climate. This pledge is expressed as a percentage of its &#8220;fair share&#8221; of the international effort that will be needed, as calculated within the Greenhouse Development Rights effort-sharing framework. The GDRs framework takes account of the mitigation gap between the current global emissions pathway and the emergency global emissions pathway that will be needed, as well as the responsibility and capacity of all countries to contribute the finance, technology, and general effort needed to close that gap.</p>
+                <p><strong>This system is still under development.</strong></p>
 EOHTML;
     $id = 'gloss_path';
     $retval[$id]['label'] = 'Pathway';
     $retval[$id]['text'] = <<<EOHTML
             <p>The Equity Scorecards system evaluates national pledges relative to the global effort that will be needed to achieve a target global emissions pathway. There are many such possible pathways, but for the purposes of simplicity, three are highlighted here.</p>
             <dl>
+                <dt>AOSIS</dt> <dd>Pathway based upon the AOSIS negotiating position. [more detail needed]</dd>
+                <dt>BASIC Experts</dt> <dd>[definition needed]</dd>
                 <dt>G8</dt> <dd>Pathway based upon official G-8 statements of its common position. This pathway is insufficient to limit planetary warming to 2°C.</dd>
-                <dt>IPCC Likely</dt> <dd>Pathway judged by the IPCC to be &#8220;likely&#8221; to hold total planetary warming below 2°C.</dd>
-                <dt>AOSIS</dt> <dd>Pathway based upon the AOSIS negotiating position. This pathway...</dd>
             </dl>
 EOHTML;
     $id = 'gloss_pledge';
@@ -50,7 +51,7 @@ EOHTML;
     $id = 'gloss_ei';
     $retval[$id]['label'] = 'Emissions Intensity';
     $retval[$id]['text'] = <<<EOHTML
-            <p>[ratio of CO2 emissions to GDP]</p>
+            <p>Emissions Intensity is a measure of the efficiency of a country&#8217;s economic activity, in terms of greenhouse gas emitted per unit of economic output.  It is defined as greenhouse-gas emissions divided by GDP, and can be calculated either in CO2-only terms or in terms of &#8220;all greenhouse gases.&#8221;</p>
 EOHTML;
     
     return $retval;
@@ -58,7 +59,13 @@ EOHTML;
 
 if (isset($_GET['id'])) {
     $array = get_glossary_array();
-    echo '<h2>' . $array[$_GET['id']]['label'] . '</h2>' . "\n";
-    echo $array[$_GET['id']]['text'];
+    
+    echo json_encode($array[$_GET['id']]);
+    
+    
+//    echo '<h2>' . $array[$_GET['id']]['label'] . '</h2>' . "\n";
+//    echo $array[$_GET['id']]['text'];
+  
+    
 }
 
