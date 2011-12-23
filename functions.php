@@ -1,5 +1,6 @@
 <?php
 require_once "HTTP/Request.php";
+include_once("class/GDRsAPI/GDRsAPI.php");
 
 function db_connect() {
     $db = mysql_connect('localhost', 'pledges', '***REMOVED***');
@@ -95,13 +96,7 @@ function avail_countries_options($iso3=NULL) {
 
 // $pathways is an array of the type array('label' => 'short_code', ...): returns 'label'=>'id'
 function get_pathways($pathways) {
-    $req =& new HTTP_Request("http://gdrights.org/calculator/api/?q=pathways");
-    $req->setMethod(HTTP_REQUEST_METHOD_GET);
-    if (!PEAR::isError($req->sendRequest())) {
-         $response = json_decode($req->getResponseBody());
-    } else {
-        $response = "";
-    }
+    $response = GDRsAPI::connection()->get('pathways');
     $retval = array();
     foreach ($pathways as $key => $val) {
         foreach ($response as $pathway) {
@@ -159,14 +154,8 @@ function get_gdrs_information($pledge_info, $pathway) {
     if (!$pledge_info) {
         return NULL;
     }
-    // First, get the parameter values used by the database
-    $req =& new HTTP_Request("http://gdrights.org/calculator/api/?q=params");
-    $req->setMethod(HTTP_REQUEST_METHOD_GET);
-    if (!PEAR::isError($req->sendRequest())) {
-         $params = (array) json_decode($req->getResponseBody());
-    } else {
-        $params = NULL;
-    }
+    
+    $params = GDRsAPI::connection()->get('params');
     
     $use_lulucf = (array) $params['use_lulucf'];
     $use_nonco2 = (array) $params['use_nonco2'];
@@ -175,23 +164,13 @@ function get_gdrs_information($pledge_info, $pathway) {
     unset($req);
     
     // Build up API query
-    $req =& new HTTP_Request("http://gdrights.org/calculator/api/");
-    $req->setMethod(HTTP_REQUEST_METHOD_POST);
     if ($pledge_info['rel_to_year']) {
         $years = $pledge_info['rel_to_year'] . "," . $pledge_info['by_year'];
     } else {
         $years = $pledge_info['by_year'];
     }
-    $req->addPostData("years", $years);
-    $req->addPostData("countries", $pledge_info['iso3']);
-    $req->addPostData("emergency_path", $pathway);
-    if (!PEAR::isError($req->sendRequest())) {
-         $response = json_decode($req->getResponseBody());
-         // Oddly, the decode procedure seems to duplicate the first element, so get the tail:
-         $response = array_slice($response, 1);
-    } else {
-        return NULL;
-    }
+    $post_array = array('years' => $years, 'countries' => $pledge_info['iso3']);
+    $response = GDRsAPI::connection()->post($post_array, $pathway);
     
     foreach ($response as $year_data_obj) {
         $year_data = (array) $year_data_obj;

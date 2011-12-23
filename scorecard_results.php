@@ -1,19 +1,14 @@
 <?php
+    session_start();
     include_once('functions.php');
-    
-    // TODO: this isn't the best style, to have "bare" variables like this: wrap in a function
-    $pathway_id = get_pathways(array('low'=>'G8', 'med'=>'basic_experts', 'high'=>'AOSIS'));
-    $pathway_label = array(
-        'low' => 'G8',
-        'med' => 'BASIC Experts',
-        'high' => 'AOSIS'
-    );
-    
+
     $results_default = '<p>Select a country to see how its pledge measures up to its <a class="def_link" href="glossary.php#gloss_fair" target="_blank">fair share</a> of the global cost of mitigating climate change.</p>';
     
-    function get_results($post_params, $pathway_id, $pathway_label) {
+    function get_results($post_params) {
+        $pathway_id = GDRsAPI::connection()->pathway_id;
+        $pathway_label = GDRsAPI::connection()->pathway_label;
         $params = array();
-
+        
         $params['min_target_year'] = get_min_target_year($post_params['country'], $post_params['conditional']);
         $params['country_name'] = get_country_name($post_params['country']);
         $params['ambition'] = $pathway_label[array_search($post_params['ambition'], $pathway_id)];
