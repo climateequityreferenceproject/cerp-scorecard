@@ -2,6 +2,10 @@
 require_once "HTTP/Request.php";
 include_once("class/GDRsAPI/GDRsAPI.php");
 
+function get_calc_url($iso3) {
+    return 'http://gdrights.org/calculator_dev/?iso3=' . $iso3;
+}
+
 function db_connect() {
     $db = mysql_connect('localhost', 'pledges', '***REMOVED***');
     if (!$db) {

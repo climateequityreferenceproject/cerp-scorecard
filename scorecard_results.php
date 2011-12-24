@@ -66,9 +66,9 @@
         if ($effort_val < 100) {
             $retval .= '<p><span class="gap"></span> ' . $gap . '% <a class="def_link" href="glossary.php#gloss_gap" target="_blank">gap</a></p></div><!-- end #key -->';
         }
-        
+        $calc_url = '"' . get_calc_url($iso3) . '"';
 $retval .= <<<EOHTML1
-            <h2 id="more_options"><a href="http://gdrights.org/calculator_dev/?iso3=$iso3" target="_blank">more results for this country &#187;</a></h2>
+            <h2 id="more_options"><a href=$calc_url target="_blank">more results for this country &#187;</a></h2>
     <div id="details">
                 <h2>Details about this pledge</h2>
 EOHTML1;
