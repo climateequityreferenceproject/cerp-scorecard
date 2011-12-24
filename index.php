@@ -75,7 +75,6 @@ if ($_POST && ($_POST['country']!=='none')) {
                 <li class="setting">
                     <fieldset id="pathway">
                         <legend><a class="def_link" href="glossary.php#gloss_path" target="_blank"><span>Pathway</span></a></legend>
-                        <?php // TODO: this is stupid, why is this repeated? what happened to DRY? ?>
                         <?php 
                         if (isset($_POST['ambition'])) {
                             foreach ($api->pathway_ids as $pw_type => $pw_id) {
