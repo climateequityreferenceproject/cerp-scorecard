@@ -78,11 +78,11 @@ if ($_POST && ($_POST['country']!=='none')) {
                         <?php // TODO: this is stupid, why is this repeated? what happened to DRY? ?>
                         <?php 
                         if (isset($_POST['ambition'])) {
-                            foreach ($api->pathway_id as $key => $val) {
-                                if ($val===$_POST['ambition']) {
-                                    $checked_string[$key] = 'checked="checked"';
+                            foreach ($api->pathway_ids as $pw_type => $pw_id) {
+                                if ($pw_id===$_POST['ambition']) {
+                                    $checked_string[$pw_type] = 'checked="checked"';
                                 } else {
-                                    $checked_string[$key] = '';
+                                    $checked_string[$pw_type] = '';
                                 }
                             }
                         } else {
@@ -91,9 +91,9 @@ if ($_POST && ($_POST['country']!=='none')) {
                             $checked_string['high'] = 'checked="checked"';
                         }
                         ?>
-                        <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathway_id['high'] ?>" <?php echo $checked_string['high']; ?> /> <?php echo $api->pathway_label['high'] ?></label>
-                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathway_id['med'] ?>" <?php echo $checked_string['med']; ?> /> <?php echo $api->pathway_label['med'] ?></label>
-                        <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $api->pathway_id['low'] ?>" <?php echo $checked_string['low']; ?> /> <?php echo $api->pathway_label['low'] ?></label>
+                        <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathway_ids['high'] ?>" <?php echo $checked_string['high']; ?> /> <?php echo $api->pathway_label['high'] ?></label>
+                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathway_ids['med'] ?>" <?php echo $checked_string['med']; ?> /> <?php echo $api->pathway_label['med'] ?></label>
+                        <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $api->pathway_ids['low'] ?>" <?php echo $checked_string['low']; ?> /> <?php echo $api->pathway_label['low'] ?></label>
                     </fieldset>
                 </li>
                 <li class="setting">

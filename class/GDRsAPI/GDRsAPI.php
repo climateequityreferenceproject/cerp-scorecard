@@ -15,7 +15,7 @@ class GDRsAPIException extends Exception {}
  * $api = GDRsAPI::connection();
  * $api->pathway_label;
  * $api->pathway_default;
- * $api->pathway_id;
+ * $api->pathway_ids;
  * $api->post($post_array, $pw_id);
  * $api->get($to_get, $pw_id = NULL);
  * 
@@ -34,7 +34,7 @@ class GDRsAPI {
         'med' => 'BASIC Experts',
         'high' => 'AOSIS'
     );
-    public $pathway_id = array();
+    public $pathway_ids = array();
     public $pathway_default = 'high';
     
     private $pathway_array = array('low'=>'G8', 'med'=>'basic_experts', 'high'=>'AOSIS');
@@ -67,7 +67,7 @@ class GDRsAPI {
                 // The json_decode function returns these arrays as type StdClass
                 $pw_info = (array) $pathway;
                 if ($pw_info['short_code'] === $val) {
-                    $this->pathway_id[$key] = $pw_info['id'];
+                    $this->pathway_ids[$key] = $pw_info['id'];
                     break;
                 }
             }
@@ -84,7 +84,7 @@ class GDRsAPI {
     
     // Use a lazy creation approach: when pw_id is first used, create the db
     private function get_db($pw_id) {
-        if (!in_array($pw_id, $this->pathway_id)) {
+        if (!in_array($pw_id, $this->pathway_ids)) {
             throw new GDRsAPIException('Pathway id "' . $pw_id . '" is not defined');
         }
         // Do we have it already?
