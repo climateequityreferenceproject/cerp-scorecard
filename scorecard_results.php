@@ -64,7 +64,7 @@
         $retval .= '<p><span class="intl"></span> ' . $intl . '% <a class="def_link" href="glossary.php#gloss_intl" target="_blank">pledged international support</a></p>';
         $retval .= '<p><span class="dom"></span> ' . $dom . '% <a class="def_link" href="glossary.php#gloss_dom" target="_blank">pledged domestic effort</a></p>';
         if ($effort_val < 100) {
-            $retval .= '<p><span class="gap"></span> ' . $gap . '% <a class="def_link" href="glossary.php#gloss_gap" target="_blank">gap</a></p></div><!-- end #key -->';
+            $retval .= '<p><span class="gap"></span> ' . $gap . '% <a class="def_link" href="glossary.php#gloss_gap" target="_blank">pledge gap</a></p></div><!-- end #key -->';
         }
         $calc_url = '"' . get_calc_url($iso3) . '"';
 $retval .= <<<EOHTML1

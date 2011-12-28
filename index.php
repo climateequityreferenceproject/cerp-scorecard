@@ -74,7 +74,7 @@ if ($_POST && ($_POST['country']!=='none')) {
                 </li>
                 <li class="setting">
                     <fieldset id="pathway">
-                        <legend><a class="def_link" href="glossary.php#gloss_path" target="_blank"><span>Pathway</span></a></legend>
+                        <legend><a class="def_link" href="glossary.php#gloss_path" target="_blank"><span>Level of Global Ambition</span></a></legend>
                         <?php 
                         if (isset($_POST['ambition'])) {
                             foreach ($api->pathway_ids as $pw_type => $pw_id) {
