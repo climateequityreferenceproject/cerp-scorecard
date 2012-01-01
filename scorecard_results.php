@@ -76,38 +76,38 @@ function getResults()
         $retval .= '</div><!-- end #graph -->';
     }
 
-        $retval = '<div id="summary">';
-        $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';
-        $retval .= 'has pledged ' . $condition_string . ' to do <span id="commitment"';
-        if ($effort_val < 0) {
-            $retval .= ' class="negative"';
-        }
-        $retval .= '>' . $effort . '%</span> ';
-        $retval .= 'of its <a class="def_link" href="glossary.php#gloss_fair" target="_blank">fair share</a> ';
-        $retval .= 'in ' . $params['min_target_year'] . ', '; 
-        $retval .= 'assuming the ' . $ambition . ' pathway.</p>';
-        $retval .= '</div>';
-        if ($effort_val < 0) {
-            $retval .= '<p>The level of effort is negative because ' . $params['country_name'];
-            $retval .= ' has pledged emissions in  ' . $params['min_target_year'] . '  that exceed ';
-            $retval .= '<a class="def_link" href="glossary.php#gloss_bau" target="_blank">business-as-usual emissions</a> by ';
-            $retval .= $pledge_over_bau . '%.</p>';
-        } else {
-            $retval .= '<div id="graph" class="group">';
-            $retval .= '<img src="img/grid.gif" alt=" " />';
-            $retval .= '<p id="fair-share">100% of fair share</p>';
-            $retval .= drawGraph($effort_array['intl_pledge'],'intl',$effort_array['dom_pledge'],'dom'); 
-            $retval .= '</div><!-- end #graph -->';
-        }
-        
-        $retval .= '<div id="key" class="group">';
-        $retval .= '<p><span class="intl"></span> ' . $intl . '% <a class="def_link" href="glossary.php#gloss_intl" target="_blank">pledged international support</a></p>';
-        $retval .= '<p><span class="dom"></span> ' . $dom . '% <a class="def_link" href="glossary.php#gloss_dom" target="_blank">pledged domestic effort</a></p>';
-        if ($effort_val < 100) {
-            $retval .= '<p><span class="gap"></span> ' . $gap . '% <a class="def_link" href="glossary.php#gloss_gap" target="_blank">pledge gap</a></p></div><!-- end #key -->';
-        }
-        $calc_url = '"' . getCalcUrl($iso3) . '"';
-$retval .= <<<EOHTML1
+    $retval = '<div id="summary">';
+    $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';
+    $retval .= 'has pledged ' . $condition_string . ' to do <span id="commitment"';
+    if ($effort_val < 0) {
+        $retval .= ' class="negative"';
+    }
+    $retval .= '>' . $effort . '%</span> ';
+    $retval .= 'of its <a class="def_link" href="glossary.php#gloss_fair" target="_blank">fair share</a> ';
+    $retval .= 'in ' . $params['min_target_year'] . ', '; 
+    $retval .= 'assuming the ' . $ambition . ' pathway.</p>';
+    $retval .= '</div>';
+    if ($effort_val < 0) {
+        $retval .= '<p>The level of effort is negative because ' . $params['country_name'];
+        $retval .= ' has pledged emissions in  ' . $params['min_target_year'] . '  that exceed ';
+        $retval .= '<a class="def_link" href="glossary.php#gloss_bau" target="_blank">business-as-usual emissions</a> by ';
+        $retval .= $pledge_over_bau . '%.</p>';
+    } else {
+        $retval .= '<div id="graph" class="group">';
+        $retval .= '<img src="img/grid.gif" alt=" " />';
+        $retval .= '<p id="fair-share">100% of fair share</p>';
+        $retval .= drawGraph($effort_array['intl_pledge'], 'intl', $effort_array['dom_pledge'], 'dom'); 
+        $retval .= '</div><!-- end #graph -->';
+    }
+
+    $retval .= '<div id="key" class="group">';
+    $retval .= '<p><span class="intl"></span> ' . $intl . '% <a class="def_link" href="glossary.php#gloss_intl" target="_blank">pledged international support</a></p>';
+    $retval .= '<p><span class="dom"></span> ' . $dom . '% <a class="def_link" href="glossary.php#gloss_dom" target="_blank">pledged domestic effort</a></p>';
+    if ($effort_val < 100) {
+        $retval .= '<p><span class="gap"></span> ' . $gap . '% <a class="def_link" href="glossary.php#gloss_gap" target="_blank">pledge gap</a></p></div><!-- end #key -->';
+    }
+    $calc_url = '"' . getCalcUrl($iso3) . '"';
+    $retval .= <<<EOHTML1
             <h2 id="more_options"><a href=$calc_url target="_blank">more results for this country &#187;</a></h2>
     <div id="details">
                 <h2>Details about this pledge</h2>
