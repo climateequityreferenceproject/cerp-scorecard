@@ -13,11 +13,11 @@ class GDRsAPIException extends Exception {}
 /*
  * Usage:
  * $api = GDRsAPI::connection();
- * $api->pathway_label;
+ * $api->pathwayLabel;
  * $api->pathway_default;
- * $api->pathway_ids;
- * $api->post($post_array, $pw_id);
- * $api->get($to_get, $pw_id = NULL);
+ * $api->pathwayIds;
+ * $api->post($post_array, $pwId);
+ * $api->get($to_get, $pwId = null);
  * 
  * 
  */
@@ -29,27 +29,27 @@ class GDRsAPI {
     private static $_instance;
     
     // Decided not to use getters and setters
-    public $pathway_label = array(
+    public $pathwayLabel = array(
         'low' => 'G8',
         'med' => 'BASIC Experts',
         'high' => 'AOSIS'
     );
-    public $pathway_ids = array();
+    public $pathwayIds = array();
     public $pathway_default = 'high';
     
     private $pathway_array = array('low'=>'G8', 'med'=>'basic_experts', 'high'=>'AOSIS');
     
-    private function build_get($to_get, $pw_id=NULL) {
+    private function build_get($to_get, $pwId=null) {
         $retval = $this->url . '?';
         $retval .= 'q=' . $to_get;
-        if ($pw_id) {
-            $retval .= 'db=' . $this->db[$pw_id];
+        if ($pwId) {
+            $retval .= 'db=' . $this->db[$pwId];
         }
         return $retval;
     }
     
-    public function get($to_get, $pw_id=NULL) {
-        $req =& new HTTP_Request($this->build_get($to_get, $pw_id));
+    public function get($to_get, $pwId=null) {
+        $req =& new HTTP_Request($this->build_get($to_get, $pwId));
         $req->setMethod(HTTP_REQUEST_METHOD_GET);
         if (!PEAR::isError($req->sendRequest())) {
              $response = json_decode($req->getResponseBody());
@@ -67,7 +67,7 @@ class GDRsAPI {
                 // The json_decode function returns these arrays as type StdClass
                 $pw_info = (array) $pathway;
                 if ($pw_info['short_code'] === $val) {
-                    $this->pathway_ids[$key] = $pw_info['id'];
+                    $this->pathwayIds[$key] = $pw_info['id'];
                     break;
                 }
             }
@@ -82,34 +82,34 @@ class GDRsAPI {
         return self::$_instance;
     }
     
-    // Use a lazy creation approach: when pw_id is first used, create the db
-    private function get_db($pw_id) {
-        if (!in_array($pw_id, $this->pathway_ids)) {
-            throw new GDRsAPIException('Pathway id "' . $pw_id . '" is not defined');
+    // Use a lazy creation approach: when pwId is first used, create the db
+    private function get_db($pwId) {
+        if (!in_array($pwId, $this->pathwayIds)) {
+            throw new GDRsAPIException('Pathway id "' . $pwId . '" is not defined');
         }
         // Do we have it already?
-        if (!(isset($this->db[$pw_id]))) {
+        if (!(isset($this->db[$pwId]))) {
             // Have we stored it in a session variable?
             if (isset($_SESSION['gdrs_db'])) {
                 $this->db = $_SESSION['gdrs_db'];
             }
             // And check again, whether in the session variable or not
-            if (!(isset($this->db[$pw_id]))) {
+            if (!(isset($this->db[$pwId]))) {
                 $response = $this->get('new_db');
-                $this->db[$pw_id] = $response['db'];
+                $this->db[$pwId] = $response['db'];
             }
         }
         $_SESSION['gdrs_db'] = $this->db;
-        return $this->db[$pw_id];
+        return $this->db[$pwId];
     }
     
-    public function post($post_array, $pw_id) {
+    public function post($post_array, $pwId) {
         $req =& new HTTP_Request($this->url);
         $req->setMethod(HTTP_REQUEST_METHOD_POST);
-        // If pw_id not defined, next line will throw an exception
-        $db = $this->get_db($pw_id);
+        // If pwId not defined, next line will throw an exception
+        $db = $this->get_db($pwId);
         
-        $req->addPostData("emergency_path", $pw_id);
+        $req->addPostData("emergency_path", $pwId);
         $req->addPostData("db", $db);
         foreach ($post_array as $key => $val) {
             $req->addPostData($key, $val);

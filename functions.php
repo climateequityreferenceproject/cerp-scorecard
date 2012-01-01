@@ -1,12 +1,37 @@
 <?php
-require_once "HTTP/Request.php";
-include_once("class/GDRsAPI/GDRsAPI.php");
+/**
+ * index.php
+ * 
+ * PHP Version 5
+ *
+ * @copyright 2011-2012 EcoEquity and Stockholm Environment Institute
+ * @license All rights reserved
+ * @link http://www.gdrights.org/
+ */
 
-function get_calc_url($iso3) {
+require_once "HTTP/Request.php";
+require_once "class/GDRsAPI/GDRsAPI.php";
+
+/**
+ * Build URL for GDRs calculator country report page
+ * 
+ * @param string $iso3 3-letter code for currently-displayed country
+ * 
+ * @return URL for GDRs calculator country report page
+ * @todo Update this to /calculator/, not /calculator_dev/
+ */
+function getCalcUrl($iso3)
+{
     return 'http://gdrights.org/calculator_dev/?iso3=' . $iso3;
 }
 
-function db_connect() {
+/**
+ * Connect to the MYSQL pledges database--expects calling function to disconnect
+ * 
+ * @return mysqldb A database connection for the pledges database
+ */
+function pledgeDBConnect()
+{
     $db = mysql_connect('localhost', 'pledges', '***REMOVED***');
     if (!$db) {
         die('Could not connect: ' . mysql_error());
@@ -16,8 +41,16 @@ function db_connect() {
     return $db;
 }
 
-function query_db($query) {
-    $db = db_connect();
+/**
+ * Return an array of query results from the pledge DB
+ * 
+ * @param string $query SQL string
+ * 
+ * @return array query result
+ */
+function queryPledgeDB($query)
+{
+    $db = pledgeDBConnect();
     
     $result = mysql_query($query, $db);
     if (!$result) {
@@ -30,7 +63,15 @@ function query_db($query) {
     return $result;
 }
 
-function nice_number($val) {
+/**
+ * Produce a nicely formatted value as a string
+ * 
+ * @param number $val A floating-point number
+ * 
+ * @return string A formatted string that either uses number_format() or "<0.5",">-0.5" for small but nonzero values
+ */
+function niceNumber($val)
+{
     if ($val > 0 && $val < 0.5) {
         $val_string = "<0.5";
     } elseif ($val < 0 && $val > -0.5) {
@@ -41,13 +82,21 @@ function nice_number($val) {
     return $val_string;
 }
 
-// Returns pledge in MtCO2e, based on pledged dollar amount and carbon price
-function get_intl_pledge($iso3, $year) {
+/**
+ * Returns pledge in MtCO2e, based on pledged dollar amount and carbon price
+ * 
+ * @param string  $iso3 A 3-letter ISO code for the country
+ * @param integer $year The four-digit year
+ * 
+ * @return array An array with the pledge amount and a string containing notes 
+ */
+function getIntlPledge($iso3, $year)
+{
     if (!$iso3 || !$year) {
-        return array('intl_pledge' => NULL, 'intl_source' => NULL);
+        return array('intl_pledge' => null, 'intl_source' => null);
     }
     $sql = "SELECT iso3, pledge_mln_USD AS pledge, source FROM intl_pledge WHERE iso3='" . $iso3 . "'";
-    $result = query_db($sql);
+    $result = queryPledgeDB($sql);
     $sources_array = array();
     $pledge_mlnUSD = 0;
     while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
@@ -57,7 +106,7 @@ function get_intl_pledge($iso3, $year) {
     $sources = join("; ", $sources_array);
     
     $sql = "SELECT c_price_USD_per_tCO2e AS price FROM carbon_price WHERE year='" . $year . "'";
-    $result = query_db($sql);
+    $result = queryPledgeDB($sql);
     // Only one row
     $row = mysql_fetch_row($result);
     $price = $row[0];
@@ -67,8 +116,16 @@ function get_intl_pledge($iso3, $year) {
     return array('intl_pledge' => $pledge_MtCO2e, 'intl_source' => $sources);
 }
 
-function avail_countries_options($iso3=NULL) {
-    $db = db_connect();
+/**
+ * Return an options list consisting of iso3 codes (as option value) and country names (as displayed text)
+ * 
+ * @param string $iso3 ISO 3-letter code for the country (just to get country name), defaults to null
+ * 
+ * @return string HTML-formatted option list
+ */
+function availCountriesOptions($iso3=null)
+{
+    $db = pledgeDBConnect();
     
     $sql = "SELECT pledge.iso3 AS iso3, name FROM country, pledge WHERE pledge.iso3 = country.iso3 AND public = 1 ORDER BY name;";
     
@@ -98,65 +155,83 @@ function avail_countries_options($iso3=NULL) {
     return $html;
 }
 
-// $pathways is an array of the type array('label' => 'short_code', ...): returns 'label'=>'id'
-function get_pathways($pathways) {
-    $response = GDRsAPI::connection()->get('pathways');
-    $retval = array();
-    foreach ($pathways as $key => $val) {
-        foreach ($response as $pathway) {
-            // The json_decode function returns these arrays as type StdClass
-            $pathway_array = (array) $pathway;
-            if ($pathway_array['short_code'] === $val) {
-                $retval[$key] = $pathway_array['id'];
-                break;
-            }
-        }
-    }
-    return $retval;
-}
-
-// $iso3 is the three-letter code, $conditional is a boolean saying whether it's conditional or not
-function get_min_target_year($iso3, $conditional) {
+/**
+ * Get the target year for the country and type of pledge; if multiple pledges, get minimum year
+ * 
+ * @param string  $iso3        ISO 3-letter code
+ * @param boolean $conditional Whether to fetch for conditional pledge or unconditional
+ * 
+ * @return integer Four-digit year 
+ */
+function getMinTargetYear($iso3, $conditional)
+{
     // To protect against SQL injection, force conditional to be boolean & iso3 to be three first characters
     $conditional_bool = $conditional ? 1 : 0;
     $iso3_3lett = substr($iso3, 0, 3);
     $sql = 'SELECT MIN(by_year) AS year FROM pledge WHERE conditional=' . $conditional_bool . ' AND iso3="' . $iso3_3lett . '";';
-    $result = query_db($sql);
+    $result = queryPledgeDB($sql);
     $row = mysql_fetch_array($result, MYSQL_ASSOC);
     mysql_free_result($result);
     return $row['year'];
 }
 
-function get_country_name($iso3) {
+/**
+ * Get the country name corresponding to an iso3 code
+ * 
+ * @param string $iso3 ISO 3-letter code
+ * 
+ * @return string Corresponding country name 
+ */
+function getCountryName($iso3)
+{
     // To protect against SQL injection, force iso3 to be three first characters
     $iso3_3lett = substr($iso3, 0, 3);
     $sql = 'SELECT name FROM country WHERE iso3="' . $iso3_3lett . '";';
-    $result = query_db($sql);
+    $result = queryPledgeDB($sql);
     $row = mysql_fetch_array($result, MYSQL_ASSOC);
     mysql_free_result($result);
     return $row['name'];
 }
 
-function get_pledge_information($iso3, $conditional, $year) {
+/**
+ * Get all pledge information for a specific country, type of pledge, and year
+ * 
+ * @param string  $iso3        ISO 3-letter code
+ * @param boolean $conditional Whether pledge is conditional or unconditional
+ * @param integer $year        4-digit year
+ * 
+ * @return array Collected information about the pldege 
+ */
+function getPledgeInformation($iso3, $conditional, $year)
+{
     // Protect against injection
     $conditional_bool = $conditional ? 1 : 0;
     $iso3_3lett = substr($iso3, 0, 3);
     $year_checked = intval($year);
     $sql = 'SELECT * FROM pledge WHERE conditional=' . $conditional_bool . ' AND iso3="' . $iso3_3lett . '" AND by_year=' . $year_checked . ';';
-    $result = query_db($sql);
+    $result = queryPledgeDB($sql);
     $row = mysql_fetch_array($result, MYSQL_ASSOC);
     mysql_free_result($result);
     if (!$row) {
-        return NULL;
+        return null;
     } else {
-        $intl_pledge = get_intl_pledge($iso3_3lett, $year_checked);
+        $intl_pledge = getIntlPledge($iso3_3lett, $year_checked);
         return $row + $intl_pledge;
     }
 }
 
-function get_gdrs_information($pledge_info, $pathway) {
+/**
+ * Major workhorse function: Evaluate the pledge against the GDRs requirement
+ * 
+ * @param array   $pledge_info Array of pledge information returned by getPledgeInformation
+ * @param integer $pathway     ID for the selected pathway
+ * 
+ * @return array Contains information about the pledge and how it matches up to the GDRs requirement
+ */
+function getGdrsInformation($pledge_info, $pathway)
+{
     if (!$pledge_info) {
-        return NULL;
+        return null;
     }
     
     $params = GDRsAPI::connection()->get('params');
@@ -240,7 +315,16 @@ function get_gdrs_information($pledge_info, $pathway) {
     return $retval;
 }
 
-function draw_bars_get_remainder($pledge,$class) {
+/**
+ * Generate the HTML containint the divs that represent the bars on the bar chart
+ * 
+ * @param integer $pledge The value of the pledge as a percentage of GDRs obligation (may be > 100%)
+ * @param string  $class  The CSS class used to style the bar
+ * 
+ * @return array The remaining part of the bar and the HTML to render the current bar
+ */
+function drawBarsGetRemainder($pledge, $class)
+{
     $html = '';
     for ($i = $pledge; $i >= 100; $i -= 100) {
         $html .= '<div class="' . $class . '" style="width:100%"></div>';
@@ -252,7 +336,20 @@ function draw_bars_get_remainder($pledge,$class) {
     );
 }
 
-function draw_graph($pledge1,$class1,$pledge2,$class2) {
+/**
+ * Generate HTML for full set of bars
+ * 
+ * The final part of the bar has class "gap"
+ * 
+ * @param integer $pledge1 The percentage of GDRs obligation covered by pledge of class1
+ * @param string  $class1  The CSS class label for 1st part of bar (international pledge)
+ * @param integer $pledge2 The percentage of GDRs obligation covered by pledge of class2
+ * @param string  $class2  The CSS class label for 2nd part of bar (domestic effort)
+ * 
+ * @return string The HTML to render
+ */
+function drawGraph($pledge1,$class1,$pledge2,$class2)
+{
     $pledge1 = round($pledge1);
     $pledge2 = round($pledge2);
     if (($pledge1 + $pledge2) >= 100) {
@@ -261,7 +358,7 @@ function draw_graph($pledge1,$class1,$pledge2,$class2) {
         // In theory this is what it is, but was getting rounding errors
         $gap = 100 - ($pledge1 + $pledge2);
     }
-    $bar_info1 = draw_bars_get_remainder($pledge1,$class1);
+    $bar_info1 = drawBarsGetRemainder($pledge1, $class1);
     $retval .= $bar_info1['html'];
     $remainder_pledge1 = $bar_info1['remainder'];
     if ($pledge2 <= $remainder_pledge1) {
@@ -269,14 +366,22 @@ function draw_graph($pledge1,$class1,$pledge2,$class2) {
     } else {
         $retval .= '<div class="' . $class2 . '" style="width:' . $remainder_pledge1 . '%"></div>';
         $pledge2 = $pledge2 - $remainder_pledge1;
-        $bar_info2 = draw_bars_get_remainder($pledge2,$class2);
+        $bar_info2 = drawBarsGetRemainder($pledge2, $class2);
         $retval .= $bar_info2['html'];
     }
     $retval .= '<div class="gap" style="width:' . $gap . '%"></div>';
     return $retval;
 }
 
-function clean_text($string) {
+/**
+ * Trim spaces and remove any trailing punctuation: we want consistent punctuations
+ * 
+ * @param string $string Possibly "dirty" string with extra spaces and punctuation
+ * 
+ * @return string Cleaned string suitable for putting into displayed comments
+ */
+function cleanText($string)
+{
     $retval = trim($string);
     // Remove trailing punctuation
     $end = substr($retval, -1);

@@ -1,13 +1,23 @@
 <?php
-include_once("functions.php");
-include("scorecard_results.php");
+/**
+ * index.php
+ * 
+ * PHP Version 5
+ *
+ * @copyright 2011-2012 EcoEquity and Stockholm Environment Institute
+ * @license All rights reserved
+ * @link http://www.gdrights.org/
+ */
+
+require_once "functions.php";
+require_once "scorecard_results.php";
 
 $api = GDRsAPI::connection();
 
 if ($_POST && ($_POST['country']!=='none')) {    
-    $html = get_results($_POST);
+    $html = getResults();
 } else {
-    $html = $results_default;
+    $html = $resultsDefault;
 }
 ?>
 <!doctype html>
@@ -64,10 +74,10 @@ if ($_POST && ($_POST['country']!=='none')) {
                         <?php
                         if (isset($_POST['country']) && ($_POST['country']!=='none')) {
                             echo '<option value="none">-Select-</option>';
-                            echo avail_countries_options($_POST['country']);
+                            echo availCountriesOptions($_POST['country']);
                         } else {
                             echo '<option value="none" selected="selected">-Select-</option>';
-                            echo avail_countries_options();
+                            echo availCountriesOptions();
                         }?>
                         </select>
                     </fieldset>
@@ -77,22 +87,22 @@ if ($_POST && ($_POST['country']!=='none')) {
                         <legend><a class="def_link" href="glossary.php#gloss_path" target="_blank"><span>Level of Global Ambition</span></a></legend>
                         <?php 
                         if (isset($_POST['ambition'])) {
-                            foreach ($api->pathway_ids as $pw_type => $pw_id) {
-                                if ($pw_id===$_POST['ambition']) {
-                                    $checked_string[$pw_type] = 'checked="checked"';
+                            foreach ($api->pathwayIds as $pwType => $pwId) {
+                                if ($pwId===$_POST['ambition']) {
+                                    $checkedString[$pwType] = 'checked="checked"';
                                 } else {
-                                    $checked_string[$pw_type] = '';
+                                    $checkedString[$pwType] = '';
                                 }
                             }
                         } else {
-                            $checked_string['low'] = '';
-                            $checked_string['med'] = '';
-                            $checked_string['high'] = 'checked="checked"';
+                            $checkedString['low'] = '';
+                            $checkedString['med'] = '';
+                            $checkedString['high'] = 'checked="checked"';
                         }
                         ?>
-                        <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathway_ids['high'] ?>" <?php echo $checked_string['high']; ?> /> <?php echo $api->pathway_label['high'] ?></label>
-                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathway_ids['med'] ?>" <?php echo $checked_string['med']; ?> /> <?php echo $api->pathway_label['med'] ?></label>
-                        <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $api->pathway_ids['low'] ?>" <?php echo $checked_string['low']; ?> /> <?php echo $api->pathway_label['low'] ?></label>
+                        <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathwayIds['high'] ?>" <?php echo $checkedString['high']; ?> /> <?php echo $api->pathwayLabel['high'] ?></label>
+                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathwayIds['med'] ?>" <?php echo $checkedString['med']; ?> /> <?php echo $api->pathwayLabel['med'] ?></label>
+                        <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $api->pathwayIds['low'] ?>" <?php echo $checkedString['low']; ?> /> <?php echo $api->pathwayLabel['low'] ?></label>
                     </fieldset>
                 </li>
                 <li class="setting">
@@ -101,18 +111,19 @@ if ($_POST && ($_POST['country']!=='none')) {
                         <?php 
                         if (isset($_POST['conditional'])) {
                             if ($_POST['conditional']) {
-                                $checked_string['yes'] = 'checked="checked"';                           
-                                $checked_string['no'] = '';
+                                $checkedString['yes'] = 'checked="checked"';
+                                $checkedString['no'] = '';
                             } else {
-                                $checked_string['no'] = 'checked="checked"';                           
-                                $checked_string['yes'] = '';
+                                $checkedString['no'] = 'checked="checked"';
+                                $checkedString['yes'] = '';
                             }
                         } else {
-                            $checked_string['no'] = 'checked="checked"';                           
-                            $checked_string['yes'] = '';                        }
+                            $checkedString['no'] = 'checked="checked"';
+                            $checkedString['yes'] = '';
+                        }
                         ?>                         
-                         <label for="conditional-no"><input type="radio" name="conditional" id="conditional-no" value="0" <?php echo $checked_string['no']; ?> /> Unconditional</label>
-                         <label for="conditional-yes"><input type="radio" name="conditional" id="conditional-yes" value="1" <?php echo $checked_string['yes']; ?> /> Conditional</label>
+                         <label for="conditional-no"><input type="radio" name="conditional" id="conditional-no" value="0" <?php echo $checkedString['no']; ?> /> Unconditional</label>
+                         <label for="conditional-yes"><input type="radio" name="conditional" id="conditional-yes" value="1" <?php echo $checkedString['yes']; ?> /> Conditional</label>
                      </fieldset>
                 </li>
             </ul>
