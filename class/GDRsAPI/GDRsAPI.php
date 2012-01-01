@@ -80,8 +80,8 @@ class GDRsAPI
     /**
      * Return the result of a call to GET
      * 
-     * @param string $to_get Value to get
-     * @param string $pwId   Pathway ID (if any: defaults to null)
+     * @param string  $to_get Value to get
+     * @param integer $pwId   Pathway ID as recognized by the calculator (if any: defaults to null)
      * 
      * @return array Result of the call to GET as a decoded JSON-encoded array
      */
@@ -166,8 +166,8 @@ class GDRsAPI
     /**
      * Carry out a POST command to the API, using an array of post parameters and pathway id
      * 
-     * @param array $post_array Array of post parameter/value pairs
-     * @param id    $pwId       Integer ID for the pathway as recognized by the calculator
+     * @param array   $post_array Array of post parameter/value pairs
+     * @param integer $pwId       Integer ID for the pathway as recognized by the calculator
      * 
      * @return array Result of the POST command to the API as a decoded JSON-encoded array 
      */
