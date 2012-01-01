@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php
+ * glossary.php
  * 
  * PHP Version 5
  *

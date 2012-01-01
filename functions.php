@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php
+ * functions.php
  * 
  * PHP Version 5
  *

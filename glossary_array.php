@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php
+ * glossary_array.php
  * 
  * PHP Version 5
  *
