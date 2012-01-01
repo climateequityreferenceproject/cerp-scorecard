@@ -1,5 +1,16 @@
-<?php 
-include("glossary_array.php");
+<?php
+/**
+ * index.php
+ * 
+ * PHP Version 5
+ *
+ * @copyright 2011-2012 EcoEquity and Stockholm Environment Institute
+ * @license All rights reserved
+ * @link http://www.gdrights.org/
+ */
+
+
+require_once "glossary_array.php";
 ?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
@@ -44,7 +55,7 @@ include("glossary_array.php");
     </header>
     <div id="main" role="main" class="group">
         <?php
-            $glossary = get_glossary_array();
+            $glossary = getGlossaryArray();
             foreach ($glossary as $id => $info) {
                 echo '<div id="' . $id . '">' . "\n";
                 echo '<h2>' . $info['label'] . '</h2>' . "\n";

@@ -1,5 +1,24 @@
 <?php
-function get_glossary_array() {
+/**
+ * index.php
+ * 
+ * PHP Version 5
+ *
+ * @copyright 2011-2012 EcoEquity and Stockholm Environment Institute
+ * @license All rights reserved
+ * @link http://www.gdrights.org/
+ */
+
+/**
+ * Get an array of glossary entries
+ * 
+ * @return array An array of glossary entries
+ * 
+ * @todo Replace this with a class and appropriate methods
+ * @todo Read glossary from a file (e.g., XML) or database
+ */
+function getGlossaryArray()
+{
     $retval = array();
     $id = 'gloss_more_info';
     $retval[$id]['label'] = 'More information about Climate Equity Scorecards';
@@ -58,14 +77,8 @@ EOHTML;
 }
 
 if (isset($_GET['id'])) {
-    $array = get_glossary_array();
+    $array = getGlossaryArray();
     
     echo json_encode($array[$_GET['id']]);
-    
-    
-//    echo '<h2>' . $array[$_GET['id']]['label'] . '</h2>' . "\n";
-//    echo $array[$_GET['id']]['text'];
-  
-    
 }
 
