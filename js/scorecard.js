@@ -22,15 +22,12 @@ function get_def_by_id(e) {
     $.getJSON('glossary_array.php', {id: def_id}, function(definition){
        $('#popup').html(definition.text).dialog({
             autoOpen: false,
-            //position: ['right','bottom'],
-            //width: 460
             title: definition.label
        });
        
        $('#popup').dialog('open');
 
     });
-    //return false;
     e.preventDefault();
 }
 
