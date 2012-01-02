@@ -123,7 +123,7 @@ class GDRsAPI
      * 
      * Follows singleton pattern
      * 
-     * @return object Single instance of the class
+     * @return GDRsAPI Single instance of the class
      */
     public static function connection()
     {
