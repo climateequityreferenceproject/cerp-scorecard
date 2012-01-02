@@ -57,11 +57,7 @@ require_once "class/HWTHelp/HWTHelp.php";
     <div id="main" role="main" class="group">
         <?php
             $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
-            foreach ($glossary as $id => $info) {
-                echo '<div id="' . $id . '">' . "\n";
-                echo '<h2>' . $info['label'] . '</h2>' . "\n";
-                echo $info['text'];
-            }
+            echo $glossary->getHelpPage();
         ?>
 
     </div> <!--! end of #main -->
