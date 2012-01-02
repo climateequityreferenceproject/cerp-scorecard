@@ -12,6 +12,9 @@
 
 require_once "functions.php";
 require_once "scorecard_results.php";
+require_once "class/HWTHelp/HWTHelp.php";
+
+$glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
 
 $api = GDRsAPI::connection();
 
@@ -62,7 +65,7 @@ if ($_POST && ($_POST['country']!=='none')) {
     <div id="container" class="group">
     <header>
         <h1>Climate Equity Scorecard</h1>
-        <p id="more_info"><a class="def_link jqModalTest" href="glossary.php#gloss_more_info" target="_blank">more information about climate equity scorecards</a></p>
+        <p id="more_info"><?php echo $glossary->getLink('gloss_more_info') ?></p>
     </header>
     <div id="main" role="main" class="group">
         <form name="settings" id="settings" method="post" autocomplete="off" >
@@ -85,8 +88,8 @@ if ($_POST && ($_POST['country']!=='none')) {
                 </li>
                 <li class="setting">
                     <fieldset id="pathway">
-                        <legend><a class="def_link" href="glossary.php#gloss_path" target="_blank"><span>Level of Global Ambition</span></a></legend>
-                        <?php 
+                        <legend><?php echo $glossary->getLink('gloss_path');?></legend>
+                        <?php
                         if (isset($_POST['ambition'])) {
                             foreach ($api->pathwayIds as $pwType => $pwId) {
                                 if ($pwId===$_POST['ambition']) {
@@ -108,7 +111,7 @@ if ($_POST && ($_POST['country']!=='none')) {
                 </li>
                 <li class="setting">
                      <fieldset id="pledge_type">
-                         <legend><a class="def_link" href="glossary.php#gloss_pledge" target="_blank">Type of Pledge</a></legend>
+                         <legend><?php echo $glossary->getLink('gloss_pledge');?></legend>
                         <?php 
                         if (isset($_POST['conditional'])) {
                             if ($_POST['conditional']) {

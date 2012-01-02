@@ -12,8 +12,12 @@
 
 session_start();
 require_once 'functions.php';
+require_once "class/HWTHelp/HWTHelp.php";
 
-$resultsDefault = '<p>Select a country to see how its pledge measures up to its <a class="def_link" href="glossary.php#gloss_fair" target="_blank">fair share</a> of the global cost of mitigating climate change.</p>';
+if (!isset($glossary)) {
+    $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
+}
+$resultsDefault = '<p>Select a country to see how its pledge measures up to its ' . $glossary->getLink('gloss_fair', true) . ' of the global cost of mitigating climate change.</p>';
 
 /**
  * Generate HTML to diplay bar chart and text information about pledge
@@ -22,6 +26,7 @@ $resultsDefault = '<p>Select a country to see how its pledge measures up to its 
  */
 function getResults()
 {
+    $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
     $pathwayIds = GDRsAPI::connection()->pathwayIds;
     $pathwayLabel = GDRsAPI::connection()->pathwayLabel;
     $params = array();
@@ -60,14 +65,14 @@ function getResults()
         $retval .= ' class="negative"';
     }
     $retval .= '>' . $effort . '%</span> ';
-    $retval .= 'of its <a class="def_link" href="glossary.php#gloss_fair" target="_blank">fair share</a> ';
-    $retval .= 'in ' . $params['min_target_year'] . ', '; 
+    $retval .= 'of its ' . $glossary->getLink('gloss_fair', true);
+    $retval .= ' in ' . $params['min_target_year'] . ', '; 
     $retval .= 'assuming the ' . $ambition . ' pathway.</p>';
     $retval .= '</div>';
     if ($effort_val < 0) {
         $retval .= '<p>The level of effort is negative because ' . $params['country_name'];
         $retval .= ' has pledged emissions in  ' . $params['min_target_year'] . '  that exceed ';
-        $retval .= '<a class="def_link" href="glossary.php#gloss_bau" target="_blank">business-as-usual emissions</a> by ';
+        $retval .= $glossary->getLink('gloss_bau', true) . ' by ';
         $retval .= $pledge_over_bau . '%.</p>';
     } else {
         $retval .= '<div id="graph" class="group">';
@@ -84,14 +89,14 @@ function getResults()
         $retval .= ' class="negative"';
     }
     $retval .= '>' . $effort . '%</span> ';
-    $retval .= 'of its <a class="def_link" href="glossary.php#gloss_fair" target="_blank">fair share</a> ';
-    $retval .= 'in ' . $params['min_target_year'] . ', '; 
+    $retval .= 'of its ' . $glossary->getLink('gloss_fair', true);
+    $retval .= ' in ' . $params['min_target_year'] . ', '; 
     $retval .= 'assuming the ' . $ambition . ' pathway.</p>';
     $retval .= '</div>';
     if ($effort_val < 0) {
         $retval .= '<p>The level of effort is negative because ' . $params['country_name'];
         $retval .= ' has pledged emissions in  ' . $params['min_target_year'] . '  that exceed ';
-        $retval .= '<a class="def_link" href="glossary.php#gloss_bau" target="_blank">business-as-usual emissions</a> by ';
+        $retval .= $glossary->getLink('gloss_bau', true) . ' by ';
         $retval .= $pledge_over_bau . '%.</p>';
     } else {
         $retval .= '<div id="graph" class="group">';
@@ -102,10 +107,10 @@ function getResults()
     }
 
     $retval .= '<div id="key" class="group">';
-    $retval .= '<p><span class="intl"></span> ' . $intl . '% <a class="def_link" href="glossary.php#gloss_intl" target="_blank">pledged international support</a></p>';
-    $retval .= '<p><span class="dom"></span> ' . $dom . '% <a class="def_link" href="glossary.php#gloss_dom" target="_blank">pledged domestic effort</a></p>';
+    $retval .= '<p><span class="intl"></span> ' . $intl . '% ' . $glossary->getLink('gloss_intl', true) . '</p>';
+    $retval .= '<p><span class="dom"></span> ' . $dom . '% ' . $glossary->getLink('gloss_dom', true) . '</p>';
     if ($effort_val < 100) {
-        $retval .= '<p><span class="gap"></span> ' . $gap . '% <a class="def_link" href="glossary.php#gloss_gap" target="_blank">pledge gap</a></p></div><!-- end #key -->';
+        $retval .= '<p><span class="gap"></span> ' . $gap . '% ' . $glossary->getLink('gloss_gap', true) . '</p></div><!-- end #key -->';
     }
     $calc_url = '"' . getCalcUrl($iso3) . '"';
     $retval .= <<<EOHTML1
