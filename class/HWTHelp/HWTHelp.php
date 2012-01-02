@@ -249,16 +249,6 @@ class HWTHelp implements Iterator
     }
     
     /**
-     * For debugging purposes: best to use iterator
-     * 
-     * @return array Array of entries
-     */
-    public function getEntries()
-    {
-        return $this->_entries;
-    }
-    
-    /**
      * Sends you to the first help entry
      * 
      * @return void
