@@ -92,7 +92,7 @@ class HWTHelpParser
      * @param string     $element_name  Name of the found element
      * @param array      $element_attrs Collection of element attributes
      * 
-     * @return nothing
+     * @return void
      */
     private function _openTag($parser, $element_name, $element_attrs)
     {
@@ -159,7 +159,7 @@ class HWTHelpParser
      * @param xml_parser $parser       An xml parser (not a proper object--a pointer)
      * @param string     $element_name Name of the found close element
      * 
-     * @return nothing
+     * @return void
      */
     private function _closeTag($parser, $element_name)
     {
@@ -192,7 +192,7 @@ class HWTHelpParser
      * @param xml_parser $parser An xml parser (not a proper object--a pointer)
      * @param string     $data   Character data
      * 
-     * @return nothing
+     * @return void
      */
     private function _handleData($parser, $data)
     {
@@ -209,9 +209,9 @@ class HWTHelpParser
 
 
 /**
- * Generic help interface
+ * Generic help class
  * 
- * Provides a generic help interface
+ * Provides a generic help class
  * Example usage:
  * $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
  * $glossary->getLink('gloss_path'); // For making links in the page
@@ -232,8 +232,7 @@ class HWTHelp implements Iterator
     /**
      * Constructor for the HWTHelp system
      * 
-     * @return nothing
-     * @todo Fill in $_entries from the file at $url
+     * @return void
      */
     public function __construct($url, $markup_flag, $help_page)
     {
@@ -262,7 +261,7 @@ class HWTHelp implements Iterator
     /**
      * Sends you to the first help entry
      * 
-     * @return nothing
+     * @return void
      */
     public function rewind()
     {
@@ -328,7 +327,6 @@ class HWTHelp implements Iterator
      * 
      * @param string  $id       Short name for the entry
      * @param boolean $to_lower Flag whether to convert to lower case
-     * @param boolean $use_span Flag whether to wrap label in a span
      * 
      * @return HTML Link markup for item you're getting help entry for
      */
