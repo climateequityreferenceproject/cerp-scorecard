@@ -60,51 +60,41 @@ function getResults()
 
     $retval = '<div id="summary">';
     $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';
-    $retval .= 'has pledged ' . $condition_string . ' to do <span id="commitment"';
-    if ($effort_val < 0) {
-        $retval .= ' class="negative"';
+    $retval .= 'has pledged ' . $condition_string . ' to do ';
+    if ($effort_array['neg_pledge']) {
+        $retval .= 'NONE ';
+    } else {
+        $retval .= '<span id="commitment">' . $effort . '%</span> ';
     }
-    $retval .= '>' . $effort . '%</span> ';
     $retval .= 'of its ' . $glossary->getLink('gloss_fair', true);
     $retval .= ' in ' . $params['min_target_year'] . ', '; 
     $retval .= 'assuming the ' . $ambition . ' pathway.</p>';
     $retval .= '</div>';
-    if ($effort_val < 0) {
-        $retval .= '<p>The level of effort is negative because ' . $params['country_name'];
-        $retval .= ' has pledged emissions in  ' . $params['min_target_year'] . '  that exceed ';
-        $retval .= $glossary->getLink('gloss_bau', true) . ' by ';
-        $retval .= $pledge_over_bau . '%.</p>';
-    } else {
-        $retval .= '<div id="graph" class="group">';
-        $retval .= '<img src="img/grid.gif" alt=" " />';
-        $retval .= '<p id="fair-share">100% of fair share</p>';
-        $retval .= drawGraph($effort_array['intl_pledge'], 'intl', $effort_array['dom_pledge'], 'dom'); 
-        $retval .= '</div><!-- end #graph -->';
+    if ($effort_array['neg_pledge']) {
+        switch ($pledge_info['quantity']) {
+            case 'absolute': $quantity_text = 'total emissions'; break;
+            case 'intensity': $quantity_text = 'emissions intensity'; break;
+            default: $quantity_text = ''; // Shouldn't reach here
+        }
+        switch ($pledge_info['year_or_bau']) {
+            case 'year': $yearbau_text = strval($pledge_info['rel_to_year']); break; // Actually, this is the only option that makes sense, so hope we get here!
+            case 'bau': $yearbau_text = '<a class="definition" href="glossary.php#gloss_bau">business-as-usual</a>'; break;
+            default: $yearbau_text = '';
+        }
+        $retval .= '<p>' . $params['country_name'];
+        $retval .= ' has pledged ' . $condition_string . ' to reduce ';
+        $retval .= $quantity_text;
+        $retval .= ' by ' . number_format($pledge_info['reduction_percent']) . '% ';
+        $retval .= 'compared to ' . $yearbau_text . '. ';
+        $retval .= 'However, our projections indicate that its ';
+        $retval .= '<a class="definition" href="glossary.php#gloss_bau">business-as-usual</a>';
+        $retval .= ' efficiency increases would exceed this amount.</p>';
     }
-
-    $retval = '<div id="summary">';
-    $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';
-    $retval .= 'has pledged ' . $condition_string . ' to do <span id="commitment"';
-    if ($effort_val < 0) {
-        $retval .= ' class="negative"';
-    }
-    $retval .= '>' . $effort . '%</span> ';
-    $retval .= 'of its ' . $glossary->getLink('gloss_fair', true);
-    $retval .= ' in ' . $params['min_target_year'] . ', '; 
-    $retval .= 'assuming the ' . $ambition . ' pathway.</p>';
-    $retval .= '</div>';
-    if ($effort_val < 0) {
-        $retval .= '<p>The level of effort is negative because ' . $params['country_name'];
-        $retval .= ' has pledged emissions in  ' . $params['min_target_year'] . '  that exceed ';
-        $retval .= $glossary->getLink('gloss_bau', true) . ' by ';
-        $retval .= $pledge_over_bau . '%.</p>';
-    } else {
-        $retval .= '<div id="graph" class="group">';
-        $retval .= '<img src="img/grid.gif" alt=" " />';
-        $retval .= '<p id="fair-share">100% of fair share</p>';
-        $retval .= drawGraph($effort_array['intl_pledge'], 'intl', $effort_array['dom_pledge'], 'dom'); 
-        $retval .= '</div><!-- end #graph -->';
-    }
+    $retval .= '<div id="graph" class="group">';
+    $retval .= '<img src="img/grid.gif" alt=" " />';
+    $retval .= '<p id="fair-share">100% of fair share</p>';
+    $retval .= drawGraph($effort_array['intl_pledge'], 'intl', $effort_array['dom_pledge'], 'dom'); 
+    $retval .= '</div><!-- end #graph -->';
 
     $retval .= '<div id="key" class="group">';
     $retval .= '<p><span class="intl"></span> ' . $intl . '% ' . $glossary->getLink('gloss_intl', true) . '</p>';

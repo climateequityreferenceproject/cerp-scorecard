@@ -316,6 +316,13 @@ function getGdrsInformation($pledge_info, $pathway)
     $retval['dom_pledge'] = 100.0 * $pledged_reduction/$gdrs_reduction;
     $retval['gap'] = 100.0 - $retval['dom_pledge'] - $retval['intl_pledge'];
     
+    $retval['neg_pledge'] = false;
+    if ($retval['dom_pledge'] < 0) {
+        $retval['dom_pledge'] = 0.0;
+        $retval['gap'] = 100.0 - $retval['intl_pledge'];
+        $retval['neg_pledge'] = true;
+    }
+    
     return $retval;
 }
 
