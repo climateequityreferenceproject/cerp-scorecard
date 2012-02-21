@@ -312,7 +312,7 @@ function getGdrsInformation($pledge_info, $pathway)
     $retval['pledge_description'] = $description . '.';
     
     //$pledged_reduction = min(max(0, $pledged_reduction), $gdrs_reduction);
-    $retval['intl_pledge'] = 100.0 * $pledge_info['intl_pledge']/$gdrs_reduction;
+    $retval['intl_pledge'] = 0.0; //100.0 * $pledge_info['intl_pledge']/$gdrs_reduction;
     $retval['dom_pledge'] = 100.0 * $pledged_reduction/$gdrs_reduction;
     $retval['gap'] = 100.0 - $retval['dom_pledge'] - $retval['intl_pledge'];
     
@@ -359,9 +359,13 @@ function drawBarsGetRemainder($pledge, $class)
  * 
  * @return string The HTML to render
  */
-function drawGraph($pledge1,$class1,$pledge2,$class2)
+function drawGraph($pledge1,$class1,$pledge2,$class2, $show_pledge1 = true)
 {
-    $pledge1 = round($pledge1);
+    if ($show_pledge1) {
+        $pledge1 = round($pledge1);
+    } else {
+        $pledge1 = 0.0;
+    }
     $pledge2 = round($pledge2);
     if (($pledge1 + $pledge2) >= 100) {
         $gap = 0;
@@ -369,9 +373,9 @@ function drawGraph($pledge1,$class1,$pledge2,$class2)
         // In theory this is what it is, but was getting rounding errors
         $gap = 100 - ($pledge1 + $pledge2);
     }
-    $bar_info1 = drawBarsGetRemainder($pledge1, $class1);
-    $retval .= $bar_info1['html'];
-    $remainder_pledge1 = $bar_info1['remainder'];
+    //$bar_info1 = drawBarsGetRemainder($pledge1, $class1);
+    //$retval .= $bar_info1['html'];
+    $remainder_pledge = 100; //$remainder_pledge1 = $bar_info1['remainder'];
     if ($pledge2 <= $remainder_pledge1) {
         $retval .= '<div class="' . $class2 . '" style="width:' . $pledge2 . '%"></div>';
     } else {

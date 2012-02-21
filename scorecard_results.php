@@ -93,11 +93,11 @@ function getResults()
     $retval .= '<div id="graph" class="group">';
     $retval .= '<img src="img/grid.gif" alt=" " />';
     $retval .= '<p id="fair-share">100% of fair share</p>';
-    $retval .= drawGraph($effort_array['intl_pledge'], 'intl', $effort_array['dom_pledge'], 'dom'); 
+    $retval .= drawGraph($effort_array['intl_pledge'], 'intl', $effort_array['dom_pledge'], 'dom', false);
     $retval .= '</div><!-- end #graph -->';
 
     $retval .= '<div id="key" class="group">';
-    $retval .= '<p><span class="intl"></span> ' . $intl . '% ' . $glossary->getLink('gloss_intl', true) . '</p>';
+    // $retval .= '<p><span class="intl"></span> ' . $intl . '% ' . $glossary->getLink('gloss_intl', true) . '</p>';
     $retval .= '<p><span class="dom"></span> ' . $dom . '% ' . $glossary->getLink('gloss_dom', true) . '</p>';
     if ($effort_val < 100) {
         $retval .= '<p><span class="gap"></span> ' . $gap . '% ' . $glossary->getLink('gloss_gap', true) . '</p></div><!-- end #key -->';
@@ -116,9 +116,9 @@ EOHTML1;
     if ($source_dom) {
         $retval .= '<p class="source">Source for domestic effort: ' . $source_dom . '.</p>';            
     }
-    if ($source_intl) {
-        $retval .= '<p class="source">Source for international support: ' . $source_intl . '.</p>';            
-    }
+//    if ($source_intl) {
+//        $retval .= '<p class="source">Source for international support: ' . $source_intl . '.</p>';            
+//    }
     $retval .= '</div>';
 
     return $retval;
