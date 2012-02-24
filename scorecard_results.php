@@ -78,7 +78,7 @@ function getResults()
         }
         switch ($pledge_info['year_or_bau']) {
             case 'year': $yearbau_text = strval($pledge_info['rel_to_year']); break; // Actually, this is the only option that makes sense, so hope we get here!
-            case 'bau': $yearbau_text = '<a class="definition" href="glossary.php#gloss_bau">business-as-usual</a>'; break;
+            case 'bau': $yearbau_text = $glossary->getLink('gloss_bau', true); break;
             default: $yearbau_text = '';
         }
         $retval .= '<p>' . $params['country_name'];
@@ -87,7 +87,7 @@ function getResults()
         $retval .= ' by ' . number_format($pledge_info['reduction_percent']) . '% ';
         $retval .= 'compared to ' . $yearbau_text . '. ';
         $retval .= 'However, our projections indicate that its ';
-        $retval .= '<a class="definition" href="glossary.php#gloss_bau">business-as-usual</a>';
+        $retval .= $glossary->getLink('gloss_bau', true);
         $retval .= ' efficiency increases would exceed this amount.</p>';
     }
     $retval .= '<div id="graph" class="group">';
