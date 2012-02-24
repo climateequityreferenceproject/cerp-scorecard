@@ -103,11 +103,10 @@ function getResults()
         $retval .= '<p><span class="gap"></span> ' . $gap . '% ' . $glossary->getLink('gloss_gap', true) . '</p></div><!-- end #key -->';
     }
     $calc_url = '"' . getCalcUrl($iso3) . '"';
-    $retval .= <<<EOHTML1
-            <h2 id="more_options"><a href=$calc_url target="_blank">more results for this country &#187;</a></h2>
-    <div id="details">
-                <h2>Details about this pledge</h2>
-EOHTML1;
+    $retval .= '<h2 id="more_options"><a href=' . $calc_url . ' target="_blank">';
+    $retval .= $glossary->getLink('gloss_more_results', true) . ' &#187;</a></h2>';
+    $retval .= '<div id="details">';
+    $retval .= '<h2>Details about this pledge</h2>';
     $retval .= '<p class="first">' . $effort_array['pledge_description'];
     // Not reporting these details
     /*if ($details) {

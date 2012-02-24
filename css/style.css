@@ -220,7 +220,7 @@ a:hover, legend a:hover, .glossary a:hover, #more_options a:hover, .source a:hov
 
 body {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, legend {font-family:ProximaNovaBold, "Helvetica Neue", Helvetica, Arial, sans-serif;}
-em {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+em {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif; font-style:italic;}
 h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {font-family:ProximaNovaBoldItalic, "Helvetica Neue", Helvetica, Arial, sans-serif;}
 
 h1 {font-size:250%; line-height:1;}

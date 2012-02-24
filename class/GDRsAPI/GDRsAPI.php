@@ -49,14 +49,14 @@ class GDRsAPI
     
     // Decided not to use getters and setters
     public $pathwayLabel = array(
-        'low' => 'G8',
-        'med' => 'BASIC Experts',
+        'low' => '2°C "coin flip"',
+        'med' => 'IPCC "2°C Likely" (barely)',
         'high' => 'AOSIS'
     );
     public $pathwayIds = array();
     public $pathway_default = 'high';
     
-    private $_pathway_array = array('low'=>'G8', 'med'=>'basic_experts', 'high'=>'AOSIS');
+    private $_pathway_array = array('low'=>'basic_experts', 'med'=>'IPCC_likely', 'high'=>'AOSIS');
     
     /**
      * Build a URL for a "GET" call to the API

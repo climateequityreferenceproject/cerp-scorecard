@@ -3,38 +3,46 @@
   <entry id="gloss_more_info">
     <label>More information about Climate Equity Scorecards</label>
     <text>
-                  &lt;p&gt;Each &amp;#8220;Equity Scorecard&amp;#8221; offers a quick look at one country&amp;#8217;s formal international pledge to act to stabilize the global climate. This pledge is compared to the country&amp;#8217;s &amp;#8220;fair share&amp;#8221; of the international effort that will be needed to close the &lt;em&gt;mitigation gap&lt;/em&gt; between the current global emissions pathway and a &lt;em&gt;global mitigation pathway&lt;/em&gt;. The country&amp;#8217;s fair share is calculated within the &lt;a href=&quot;http://gdrights.org&quot; target=&quot;_blank&quot;&gt;Greenhouse Development Rights (GDRs)&lt;/a&gt; effort-sharing framework, as based on the &lt;em&gt;responsibility&lt;/em&gt; and &lt;em&gt;capacity&lt;/em&gt; of all countries to contribute the finance, technology, and general effort to the common global effort to stabilize the climate. At any point, the user may click though to the underlying calculator to examine and adjust a number of parameters.&lt;/p&gt;
-            &lt;p&gt;&lt;strong&gt;This system is still under development.&lt;/strong&gt;&lt;/p&gt;
+      &lt;p&gt;Each &lt;em&gt;Equity Scorecard&lt;/em&gt; offers a quick look at a country&amp;#8217;s international mitigation pledge, its formally professed willingness to act to stabilize the global climate. This pledge is expressed as a percentage, which is calculated by comparing the country&amp;#8217;s pledge to its &amp;#8220;fair share&amp;#8221; of the international effort needed to close the gap between the current global emissions pathway and one of the &lt;em&gt;global mitigation pathways&lt;/em&gt;. The country&amp;#8217;s fair share is calculated within the &lt;a href=&quot;http://gdrights.org/&quot;&gt;Greenhouse Development Rights&lt;/a&gt; (GDRs) effort-sharing framework, and is based on the &lt;em&gt;responsibility&lt;/em&gt; and &lt;em&gt;capacity&lt;/em&gt; of all countries to contribute to the general effort of stabilizing the climate.&lt;/p&gt;
+&lt;p&gt;Note: at any point, the user may click though to the underlying &lt;a href=&quot;http://gdrights.org/calculator_dev/&quot;&gt;Greenhouse Development Rights calculator&lt;/a&gt; for much more detail, and to examine and adjust a number of the controlling parameters.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;This system is still under development.&lt;/strong&gt;&lt;/p&gt;
     </text>
   </entry>
   <entry id="gloss_path">
     <label>Level of Global Ambition</label>
     <text>
-                  &lt;p&gt;The Equity Scorecards system evaluates national pledges relative to the global effort that will be needed to achieve a target global emissions pathway. There are many such possible pathways, but for the purposes of simplicity, three are highlighted here.&lt;/p&gt;
+      &lt;p&gt;The &lt;em&gt;Equity Scorecards&lt;/em&gt; system evaluates national pledges relative to the global effort that will be needed to achieve a target &lt;em&gt;global mitigation pathway&lt;/em&gt;. Various target global emissions pathways can be used. They vary by level of ambitiousness, extent of risk, and whether effort is front-loaded or back-loaded, for example. We have chosen to highlight three mitigation pathways in these scorecards. (Many others, including one that&amp;#8217;s more ambitious than the AOSIS pathway, are available in the &lt;a href=&quot;http://gdrights.org/calculator_dev/&quot;&gt;GDRs calculator&lt;/a&gt;, which underlies the &lt;em&gt;Scorecards&lt;/em&gt; system.&lt;/p&gt;
             &lt;dl&gt;
-                &lt;dt&gt;AOSIS&lt;/dt&gt; &lt;dd&gt;This, our high-ambition reference pathway, is based upon the negotiating position of the Small Island States. Note that, if you click through to the underlying &lt;a href=&quot;http://gdrights.org/calculator&quot; target=&quot;_blank&quot;&gt;Greenhouse Development Rights Calculator&lt;/a&gt;, you will find that it supports the even more ambitious &amp;#8220;Hansen-style 350 ppm&amp;#8221; pathway.&lt;/dd&gt;
-                &lt;dt&gt;BASIC Experts&lt;/dt&gt; &lt;dd&gt;This, our moderate-ambition reference pathway, is based upon the carbon budget which the &amp;#8220;BASIC Experts&amp;#8221; group (researchers from Brazil, South Africa, India and China) used in their common report on &lt;a href=&quot;http://gdrights.org/wp-content/uploads/2011/12/EASD-final.pdf&quot; target=&quot;_blank&quot;&gt;Equitable Access to Sustainable Development&lt;/a&gt; (released in Durban on Dec 3, 2011).&lt;/dd&gt;
-                &lt;dt&gt;G8&lt;/dt&gt; &lt;dd&gt;This, our low-ambition reference pathway, is based upon official G-8 statements of its common mitigation goals. This pathway is supported by various kinds of self-styled &amp;#8220;realists&amp;#8221; but is insufficient to limit planetary warming to 2&amp;#8451;.&lt;/dd&gt;
+                &lt;dt&gt;AOSIS&lt;/dt&gt; 
+                &lt;dd&gt;This is the most ambitious global mitigation pathway with high-level political support. It is drawn from the negotiating position of the Alliance of Small Island States (AOSIS), which requires &amp;#8220;global greenhouse gas emissions to peak by 2015 and decline thereafter&amp;#8221; and &amp;#8220;reductions in global greenhouse gas emissions by more than 85&#37; below 1990 levels by 2050.&amp;#8221;&lt;/dd&gt;
+                &lt;dt&gt;IPCC &amp;#8220;2&#176;C Likely&amp;#8221; (barely)&lt;/dt&gt; 
+                &lt;dd&gt;This, our moderate-ambition reference pathway, is &lt;em&gt;just barely&lt;/em&gt; stringent enough to meet the IPCC guidance for an event or phenomenon that is likely to occur. Which is to say that, by current reckoning, it has a 66&#37; chance of holding mean planetary warming below 2&#176;C.
+                &lt;/dd&gt;
+                &lt;dt&gt;2&#176;C &amp;#8220;coin flip&amp;#8221;&lt;/dt&gt;
+&lt;dd&gt;This global mitigation pathway has a cumulative budget that suggests a roughly 50&#37; chance of temperatures rising above 2&#176;C. This assessment is made in accordance with the analysis of &lt;a href=&quot;http://www.nature.com/nature/journal/v458/n7242/full/nature08017.html&quot;&gt;Meinshausen et al (2009)&lt;/a&gt;.&lt;/dd&gt;
             &lt;/dl&gt;
     </text>
   </entry>
   <entry id="gloss_pledge">
     <label>Type of Pledge</label>
     <text>
-                  &lt;p&gt;As countries have tabled their national emissions mitigation pledges with the UNFCCC, a pattern has emerged. In it, countries make both unconditional pledges &amp;#8211; which they commit to meet, come what may &amp;#8211; and unconditional pledges that represent their willingness to act in concert with others.&lt;/p&gt;
+      &lt;p&gt;Many countries have expressed their national emissions mitigation pledges in the form of an &lt;em&gt;unconditional&lt;/em&gt; pledge and a &lt;em&gt;conditional&lt;/em&gt; pledge. The unconditional pledge is of lower ambition, but will be met unilaterally. The conditional pledge is higher ambition, but is conditional on other countries satisfying certain requirements relating to increasing their own ambition with respect to mitigation pledges and/or the provision of finance and technology.&lt;/p&gt;
     </text>
   </entry>
   <entry id="gloss_fair">
     <label>Fair Share</label>
     <text>
-                  &lt;p&gt;The &lt;a href=&quot;http://unfccc.int&quot; target=&quot;_blank&quot;&gt;United Nations Framework Convention on Climate Change&lt;/a&gt;, in its Article 3.1, commits its signatories to &amp;#8220;protect the climate system for the benefit of present and future generations of humankind, on the basis of &lt;strong&gt;equity&lt;/strong&gt; and in accordance with their &lt;strong&gt;common but differentiated responsibilities and respective capabilities&lt;/strong&gt;.&amp;#8221; This implies that nations, and by extension their citizens, have obligations to act to protect the climate system. The &lt;a href=&quot;http://gdrights.org&quot; target=&quot;_blank&quot;&gt;Greenhouse Development Rights&lt;/a&gt; framework is an attempt to rigorously but transparently model those obligations, and this Equity Scorecards interface to the &lt;a href=&quot;http://gdrights.org/calculator&quot; target=&quot;_blank&quot;&gt;GDRs calculator&lt;/a&gt; is simply an interface that highlights the GDRs standard case, which calculates national &amp;#8220;fair shares&amp;#8221; of the necessary global action, and compares a country&amp;#8217;s pledge to its fair share to see how it&amp;#8217;s doing.&lt;/p&gt;
-            &lt;p&gt;Do note that, from any scorecard, you are able to &amp;#8220;click through&amp;#8221; to the underlying calculator, which allows you to modify most of the parameters in the standard case.&lt;/p&gt;
+      &lt;p&gt;The &lt;em&gt;Equity Scorecards&lt;/em&gt; system assesses a country&amp;#8217;s pledges by comparing them to a &lt;a href=&quot;http://gdrights.org&quot;&gt;Greenhouse Development Rights&lt;/a&gt; based estimate of its fair share of the global climate effort. GDRs is an effort-sharing framework that aims to provide a plausible, rigorous and transparent quantification of the commitment by &lt;a href=&quot;http://unfccc.int/resource/docs/convkp/conveng.pdf&quot;&gt;United Nations Framework Convention on Climate Change&lt;/a&gt; signatories to &amp;#8220;protect the climate system for the benefit of present and future generations of humankind, on the basis of &lt;strong&gt;equity &lt;/strong&gt;and in accordance with their &lt;strong&gt;common but differentiated responsibilities and respective capabilities&lt;/strong&gt;.&amp;#8221; (Note, from any &lt;em&gt;Scorecard&lt;/em&gt;, the &amp;#8220;more results for this country&amp;#8221; link takes you to the GDRs calculator, where you can examine and experiment with a much more detailed analysis).&lt;/p&gt;
     </text>
   </entry>
   <entry id="gloss_dom">
-    <label>Pledged Domestic Effort</label>
+    <label>Pledged Effort</label>
     <text>
-                  &lt;p&gt;Nations can act to protect the climate system in one of two ways. They can act within their own borders, and they can act by providing international support to other countries. There are of course lots of complexities involved in qualifying and quantifying actions, but at the end of the day they have this dual aspect. Domestic effort is that effort which a nation makes within its own borders. We do not attempt to estimate levels of domestic effort, but rather take authoritative estimates of pledged effort &amp;#8220;off the shelf&amp;#8221; as they become available.&lt;/p&gt;
+      &lt;p&gt;Nations can act to protect the climate system in one of two ways. They can act within their own borders, and they can act by providing international support to other countries. There are of course numerous complexities involved in qualifying and quantifying national actions, but at the end of the day they will have this dual aspect.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We do not attempt to estimate levels of domestic effort, but rather take authoritative estimates of pledged effort &amp;#8220;off the shelf&amp;#8221; as they become available. This raises an important caveat &amp;#8211; the scores here are only meaningful to the extent that national pledges are made in good faith. On this matter, we attempt no judgments. Also note that in some cases a country is judged to be pledging NO effort. This is typically because it has pledged only to an emission intensity target that is smaller than its projected &lt;em&gt;business-as-usual&lt;/em&gt; rate of intensity improvement.&lt;/li&gt;
+&lt;li&gt;International effort will also be essential in any successful climate regime, but to our knowledge, no nations have yet made international pledges that are precise enough to score. This is because the scores here reflect pledged effort in 2020, not (cumulative) pledged effort before 2020. The situation on this front will evolve rapidly in the years ahead. If and when it clarifies to the necessary point, international efforts will be added to these scores.&lt;/li&gt;
+&lt;/ul&gt;
     </text>
   </entry>
   <entry id="gloss_intl">
@@ -46,19 +54,24 @@
   <entry id="gloss_gap">
     <label>Pledge Gap</label>
     <text>
-                  &lt;p&gt;The gap shown in these Equity Scorecards represents the difference between a country&amp;#8217;s &lt;em&gt;fair share&lt;/em&gt; of the global effort (as implied by the specified level of ambition) and its total pledge. This total pledge is the sum of its &lt;em&gt;pledged domestic effort&lt;/em&gt; and its &lt;em&gt;pledged international support&lt;/em&gt;. Today, unfortunately, most countries cannot be taken as having pledged any international support. It is, precisely, a national pledge gap.&lt;/p&gt;
+      &lt;p&gt;The gap shown in these &lt;em&gt;Equity Scorecards&lt;/em&gt; represents the difference between a country&amp;#8217;s pledged mitigation and its &lt;em&gt;fair share&lt;/em&gt; of the global effort.&lt;/p&gt;
     </text>
   </entry>
   <entry id="gloss_bau">
     <label>Business as Usual</label>
     <text>
-                  &lt;p&gt;National greenhouse-gas emissions baselines (&amp;#8220;BAU baselines&amp;#8221;) are here based on projected emissions growth rates from McKinsey and Co&amp;#8217;s projections (Version 2.1) applied to the most current available annual emissions data (CO2 from fossil fuels from CDIAC&amp;#8217;s 2010 estimates). CO2 from land use is projected to remain constant at 2005 levels. Non-CO2 greenhouse gases are taken to remain in the same proportion to fossil CO2 emissions that they were in 2005.&lt;/p&gt;
+      &lt;p&gt;Business-as-Usual baselines (&amp;#8220;Business-as-Usual&amp;#8221; pathways) are based on projected emissions from McKinsey and Company (&lt;em&gt;Version 2.1&lt;/em&gt;). We update and calibrate McKinsey&amp;#8217;s projections to be consistent with the most current available annual emissions data, based on fossil fuel CO2 from &lt;em&gt;CDIAC&amp;#8217;s data&lt;/em&gt;, non-CO2 GHGs from &lt;em&gt;UNFCCC&lt;/em&gt; and &lt;em&gt;USEPA&lt;/em&gt;, and land-use CO2 from &lt;a href=&quot;http://cait.wri.org/&quot;&gt;Climate Analysis Indicators Tool&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;More information [add link to &lt;a href=&quot;#&quot;&gt;more detailed BAU documentation]&lt;/a&gt;.&lt;/p&gt;
     </text>
   </entry>
   <entry id="gloss_ei">
     <label>Emissions Intensity</label>
     <text>
-                  &lt;p&gt;Emissions Intensity is a measure of the efficiency of a country&amp;#8217;s economic activity, in terms of greenhouse gas emitted per unit of economic output.  It is defined as greenhouse-gas emissions divided by GDP, and can be calculated either in CO2-only terms or in terms of &amp;#8220;all greenhouse gases.&amp;#8221;&lt;/p&gt;
+      &lt;p&gt;Emissions Intensity is a measure of the efficiency of a country&amp;#8217;s economic activity, in terms of greenhouse gas emitted per unit of economic output. It is defined as greenhouse-gas emissions divided by GDP, and can be calculated either in CO2-only terms or in terms of &amp;#8220;all greenhouse gases.&amp;#8221;&lt;/p&gt;
     </text>
+  </entry>
+  <entry id="gloss_more_results">
+   <label>More Results for This Country</label>
+   <text>&lt;p&gt;This link directs you to the &lt;a href=&quot;http://gdrights.org/calculator_dev/&quot;&gt;GDRs calculator&lt;/a&gt;, where you can see and experiment with an analysis that is much more detailed than the one available in this &lt;em&gt;Scorecards&lt;/em&gt; interface.&lt;/p&gt;</text>
   </entry>
 </hwt_help>
