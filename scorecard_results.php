@@ -102,11 +102,12 @@ function getResults()
     if ($effort_val < 100) {
         $retval .= '<p><span class="gap"></span> ' . $gap . '% ' . $glossary->getLink('gloss_gap', true) . '</p></div><!-- end #key -->';
     }
+    $retval .= '<p><a href="what.php" target="_blank">How do I interpret these scores?</a></p>';
     $calc_url = '"' . getCalcUrl($iso3) . '"';
     $retval .= '<h2 id="more_options"><a href=' . $calc_url . ' target="_blank">';
     $retval .= 'more results for this country';
     $retval .= ' &#187;</a>';
-    $retval .= '<br /><span class="what"><a class="def_link" href="glossary.php#gloss_more_results" target="_blank">what is this?</a></span>';
+    $retval .= ' <span class="what"><a class="def_link" href="glossary.php#gloss_more_results" target="_blank">(?)</a></span>';
     $retval .= '</h2>';
     // $retval .= $glossary->getLink('gloss_more_results', true);
     $retval .= '<div id="details">';
@@ -122,6 +123,7 @@ function getResults()
 //    if ($source_intl) {
 //        $retval .= '<p class="source">Source for international support: ' . $source_intl . '.</p>';            
 //    }
+    $retval .= '<p class="source">Warning: the scores here are only meaningful if the underlying national pledges are in good faith.</p>';
     $retval .= '</div>';
 
     return $retval;

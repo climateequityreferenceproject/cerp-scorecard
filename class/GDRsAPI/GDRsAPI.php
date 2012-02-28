@@ -49,8 +49,8 @@ class GDRsAPI
     
     // Decided not to use getters and setters
     public $pathwayLabel = array(
-        'low' => '2°C "coin flip"',
-        'med' => 'IPCC "2°C Likely" (barely)',
+        'low' => '2°C coin flip',
+        'med' => 'IPCC 2°C Likely (barely)',
         'high' => 'AOSIS'
     );
     public $pathwayIds = array();
