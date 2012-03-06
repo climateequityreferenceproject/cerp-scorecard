@@ -56,7 +56,7 @@ class GDRsAPI
     public $pathwayIds = array();
     public $pathway_default = 'high';
     
-    private $_pathway_array = array('low'=>'basic_experts', 'med'=>'IPCC_likely', 'high'=>'AOSIS');
+    private $_pathway_array = array('low'=>'_50_50', 'med'=>'IPCC_likely', 'high'=>'AOSIS');
     
     /**
      * Build a URL for a "GET" call to the API
