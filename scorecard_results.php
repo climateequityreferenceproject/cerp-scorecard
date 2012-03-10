@@ -32,6 +32,7 @@ function getResults()
     $params = array();
 
     $params['min_target_year'] = getMinTargetYear($_POST['country'], $_POST['conditional']);
+    $by_year = $params['min_target_year'];
     $params['country_name'] = getCountryName($_POST['country']);
     $params['ambition'] = $pathwayLabel[array_search($_POST['ambition'], $pathwayIds)];
     $ambition = $params['ambition'];
@@ -53,13 +54,24 @@ function getResults()
     $dom = niceNumber($effort_array['dom_pledge']);
     $gap = niceNumber($effort_array['gap']);
     $pledge_over_bau = niceNumber($effort_array['pledge_over_bau']);
+    $cap = niceNumber($effort_array['cap']);
+    $resp = niceNumber($effort_array['resp']);
+    $dom_rel_global = niceNumber($effort_array['dom_rel_global']);
 
     $iso3 = $_POST['country'];
 
     $condition_string = $_POST['conditional'] ? 'conditionally' : 'unconditionally';
-
+// China, which is projected to in 2020 have 6% of global Capacity and 11% of global
+// Responsibility, has pledged to do X% of the mitigation that would be needed, globally, 
+// o reach the [name] pathway. 
     $retval = '<div id="summary">';
-    $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';
+    $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span>, ';
+    $retval .= 'which is projected in ' . $by_year . ' to have ' . $cap . '% of global Capacity and ';
+    $retval .= $resp . '% of global Responsibility, has pledged ' . $condition_string . ' to do ';
+    $retval .= $dom_rel_global . '% of the mitigation that would be needed, globally, ';
+    $retval .= 'to reach the ' . $ambition . ' pathway.</p>';
+    
+    $retval .= '<p>In other words, <span id="country_name">' . $params['country_name'] . '</span>  ';
     $retval .= 'has pledged ' . $condition_string . ' to do ';
     if ($effort_array['neg_pledge']) {
         $retval .= 'NONE ';

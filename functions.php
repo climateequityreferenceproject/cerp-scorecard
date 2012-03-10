@@ -260,6 +260,9 @@ function getGdrsInformation($pledge_info, $pathway)
         $year = $year_data['year'];
         $gdp[$year] = $year_data['gdp_blnUSDMER'];
         $bau[$year] = $year_data['fossil_CO2_MtCO2'];
+        $c_frac[$year] = $year_data['gdrs_c_frac'];
+        $r_frac[$year] = $year_data['gdrs_r_frac'];
+        $rci[$year] = $year_data['gdrs_rci'];
         if ($use_lulucf['value']) {
             $bau[$year] += $year_data['LULUCF_MtCO2'];
         }
@@ -315,6 +318,11 @@ function getGdrsInformation($pledge_info, $pathway)
     $retval['intl_pledge'] = 0.0; //100.0 * $pledge_info['intl_pledge']/$gdrs_reduction;
     $retval['dom_pledge'] = 100.0 * $pledged_reduction/$gdrs_reduction;
     $retval['gap'] = 100.0 - $retval['dom_pledge'] - $retval['intl_pledge'];
+    
+    $retval['dom_rel_global'] = $retval['dom_pledge'] * $rci[$pledge_info['by_year']];
+    
+    $retval['cap'] = 100.0 * $c_frac[$pledge_info['by_year']];
+    $retval['resp'] = 100.0 * $r_frac[$pledge_info['by_year']];
     
     $retval['neg_pledge'] = false;
     if ($retval['dom_pledge'] < 0) {
