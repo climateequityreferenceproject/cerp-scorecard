@@ -51,10 +51,29 @@ require_once "class/HWTHelp/HWTHelp.php";
   <body class="glossary group">
     <div id="container" class="group">
     <header>
-        <h1>Climate Equity Scorecard Glossary</h1>
+        <h1><a href="http://gdrights.org/scorecard/">Climate Equity Scorecard</a> Glossary</h1>
         <!--<p id="more_info"><a href="#">more information about climate equity scorecards</a> &#187;</p>-->
     </header>
     <div id="main" role="main" class="group">
+        <!-- TODO generate this list of glossary terms from XML file -->
+        <nav>
+            <ul>
+                <li><a href="#gloss_more_info">More information about Climate Equity Scorecards</a></li>
+                <li><a href="#gloss_path">Level of Global Ambition &#8211; Global Mitigation Pathways</a></li>
+                <li><a href="#gloss_pledge">Type of Pledge</a></li>
+                <li><a href="#gloss_fair">Fair Share</a></li>
+                <li><a href="#gloss_dom">Pledged Effort</a></li>
+                <!--<li><a href="#gloss_intl">Pledged International Support</a></li>-->
+                <li><a href="#gloss_gap">Pledge Gap</a></li>
+                <li><a href="#gloss_bau">Business as Usual</a></li>
+                <li><a href="#gloss_ei">Emissions Intensity</a></li>
+                <li><a href="#gloss_more_results">More Results for This Country</a></li>
+                <li><a href="#gloss_responsibility">Responsibility</a></li>
+                <li><a href="#gloss_capacity">Capacity</a></li>
+                <li><a href="#gloss_rci">Responsibility and Capacity Index (RCI)</a></li>
+                <li><a href="#gloss_dev_threshold">Development Threshold</a></li>
+            </ul>
+        </nav>
         <?php
             $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
             echo $glossary->getHelpPage();

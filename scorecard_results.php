@@ -65,13 +65,15 @@ function getResults()
 // Responsibility, has pledged to do X% of the mitigation that would be needed, globally, 
 // o reach the [name] pathway. 
     $retval = '<div id="summary">';
-    $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span>, ';
-    $retval .= 'which is projected in ' . $by_year . ' to have ' . $cap . '% of global Capacity and ';
-    $retval .= $resp . '% of global Responsibility, has pledged ' . $condition_string . ' to do ';
-    $retval .= $dom_rel_global . '% of the mitigation that would be needed, globally, ';
-    $retval .= 'to reach the ' . $ambition . ' pathway.</p>';
+    $retval .= '<p class="first"><span id="country_name">' . $params['country_name'] . '</span> ';
+    $retval .= 'is projected in ' . $by_year . ' to have ' . $cap . '% of global ';
+    $retval .= $glossary->getLink('gloss_capacity', true) . ' and ';
+    $retval .= $resp . '% of global ' . $glossary->getLink('gloss_responsibility', true) . '. ';
+        //, has pledged ' . $condition_string . ' to do ';
+    //$retval .= $dom_rel_global . '% of the mitigation that would be needed, globally, ';
+    //$retval .= 'to reach the ' . $ambition . ' pathway.</p>';
     
-    $retval .= '<p>In other words, <span id="country_name">' . $params['country_name'] . '</span>  ';
+    $retval .= $params['country_name'] . ' ';
     $retval .= 'has pledged ' . $condition_string . ' to do ';
     if ($effort_array['neg_pledge']) {
         $retval .= 'NONE ';
@@ -80,8 +82,7 @@ function getResults()
     }
     $retval .= 'of its ' . $glossary->getLink('gloss_fair', true);
     $retval .= ' in ' . $params['min_target_year'] . ', '; 
-    $retval .= 'assuming the ' . $ambition . ' pathway.</p>';
-    $retval .= '</div>';
+    $retval .= 'assuming the ' . $ambition . ' pathway.';
     if ($effort_array['neg_pledge']) {
         switch ($pledge_info['quantity']) {
             case 'absolute': $quantity_text = 'total emissions'; break;
@@ -93,15 +94,15 @@ function getResults()
             case 'bau': $yearbau_text = $glossary->getLink('gloss_bau', true); break;
             default: $yearbau_text = '';
         }
-        $retval .= '<p>' . $params['country_name'];
-        $retval .= ' has pledged ' . $condition_string . ' to reduce ';
+        $retval .= ' (It has pledged ' . $condition_string . ' to reduce ';
         $retval .= $quantity_text;
         $retval .= ' by ' . number_format($pledge_info['reduction_percent']) . '% ';
         $retval .= 'compared to ' . $yearbau_text . '. ';
         $retval .= 'However, our projections indicate that its ';
         $retval .= $glossary->getLink('gloss_bau', true);
-        $retval .= ' efficiency increases would exceed this amount.</p>';
+        $retval .= ' efficiency increases would exceed this amount.)';
     }
+    $retval .= '</p></div>';
     $retval .= '<div id="graph" class="group">';
     $retval .= '<img src="img/grid.gif" alt=" " />';
     $retval .= '<p id="fair-share">100% of fair share</p>';
