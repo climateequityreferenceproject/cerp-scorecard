@@ -80,9 +80,7 @@ require_once "class/HWTHelp/HWTHelp.php";
         ?>
 
     </div> <!--! end of #main -->
-    <footer>
-
-    </footer>
+    <?php include_once ("footer.php"); ?>
   </div> <!--! end of #container -->
 
 

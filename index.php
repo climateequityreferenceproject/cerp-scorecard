@@ -38,7 +38,7 @@ if ($_POST && ($_POST['country']!=='none')) {
        More info: h5bp.com/b/378 -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Climate Equity Scorecard</title>
+  <title>Climate Equity Scorecard - BETA</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -64,7 +64,8 @@ if ($_POST && ($_POST['country']!=='none')) {
     <div id="loading"></div>
     <div id="container" class="group">
     <header>
-        <h1>Climate Equity Scorecard</h1>
+        <h1>Climate Equity Scorecard <span>BETA</span></h1>
+        <h2><span>DO NOT CITE OR PUBLICIZE</span></h2>
         <p id="more_info"><?php echo $glossary->getLink('gloss_more_info') ?></p>
     </header>
     <div id="main" role="main" class="group">
@@ -141,11 +142,12 @@ if ($_POST && ($_POST['country']!=='none')) {
         <div id="popup"></div>
         
     </div> <!--! end of #main -->
-    <footer>
+    <?php include_once ("footer.php"); ?>
+
+    <!--<footer>
         <p>Thanks to the <a href="http://www.minor-foundation.no/" target="_blank">Minor Foundation for Major Challenges</a>, and to the <a href="http://www.rbf.org/">Rockefeller Brothers Fund</a>, <a href="http://www.christianaid.org.uk/">Christian Aid</a>, and the <a href="http://www.sei-international.org/">Stockholm Environment Institute</a> for supporting this effort.</p>
         <p>Please send feedback on the Climate Equity Scorecard to <a href='m&#97;il&#116;o&#58;f%65&#37;65db%61ck&#64;gdri&#103;&#104;ts%2E%6F&#114;&#103;'>feed&#98;ack&#64;gdrig&#104;&#116;s&#46;org</a></p>
-
-    </footer>
+    </footer>-->
   </div> <!--! end of #container -->
 
 

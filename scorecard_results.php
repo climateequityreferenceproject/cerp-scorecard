@@ -118,14 +118,12 @@ function getResults()
     $retval .= '<p><a href="what.php" target="_blank">How do I interpret these scores?</a></p>';
     $calc_url = '"' . getCalcUrl($iso3) . '"';
     $retval .= '<h2 id="more_options"><a href=' . $calc_url . ' target="_blank">';
-    $retval .= 'more results for this country';
-    $retval .= ' &#187;</a>';
-    $retval .= ' <span class="what"><a class="def_link" href="glossary.php#gloss_more_results" target="_blank">(?)</a></span>';
+    $retval .= 'more detailed results for this country &#187;</a>';
+    // $retval .= ' <span class="what"><a class="def_link" href="glossary.php#gloss_more_results" target="_blank">(?)</a></span>';
     $retval .= '</h2>';
-    // $retval .= $glossary->getLink('gloss_more_results', true);
     $retval .= '<div id="details">';
     $retval .= '<h2>Details about this pledge</h2>';
-    $retval .= '<p class="first">' . $effort_array['pledge_description'];
+    $retval .= '<p class="source">' . $effort_array['pledge_description'];
     // Not reporting these details
     /*if ($details) {
         $retval .= ' This pledge assumes: ' . $details . '.</p>';

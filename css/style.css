@@ -133,7 +133,6 @@ button {  width: auto; overflow: visible; }
 /* layout ***************************************/
 #container {margin:0.5em auto; min-width:720px; width:90%;}
 header {padding:0.5em 0 1em 0;}
-p {margin-top:1.2em;}
 
 #settings {float:left; margin:0 30px 1em 0; padding: 0 13px 22px 13px; min-width:180px; width:30%;}
 fieldset {padding:0 0 0.5em;}
@@ -144,6 +143,8 @@ select {margin-top:0.25em;}
 
 #results {float:left; padding:0 20px 1.5em 20px; min-width:220px; width:50%;}
 #summary {margin:1.5em 0 0.25em;}
+footer {padding: 0.5em 13px 1.5em 13px; width:60%}
+
 #graph {width:100%}
 /* ids for the first three are only for layout-test.html, not in live scorecard, where only classes are used */
 #international, #domestic, #gap, 
@@ -152,21 +153,20 @@ select {margin-top:0.25em;}
 #graph img {left:0; position:absolute; top:20px; width:100%; z-index:-200;}
 
 #key {clear:both; margin-top:0.5em;}
-#key p {line-height:1; margin-top:0.5em;}
-#key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
 .glossary #container, .docs #container {min-width:500px; max-width:900px;}
 .glossary nav {margin-top:2em;}
 .glossary #main div p, .glossary #main div dl {padding-left:1em;}
-footer {margin-top:3em;}
+footer {margin-top:2em;}
 
 
 /* color ***************************************/
 body {background:#fff;}
 body, select, input, textarea {color:#444;}
-h1, h2, h3, #country_name, #commitment,
+h1, h2, h3, h4, #country_name, #commitment,
 legend, legend a, legend a:active, legend a:visited {color:#4d59a4;}
 /*form {background:#e6ebe6;} */
 fieldset {background:#fff;}
+h1 span, h2 span {color:#999; letter-spacing:0.035em;}
 
 /* These selection declarations have to be separate
    No text-shadow: twitter.com/miketaylr/status/12228805301   */
@@ -175,30 +175,34 @@ fieldset {background:#fff;}
 /* j.mp/webkit-tap-highlight-color */
 a:link {-webkit-tap-highlight-color:#dd6e4c;}
 
-a, a:active, a:visited, 
-#more_options span.what a, #more_options span.what a:active, #more_options span.what a:visited,
-.glossary nav a, .glossary nav a:active, .glossary nav a:visited {color:#999;}
-legend a, legend a:active, legend a:visited,
-.glossary header h1 a, .glossary header h1 a:active, .glossary header h1 a:visited {color:#6b87c3;}
-
 #graph {border-left:2px solid #999;}
 .intl {background:#707ac9;}
 .dom {background:#8ebd7f;}
 .gap {background:#ffce73;}
 #results {border:6px solid #ffce73;}
-#settings {border:6px solid #e6ebe6;}
-#settings, #results {-moz-border-radius:15px; border-radius:15px;}
+#settings, footer {border:6px solid #e6ebe6;}
+#settings, #results, footer {-moz-border-radius:15px; border-radius:15px;}
 #commitment.negative {color:#dd6e4c; white-space:nowrap;}
 
 .glossary #main, .docs #main {border-top:6px solid #ffce73;}
 .glossary p {margin-top:0.75em;}
 .glossary h2, .docs h2 {margin-top:1.5em;}
+
+a, a:active, a:visited, 
+#more_options span.what a, #more_options span.what a:active, #more_options span.what a:visited,
+.glossary nav a, .glossary nav a:active, .glossary nav a:visited {color:#999;}
+
+legend a, legend a:active, legend a:visited,
+.docs header h1 a, .docs header h1 a:active, .docs header h1 a:visited,
+.glossary header h1 a, .glossary header h1 a:active, .glossary header h1 a:visited {color:#6b87c3;}
+
 .glossary a, .glossary a:active, .glossary a:visited,
 .docs a, .docs a:active, .docs a:visited,
 #more_options a, #more_options a:active, #more_options a:visited,
-.source a, .source a:active, .source a:visited {color:#a23b1e;}
+.source a, .source a:active, .source a:visited, 
+footer a, footer a:active, footer a:visited {color:#a23b1e;}
 
-a:hover, legend a:hover, .glossary a:hover, .docs a:hover, #more_options a:hover, #more_options span.what a:hover, .source a:hover, .glossary header h1 a:hover, .glossary nav a:hover {color:#dd6e4c;}
+a:hover, legend a:hover, .glossary a:hover, .docs a:hover, #more_options a:hover, #more_options span.what a:hover, .source a:hover, .glossary header h1 a:hover, .glossary nav a:hover, footer a:hover, .docs header h1 a:hover {color:#dd6e4c;}
 
 /* typography ***************************************/
 
@@ -231,21 +235,27 @@ em {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif; font-style:itali
 h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {font-family:ProximaNovaBoldItalic, "Helvetica Neue", Helvetica, Arial, sans-serif;}
 
 h1 {font-size:250%; line-height:1;}
-h2 {font-size:150%;}
-h2#more_options {font-size:125%}
+h2 {font-size:150%; margin-top:0.75em;}
+/*h2#more_options {font-size:125%}*/
 #summary {font-size:120%; line-height:30px;}
-h2, .docs h1, .docs h3 {margin-top:0.75em;}
+.docs h1, .docs h2, .docs h3, h4 {margin-top:1em;}
 .docs h1 {margin-bottom:0.25em;}
 .docs h2 {font-size:180%;}
 .docs h3 {font-size:115%;}
+header h1, header h2, .docs header h1, .docs header h2 {margin-top:0;}
+
+p {margin-top:1.2em;}
+#key p {line-height:1; margin-top:0.5em;}
+#key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
 .docs p {margin-top:0.5em;}
 #details p.first {margin-top:0;}
-header h1, header h2 {margin-top:0;}
+header p {margin-top:0.5em;}
+p.source {margin-top:0.25em;}
+
 #country_name {font-size:360%;}
 #commitment {font-size:200%;}
 #summary #more_options {font-size:65%; line-height:0.5; margin-top:2em;}
 legend {font-size:125%;}
-p.source {margin-top:0.25em;}
 .source {font-size:80%;}
 .what {font-size:60%;}
 
@@ -345,7 +355,7 @@ a.def_link {background:url(../img/info-icon.gif) center right no-repeat; padding
    consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
 @media screen and (max-device-width: 480px) {
     body {line-height:1.2;}
-    #container, .glossary #container, .docs #container, header, #settings, #results, dl, dt, dd {float:none; margin-left:0; margin-right:0; min-width:140px; width:auto;}
+    #container, .glossary #container, .docs #container, header, footer, #settings, #results, dl, dt, dd {float:none; margin-left:0; margin-right:0; min-width:140px; width:auto;}
     #container {padding:0 2% 0 2%;}
     #results {border:none; padding:0;}
     dd {border-top:none; padding-top:0;}
