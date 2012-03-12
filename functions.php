@@ -74,10 +74,12 @@ function queryPledgeDB($query)
  */
 function niceNumber($val)
 {
-    if ($val > 0 && $val < 0.5) {
-        $val_string = "<0.5";
-    } elseif ($val < 0 && $val > -0.5) {
-        $val_string = ">-0.5";
+    if ($val > 0 && $val < 0.1) {
+        $val_string = "<0.1";
+    } elseif ($val < 0 && $val > -0.1) {
+        $val_string = ">-0.1";
+    } elseif (abs($val) < 10 && $val != 0) {
+        $val_string = number_format($val, 1);
     } else {
         $val_string = number_format($val);
     }
