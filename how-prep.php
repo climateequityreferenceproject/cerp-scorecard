@@ -1,3 +1,18 @@
+<?php
+/**
+ * glossary.php
+ * 
+ * PHP Version 5
+ *
+ * @package GDRsScorecard
+ * @copyright 2011-2012 EcoEquity and Stockholm Environment Institute
+ * @license All rights reserved
+ * @link http://www.gdrights.org/
+ */
+
+require_once "class/HWTHelp/HWTHelp.php";
+
+?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
@@ -36,12 +51,12 @@
   <body class="group docs">
     <div id="container" class="group">
     <header>
-        <h1>How do I interpret a <a href="http://gdrights.org/scorecard/">Climate Equity Scorecard</a>?</h1>
+        <h1>How do I interpret a &#8220;<a href="http://gdrights.org/scorecard/">Climate Equity Scorecard</a>&#8221;?</h1>
     </header>
     <div id="main" role="main" class="group">
         
     <section>
-        <p class="first">Each <em>Climate</em> <em>Equity Scorecards system</em> compares a country&#8217;s <a href="#">mitigation pledge</a> to its estimated <a href="http://gdrights.org/scorecard/glossary.php#gloss_fair">fair share</a> of the <a href="#">global mitigation needed to stabilize the climate</a>. A country whose mitigation pledge is equal to its fair share would receive a score of &#8220;100%&#8221;. (A score lower than 100% means the country has pledged to do less than its fair share, and one that is higher than 100% means it has pledged to do more than its fair share.)</p>
+        <p>Each <em>Climate</em> <em>Equity Scorecards system</em> compares a country&#8217;s <a href="#">mitigation pledge</a> to its estimated <a href="http://gdrights.org/scorecard/glossary.php#gloss_fair">fair share</a> of the <a href="#">global mitigation needed to stabilize the climate</a>. A country whose mitigation pledge is equal to its fair share would receive a score of &#8220;100%&#8221;. (A score lower than 100% means the country has pledged to do less than its fair share, and one that is higher than 100% means it has pledged to do more than its fair share.)</p>
         <h3>Mitigation Pledges</h3>
         <p>The <em>Climate Equity Scorecards</em> system assesses the national mitigation pledges that countries have submitted to UNFCCC Secretariat, which are typically referred to as &#8220;Copenhagen pledges.&#8221; (The official <a href="http://unfccc.int/meetings/copenhagen_dec_2009/items/5264.php">Annex 1 submissions</a> and <a href="http://unfccc.int/meetings/cop_15/copenhagen_accord/items/5265.php">non-Annex 1 submissions</a> are available on the UNFCCC website, and a helpful synthesis is available on the <a href="http://climateactiontracker.org/countries.html">Climate Action Tracker website</a>, and in spreadsheet form at the <a href="http://climateinteractive.org/scoreboard">Climate Interactive website</a>.) It reports scores for the year 2020, because that is the year for which countries have consistently reported their pledges. In many cases, countries have submitted both an &#8220;unconditional&#8221; pledge, which they intend to meet unilaterally, and a more ambitious &#8220;conditional&#8221; pledge, which is contingent on other countries raising their own mitigation ambition and/or providing financial and technological support. Under &#8220;Type of Pledge&#8221; on the panel to the left of the scorecard, click either &#8220;Unconditional&#8221; or &#8220;Conditional&#8221; to display the corresponding score. (Note, the Scorecards system accounts for mitigation pledges only, not financing pledges, because of the absence of confirmed financing commitments.)</p>
         <h3>Fair Shares</h3>

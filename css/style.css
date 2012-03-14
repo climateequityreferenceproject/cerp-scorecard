@@ -143,7 +143,7 @@ select {margin-top:0.25em;}
 
 #results {float:left; padding:0 20px 1.5em 20px; min-width:220px; width:50%;}
 #summary {margin:1.5em 0 0.25em;}
-footer {padding: 0.5em 13px 1.5em 13px; width:60%}
+footer {margin-top:2em; padding: 0.5em 13px 1.5em 13px; width:60%}
 
 #graph {width:100%}
 /* ids for the first three are only for layout-test.html, not in live scorecard, where only classes are used */
@@ -156,7 +156,9 @@ footer {padding: 0.5em 13px 1.5em 13px; width:60%}
 .glossary #container, .docs #container {min-width:500px; max-width:900px;}
 .glossary nav {margin-top:2em;}
 .glossary #main div p, .glossary #main div dl {padding-left:1em;}
-footer {margin-top:2em;}
+
+img.left {float:left; margin-right:2em;}
+img.right {float:right; margin-left:2em;}
 
 
 /* color ***************************************/
@@ -193,6 +195,7 @@ a, a:active, a:visited,
 .glossary nav a, .glossary nav a:active, .glossary nav a:visited {color:#999;}
 
 legend a, legend a:active, legend a:visited,
+h3 a, h3 a:active, h3 a:visited,
 .docs header h1 a, .docs header h1 a:active, .docs header h1 a:visited,
 .glossary header h1 a, .glossary header h1 a:active, .glossary header h1 a:visited {color:#6b87c3;}
 
@@ -202,7 +205,7 @@ legend a, legend a:active, legend a:visited,
 .source a, .source a:active, .source a:visited, 
 footer a, footer a:active, footer a:visited {color:#a23b1e;}
 
-a:hover, legend a:hover, .glossary a:hover, .docs a:hover, #more_options a:hover, #more_options span.what a:hover, .source a:hover, .glossary header h1 a:hover, .glossary nav a:hover, footer a:hover, .docs header h1 a:hover {color:#dd6e4c;}
+a:hover, legend a:hover, .glossary a:hover, .docs a:hover, #more_options a:hover, #more_options span.what a:hover, .source a:hover, .glossary header h1 a:hover, .glossary nav a:hover, footer a:hover, .docs header h1 a:hover, h3 a:hover {color:#dd6e4c;}
 
 /* typography ***************************************/
 
@@ -249,6 +252,7 @@ p {margin-top:1.2em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
 .docs p {margin-top:0.5em;}
 #details p.first {margin-top:0;}
+.docs p.first {margin-top:2em;}
 header p {margin-top:0.5em;}
 p.source {margin-top:0.25em;}
 
