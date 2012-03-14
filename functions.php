@@ -20,11 +20,10 @@ require_once "class/HWTHelp/HWTHelp.php";
  * @param string $iso3 3-letter code for currently-displayed country
  * 
  * @return URL for GDRs calculator country report page
- * @todo Update this to /calculator/, not /calculator_dev/
  */
 function getCalcUrl($iso3)
 {
-    return 'http://gdrights.org/calculator_dev/?iso3=' . $iso3;
+    return 'http://gdrights.org/calculator/?iso3=' . $iso3;
 }
 
 /**
