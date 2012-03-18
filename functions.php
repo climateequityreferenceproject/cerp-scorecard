@@ -21,9 +21,14 @@ require_once "class/HWTHelp/HWTHelp.php";
  * 
  * @return URL for GDRs calculator country report page
  */
-function getCalcUrl($iso3)
+function getCalcUrl($iso3, $pathway_id)
 {
-    return 'http://gdrights.org/calculator/?iso3=' . $iso3;
+    if (isset($_SESSION['gdrs_db'])) {
+        $db_string = '&db=' . $_SESSION['gdrs_db'][$pathway_id];
+    } else {
+        $db_string = '';
+    }
+    return 'http://gdrights.org/calculator_dev/?iso3=' . $iso3 . $db_string;
 }
 
 /**

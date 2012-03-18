@@ -34,7 +34,8 @@ function getResults()
     $params['min_target_year'] = getMinTargetYear($_POST['country'], $_POST['conditional']);
     $by_year = $params['min_target_year'];
     $params['country_name'] = getCountryName($_POST['country']);
-    $params['ambition'] = $pathwayLabel[array_search($_POST['ambition'], $pathwayIds)];
+    $pathway_id = $_POST['ambition'];
+    $params['ambition'] = $pathwayLabel[array_search($pathway_id, $pathwayIds)];
     $ambition = $params['ambition'];
 
     $pledge_info = getPledgeInformation($_POST['country'], $_POST['conditional'], $params['min_target_year']);
@@ -116,7 +117,7 @@ function getResults()
         $retval .= '<p><span class="gap"></span> ' . $gap . '% ' . $glossary->getLink('gloss_gap', true) . '</p></div><!-- end #key -->';
     }
     $retval .= '<p><a href="what.php" target="_blank">How do I interpret these scores?</a></p>';
-    $calc_url = '"' . getCalcUrl($iso3) . '"';
+    $calc_url = '"' . getCalcUrl($iso3, $pathway_id) . '"';
     $retval .= '<h2 id="more_options"><a href=' . $calc_url . ' target="_blank">';
     $retval .= 'more detailed results for this country &#187;</a>';
     // $retval .= ' <span class="what"><a class="def_link" href="glossary.php#gloss_more_results" target="_blank">(?)</a></span>';
