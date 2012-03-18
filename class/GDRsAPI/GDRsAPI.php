@@ -94,7 +94,7 @@ class GDRsAPI
             if ($req->getResponseCode() == 200) {
                 return (array) json_decode($req->getResponseBody());
             } else {
-                return NULL;
+                return null;
             }
         } else {
             throw new GDRsAPIException($req->getMessage());
