@@ -73,7 +73,7 @@ class GDRsAPI
         $retval = $this->_url . '?';
         $retval .= 'q=' . $to_get;
         if ($pwId) {
-            $retval .= 'db=' . $this->_db[$pwId];
+            $retval .= '&db=' . $this->_db[$pwId];
         }
         return $retval;
     }
@@ -91,11 +91,14 @@ class GDRsAPI
         $req =& new HTTP_Request($this->_buildGet($to_get, $pwId));
         $req->setMethod(HTTP_REQUEST_METHOD_GET);
         if (!PEAR::isError($req->sendRequest())) {
-             $response = json_decode($req->getResponseBody());
+            if ($req->getResponseCode() == 200) {
+                return (array) json_decode($req->getResponseBody());
+            } else {
+                return NULL;
+            }
         } else {
             throw new GDRsAPIException($req->getMessage());
         }
-        return (array) $response;
     }
     
     // 
@@ -154,8 +157,8 @@ class GDRsAPI
             if (isset($_SESSION['gdrs_db'])) {
                 $this->_db = $_SESSION['gdrs_db'];
             }
-            // And check again, whether in the session variable or not
-            if (!(isset($this->_db[$pwId]))) {
+            // Does a database exist for this pathway?
+            if (!(isset($this->_db[$pwId])) || !$this->get('calc_ver', $pwId)) {
                 $response = $this->get('new_db');
                 $this->_db[$pwId] = $response['db'];
             }
