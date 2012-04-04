@@ -33,7 +33,7 @@ function getResults()
 
     $params['min_target_year'] = getMinTargetYear($_POST['country'], $_POST['conditional']);
     $by_year = $params['min_target_year'];
-    $params['country_name'] = getCountryName($_POST['country']);
+    $params['country_name'] = getCountryRegionName($_POST['country']);
     $pathway_id = $_POST['ambition'];
     $params['ambition'] = $pathwayLabel[array_search($pathway_id, $pathwayIds)];
     $ambition = $params['ambition'];

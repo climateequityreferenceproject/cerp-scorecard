@@ -252,7 +252,7 @@ function getMinTargetYear($iso3, $conditional)
  * 
  * @return string Corresponding country or region name
  */
-function getCountryName($code)
+function getCountryRegionName($code)
 {
     if (isCountry($code)) {
         $sql = 'SELECT name FROM country WHERE iso3="' . $code . '";';
