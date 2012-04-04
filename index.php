@@ -80,9 +80,20 @@ if ($_POST && ($_POST['country']!=='none')) {
                         <?php
                         if (isset($_POST['country']) && ($_POST['country']!=='none')) {
                             echo '<option value="none">-Select-</option>';
-                            echo availCountriesOptions($_POST['country']);
+                            // 'country' can be either a region or a country
+                            if (isCountry($_POST['country'])) {
+                                echo availRegionsOptions();
+                                echo '<option value="none">--------</option>';
+                                echo availCountriesOptions($_POST['country']);
+                            } else {
+                                echo availRegionsOptions($_POST['country']);
+                                echo '<option value="none">--------</option>';
+                                echo availCountriesOptions();
+                            }
                         } else {
                             echo '<option value="none" selected="selected">-Select-</option>';
+                            echo availRegionsOptions();
+                            echo '<option value="none">--------</option>';
                             echo availCountriesOptions();
                         }?>
                         </select>

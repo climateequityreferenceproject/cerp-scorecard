@@ -127,7 +127,7 @@ function getIntlPledge($iso3, $year)
 /**
  * Return an options list consisting of iso3 codes (as option value) and country names (as displayed text)
  * 
- * @param string $iso3 ISO 3-letter code for the country (just to get country name), defaults to null
+ * @param string $iso3 ISO 3-letter code for selected country, defaults to null
  * 
  * @return string HTML-formatted option list
  */
@@ -161,6 +161,68 @@ function availCountriesOptions($iso3=null)
     mysql_free_result($result);
     
     return $html;
+}
+
+/**
+ * Return an options list consisting of GDRs region codes (as option value) and region names (as displayed text)
+ * 
+ * @param string $region Code for selected region, defaults to null
+ * 
+ * @return string HTML-formatted option list
+ */
+function availRegionsOptions($region=null)
+{
+    $db = pledgeDBConnect();
+    
+    $sql = "SELECT pledge.region AS region, name FROM region, pledge WHERE pledge.region = region.region_code AND public = 1 ORDER BY name;";
+    
+    $result = mysql_query($sql, $db);
+    if (!$result) {
+        mysql_close($db);
+        die('Invalid query: ' . mysql_error());
+    }
+    mysql_close($db);
+    
+    $html = "";
+    $keys = array();
+    while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+        if (!in_array($row['region'], $keys, true)) {
+            if ($row['region']===$region) {
+                $sel_string = ' selected="selected"';
+            } else {
+                $sel_string = '';
+            }
+                
+            $html .= '<option value=' . $row['region'] . $sel_string . '>'  . $row['name'] . '</option>';
+            $keys[] = $row['region'];
+        }
+    }
+    mysql_free_result($result);
+    
+    return $html;
+}
+
+/**
+ * Return a boolean saying whether a region/country code refers to a country
+ * 
+ * @param string $code The code to check
+ * 
+ * @return boolean True if it is a country, false otherwise (presumably a region, but not checking)
+ */
+function isCountry($code)
+{
+    $db = pledgeDBConnect();
+    
+    $sql = 'SELECT iso3 FROM country WHERE iso3="' . $code . '";';
+    
+    $result = mysql_query($sql, $db);
+    if (!$result) {
+        mysql_close($db);
+        die('Invalid query: ' . mysql_error());
+    }
+    mysql_close($db);
+    
+    return mysql_num_rows($result) > 0;
 }
 
 /**
