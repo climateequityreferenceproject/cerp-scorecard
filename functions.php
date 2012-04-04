@@ -28,7 +28,7 @@ function getCalcUrl($iso3, $pathway_id)
     } else {
         $db_string = '';
     }
-    return 'http://gdrights.org/calculator/?iso3=' . $iso3 . $db_string;
+    return 'http://gdrights.org/calculator_dev/?iso3=' . $iso3 . $db_string;
 }
 
 /**

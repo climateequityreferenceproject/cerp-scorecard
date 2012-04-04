@@ -5,14 +5,14 @@
     <text>
       &lt;p&gt;Each &lt;em&gt;Equity Scorecard&lt;/em&gt; offers a quick look at a country&amp;#8217;s international mitigation pledge, its formally professed willingness to act to stabilize the global climate. This pledge is expressed as a percentage, which is calculated by comparing the country&amp;#8217;s pledge to its &lt;a href=&quot;http://gdrights.org/scorecard/glossary.php#gloss_fair&quot;&gt;fair share&lt;/a&gt; of the international effort needed to close the gap between the current global emissions pathway and one of the &lt;a href=&quot;http://gdrights.org/scorecard/glossary.php#gloss_path&quot;&gt;global mitigation pathways&lt;/a&gt;. The country&amp;#8217;s fair share is calculated within the &lt;a href=&quot;http://gdrights.org/&quot; target=&quot;_blank&quot;&gt;Greenhouse Development Rights&lt;/a&gt; (GDRs) effort-sharing framework, and is based on the &lt;a href=&quot;http://gdrights.org/scorecard/glossary.php#gloss_responsibility&quot;&gt;responsibility&lt;/a&gt; and &lt;a href=&quot;http://gdrights.org/scorecard/glossary.php#gloss_capacity&quot;&gt;capacity&lt;/a&gt; of all countries to contribute to the general effort of stabilizing the climate.&lt;/p&gt;
       &lt;p&gt;&lt;strong&gt;Click here for &lt;a href=&quot;http://gdrights.org/scorecard/what.php&quot;&gt;more background on what goes into the score&lt;/a&gt;.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Note: at any point, the user may click though to the underlying &lt;a href=&quot;http://gdrights.org/calculator/&quot; target=&quot;_blank&quot;&gt;Greenhouse Development Rights calculator&lt;/a&gt; for much more detail, and to examine and adjust a number of the controlling parameters.&lt;/p&gt;
+&lt;p&gt;Note: at any point, the user may click though to the underlying &lt;a href=&quot;http://gdrights.org/calculator_dev/&quot; target=&quot;_blank&quot;&gt;Greenhouse Development Rights calculator&lt;/a&gt; for much more detail, and to examine and adjust a number of the controlling parameters.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;This system is still under development.&lt;/strong&gt;&lt;/p&gt;
     </text>
   </entry>
   <entry id="gloss_path">
     <label>Level of Global Ambition</label>
     <text>
-      &lt;p&gt;The &lt;a href=&quot;#&quot;&gt;Equity Scorecards&lt;/a&gt; system evaluates national pledges relative to the global effort that will be needed to achieve a target &lt;strong&gt;global mitigation pathway&lt;/strong&gt;. Various target global emissions pathways can be used. They vary by level of ambitiousness, extent of risk, and whether effort is front-loaded or back-loaded, for example. We have chosen to highlight three mitigation pathways in these scorecards. (Many others, including one that&amp;#8217;s more ambitious than the AOSIS pathway, are available in the &lt;a href=&quot;http://gdrights.org/calculator/&quot; target=&quot;_blank&quot;&gt;GDRs calculator&lt;/a&gt;, which underlies the &lt;em&gt;Scorecards&lt;/em&gt; system.&lt;/p&gt;
+      &lt;p&gt;The &lt;a href=&quot;#&quot;&gt;Equity Scorecards&lt;/a&gt; system evaluates national pledges relative to the global effort that will be needed to achieve a target &lt;strong&gt;global mitigation pathway&lt;/strong&gt;. Various target global emissions pathways can be used. They vary by level of ambitiousness, extent of risk, and whether effort is front-loaded or back-loaded, for example. We have chosen to highlight three mitigation pathways in these scorecards. (Many others, including one that&amp;#8217;s more ambitious than the AOSIS pathway, are available in the &lt;a href=&quot;http://gdrights.org/calculator_dev/&quot; target=&quot;_blank&quot;&gt;GDRs calculator&lt;/a&gt;, which underlies the &lt;em&gt;Scorecards&lt;/em&gt; system.&lt;/p&gt;
             &lt;dl&gt;
                 &lt;dt&gt;AOSIS&lt;/dt&gt; 
                 &lt;dd&gt;This is the most ambitious global mitigation pathway with high-level political support. It is drawn from the negotiating position of the Alliance of Small Island States (AOSIS), which requires &amp;#8220;global greenhouse gas emissions to peak by 2015 and decline thereafter&amp;#8221; and &amp;#8220;reductions in global greenhouse gas emissions by more than 85&#37; below 1990 levels by 2050.&amp;#8221;&lt;/dd&gt;
@@ -73,7 +73,7 @@
   </entry>
   <entry id="gloss_more_results">
    <label>More Results for This Country</label>
-   <text>&lt;p&gt;This link directs you to the &lt;a href=&quot;http://gdrights.org/calculator/&quot; target=&quot;_blank&quot;&gt;GDRs calculator&lt;/a&gt;, where you can see and experiment with an analysis that is much more detailed than the one available in this &lt;em&gt;Scorecards&lt;/em&gt; interface.&lt;/p&gt;</text>
+   <text>&lt;p&gt;This link directs you to the &lt;a href=&quot;http://gdrights.org/calculator_dev/&quot; target=&quot;_blank&quot;&gt;GDRs calculator&lt;/a&gt;, where you can see and experiment with an analysis that is much more detailed than the one available in this &lt;em&gt;Scorecards&lt;/em&gt; interface.&lt;/p&gt;</text>
   </entry>
   <entry id="gloss_responsibility">
    <label>Responsibility</label>

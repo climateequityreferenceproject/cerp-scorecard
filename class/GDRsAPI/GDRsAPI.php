@@ -44,7 +44,7 @@ class GDRsAPIException extends Exception
 class GDRsAPI
 {
     private $_db = array();
-    private $_url = "http://gdrights.org/calculator/api/";
+    private $_url = "http://gdrights.org/calculator_dev/api/";
     private static $_instance;
     
     // Decided not to use getters and setters
