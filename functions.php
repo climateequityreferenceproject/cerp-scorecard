@@ -246,17 +246,19 @@ function getMinTargetYear($iso3, $conditional)
 }
 
 /**
- * Get the country name corresponding to an iso3 code
+ * Get the country or region name corresponding to an iso3 code or GDRs region code
  * 
- * @param string $iso3 ISO 3-letter code
+ * @param string $code ISO 3-letter code or GDRs region code
  * 
- * @return string Corresponding country name 
+ * @return string Corresponding country or region name
  */
-function getCountryName($iso3)
+function getCountryName($code)
 {
-    // To protect against SQL injection, force iso3 to be three first characters
-    $iso3_3lett = substr($iso3, 0, 3);
-    $sql = 'SELECT name FROM country WHERE iso3="' . $iso3_3lett . '";';
+    if (isCountry($code)) {
+        $sql = 'SELECT name FROM country WHERE iso3="' . $code . '";';
+    } else {
+        $sql = 'SELECT name FROM region WHERE region_code="' . $code . '";';
+    }
     $result = queryPledgeDB($sql);
     $row = mysql_fetch_array($result, MYSQL_ASSOC);
     mysql_free_result($result);
