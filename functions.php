@@ -97,6 +97,8 @@ function niceNumber($val)
  * @param integer $year The four-digit year
  * 
  * @return array An array with the pledge amount and a string containing notes 
+ * 
+ * @todo Extend to regions
  */
 function getIntlPledge($iso3, $year)
 {
@@ -226,19 +228,23 @@ function isCountry($code)
 }
 
 /**
- * Get the target year for the country and type of pledge; if multiple pledges, get minimum year
+ * Get the target year for the country or region and type of pledge; if multiple pledges, get minimum year
  * 
- * @param string  $iso3        ISO 3-letter code
+ * @param string  $code        ISO 3-letter code or GDRs region code
  * @param boolean $conditional Whether to fetch for conditional pledge or unconditional
  * 
  * @return integer Four-digit year 
  */
-function getMinTargetYear($iso3, $conditional)
+function getMinTargetYear($code, $conditional)
 {
-    // To protect against SQL injection, force conditional to be boolean & iso3 to be three first characters
+    // To protect against SQL injection, force conditional to be boolean
     $conditional_bool = $conditional ? 1 : 0;
-    $iso3_3lett = substr($iso3, 0, 3);
-    $sql = 'SELECT MIN(by_year) AS year FROM pledge WHERE conditional=' . $conditional_bool . ' AND iso3="' . $iso3_3lett . '";';
+    if (isCountry($code)) {
+        $ctryrgn_str = 'iso3="' . $code . '"';
+    } else {
+        $ctryrgn_str = 'region="' . $code . '"';
+    }
+    $sql = 'SELECT MIN(by_year) AS year FROM pledge WHERE conditional=' . $conditional_bool . ' AND ' . $ctryrgn_str . ';';
     $result = queryPledgeDB($sql);
     $row = mysql_fetch_array($result, MYSQL_ASSOC);
     mysql_free_result($result);
@@ -266,28 +272,32 @@ function getCountryRegionName($code)
 }
 
 /**
- * Get all pledge information for a specific country, type of pledge, and year
+ * Get all pledge information for a specific country or region, type of pledge, and year
  * 
- * @param string  $iso3        ISO 3-letter code
+ * @param string  $code        ISO 3-letter code or GDRs region code
  * @param boolean $conditional Whether pledge is conditional or unconditional
  * @param integer $year        4-digit year
  * 
  * @return array Collected information about the pldege 
  */
-function getPledgeInformation($iso3, $conditional, $year)
+function getPledgeInformation($code, $conditional, $year)
 {
     // Protect against injection
     $conditional_bool = $conditional ? 1 : 0;
-    $iso3_3lett = substr($iso3, 0, 3);
     $year_checked = intval($year);
-    $sql = 'SELECT * FROM pledge WHERE conditional=' . $conditional_bool . ' AND iso3="' . $iso3_3lett . '" AND by_year=' . $year_checked . ';';
+    if (isCountry($code)) {
+        $ctryrgn_str = 'iso3="' . $code . '"';
+    } else {
+        $ctryrgn_str = 'region="' . $code . '"';
+    }
+    $sql = 'SELECT * FROM pledge WHERE conditional=' . $conditional_bool . ' AND ' . $ctryrgn_str . ' AND by_year=' . $year_checked . ';';
     $result = queryPledgeDB($sql);
     $row = mysql_fetch_array($result, MYSQL_ASSOC);
     mysql_free_result($result);
     if (!$row) {
         return null;
     } else {
-        $intl_pledge = getIntlPledge($iso3_3lett, $year_checked);
+        $intl_pledge = getIntlPledge($code, $year_checked);
         return $row + $intl_pledge;
     }
 }
