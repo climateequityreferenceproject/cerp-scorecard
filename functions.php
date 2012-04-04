@@ -278,7 +278,7 @@ function getCountryRegionName($code)
  * @param boolean $conditional Whether pledge is conditional or unconditional
  * @param integer $year        4-digit year
  * 
- * @return array Collected information about the pldege 
+ * @return array Collected information about the pldege
  */
 function getPledgeInformation($code, $conditional, $year)
 {
@@ -332,7 +332,15 @@ function getGdrsInformation($pledge_info, $pathway)
     } else {
         $years = $pledge_info['by_year'];
     }
-    $post_array = array('years' => $years, 'countries' => $pledge_info['iso3']);
+    if (isset($pledge_info['iso3'])) {
+        $ctryrgn = $pledge_info['iso3'];
+    } elseif (isset($pledge_info['region'])) {
+        $ctryrgn = $pledge_info['region'];
+    } else {
+        $ctryrgn = null;
+    }
+    // TODO: For regions, it is not getting values for 1990
+    $post_array = array('years' => $years, 'countries' => $ctryrgn);
     $response = GDRsAPI::connection()->post($post_array, $pathway);
     
     foreach ($response as $year_data_obj) {
