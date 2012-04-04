@@ -188,10 +188,15 @@ class GDRsAPI
             $req->addPostData($key, $val);
         }
         
+        // json_decode sometimes duplicating first element -- find out how many we expect
+        $numitems = count(explode(",", $post_array['years'])) * count(explode(",", $post_array['countries']));
+        
         if (!PEAR::isError($req->sendRequest())) {
-             $response = json_decode($req->getResponseBody());
-             // Oddly, the decode procedure seems to duplicate the first element, so get the tail:
-             $response = array_slice($response, 1);
+             $response = (array) json_decode($req->getResponseBody());
+             // Oddly, the decode procedure sometimes seems to duplicate the first element.
+             if (count($response) > $numitems) {
+                $response = array_slice($response, 1);
+             }
         } else {
             throw new GDRsAPIException($req->getMessage());
         }
