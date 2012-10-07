@@ -10,6 +10,10 @@
  * @link http://www.gdrights.org/
  */
 
+if (isset($_GET['debug']) && $_GET['debug'] == 'yes') {
+    ini_set('display_errors',1); 
+    error_reporting(E_ALL);
+}
 require_once "functions.php";
 require_once "scorecard_results.php";
 require_once "class/HWTHelp/HWTHelp.php";

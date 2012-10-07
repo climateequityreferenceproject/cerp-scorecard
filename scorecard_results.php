@@ -11,6 +11,7 @@
  */
 
 session_start();
+require_once('i18n.php');
 require_once 'functions.php';
 require_once "class/HWTHelp/HWTHelp.php";
 
