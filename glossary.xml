@@ -3,10 +3,17 @@
   <entry id="gloss_more_info">
     <label>More information about Climate Equity Scorecards</label>
     <text>
-      &lt;p&gt;Each &lt;em&gt;Equity Scorecard&lt;/em&gt; offers a quick look at a country&amp;#8217;s international mitigation pledge, its formally professed willingness to act to stabilize the global climate. This pledge is expressed as a percentage, which is calculated by comparing the country&amp;#8217;s pledge to its &lt;a href=&quot;http://gdrights.org/scorecard/glossary.php#gloss_fair&quot;&gt;fair share&lt;/a&gt; of the international effort needed to close the gap between the current global emissions pathway and one of the &lt;a href=&quot;http://gdrights.org/scorecard/glossary.php#gloss_path&quot;&gt;global mitigation pathways&lt;/a&gt;. The country&amp;#8217;s fair share is calculated within the &lt;a href=&quot;http://gdrights.org/&quot; target=&quot;_blank&quot;&gt;Greenhouse Development Rights&lt;/a&gt; (GDRs) effort-sharing framework, and is based on the &lt;a href=&quot;http://gdrights.org/scorecard/glossary.php#gloss_responsibility&quot;&gt;responsibility&lt;/a&gt; and &lt;a href=&quot;http://gdrights.org/scorecard/glossary.php#gloss_capacity&quot;&gt;capacity&lt;/a&gt; of all countries to contribute to the general effort of stabilizing the climate.&lt;/p&gt;
-      &lt;p&gt;&lt;strong&gt;Click here for &lt;a href=&quot;http://gdrights.org/scorecard/what.php&quot;&gt;more background on what goes into the score&lt;/a&gt;.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Note: at any point, the user may click though to the underlying &lt;a href=&quot;http://gdrights.org/calculator_dev/&quot; target=&quot;_blank&quot;&gt;Greenhouse Development Rights calculator&lt;/a&gt; for much more detail, and to examine and adjust a number of the controlling parameters.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;This system is still under development.&lt;/strong&gt;&lt;/p&gt;
+      &lt;p&gt;Each &lt;em&gt;Equity Scorecard&lt;/em&gt; offers a quick look at a country&amp;#8217;s international mitigation pledge, its formally professed willingness to act to stabilize the global climate. This pledge is expressed as a percentage, which is calculated by comparing the country&amp;#8217;s pledge to its &amp;#8220;fair share&amp;#8221; of the international effort needed to close the gap between the current global emissions pathway and one of the &lt;a href=&quot;http://gdrights.org/scorecard_dev/glossary.php#gloss_path&quot;&gt;global mitigation pathways&lt;/a&gt;. The country&amp;#8217;s fair share is calculated within the &lt;a href=&quot;http://gdrights.org/&quot;&gt;Greenhouse Development Rights&lt;/a&gt; (GDRs) effort-sharing framework, and is based on the &lt;a href=&quot;http://gdrights.org/scorecard_dev/glossary.php#gloss_responsibility&quot;&gt;responsibility&lt;/a&gt; and &lt;a href=&quot;http://gdrights.org/scorecard_dev/glossary.php#gloss_capacity&quot;&gt;capacity&lt;/a&gt; of all countries to contribute to the general effort of stabilizing the climate.&lt;/p&gt;
+
+&lt;h3&gt;Click here for:&lt;/h3&gt;
+&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;http://gdrights.org/scorecard_dev/how.php&quot;&gt;A quick guide to interpreting these scorecards&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://gdrights.org/scorecard_dev/politics.php&quot;&gt;A few notes about the politics of fair-shares effort sharing&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://gdrights.org/scorecard_dev/warning.php&quot;&gt;Warning: We&amp;#8217;re not scoring national actions, but only national &amp;#8220;pledges&amp;#8221; to act&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note: at any point, the user may click though to the underlying &lt;a href=&quot;http://gdrights.org/calculator_dev/&quot;&gt;Greenhouse Development Rights calculator&lt;/a&gt; for much more detail, and to examine and adjust a number of the controlling parameters.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;This system is still under development&lt;/strong&gt;&lt;/p&gt;
     </text>
   </entry>
   <entry id="gloss_path">
@@ -95,5 +102,11 @@
    <text>&lt;p&gt;The development threshold is in many ways the key to the &lt;a href=&quot;http://gdrights.org&quot; target=&quot;_blank&quot;&gt;Greenhouse Development Rights&lt;/a&gt; framework. It defines an income threshold below which an individual, whatever country they may reside in, is taken to be exempt from international climate-related obligations. This threshold is emphatically not an &amp;#8220;extreme poverty&amp;#8221; line, which is typically defined to be so low ($1 or $2 a day) as to be more properly called a &amp;#8220;destitution line.&amp;#8221; Rather, it is set to be much higher ($20 per person per day, or $7,500 per person per year), which is a bit above a reasonably-defined &amp;#8220;global poverty line.&amp;#8221; That is to say, it reflects a level of welfare that is beyond basic needs but well short of today&amp;#8217;s levels of &amp;#8220;affluent&amp;#8221; consumption.&lt;/p&gt;</text>
   </entry>
   
+  <entry id="gloss_credits">
+   <label>Acknowledgements</label>
+   <text>&lt;p&gt;The Greenhouse Development Rights framework was developed by Tom Athanasiou &amp; Paul Baer of EcoEquity and Sivan Kartha &amp; Eric Kemp-Benedict of the Stockholm Environment Institute. Most of the programming on the GDRs Scorecards and Calculator systems was also done by Eric, with the assistance of Douglas Wang. Tyler Kemp-Benedict did most of the user-interface design and implementation.&lt;/p&gt;
+&lt;p&gt;Continued funding for the GDRs project has been provided by the Stockholm Environment Institute, the Rockefeller Brothers Fund and Christian Aid. Major funding for the Equity Scorecards project was provided by the Minor Foundation for Major Challenges.&lt;/p&gt;
+&lt;p&gt;We&amp;#8217;d also like to thank Kirk Smith, who as far as we can tell invented the Responsibility and Capacity Index. (We thought we had, but in fact Kirk beat us by over a decade!) See Kirk R. Smith, Joel Swisher, and Dilip R Ahuja, &amp;#8220;Who pays (to solve the problem and how  much)?,&amp;#8221; in Peter Hayes and Kirk Smith (eds.), &lt;em&gt;The global greenhouse regime: Who pays?&lt;/em&gt;, United Nations University Press/Earthscan, London, 1993.&lt;/p&gt;</text>
+  </entry>
   
 </hwt_help>

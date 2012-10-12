@@ -27,6 +27,7 @@ if ($_POST && ($_POST['country']!=='none')) {
 } else {
     $html = $resultsDefault;
 }
+
 ?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
@@ -70,11 +71,12 @@ if ($_POST && ($_POST['country']!=='none')) {
     <header>
         <h1>Climate Equity Scorecard <span>BETA</span></h1>
         <h2><span>DO NOT CITE OR PUBLICIZE</span></h2>
-        <h3>Please send feedback on the Climate Equity Scorecard to <a href='m&#97;il&#116;o&#58;f%65&#37;65db%61ck&#64;gdri&#103;&#104;ts%2E%6F&#114;&#103;'>feed&#98;ack&#64;gdrig&#104;&#116;s&#46;org</a></h3>      
+        <p>Please send feedback on the Climate Equity Scorecard to <a href='m&#97;il&#116;o&#58;f%65&#37;65db%61ck&#64;gdri&#103;&#104;ts%2E%6F&#114;&#103;' class="ext">feed&#98;ack&#64;gdrig&#104;&#116;s&#46;org</a></p>      
         <p id="more_info"><?php echo $glossary->getLink('gloss_more_info') ?></p>
     </header>
     <div id="main" role="main" class="group">
         <form name="settings" id="settings" method="post" autocomplete="off" >
+        <div id="settings_wrapper">
             
             <ul>
                 <li class="setting">
@@ -123,37 +125,58 @@ if ($_POST && ($_POST['country']!=='none')) {
                         ?>
                         <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathwayIds['high'] ?>" <?php echo $checkedString['high']; ?> /> <?php echo $api->pathwayLabel['high'] ?></label>
                         <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathwayIds['med'] ?>" <?php echo $checkedString['med']; ?> /> <?php echo $api->pathwayLabel['med'] ?></label>
-                        <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $api->pathwayIds['low'] ?>" <?php echo $checkedString['low']; ?> /> <?php echo $api->pathwayLabel['low'] ?></label>
+                        <!-- No more low[est]-ambition pathway, for now
+                        TODO: fix 3-pathway workflow to 2-pathway workflow, with labels stored in API and not overridden here -->
                     </fieldset>
                 </li>
                 <li class="setting">
                      <fieldset id="pledge_type">
                          <legend><?php echo $glossary->getLink('gloss_pledge');?></legend>
                         <?php 
+                        $pledge_info = getPledgeInformation($_POST['country'], $_POST['conditional'], $params['min_target_year']);
                         if (isset($_POST['conditional'])) {
                             if ($_POST['conditional']) {
                                 $checkedString['yes'] = 'checked="checked"';
                                 $checkedString['no'] = '';
+                                if (!$pledge_info) {
+                                    $disabledString['yes'] = 'disabled="disabled"';
+                                } else {
+                                    $disabledString['yes'] = '';
+                                }                          
                             } else {
                                 $checkedString['no'] = 'checked="checked"';
                                 $checkedString['yes'] = '';
+                                if (!$pledge_info) {
+                                    $disabledString['no'] = 'disabled="disabled"';
+                                } else {
+                                    $disabledString['no'] = '';
+                                }                          
                             }
                         } else {
                             $checkedString['no'] = 'checked="checked"';
                             $checkedString['yes'] = '';
                         }
+                        // TODO: Disable choice if unavailable
+                        // if selected country/group does NOT have a [conditional/unconditional] pledge, add disabled="disabled"
+                        
                         ?>                         
-                         <label for="conditional-no"><input type="radio" name="conditional" id="conditional-no" value="0" <?php echo $checkedString['no']; ?> /> Unconditional</label>
-                         <label for="conditional-yes"><input type="radio" name="conditional" id="conditional-yes" value="1" <?php echo $checkedString['yes']; ?> /> Conditional</label>
+                         <label for="conditional-no"><input type="radio" name="conditional" id="conditional-no" value="0" 
+                        <?php echo $checkedString['no']; ?> <?php echo $disabledString['no']; ?> /> Unconditional</label>
+                         
+                         <label for="conditional-yes"><input type="radio" name="conditional" id="conditional-yes" value="1" 
+                        <?php echo $checkedString['yes']; ?> <?php echo $disabledString['yes']; ?>/> Conditional</label>
                      </fieldset>
                 </li>
             </ul>
+
             <input type="submit" value="get score" id="submit" />
-        </form>
+
+        </div><!-- end of #settings -->
         
         <div id="results" class="group">
             <?php echo $html; ?>
         </div> <!--! end of #results -->
+        </form>
         
         <div id="popup"></div>
         
@@ -168,7 +191,7 @@ if ($_POST && ($_POST['country']!=='none')) {
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 
-  <!-- Grab dialog-optimmized jQueryUI locally if possible, fall back to Google CDN's complete jQueryUI, with a protocol relative URL -->
+  <!-- Grab dialog-optimized jQueryUI locally if possible, fall back to Google CDN's complete jQueryUI, with a protocol relative URL -->
   <script src="js/libs/jquery-ui-1.8.16.custom.min.js"></script>
   <script>window.ui || document.write('<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"><\/script>')</script>
 
@@ -176,9 +199,8 @@ if ($_POST && ($_POST['country']!=='none')) {
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
   <script src="js/scorecard.js"></script>
-  <!-- <script src="js/jqModal.js"></script>-->
+  <script src="js/libs/jquery.pageslide.min.js"></script>
   <!-- end scripts-->
-
 	
   <!-- Change UA-XXXXX-X to be your site's ID -->
   <script>

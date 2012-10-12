@@ -131,19 +131,22 @@ button {  width: auto; overflow: visible; }
  */
  
 /* layout ***************************************/
-#container {margin:0.5em auto; min-width:720px; width:90%;}
-header {padding:0.5em 0 1em 0;}
+/* #container {margin:0.5em auto; min-width:720px; width:90%;} */
+#container {margin:0.5em auto; min-width:800px; padding:0 3em; width:60em;}
+header {padding:0.5em 0 1.5em 0;}
 
-#settings {float:left; margin:0 30px 1em 0; padding: 0 13px 22px 13px; min-width:180px; width:30%;}
+/* #settings_wrapper {float:left; margin:0 30px 1em 0; padding: 0 13px 22px 13px; min-width:180px; width:30%;} */
+#settings_wrapper {float:left; margin:0 2em 1em 0; padding: 0 1em 1em 1em; width:14em;}
 fieldset {padding:0 0 0.5em;}
-legend {padding-top:1em;}
+legend {padding-top:0.75em;}
 label {display:block; padding:0 0.75em 0 0.25em;}
 select {margin-top:0.25em;}
 #submit {margin:1.75em auto 0;}
 
-#results {float:left; padding:0 20px 1.5em 20px; min-width:220px; width:50%;}
+/* #results {float:left; padding:0 20px 1.5em 20px; min-width:220px; width:50%;} */
+#results {float:left; padding:0 2em 1.5em 2em; width:32em;}
 #summary {margin:1.5em 0 0.25em;}
-footer {margin-top:2em; padding: 0.5em 13px 1.5em 13px; width:60%}
+footer {margin-top:1.5em; padding: 0.25em 1em 1em 1em; width:35em}
 
 #graph {width:100%}
 /* ids for the first three are only for layout-test.html, not in live scorecard, where only classes are used */
@@ -159,14 +162,13 @@ footer {margin-top:2em; padding: 0.5em 13px 1.5em 13px; width:60%}
 
 img.left {float:left; margin-right:2em;}
 img.right {float:right; margin-left:2em;}
-
+p.right {text-align:right;}
 
 /* color ***************************************/
 body {background:#fff;}
-body, select, input, textarea {color:#444;}
+body, select, input, textarea {color:#666;}
 h1, h2, h3, h4, #country_name, #commitment,
-legend, legend a, legend a:active, legend a:visited {color:#4d59a4;}
-/*form {background:#e6ebe6;} */
+legend/*, legend a, legend a:active, legend a:visited */ {color:#4d59a4;}
 fieldset {background:#fff;}
 h1 span, h2 span {color:#999; letter-spacing:0.035em;}
 
@@ -182,30 +184,32 @@ a:link {-webkit-tap-highlight-color:#dd6e4c;}
 .dom {background:#8ebd7f;}
 .gap {background:#ffce73;}
 #results {border:6px solid #ffce73;}
-#settings, footer {border:6px solid #e6ebe6;}
-#settings, #results, footer {-moz-border-radius:15px; border-radius:15px;}
+#settings_wrapper, footer {border:6px solid #e6ebe6;}
+#settings_wrapper, #results, footer {-moz-border-radius:15px; border-radius:15px;}
 #commitment.negative {color:#dd6e4c; white-space:nowrap;}
 
 .glossary #main, .docs #main {border-top:6px solid #ffce73;}
 .glossary p {margin-top:0.75em;}
 .glossary h2, .docs h2 {margin-top:1.5em;}
 
-a, a:active, a:visited, 
-#more_options span.what a, #more_options span.what a:active, #more_options span.what a:visited,
-.glossary nav a, .glossary nav a:active, .glossary nav a:visited {color:#999;}
-
+a, a:active, a:visited /*, 
+.glossary nav a, .glossary nav a:active, .glossary nav a:visited,
 legend a, legend a:active, legend a:visited,
 h3 a, h3 a:active, h3 a:visited,
-.docs header h1 a, .docs header h1 a:active, .docs header h1 a:visited,
-.glossary header h1 a, .glossary header h1 a:active, .glossary header h1 a:visited {color:#6b87c3;}
-
-.glossary a, .glossary a:active, .glossary a:visited,
 .docs a, .docs a:active, .docs a:visited,
-#more_options a, #more_options a:active, #more_options a:visited,
+.docs header h1 a, .docs header h1 a:active, .docs header h1 a:visited,
+.glossary a, .glossary a:active, .glossary a:visited,
+.glossary header h1 a, .glossary header h1 a:active, .glossary header h1 a:visited,
 .source a, .source a:active, .source a:visited, 
-footer a, footer a:active, footer a:visited {color:#a23b1e;}
+footer a, footer a:active, footer a:visited */ {color:#6b87c3;}
 
-a:hover, legend a:hover, .glossary a:hover, .docs a:hover, #more_options a:hover, #more_options span.what a:hover, .source a:hover, .glossary header h1 a:hover, .glossary nav a:hover, footer a:hover, .docs header h1 a:hover, h3 a:hover {color:#dd6e4c;}
+#more_options a, #more_options a:active, #more_options a:visited {color:#a23b1e;}
+
+footer a, footer a:active, footer a:visited,
+a.more, a.more:active, a.more:visited,
+a.ext, a.ext:active, a.ext:visited {color:#666;}
+
+a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover /*, legend a:hover, .glossary a:hover, .docs a:hover, #more_options a:hover, .source a:hover, .glossary header h1 a:hover, .glossary nav a:hover, .docs header h1 a:hover, h3 a:hover */ {color:#dd6e4c;}
 
 /* typography ***************************************/
 
@@ -239,8 +243,9 @@ h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {font-family:ProximaNovaBold
 
 h1 {font-size:250%; line-height:1;}
 h2 {font-size:150%; margin-top:0.75em;}
-/*h2#more_options {font-size:125%}*/
-#summary {font-size:120%; line-height:30px;}
+
+/* #summary {font-size:120%; line-height:30px;} */
+#summary {line-height:24px;}
 .docs h1, .docs h2, .docs h3, h4 {margin-top:1em;}
 .docs h1 {margin-bottom:0.25em;}
 .docs h2 {font-size:180%;}
@@ -248,23 +253,23 @@ h2 {font-size:150%; margin-top:0.75em;}
 header h1, header h2, .docs header h1, .docs header h2 {margin-top:0;}
 
 p {margin-top:1.2em;}
-#key p {line-height:1; margin-top:0.5em;}
+#key p {margin-top:0.5em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
 .docs p {margin-top:0.5em;}
+#details {font-size:85%;}
 #details p.first {margin-top:0;}
 .docs p.first {margin-top:2em;}
 header p {margin-top:0.5em;}
-p.source {margin-top:0.25em;}
+/* p.source {margin-top:0.25em;} */
 
 #country_name {font-size:360%;}
-#commitment {font-size:200%;}
+#commitment {font-size:150%;}
 #summary #more_options {font-size:65%; line-height:0.5; margin-top:2em;}
 legend {font-size:125%;}
 .source {font-size:80%;}
-.what {font-size:60%;}
 
-a, a:active, a:visited {border-bottom:1px solid transparent; text-decoration: none;}
-a:hover {border-bottom:1px dotted #036;}
+a, a:active, a:visited {border-bottom-width:1px; border-bottom-style:dotted; text-decoration: none;}
+a:hover {border-bottom-style:solid;}
 
 .glossary #container, .docs #container {font-size:90%;}
 dl {
@@ -291,10 +296,11 @@ dd {
 	width: 80%;
 }
 .glossary div {clear:both;}
-footer {font-size:80%;}
+footer div {font-size:80%;}
+footer div div {font-size:100%;}
 
 /* miscellaneous ***************************************/
-a.def_link {background:url(../img/info-icon.gif) center right no-repeat; padding-right: 16px;}
+/* a.def_link {background:url(../img/info-icon.gif) center right no-repeat; padding-right: 16px;} */
 #fair-share {background:transparent url(../img/arrow-lr.gif) 100% 85% no-repeat; margin:0; padding:0 12px 5px 0; text-align:right;}
 
 #submit {display:block; text-indent:-5000px; width:200px!important; height:47px; background-image:url(../img/send-button-sprite.png)!important; background-repeat:no-repeat; border:0px!important; padding:0px!important; }
@@ -306,6 +312,28 @@ a.def_link {background:url(../img/info-icon.gif) center right no-repeat; padding
     margin:300px 50% auto;
     position:fixed;
     z-index:3000;
+}
+#pageslide {
+    /* These styles MUST be included. Do not change. */
+    display:none;
+    position:absolute;
+    position:fixed;
+    top:0;
+    height:100%;
+    z-index:999999;
+    
+    /* Specify the width of your pageslide here */
+    width:14em;
+    padding:1em 1em 1em;
+    overflow:scroll;
+    
+    /* These styles are optional, and describe how the pageslide will look */
+    background-color:#fff;
+    font-size:80%;
+    
+    -webkit-box-shadow: 0 0 5px 5px #ccc;
+    -moz-shadow: 0 0 5px 5px #ccc;
+    box-shadow: 0 0 5px 5px #ccc;
 }
 
 /****************************************************************************************/
@@ -357,16 +385,19 @@ a.def_link {background:url(../img/info-icon.gif) center right no-repeat; padding
 
 /* Grade-A Mobile Browsers (Opera Mobile, Mobile Safari, Android Chrome)
    consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
-@media screen and (max-device-width: 480px) {
-    body {line-height:1.2;}
-    #container, .glossary #container, .docs #container, header, footer, #settings, #results, dl, dt, dd {float:none; margin-left:0; margin-right:0; min-width:140px; width:auto;}
-    #container {padding:0 2% 0 2%;}
+ @media screen and (max-device-width: 480px) { 
+    body {font-size:small; line-height:1.4;}
+    #container, .glossary #container, .docs #container, header, footer, #settings_wrapper, #results, dl, dt, dd {float:none; margin-left:0; margin-right:0; min-width:60px; width:auto;}
+    #container {padding:0 1em;}
+    #summary {line-height:18px;}
     #results {border:none; padding:0;}
     dd {border-top:none; padding-top:0;}
+    #pageslide {line-height:1.2; padding-top:1em; width:30%;}
+    h1 span, h2 span {font-size:85%; letter-spacing:0;}
 
   /* Uncomment if you don't want iOS and WinMobile to mobile-optimize the text for you: j.mp/textsizeadjust */
   /* html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
-}
+ }
 
 
 /**

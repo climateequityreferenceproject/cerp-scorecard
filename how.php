@@ -10,7 +10,9 @@
  * @link http://www.gdrights.org/
  */
 
+require_once "functions.php";
 require_once "class/HWTHelp/HWTHelp.php";
+$glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
 
 ?>
 <!doctype html>
