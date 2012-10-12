@@ -303,6 +303,61 @@ function getPledgeInformation($code, $conditional, $year)
 }
 
 /**
+ * Return Boolean saying whether there is a conditional pledge for a specific country or region and year
+ * 
+ * @param string  $code        ISO 3-letter code or GDRs region code
+ * @param integer $year        4-digit year
+ * 
+ * @return Boolean
+ */
+function hasConditionalPledge($code, $year=null) 
+{
+    // Protect against injection
+    if (isCountry($code)) {
+        $ctryrgn_str = 'iso3="' . $code . '"';
+    } else {
+        $ctryrgn_str = 'region="' . $code . '"';
+    }
+    if ($year) {
+        $year_checked = intval($year);
+        $sql = 'SELECT * FROM pledge WHERE conditional=1 AND ' . $ctryrgn_str . ' AND by_year=' . $year_checked . ';';
+    } else {
+        $sql = 'SELECT * FROM pledge WHERE conditional=1 AND ' . $ctryrgn_str;
+    }
+    
+    return mysql_num_rows(queryPledgeDB($sql)) != 0;
+}
+
+
+/**
+ * Return Boolean saying whether there is an unconditional pledge for a specific country or region and year
+ * 
+ * @param string  $code        ISO 3-letter code or GDRs region code
+ * @param integer $year        4-digit year
+ * 
+ * @return Boolean
+ */
+function hasUnconditionalPledge($code, $year=null) 
+{
+    // Protect against injection
+    if (isCountry($code)) {
+        $ctryrgn_str = 'iso3="' . $code . '"';
+    } else {
+        $ctryrgn_str = 'region="' . $code . '"';
+    }
+    if ($year) {
+        $year_checked = intval($year);
+        $sql = 'SELECT * FROM pledge WHERE conditional=0 AND ' . $ctryrgn_str . ' AND by_year=' . $year_checked . ';';
+    } else {
+        $sql = 'SELECT * FROM pledge WHERE conditional=0 AND ' . $ctryrgn_str;
+    }
+    
+    return mysql_num_rows(queryPledgeDB($sql)) != 0;
+}
+
+
+
+/**
  * Major workhorse function: Evaluate the pledge against the GDRs requirement
  * 
  * @param array   $pledge_info Array of pledge information returned by getPledgeInformation

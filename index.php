@@ -133,31 +133,44 @@ if ($_POST && ($_POST['country']!=='none')) {
                      <fieldset id="pledge_type">
                          <legend><?php echo $glossary->getLink('gloss_pledge');?></legend>
                         <?php 
-                        $pledge_info = getPledgeInformation($_POST['country'], $_POST['conditional'], $params['min_target_year']);
-                        if (isset($_POST['conditional'])) {
-                            if ($_POST['conditional']) {
-                                $checkedString['yes'] = 'checked="checked"';
-                                $checkedString['no'] = '';
-                                if (!$pledge_info) {
-                                    $disabledString['yes'] = 'disabled="disabled"';
-                                } else {
-                                    $disabledString['yes'] = '';
-                                }                          
-                            } else {
-                                $checkedString['no'] = 'checked="checked"';
-                                $checkedString['yes'] = '';
-                                if (!$pledge_info) {
-                                    $disabledString['no'] = 'disabled="disabled"';
-                                } else {
-                                    $disabledString['no'] = '';
-                                }                          
-                            }
-                        } else {
-                            $checkedString['no'] = 'checked="checked"';
+                        //$pledge_cond = false; // temporarily hard-coded
+                        //$pledge_uncond = true; // temporarily hard-coded
+                        $pledge_cond = getPledgeInformation($_POST['country'], 1, $params['min_target_year']);
+                        $pledge_uncond = getPledgeInformation($_POST['country'], 0, $params['min_target_year']);
+                        
+                        if ($pledge_cond and !$pledge_uncond) {
+                            $checkedString['yes'] = 'checked="checked"';
+                            $disabledString['yes'] = '';
+                            $checkedString['no'] = '';
+                            $disabledString['no'] = 'disabled="disabled"';
+                        } else if (!$pledge_cond and $pledge_uncond) {
                             $checkedString['yes'] = '';
+                            $disabledString['yes'] = 'disabled="disabled"';
+                            $checkedString['no'] = 'checked="checked"';
+                            $disabledString['no'] = '';
+                        } else if ($pledge_cond and $pledge_uncond) {
+                            if (isset($_POST['conditional'])) {
+                                if ($_POST['conditional']) {
+                                    $checkedString['yes'] = 'checked="checked"';
+                                    $disabledString['yes'] = '';
+                                    $checkedString['no'] = '';
+                                    $disabledString['no'] = '';
+                                } else {
+                                    $checkedString['yes'] = '';
+                                    $disabledString['yes'] = '';
+                                    $checkedString['no'] = 'checked="checked"';
+                                    $disabledString['no'] = '';
+                                }
+                            } else {
+                                $checkedString['yes'] = '';
+                                $disabledString['yes'] = '';
+                                $checkedString['no'] = 'checked="checked"';
+                                $disabledString['no'] = '';
+                            }
                         }
-                        // TODO: Disable choice if unavailable
-                        // if selected country/group does NOT have a [conditional/unconditional] pledge, add disabled="disabled"
+                      // TODO: Disable choice if unavailable
+                      // if selected country/group does NOT have a [conditional/unconditional] pledge, 
+                      // add disabled="disabled" to the unavailable option and check the one that is available
                         
                         ?>                         
                          <label for="conditional-no"><input type="radio" name="conditional" id="conditional-no" value="0" 
