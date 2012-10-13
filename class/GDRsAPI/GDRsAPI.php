@@ -50,16 +50,14 @@ class GDRsAPI
     // Decided not to use getters and setters
     public $pathwayLabel = array(
         'low' => 'LOW AMBITION PATHWAY (G-8)', // G-8
-        'med' => 'MEDIUM AMBITION PATHWAY (IPCC-likely)', // IPCC 2°C Likely (barely) for now
+        'med' => 'MEDIUM AMBITION PATHWAY (CAT-2.0)', // Climate Action Tracker 2.0
         'high' => 'HIGH AMBITION PATHWAY (AOSIS2)' // AOSIS2
-     //   'low' => '2°C coin flip',
-     //   'med' => '2°C marker pathway', // IPCC 2°C Likely (barely) for now
-     //   'high' => '1.5°C marker pathway' // AOSIS
     );
     public $pathwayIds = array();
     public $pathway_default = 'high';
     
-    private $_pathway_array = array('low'=>'G-8', 'med'=>'IPCC-likely(barely)', 'high'=>'AOSIS2');
+    private $_pathway_array = array('low'=>'G-8', 'med'=>'CAT-2.0', 'high'=>'AOSIS2');
+    // TODO allow authors to identify in pathway db which are used here
     
     /**
      * Build a URL for a "GET" call to the API

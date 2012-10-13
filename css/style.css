@@ -163,6 +163,7 @@ footer {margin-top:1.5em; padding: 0.25em 1em 1em 1em; width:35em}
 img.left {float:left; margin-right:2em;}
 img.right {float:right; margin-left:2em;}
 p.right {text-align:right;}
+.note { border:1px solid #999; margin:0.5em 0; padding:0.5em; }
 
 /* color ***************************************/
 body {background:#fff;}
@@ -210,6 +211,8 @@ a.more, a.more:active, a.more:visited,
 a.ext, a.ext:active, a.ext:visited {color:#666;}
 
 a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover /*, legend a:hover, .glossary a:hover, .docs a:hover, #more_options a:hover, .source a:hover, .glossary header h1 a:hover, .glossary nav a:hover, .docs header h1 a:hover, h3 a:hover */ {color:#dd6e4c;}
+
+.disabled {color:#aaa;}
 
 /* typography ***************************************/
 

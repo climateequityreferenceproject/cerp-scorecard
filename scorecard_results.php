@@ -41,8 +41,7 @@ $resultsDefault = '<p>How do countries&#8217; emission-reduction pledges &#8211;
 
 function getResults() {
     $retval = print_r($_POST, true);
-    $retval .= '<br />';
-    $retval .= print_r($pledge_info, true);
+    $retval .= '<br /><br />';
     
     if (!isset($_POST['scoreview'])) {
         $scoreview = 'scorebasic';
