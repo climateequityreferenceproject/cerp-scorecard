@@ -149,25 +149,26 @@ class GDRsAPI
      * 
      * @return string API's label for the user database
      */
-    private function _getDB($pwId)
+    private function _getDB($pwId, $kab)
     {
         if (!in_array($pwId, $this->pathwayIds)) {
             throw new GDRsAPIException('Pathway id "' . $pwId . '" is not defined');
         }
         // Do we have it already?
-        if (!(isset($this->_db[$pwId]))) {
+        $key = $pwID . ':' . $kab;
+        if (!(isset($this->_db[$key]))) {
             // Have we stored it in a session variable?
             if (isset($_SESSION['gdrs_db'])) {
                 $this->_db = $_SESSION['gdrs_db'];
             }
             // Does a database exist for this pathway?
-            if (!(isset($this->_db[$pwId])) || !$this->get('calc_ver', $pwId)) {
+            if (!(isset($this->_db[$key])) || !$this->get('calc_ver', $pwId)) {
                 $response = $this->get('new_db');
-                $this->_db[$pwId] = $response['db'];
+                $this->_db[$key] = $response['db'];
             }
         }
         $_SESSION['gdrs_db'] = $this->_db;
-        return $this->_db[$pwId];
+        return $this->_db[$key];
     }
     
     /**
@@ -178,12 +179,28 @@ class GDRsAPI
      * 
      * @return array Result of the POST command to the API as a decoded JSON-encoded array 
      */
-    public function post($post_array, $pwId)
+    public function post($post_array, $pwId, $kab='none')
     {
+        switch ($kab) {
+            case 'none':
+                $post_array['use_kab'] = 0;
+                $post_array['kab_only_ratified'] = 0;
+                break;
+            case 'all':
+                $post_array['use_kab'] = 1;
+                $post_array['kab_only_ratified'] = 0;
+                break;
+            case 'ratified':
+                $post_array['use_kab'] = 1;
+                $post_array['kab_only_ratified'] = 1;
+                break;
+            default:
+                throw new GDRsAPIException('Value for kab parameter "' . $kab .'" not valid: Use "none", "all", or "ratified"');
+        }
         $req =& new HTTP_Request($this->_url);
         $req->setMethod(HTTP_REQUEST_METHOD_POST);
         // If pwId not defined, next line will throw an exception
-        $db = $this->_getDB($pwId);
+        $db = $this->_getDB($pwId, $kab);
         
         $req->addPostData("emergency_path", $pwId);
         $req->addPostData("db", $db);
