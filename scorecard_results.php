@@ -69,8 +69,7 @@ function getResults()
 
     $pledge_info = getPledgeInformation($_POST['country'], $_POST['conditional'], $params['min_target_year']);
     $gdrs_info = getGdrsInformation($pledge_info, $pathway_id);
-   // JUST TESTING for now--but this should be the real, no-KAB score
-    print_r($gdrs_info);
+   // This should be the real, no-KAB score
     $score_no_kab = niceNumber($gdrs_info['score']);
     
     
