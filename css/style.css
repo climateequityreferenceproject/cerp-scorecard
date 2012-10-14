@@ -148,12 +148,12 @@ select {margin-top:0.25em;}
 #summary {margin:1.5em 0 0.25em;}
 footer {margin-top:1.5em; padding: 0.25em 1em 1em 1em; width:35em}
 
-#graph {width:100%}
+.graph {width:100%}
 /* ids for the first three are only for layout-test.html, not in live scorecard, where only classes are used */
 #international, #domestic, #gap, 
-#graph .intl, #graph .dom, #graph .gap {float:left; height:30px; margin-bottom:10px;}
-#graph {overflow:hidden; position:relative;}
-#graph img {left:0; position:absolute; top:20px; width:100%; z-index:-200;}
+.graph .intl, .graph .dom, .graph .no_kab, .graph .kab, .graph .gap {float:left; height:30px; margin-bottom:10px;}
+.graph {overflow:hidden; position:relative;}
+.graph img {left:0; position:absolute; top:20px; width:100%; z-index:-200;}
 
 #key {clear:both; margin-top:0.5em;}
 .glossary #container, .docs #container {min-width:500px; max-width:900px;}
@@ -168,7 +168,7 @@ p.right {text-align:right;}
 /* color ***************************************/
 body {background:#fff;}
 body, select, input, textarea {color:#666;}
-h1, h2, h3, h4, #country_name, #commitment,
+h1, h2, h3, h4, #country_name, #commitment, .score,
 legend/*, legend a, legend a:active, legend a:visited */ {color:#4d59a4;}
 fieldset {background:#fff;}
 h1 span, h2 span {color:#999; letter-spacing:0.035em;}
@@ -180,9 +180,10 @@ h1 span, h2 span {color:#999; letter-spacing:0.035em;}
 /* j.mp/webkit-tap-highlight-color */
 a:link {-webkit-tap-highlight-color:#dd6e4c;}
 
-#graph {border-left:2px solid #999;}
+/*.graph {border-left:2px solid #999;}*/
 .intl {background:#707ac9;}
-.dom {background:#8ebd7f;}
+.dom, .no_kab, .kab {background:#8ebd7f;}
+.score {color:#8ebd7f;}
 .gap {background:#ffce73;}
 #results {border:6px solid #ffce73;}
 #settings_wrapper, footer {border:6px solid #e6ebe6;}
@@ -240,7 +241,7 @@ a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover /*, le
 }
 
 body {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
-h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, legend {font-family:ProximaNovaBold, "Helvetica Neue", Helvetica, Arial, sans-serif;}
+h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, .score, legend {font-family:ProximaNovaBold, "Helvetica Neue", Helvetica, Arial, sans-serif;}
 em {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif; font-style:italic;}
 h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {font-family:ProximaNovaBoldItalic, "Helvetica Neue", Helvetica, Arial, sans-serif;}
 
@@ -259,7 +260,7 @@ p {margin-top:1.2em;}
 #key p {margin-top:0.5em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
 .docs p {margin-top:0.5em;}
-#details {font-size:85%;}
+#details, #key {font-size:85%;}
 #details p.first {margin-top:0;}
 .docs p.first {margin-top:2em;}
 header p {margin-top:0.5em;}
@@ -267,6 +268,7 @@ header p {margin-top:0.5em;}
 
 #country_name {font-size:360%;}
 #commitment {font-size:150%;}
+.score {font-size:200%;}
 #summary #more_options {font-size:65%; line-height:0.5; margin-top:2em;}
 legend {font-size:125%;}
 .source {font-size:80%;}

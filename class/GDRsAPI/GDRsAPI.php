@@ -49,9 +49,9 @@ class GDRsAPI
     
     // Decided not to use getters and setters
     public $pathwayLabel = array(
-        'low' => 'LOW AMBITION PATHWAY (G-8)', // G-8
-        'med' => 'MEDIUM AMBITION PATHWAY (CAT-2.0)', // Climate Action Tracker 2.0
-        'high' => 'HIGH AMBITION PATHWAY (AOSIS2)' // AOSIS2
+        'low' => 'LOW AMBITION', // G-8
+        'med' => '2C', // Climate Action Tracker 2.0
+        'high' => '1.5C' // AOSIS2
     );
     public $pathwayIds = array();
     public $pathway_default = 'high';

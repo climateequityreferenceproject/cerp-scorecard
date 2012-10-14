@@ -23,7 +23,8 @@ $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
 $api = GDRsAPI::connection();
 
 if ($_POST && ($_POST['country']!=='none')) {    
-    $html = getResults();
+    //$html = getResults();
+    $html = resultsTest();
 } else {
     $html = $resultsDefault;
 }
@@ -81,7 +82,7 @@ if ($_POST && ($_POST['country']!=='none')) {
             <ul>
                 <li class="setting">
                     <fieldset>
-                        <legend>Country</legend>
+                        <legend>Country or Region</legend>
                         <select id="country" name="country">
                         <?php
                         if (isset($_POST['country']) && ($_POST['country']!=='none')) {
@@ -124,8 +125,8 @@ if ($_POST && ($_POST['country']!=='none')) {
                             $checkedString['high'] = 'checked="checked"';
                         }
                         ?>
-                        <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathwayIds['high'] ?>" <?php echo $checkedString['high']; ?> /> <?php echo $api->pathwayLabel['high'] ?></label>
-                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathwayIds['med'] ?>" <?php echo $checkedString['med']; ?> /> <?php echo $api->pathwayLabel['med'] ?></label>
+                        <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathwayIds['high'] ?>" <?php echo $checkedString['high']; ?> /> <?php echo $api->pathwayLabel['high'] ?> marker pathway</label>
+                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathwayIds['med'] ?>" <?php echo $checkedString['med']; ?> /> <?php echo $api->pathwayLabel['med'] ?> marker pathway</label>
                         <!-- No more low[est]-ambition pathway, for now
                         TODO: fix 3-pathway workflow to 2-pathway workflow, with labels stored in API and not overridden here -->
                     </fieldset>

@@ -510,6 +510,9 @@ function drawBarsGetRemainder($pledge, $class)
  * 
  * @return string The HTML to render
  */
+// TODO determine whether drawGraph needs to continue to accommodate international pledges,
+// and if not, change function to simplify arguments
+
 function drawGraph($pledge1,$class1,$pledge2,$class2, $show_pledge1 = true)
 {
     if ($show_pledge1) {
