@@ -52,7 +52,6 @@ require_once "class/HWTHelp/HWTHelp.php";
     <div id="container" class="group">
     <header>
         <h1><a href="http://gdrights.org/scorecard/">Climate Equity Scorecard</a> Glossary</h1>
-        <!--<p id="more_info"><a href="#">more information about climate equity scorecards</a> &#187;</p>-->
     </header>
     <div id="main" role="main" class="group">
         <!-- TODO generate this list of glossary terms from XML file -->

@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <hwt_help>
   <entry id="gloss_more_info">
-    <label>More information about Climate Equity Scorecards</label>
+    <!--<label>More information about Climate Equity Scorecards</label>-->
+    <label>About the Scorecards</label>
     <text>
       &lt;p&gt;Each &lt;em&gt;Equity Scorecard&lt;/em&gt; offers a quick look at a country&amp;#8217;s international mitigation pledge, its formally professed willingness to act to stabilize the global climate. This pledge is expressed as a percentage, which is calculated by comparing the country&amp;#8217;s pledge to its &amp;#8220;fair share&amp;#8221; of the international effort needed to close the gap between the current global emissions pathway and one of the &lt;a href=&quot;http://gdrights.org/scorecard_dev/glossary.php#gloss_path&quot;&gt;global mitigation pathways&lt;/a&gt;. The country&amp;#8217;s fair share is calculated within the &lt;a href=&quot;http://gdrights.org/&quot;&gt;Greenhouse Development Rights&lt;/a&gt; (GDRs) effort-sharing framework, and is based on the &lt;a href=&quot;http://gdrights.org/scorecard_dev/glossary.php#gloss_responsibility&quot;&gt;responsibility&lt;/a&gt; and &lt;a href=&quot;http://gdrights.org/scorecard_dev/glossary.php#gloss_capacity&quot;&gt;capacity&lt;/a&gt; of all countries to contribute to the general effort of stabilizing the climate.&lt;/p&gt;
 

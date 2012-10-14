@@ -72,8 +72,8 @@ if ($_POST && ($_POST['country']!=='none')) {
     <header>
         <h1>Climate Equity Scorecard <span>BETA</span></h1>
         <h2><span>DO NOT CITE OR PUBLICIZE</span></h2>
-        <p>Please send feedback on the Climate Equity Scorecard to <a href='m&#97;il&#116;o&#58;f%65&#37;65db%61ck&#64;gdri&#103;&#104;ts%2E%6F&#114;&#103;' class="ext">feed&#98;ack&#64;gdrig&#104;&#116;s&#46;org</a></p>      
-        <p id="more_info"><?php echo $glossary->getLink('gloss_more_info') ?></p>
+        <!--<p>Please send feedback to <a href='m&#97;il&#116;o&#58;f%65&#37;65db%61ck&#64;gdri&#103;&#104;ts%2E%6F&#114;&#103;' class="ext">feed&#98;ack&#64;gdrig&#104;&#116;s&#46;org</a></p>-->      
+        <p><?php echo $glossary->getLink('gloss_more_info') ?> &nbsp;|&nbsp; <a href='m&#97;il&#116;o&#58;f%65&#37;65db%61ck&#64;gdri&#103;&#104;ts%2E%6F&#114;&#103;' >feed&#98;ack&#64;gdrig&#104;&#116;s&#46;org</a></p>
     </header>
     <div id="main" role="main" class="group">
         <form name="settings" id="settings" method="post" autocomplete="off" >
@@ -109,7 +109,6 @@ if ($_POST && ($_POST['country']!=='none')) {
                 <li class="setting">
                     <fieldset id="pathway">
                         <legend><?php echo $glossary->getLink('gloss_path');?></legend>
-                        <small>Which pathways should actually be used here, and what should they be called?</small>
                         <?php
                         $checkedString = array();
                         if (isset($_POST['ambition'])) {

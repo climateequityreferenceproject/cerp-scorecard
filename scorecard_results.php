@@ -18,15 +18,20 @@ require_once 'i18n.php';
 require_once 'functions.php';
 require_once "class/HWTHelp/HWTHelp.php";
 
-//if (!isset($glossary)) {
-//    $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
-//}
+if (!isset($glossary)) {
+    $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
+}
+$resultsDefault = '<p>How do countries&#8217; emission-reduction pledges &#8211; their international promises &#8211; compare to the efforts they should be making, their ' . $glossary->getLink('gloss_fair', true) . ' of the global effort needed to limit dangerous and avoidable climate change? <strong>This is the basic question that this Scorecard tries to answer.</strong></p>
+        <p>The Climate Equity Scorecard aims to express the principle of &#8220;Common but differentiated responsibilities and respective capabilities&#8221; &#8211; a keystone of global climate diplomacy &#8211; in terms of a simple but meaningful analysis of national pledges.</p>
+        <p>The Scorecard represents a country&#8217;s (or group of countries&#8217;) pledge to act, relative to its fair share of the international effort that would be needed to reach an ambitious temperate-stabilization target.</p>
+        <p>This calculation is based on the Greenhouse Development Rights (GDRs) effort-sharing framework. The underlying <a href="http://gdrights.org/calculator/" target="_blank">GDRs calculator</a> offers much more detail, and many more options for exploring national fair shares.';
+
 
 function getResults() 
 {
-    $retval = print_r($_POST, true);
-    $retval .= '<br /><br />';
-    
+    $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
+
+    // Check/set basic/advanced scorecard view (short/long text)
     if (!isset($_POST['scoreview'])) {
         $scoreview = 'scorebasic'; 
     }
@@ -39,18 +44,6 @@ function getResults()
     else {
         $scoreview = 'scorebasic';
     }
-    $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
-    $retval .= '<input type="submit" value="switch view" name="switch_view" id="switch_view" />';
-    $retval .= '<br />' . $scoreview . '<br /><br />';
-
-    
-    $pledge1 = 0.0; 
-    //$score_kab = $effort_array['kab_pledge']; // TODO make this real
-    $score_kab = 30.0; // placeholder for testing
-    //$score_no_kab = $effort_array['no_kab_pledge']; // TODO make this real
-    $score_no_kab = 40.0; // placeholder for testing
- 
-    $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
     
     // Get general pathway information
     $pathwayIds = GDRsAPI::connection()->pathwayIds;
@@ -69,52 +62,108 @@ function getResults()
 
     $pledge_info = getPledgeInformation($_POST['country'], $_POST['conditional'], $params['min_target_year']);
     $gdrs_info = getGdrsInformation($pledge_info, $pathway_id);
+    $pledge1 = 0.0; 
+    $score_kab = 30.0; // placeholder for testing
+    //$score_no_kab = 40.0; // placeholder for testing
    // This should be the real, no-KAB score
     $score_no_kab = niceNumber($gdrs_info['score']);
+
+    // Remove surrounding spaces and any ending punctuation: we have no control over this text, so clean it up a bit
+    // TODO cull unnecessary stuff here - TKB copied all over from earlier version for now
+    $details = cleanText($pledge_info['details']);
+    $source_dom = cleanText($pledge_info['source']);
+    $source_intl = cleanText($pledge_info['intl_source']);
+
+    $effort_array = getGdrsInformation($pledge_info, $_POST['ambition']);
+    $effort_val = $effort_array['dom_pledge'] + $effort_array['intl_pledge'];
+    $effort = number_format($effort_val);
+
+    $intl = niceNumber($effort_array['intl_pledge']);
+    $dom = niceNumber($effort_array['dom_pledge']);
+    $gap = niceNumber($effort_array['gap']);
+    $pledge_over_bau = niceNumber($effort_array['pledge_over_bau']);
+    $cap = niceNumber($effort_array['cap']);
+    $resp = niceNumber($effort_array['resp']);
+    $dom_rel_global = niceNumber($effort_array['dom_rel_global']);
+
+    $iso3 = $_POST['country'];
+
+    $condition_string = $_POST['conditional'] ? 'conditional' : 'unconditional';
     
-    
-    $retval .= '<p><span class="score">Score: ' . $score_kab;
+    // Collect content for output
+    $retval = '<p><span class="score">Score: XX%';
+    //$retval = '<p><span class="score">Score: ' . $score_kab . '%';
     $retval .= '</span>&nbsp; with baseline adjusted for Kyoto commitments</p>';
     $retval .= '<div class="graph group">';
     $retval .= drawGraph($pledge1, 'intl', $score_kab, 'kab', false);
     $retval .= '</div><!-- end .graph -->';
 
-    $retval .= '<p><span class="score">Score: ' . $score_no_kab;
+    $retval .= '<p><span class="score">Score: ' . $score_no_kab . '%';
     $retval .= '</span>&nbsp; with no baseline adjustment</p>';
     $retval .= '<div class="graph group">';
     $retval .= drawGraph($pledge1, 'intl', $score_no_kab, 'no_kab', false);
     $retval .= '</div><!-- end .graph -->';
 
     $retval .= '<div id="key" class="group">';
-    if ($effort_val < 100) {
+//    if ($effort_val < 100) {
         $retval .= '<p><span class="gap"></span> Shortfall = gap between fair share and pledge, as percentage of baseline</p>';
-    }
+//    }
     $retval .= '<p><span class="dom"></span> Score = ( baseline – shortfall ) / baseline</p></div><!-- end #key -->';
+
+    $retval .= '<br />';
+    //$retval .= $scoreview;
+    $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
+    if ($scoreview == 'scorebasic') {
+        $switchview = 'Show more';
+    } else {
+        $switchview = 'Show less';
+    }
+    $retval .= '<input type="submit" value="' . $switchview . '" name="switch_view" id="switch_view" />';
+    
+    $retval .= '<br />';
+    
+    
     if ($scoreview == 'scoreadv') {
         $retval .= <<<LONGTEXT
         <p><span class="score">$country</span>'s [fair share] of the global mitigation burden associated with the $ambition marker pathway is _fair_share%. This fair share is calculated as the simple average of its share of global capacity and global responsibility. ($country is projected in $by_year to have _capacity_share% of global capacity and _responsibility_share% of global responsibility.)</p>
 
         <p>$country has pledged to do _pledge_percent% of the mitigation that would be needed, globally, to reach the $ambition marker pathway.</p>
 
-        <p>Given a [$ambition target], $country's $by_year _conditional_or_not [pledge] to mitigate _pledge_tons tons falls short of its fair share by _pledge_gap_tons tons. To close that gap, $country should raise its pledge by an additional _pledge_gap_percent% of its [business-as-usual] emissions.</p>
+        <p>Given a [$ambition target], $country's $by_year $condition_string [pledge] to mitigate _pledge_tons tons falls short of its fair share by _pledge_gap_tons tons. To close that gap, $country should raise its pledge by an additional _pledge_gap_percent% of its [business-as-usual] emissions.</p>
 LONGTEXT;
+    
+    $retval .= '<div id="details">';
+    $retval .= '<h2>Details about this pledge</h2>';
+    $retval .= '<p>' . $effort_array['pledge_description'];
+    
+    if ($source_dom) {
+        $retval .= '<p>Source for domestic effort: ' . $source_dom . '.</p>';            
+    }
+    if ($source_intl) {
+        $retval .= '<p class="source">Source for international support: ' . $source_intl . '.</p>';            
+    }
+    $retval .= '<p><strong>Warning: the scores here are only meaningful if the underlying national pledges are in good faith.</strong></p>';
+    $retval .= '</div>';
+        
     } elseif ($scoreview == 'scorebasic') {
         $retval .= <<<SHORTTEXT
-        <p>Given a [$ambition target], <span class="score">$country&#8217;s</span> $by_year _conditional_or_not [pledge] to mitigate _pledge_tons tons falls short of its fair share by _pledge_gap_tons tons. To close that gap, $country should raise its pledge by an additional _pledge_gap_percent% of its [business-as-usual] emissions.</p>
+        <p>Given a [$ambition target], <span class="score">$country&#8217;s</span> $by_year $condition_string [pledge] to mitigate _pledge_tons tons falls short of its fair share by _pledge_gap_tons tons. To close that gap, $country should raise its pledge by an additional _pledge_gap_percent% of its [business-as-usual] emissions.</p>
 SHORTTEXT;
     } else {
-        
+        // TODO make sure nothing else needs to go here
     }
+
+    $retval .= '<p><a href="what.php" target="_blank">How do I interpret these scores?</a> &nbsp;|&nbsp; ';
+
+    $calc_url = getCalcUrl($iso3, $pathway_id);
+    $retval .= '<a href="' . $calc_url . '" target="_blank">';
+    $retval .= 'More detailed calculations &#187;</a></p>';
+    
+    //$retval .= '<br /><br />';
+    //$retval .= print_r($_POST, true);
     
     return $retval;
 }
-
-$glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
-$resultsDefault = '<p>How do countries&#8217; emission-reduction pledges &#8211; their international promises &#8211; compare to the efforts they should be making, their ' . $glossary->getLink('gloss_fair', true) . ' of the global effort needed to limit dangerous and avoidable climate change? <strong>This is the basic question that this Scorecard tries to answer.</strong></p>
-        
-        <p>The Climate Equity Scorecard aims to express the principle of &#8220;Common but differentiated responsibilities and respective capabilities&#8221; &#8211; a keystone of global climate diplomacy &#8211; in terms of a simple but meaningful analysis of national pledges.</p>
-        <p>The Scorecard represents a country&#8217;s (or group of countries&#8217;) pledge to act, relative to its fair share of the international effort that would be needed to reach an ambitious temperate-stabilization target.</p>
-        <p>This calculation is based on the Greenhouse Development Rights (GDRs) effort-sharing framework. The underlying <a href="http://gdrights.org/calculator/" target="_blank">GDRs calculator</a> offers much more detail, and many more options for exploring national fair shares.';
 
 /**
  * Generate HTML to diplay bar chart and text information about pledge
