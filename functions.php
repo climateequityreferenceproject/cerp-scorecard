@@ -379,7 +379,7 @@ function getGdrsInformation($pledge_info, $pathway)
     $use_nonco2 = (array) $params['use_nonco2'];
     
     // Announce that we'd like to free up memory before reusing the variable
-    unset($req);
+    // unset($req);
     
     // Build up API query
     if ($pledge_info['rel_to_year']) {

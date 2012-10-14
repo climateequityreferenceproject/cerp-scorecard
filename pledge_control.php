@@ -3,8 +3,13 @@
 require_once "functions.php";
 
 function pledge_control(&$disabledString, &$checkedString) {
-    $pledge_uncond = hasUnconditionalPledge($_POST['country']);
-    $pledge_cond = hasConditionalPledge($_POST['country']);
+    if (isset($_POST['country'])) {
+        $pledge_uncond = hasUnconditionalPledge($_POST['country']);
+        $pledge_cond = hasConditionalPledge($_POST['country']);
+    } else {
+        $pledge_uncond = false;
+        $pledge_cond = false;
+    }
 //    echo $_POST['country'] . '<br />uncond: ';
 //    echo $pledge_uncond ? 'true' : 'false';
 //    echo '<br />cond: ';

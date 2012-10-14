@@ -10,16 +10,19 @@
  * @link http://www.gdrights.org/
  */
 
+// Maintain a session cookie
 session_start();
-require_once('i18n.php');
+
+require_once 'i18n.php';
+// Note: functions.php also loads GDRsAPI
 require_once 'functions.php';
 require_once "class/HWTHelp/HWTHelp.php";
 
-if (!isset($glossary)) {
-    $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
-}
+//if (!isset($glossary)) {
+//    $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
+//}
 
-function resultsTest() 
+function getResults() 
 {
     $retval = print_r($_POST, true);
     $retval .= '<br /><br />';
@@ -48,10 +51,13 @@ function resultsTest()
     $score_no_kab = 40.0; // placeholder for testing
  
     $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
+    
+    // Get general pathway information
     $pathwayIds = GDRsAPI::connection()->pathwayIds;
     $pathwayLabel = GDRsAPI::connection()->pathwayLabel;
+    
+    // Get params
     $params = array();
-
     $params['min_target_year'] = getMinTargetYear($_POST['country'], $_POST['conditional']);
     $conditional_or_not = $_POST['conditional'];
     $by_year = $params['min_target_year'];
@@ -100,7 +106,7 @@ SHORTTEXT;
     return $retval;
 }
 
-
+$glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
 $resultsDefault = '<p>How do countries&#8217; emission-reduction pledges &#8211; their international promises &#8211; compare to the efforts they should be making, their ' . $glossary->getLink('gloss_fair', true) . ' of the global effort needed to limit dangerous and avoidable climate change? <strong>This is the basic question that this Scorecard tries to answer.</strong></p>
         
         <p>The Climate Equity Scorecard aims to express the principle of &#8220;Common but differentiated responsibilities and respective capabilities&#8221; &#8211; a keystone of global climate diplomacy &#8211; in terms of a simple but meaningful analysis of national pledges.</p>
@@ -112,34 +118,34 @@ $resultsDefault = '<p>How do countries&#8217; emission-reduction pledges &#8211;
  * 
  * @return string: Nicely-formatted HTML for displaying information about the pledge
  */
-function getResults() {
-    $retval = print_r($_POST, true);
-    $retval .= '<br /><br />';
-    
-    if (!isset($_POST['scoreview'])) {
-        $scoreview = 'scorebasic'; 
-    }
-    elseif (!isset($_POST['switch_view'])) {
-        $scoreview = $_POST['scoreview'];
-    }
-    elseif ($_POST['scoreview'] == 'scorebasic') {
-        $scoreview = 'scoreadv';
-    }
-    else {
-        $scoreview = 'scorebasic';
-    }
-    $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
-    $retval .= '<input type="submit" value="switch view" name="switch_view" id="switch_view" />';
-    $retval .= '<br />' . $scoreview;
-    // TODO replace 'scorebasic' with a function generating basic/short results, 
-    // and replace 'scoreadv' with a function generating longer/more-info results
-    
-    return $retval;
-}
+//function getResults() {
+//    $retval = print_r($_POST, true);
+//    $retval .= '<br /><br />';
+//    
+//    if (!isset($_POST['scoreview'])) {
+//        $scoreview = 'scorebasic'; 
+//    }
+//    elseif (!isset($_POST['switch_view'])) {
+//        $scoreview = $_POST['scoreview'];
+//    }
+//    elseif ($_POST['scoreview'] == 'scorebasic') {
+//        $scoreview = 'scoreadv';
+//    }
+//    else {
+//        $scoreview = 'scorebasic';
+//    }
+//    $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
+//    $retval .= '<input type="submit" value="switch view" name="switch_view" id="switch_view" />';
+//    $retval .= '<br />' . $scoreview;
+//    // TODO replace 'scorebasic' with a function generating basic/short results, 
+//    // and replace 'scoreadv' with a function generating longer/more-info results
+//    
+//    return $retval;
+//}
 
 if (isset($_POST['ajax']) ) {
     if ($_POST['country']!=='none') {
-        echo getResults($_POST, $pathwayIds, $pathwayLabel);
+        echo getResults();
     } else {
         echo $resultsDefault;
     }

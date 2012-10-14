@@ -23,8 +23,8 @@ $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
 $api = GDRsAPI::connection();
 
 if ($_POST && ($_POST['country']!=='none')) {    
-    //$html = getResults();
-    $html = resultsTest();
+    $html = getResults();
+    //$html = resultsTest();
 } else {
     $html = $resultsDefault;
 }
