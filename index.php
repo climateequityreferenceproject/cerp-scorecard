@@ -111,6 +111,7 @@ if ($_POST && ($_POST['country']!=='none')) {
                         <legend><?php echo $glossary->getLink('gloss_path');?></legend>
                         <small>Which pathways should actually be used here, and what should they be called?</small>
                         <?php
+                        $checkedString = array();
                         if (isset($_POST['ambition'])) {
                             foreach ($api->pathwayIds as $pwType => $pwId) {
                                 if ($pwId===$_POST['ambition']) {
@@ -134,55 +135,7 @@ if ($_POST && ($_POST['country']!=='none')) {
                 <li class="setting">
                      <fieldset id="pledge_type">
                         <legend><?php echo $glossary->getLink('gloss_pledge');?></legend>
-                        <?php echo '<small>This info not updated via AJAX, for now reflects selections only if JavaScript is turned OFF.</small><br />'; ?>
-                        <?php 
-                        $pledge_uncond = hasUnconditionalPledge($_POST['country']);
-                        $pledge_cond = hasConditionalPledge($_POST['country']);
-                        echo $_POST['country'] . '<br />uncond: ';
-                        echo $pledge_uncond ? 'true' : 'false';
-                        echo '<br />cond: ';
-                        echo $pledge_cond ? 'true' : 'false'; 
-                        
-                        if ($pledge_cond and !$pledge_uncond) { // conditional pledge only
-                            $checkedString['yes'] = 'checked="checked"';
-                            $disabledString['yes'] = '';
-                            $checkedString['no'] = '';  
-                            $disabledString['no'] = 'disabled="disabled"';
-                        } else if (!$pledge_cond and $pledge_uncond) { // unconditional pledge only
-                            $checkedString['yes'] = '';
-                            $disabledString['yes'] = 'disabled="disabled"';
-                            $checkedString['no'] = 'checked="checked"';
-                            $disabledString['no'] = '';
-                        } else if ($pledge_cond and $pledge_uncond) { // conditional AND unconditional pledges are available for this country/region
-                            if (isset($_POST['conditional'])) { 
-                                if ($_POST['conditional']) {
-                                    $checkedString['yes'] = 'checked="checked"';
-                                    $disabledString['yes'] = '';
-                                    $checkedString['no'] = '';
-                                    $disabledString['no'] = '';
-                                } else {
-                                    $checkedString['yes'] = '';
-                                    $disabledString['yes'] = '';
-                                    $checkedString['no'] = 'checked="checked"';
-                                    $disabledString['no'] = '';
-                                }
-                            } else { // conditional vs unconditional has not been set
-                                $checkedString['yes'] = '';
-                                $disabledString['yes'] = '';
-                                $checkedString['no'] = 'checked="checked"';
-                                $disabledString['no'] = '';
-                            }
-                        }
-                        ?>                         
-                         <label for="conditional-no" <?php if ($disabledString['no'] == 'disabled="disabled"') { echo 'class="disabled"'; } ?> >
-                             <input type="radio" name="conditional" id="conditional-no" value="0" 
-                            <?php echo $checkedString['no']; ?> <?php echo $disabledString['no']; ?> /> Unconditional
-                         </label>
-                         
-                         <label for="conditional-yes" <?php if ($disabledString['yes'] == 'disabled="disabled"') { echo 'class="disabled"'; } ?> >
-                             <input type="radio" name="conditional" id="conditional-yes" value="1" 
-                            <?php echo $checkedString['yes']; ?> <?php echo $disabledString['yes']; ?> /> Conditional
-                         </label>
+                        <span id="pledge_controls"><?php include_once 'pledge_control.php'; ?></span>
                      </fieldset>
                 </li>
             </ul>

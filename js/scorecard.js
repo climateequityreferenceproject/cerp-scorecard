@@ -33,6 +33,17 @@ function get_def_by_id(e) {
 
 function submit() {
     $('#loading').show();
+    
+    // Update pledge controls
+    $.post(
+        'pledge_control.php',
+        $('#settings').serialize(),
+        function(data){
+            $('#pledge_controls').html(data);
+        }
+    );
+    
+    // Get new results
     $.post(
         "scorecard_results.php",
         $('#settings').serialize() + "&ajax=ajax",
