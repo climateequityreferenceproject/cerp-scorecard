@@ -51,12 +51,12 @@ class GDRsAPI
     public $pathwayLabel = array(
         'low' => 'LOW AMBITION', // G-8
         'med' => '2C', // Climate Action Tracker 2.0
-        'high' => '1.5C' // AOSIS2
+        'high' => '1.5C' // AOSIS3
     );
     public $pathwayIds = array();
     public $pathway_default = 'high';
     
-    private $_pathway_array = array('low'=>'G-8', 'med'=>'CAT-2.0', 'high'=>'AOSIS2');
+    private $_pathway_array = array('low'=>'G-8', 'med'=>'CAT-2.0', 'high'=>'AOSIS3');
     // TODO allow authors to identify in pathway db which are used here
     
     /**
