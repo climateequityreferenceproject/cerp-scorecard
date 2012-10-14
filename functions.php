@@ -473,6 +473,8 @@ function getGdrsInformation($pledge_info, $pathway)
         $retval['gap'] = 100.0 - $retval['intl_pledge'];
         $retval['neg_pledge'] = true;
     }
+    $gdrs_reduction_perc_bau = 100 * $gdrs_reduction/$bau[$pledge_info['by_year']];
+    $retval['score'] = 100 - ($gdrs_reduction_perc_bau - $retval['pledge_over_bau']);
     
     return $retval;
 }

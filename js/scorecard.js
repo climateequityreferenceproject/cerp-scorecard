@@ -2,7 +2,7 @@ $(function() {
     // We will override this
     $('#submit').hide();
     
-    $("#settings :input").change(submit);
+    $("#settings :input").change(update_pledge_controls);
     
     $('#loading').hide();
     $('#loading').html('<img src="img/spinner.gif" alt="loading indicator" />');
@@ -31,17 +31,20 @@ function get_def_by_id(e) {
     e.preventDefault();
 }
 
-function submit() {
-    $('#loading').show();
-    
+function update_pledge_controls() {
     // Update pledge controls
     $.post(
         'pledge_control.php',
         $('#settings').serialize(),
         function(data){
             $('#pledge_controls').html(data);
+            submit();
         }
     );
+}
+
+function submit() {
+    $('#loading').show();
     
     // Get new results
     $.post(
