@@ -65,7 +65,7 @@ function getResults()
 
     // Remove surrounding spaces and any ending punctuation: we have no control over this text, so clean it up a bit
     // TODO cull unnecessary stuff here - TKB copied all over from earlier version for now
-    $details = cleanText($pledge_info['details']);
+//    $details = cleanText($pledge_info['details']);
     $source_dom = cleanText($pledge_info['source']);
     $source_intl = cleanText($pledge_info['intl_source']);
 
@@ -81,16 +81,16 @@ function getResults()
     $effort_array = getGdrsInformation($pledge_info, $pathway_id, $kab_score);
     $score_kab = niceNumber($effort_array['score_kab']);
     $score_no_kab = niceNumber($effort_array['score']);
-    $effort_val = $effort_array['dom_pledge'] + $effort_array['intl_pledge'];
-    $effort = number_format($effort_val);
+//    $effort_val = $effort_array['dom_pledge'] + $effort_array['intl_pledge'];
+//    $effort = number_format($effort_val);
 
-    $intl = niceNumber($effort_array['intl_pledge']);
-    $dom = niceNumber($effort_array['dom_pledge']);
-    $gap = niceNumber($effort_array['gap']);
-    $pledge_over_bau = niceNumber($effort_array['pledge_over_bau']);
+//    $intl = niceNumber($effort_array['intl_pledge']);
+//    $dom = niceNumber($effort_array['dom_pledge']);
+//    $gap = niceNumber($effort_array['gap']);
+//    $pledge_over_bau = niceNumber($effort_array['pledge_over_bau']);
     $cap = niceNumber($effort_array['cap']);
     $resp = niceNumber($effort_array['resp']);
-    $dom_rel_global = niceNumber($effort_array['dom_rel_global']);
+//    $dom_rel_global = niceNumber($effort_array['dom_rel_global']);
     $fair_share_perc = niceNumber($effort_array['fair_share_perc']);
     $pledged_reduct_perc = niceNumber($effort_array['pledged_reduct_perc']);
     $pledged_reduct_MtCO2 = niceNumber($effort_array['pledged_reduct_MtCO2']);
@@ -158,7 +158,7 @@ LONGTEXT;
         
     } elseif ($scoreview == 'scorebasic') {
         $retval .= <<<SHORTTEXT
-        <p>Given a [$ambition target], <span class="score">$country&#8217;s</span> $by_year $condition_string [pledge] to mitigate _pledge_tons tons falls short of its fair share by _pledge_gap_tons tons. To close that gap, $country should raise its pledge by an additional _pledge_gap_percent% of its [business-as-usual] emissions.</p>
+        <p>Given a [$ambition target], <span class="score">$country&#8217;s</span> $by_year $condition_string [pledge] to mitigate $pledged_reduct_MtCO2 million tonnes falls short of its fair share by $pledge_gap_MtCO2 million tonnes. To close that gap, $country should raise its pledge by an additional $pledge_gap_perc_bau% of its [business-as-usual] emissions.</p>
 SHORTTEXT;
     } else {
         // TODO make sure nothing else needs to go here
