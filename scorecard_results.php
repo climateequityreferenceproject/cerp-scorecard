@@ -92,6 +92,7 @@ function getResults()
     $resp = niceNumber($effort_array['resp']);
     $dom_rel_global = niceNumber($effort_array['dom_rel_global']);
     $fair_share_perc = niceNumber($effort_array['fair_share_perc']);
+    $pledged_reduct_perc = niceNumber($effort_array['pledged_reduct_perc']);
 
     $iso3 = $_POST['country'];
 
@@ -132,9 +133,9 @@ function getResults()
     
     if ($scoreview == 'scoreadv') {
         $retval .= <<<LONGTEXT
-        <p><span class="score">$country</span>'s [fair share] of the global mitigation burden associated with the $ambition marker pathway is $fair_share_perc%. This fair share is calculated as the simple average of its share of global capacity and global responsibility. ($country is projected in $by_year to have _capacity_share% of global capacity and _responsibility_share% of global responsibility.)</p>
+        <p><span class="score">$country</span>'s [fair share] of the global mitigation burden associated with the $ambition marker pathway is $fair_share_perc%. This fair share is calculated as the simple average of its share of global capacity and global responsibility. ($country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility.)</p>
 
-        <p>$country has pledged to do _pledge_percent% of the mitigation that would be needed, globally, to reach the $ambition marker pathway.</p>
+        <p>$country has pledged to do $pledged_reduct_perc% of the mitigation that would be needed, globally, to reach the $ambition marker pathway.</p>
 
         <p>Given a [$ambition target], $country's $by_year $condition_string [pledge] to mitigate _pledge_tons tons falls short of its fair share by _pledge_gap_tons tons. To close that gap, $country should raise its pledge by an additional _pledge_gap_percent% of its [business-as-usual] emissions.</p>
 LONGTEXT;

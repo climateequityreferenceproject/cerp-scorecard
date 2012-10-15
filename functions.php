@@ -513,6 +513,8 @@ function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option1')
     $retval['score_kab'] = 100 - ($gdrs_kab_reduction_perc_bau - $pledged_reduction_perc_bau);
     
     $retval['fair_share_perc'] = 100 * $gdrs_reduction/$gdrs_reduction_world;
+    // Don't allow negative values
+    $retval['pledged_reduct_perc'] = 100 * max(0, $pledged_reduction)/$gdrs_reduction_world;
     
     return $retval;
 }
