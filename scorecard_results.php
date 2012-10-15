@@ -93,6 +93,9 @@ function getResults()
     $dom_rel_global = niceNumber($effort_array['dom_rel_global']);
     $fair_share_perc = niceNumber($effort_array['fair_share_perc']);
     $pledged_reduct_perc = niceNumber($effort_array['pledged_reduct_perc']);
+    $pledged_reduct_MtCO2 = niceNumber($effort_array['pledged_reduct_MtCO2']);
+    $pledge_gap_MtCO2 = niceNumber($effort_array['pledge_gap_MtCO2']);
+    $pledge_gap_perc_bau = niceNumber($effort_array['pledge_gap_perc_bau']);
 
     $iso3 = $_POST['country'];
 
@@ -137,7 +140,7 @@ function getResults()
 
         <p>$country has pledged to do $pledged_reduct_perc% of the mitigation that would be needed, globally, to reach the $ambition marker pathway.</p>
 
-        <p>Given a [$ambition target], $country's $by_year $condition_string [pledge] to mitigate _pledge_tons tons falls short of its fair share by _pledge_gap_tons tons. To close that gap, $country should raise its pledge by an additional _pledge_gap_percent% of its [business-as-usual] emissions.</p>
+        <p>Given a [$ambition target], $country's $by_year $condition_string [pledge] to mitigate $pledged_reduct_MtCO2 million tonnes falls short of its fair share by $pledge_gap_MtCO2 million tonnes. To close that gap, $country should raise its pledge by an additional $pledge_gap_perc_bau% of its [business-as-usual] emissions.</p>
 LONGTEXT;
     
     $retval .= '<div id="details">';
