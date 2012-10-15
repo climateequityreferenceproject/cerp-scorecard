@@ -24,7 +24,8 @@ require_once "class/HWTHelp/HWTHelp.php";
 function getCalcUrl($iso3, $pathway_id)
 {
     if (isset($_SESSION['gdrs_db'])) {
-        $db_string = '&db=' . $_SESSION['gdrs_db'][$pathway_id];
+        $key = GDRsAPI::get_db_key($pathway_id);
+        $db_string = '&db=' . $_SESSION['gdrs_db'][$key];
     } else {
         $db_string = '';
     }
@@ -398,6 +399,8 @@ function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option1')
     $post_array = array('years' => $years, 'countries' => $ctryrgn);
     $response = GDRsAPI::connection()->post($post_array, $pathway);
     $response_kab = GDRsAPI::connection()->post($post_array, $pathway, 'all');
+    $post_array = array('years' => $years, 'countries' => GDRsAPI::connection()->get_world_code());
+    $response_world = GDRsAPI::connection()->post($post_array, $pathway);
     
     foreach ($response as $year_data_obj) {
         $year_data = (array) $year_data_obj;
@@ -426,6 +429,20 @@ function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option1')
         $alloc_kab[$year] = $year_data['gdrs_alloc_MtCO2'];
     }
     
+    foreach ($response_world as $year_data_obj) {
+        $year_data = (array) $year_data_obj;
+        $year = $year_data['year'];
+        $bau_world[$year] = $year_data['fossil_CO2_MtCO2'];
+        if ($use_lulucf['value']) {
+            $bau_world[$year] += $year_data['LULUCF_MtCO2'];
+        }
+        if ($use_nonco2['value']) {
+            $bau_world[$year] += $year_data['NonCO2_MtCO2e'];
+        }
+        $alloc_world[$year] = $year_data['gdrs_alloc_MtCO2'];
+    }
+
+    $gdrs_reduction_world = $bau_world[$pledge_info['by_year']] - $alloc_world[$pledge_info['by_year']];
     $gdrs_reduction = $bau[$pledge_info['by_year']] - $alloc[$pledge_info['by_year']];
     if ($kab_score === 'option1') {
         $gdrs_kab_reduction = $bau[$pledge_info['by_year']] - $alloc_kab[$pledge_info['by_year']];
@@ -495,6 +512,8 @@ function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option1')
     $retval['score'] = 100 - ($gdrs_reduction_perc_bau - $pledged_reduction_perc_bau);
     $retval['score_kab'] = 100 - ($gdrs_kab_reduction_perc_bau - $pledged_reduction_perc_bau);
     
+    $retval['fair_share_perc'] = 100 * $gdrs_reduction/$gdrs_reduction_world;
+    
     return $retval;
 }
 
@@ -550,7 +569,8 @@ function drawGraph($pledge1,$class1,$pledge2,$class2, $show_pledge1 = true)
     }
     //$bar_info1 = drawBarsGetRemainder($pledge1, $class1);
     //$retval .= $bar_info1['html'];
-    $remainder_pledge = 100; //$remainder_pledge1 = $bar_info1['remainder'];
+    $retval = '';
+    $remainder_pledge1 = 100; //$remainder_pledge1 = $bar_info1['remainder'];
     if ($pledge2 <= $remainder_pledge1) {
         $retval .= '<div class="' . $class2 . '" style="width:' . $pledge2 . '%"></div>';
     } else {

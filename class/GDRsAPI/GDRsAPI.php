@@ -74,7 +74,7 @@ class GDRsAPI
         $retval = $this->_url . '?';
         $retval .= 'q=' . $to_get;
         if ($pwId) {
-            $retval .= '&db=' . $this->_db[$pwId];
+            $retval .= '&db=' . $this->_getDB($pwId, 'none');
         }
         return $retval;
     }
@@ -122,7 +122,7 @@ class GDRsAPI
             }
         }
     }
-    
+        
     /**
      * Public interface to constructor: either return current instance or create one
      * 
@@ -136,6 +136,17 @@ class GDRsAPI
             self::$_instance = new GDRsAPI();
         }
         return self::$_instance;
+    }
+    
+    /**
+     * Construct a key into the array of databases, labeled by pathway and kab/no-kab
+     * 
+     * @param string $pwId  A valid pathway ID
+     * @param string $kab   One of 'none', 'all', or 'ratified' (defaults to 'none')
+     * @return string       The key
+     */
+    public static function get_db_key($pwId, $kab = 'none') {
+        return '_' . $pwId . ':' . $kab;
     }
     
     /**
@@ -153,7 +164,7 @@ class GDRsAPI
             throw new GDRsAPIException('Pathway id "' . $pwId . '" is not defined');
         }
         // Do we have it already?
-        $key = '_' . $pwId . ':' . $kab;
+        $key = self::get_db_key($pwId, $kab);
         if (!(isset($this->_db[$key]))) {
             // Have we stored it in a session variable?
             if (isset($_SESSION['gdrs_db'])) {
@@ -220,6 +231,17 @@ class GDRsAPI
         }
         
         return $response;
+    }
+    
+    /**
+     * Return the value for code for the pseudo-region "world"
+     * 
+     * @return string The code
+     * 
+     * @todo Query the API to get the actual value
+     */
+    public function get_world_code() {
+        return 'world';
     }
     
 }
