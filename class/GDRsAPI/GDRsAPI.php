@@ -153,7 +153,7 @@ class GDRsAPI
             throw new GDRsAPIException('Pathway id "' . $pwId . '" is not defined');
         }
         // Do we have it already?
-        $key = $pwID . ':' . $kab;
+        $key = '_' . $pwId . ':' . $kab;
         if (!(isset($this->_db[$key]))) {
             // Have we stored it in a session variable?
             if (isset($_SESSION['gdrs_db'])) {
