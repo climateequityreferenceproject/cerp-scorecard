@@ -54,19 +54,14 @@ function getResults()
     $params['min_target_year'] = getMinTargetYear($_POST['country'], $_POST['conditional']);
     $conditional_or_not = $_POST['conditional'];
     $by_year = $params['min_target_year'];
+    $iso3 = $_POST['country'];
     $params['country_name'] = getCountryRegionName($_POST['country']);
     $country = $params['country_name'];
     $pathway_id = $_POST['ambition'];
     $params['ambition'] = $pathwayLabel[array_search($pathway_id, $pathwayIds)];
     $ambition = $params['ambition'];
 
-    $pledge_info = getPledgeInformation($_POST['country'], $_POST['conditional'], $params['min_target_year']);
-    $gdrs_info = getGdrsInformation($pledge_info, $pathway_id);
-    $pledge1 = 0.0; 
-    $score_kab = 30.0; // placeholder for testing
-    //$score_no_kab = 40.0; // placeholder for testing
-   // This should be the real, no-KAB score
-    $score_no_kab = niceNumber($gdrs_info['score']);
+    $pledge_info = getPledgeInformation($iso3, $conditional_or_not, $by_year);
 
     // Remove surrounding spaces and any ending punctuation: we have no control over this text, so clean it up a bit
     // TODO cull unnecessary stuff here - TKB copied all over from earlier version for now
@@ -74,7 +69,18 @@ function getResults()
     $source_dom = cleanText($pledge_info['source']);
     $source_intl = cleanText($pledge_info['intl_source']);
 
-    $effort_array = getGdrsInformation($pledge_info, $_POST['ambition']);
+    echo '<br />';
+    if (isset($_POST['kab_score'])) {
+        $kab_score = $_POST['kab_score'];
+    } else if (isset($_GET['kab_score'])) {
+        $kab_score = $_GET['kab_score'];
+    } else {
+        $kab_score = 'option1';
+    }
+    $pledge1 = 0.0; 
+    $effort_array = getGdrsInformation($pledge_info, $pathway_id, $kab_score);
+    $score_kab = niceNumber($effort_array['score_kab']);
+    $score_no_kab = niceNumber($effort_array['score']);
     $effort_val = $effort_array['dom_pledge'] + $effort_array['intl_pledge'];
     $effort = number_format($effort_val);
 
@@ -91,7 +97,7 @@ function getResults()
     $condition_string = $_POST['conditional'] ? 'conditional' : 'unconditional';
     
     // Collect content for output
-    $retval = '<p><span class="score">Score: XX%';
+    $retval = '<p><span class="score">Score: ' . $score_kab . '%';
     //$retval = '<p><span class="score">Score: ' . $score_kab . '%';
     $retval .= '</span>&nbsp; with baseline adjusted for Kyoto commitments</p>';
     $retval .= '<div class="graph group">';

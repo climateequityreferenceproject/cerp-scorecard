@@ -77,6 +77,12 @@ if ($_POST && ($_POST['country']!=='none')) {
     </header>
     <div id="main" role="main" class="group">
         <form name="settings" id="settings" method="post" autocomplete="off" >
+        <?php
+        if (isset($_GET['kab_score'])) {
+            // Persist if set
+            echo '<input type="hidden" name="kab_score" value="' . $_GET['kab_score'] . '">';
+        }
+        ?>
         <div id="settings_wrapper">
             
             <ul>
