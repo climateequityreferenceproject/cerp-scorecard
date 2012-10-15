@@ -50,8 +50,8 @@ class GDRsAPI
     // Decided not to use getters and setters
     public $pathwayLabel = array(
         'low' => 'LOW AMBITION', // G-8
-        'med' => '2C', // Climate Action Tracker 2.0
-        'high' => '1.5C' // AOSIS3
+        'med' => '2&#8451;', // Climate Action Tracker 2.0
+        'high' => '1.5&#8451;' // AOSIS2
     );
     public $pathwayIds = array();
     public $pathway_default = 'high';
@@ -89,7 +89,7 @@ class GDRsAPI
      */
     public function get($to_get, $pwId=null)
     {
-        $req =& new HTTP_Request($this->_buildGet($to_get, $pwId));
+        $req = new HTTP_Request($this->_buildGet($to_get, $pwId));
         $req->setMethod(HTTP_REQUEST_METHOD_GET);
         if (!PEAR::isError($req->sendRequest())) {
             if ($req->getResponseCode() == 200) {
@@ -195,7 +195,7 @@ class GDRsAPI
             default:
                 throw new GDRsAPIException('Value for kab parameter "' . $kab .'" not valid: Use "none", "all", or "ratified"');
         }
-        $req =& new HTTP_Request($this->_url);
+        $req = new HTTP_Request($this->_url);
         $req->setMethod(HTTP_REQUEST_METHOD_POST);
         // If pwId not defined, next line will throw an exception
         $db = $this->_getDB($pwId, $kab);

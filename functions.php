@@ -397,6 +397,7 @@ function getGdrsInformation($pledge_info, $pathway)
     // TODO: For regions, it is not getting values for 1990
     $post_array = array('years' => $years, 'countries' => $ctryrgn);
     $response = GDRsAPI::connection()->post($post_array, $pathway);
+    $response_kab = GDRsAPI::connection()->post($post_array, $pathway, 'all');
     
     foreach ($response as $year_data_obj) {
         $year_data = (array) $year_data_obj;
@@ -414,6 +415,24 @@ function getGdrsInformation($pledge_info, $pathway)
         }
         $alloc[$year] = $year_data['gdrs_alloc_MtCO2'];
     }
+    
+    foreach ($response_kab as $year_data_obj) {
+        $year_data = (array) $year_data_obj;
+        $year = $year_data['year'];
+        $gdp_kab[$year] = $year_data['gdp_blnUSDMER'];
+        $bau_kab[$year] = $year_data['fossil_CO2_MtCO2'];
+        $c_frac_kab[$year] = $year_data['gdrs_c_frac'];
+        $r_frac_kab[$year] = $year_data['gdrs_r_frac'];
+        $rci_kab[$year] = $year_data['gdrs_rci'];
+        if ($use_lulucf['value']) {
+            $bau_kab[$year] += $year_data['LULUCF_MtCO2'];
+        }
+        if ($use_nonco2['value']) {
+            $bau_kab[$year] += $year_data['NonCO2_MtCO2e'];
+        }
+        $alloc_kab[$year] = $year_data['gdrs_alloc_MtCO2'];
+    }
+
     
     $gdrs_reduction = $bau[$pledge_info['by_year']] - $alloc[$pledge_info['by_year']];
     switch ($pledge_info['rel_to']) {
