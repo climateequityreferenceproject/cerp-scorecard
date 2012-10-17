@@ -3,6 +3,7 @@ $(function() {
     $('#submit').hide();
     
     $("#settings :input").change(update_pledge_controls);
+    $("#pledge_controls").change(submit);
     
     $('#loading').hide();
     $('#loading').html('<img src="img/spinner.gif" alt="loading indicator" />');
