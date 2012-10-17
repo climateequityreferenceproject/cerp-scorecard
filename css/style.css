@@ -149,7 +149,7 @@ select {margin-top:0.25em;}
 footer {margin-top:1.5em; padding: 0.25em 1em 1em 1em; width:35em}
 
 .graph {width:100%}
-.graph .intl, .graph .dom, .graph .no_kab, .graph .kab, .graph .gap {float:left; height:30px; margin-bottom:10px;}
+.graph .intl, .graph .dom, .graph .no_kab, .graph .kab, .graph .gap, .graph .plug, .graph .neg, .graph .pos, .zero_line {float:left; height:30px; margin-bottom:10px;}
 .graph {overflow:hidden; position:relative;}
 .graph img {left:0; position:absolute; top:20px; width:100%; z-index:-200;}
 
@@ -183,10 +183,14 @@ a:link {-webkit-tap-highlight-color:#dd6e4c;}
 .dom, .no_kab, .kab {background:#8ebd7f;}
 .score {color:#8ebd7f;}
 .gap {background:#ffce73;}
+.plug {background: #eee;}
+.neg {background:#dd6e4c;}
+.pos {background:green;}
 #results {border:6px solid #ffce73;}
 #settings_wrapper, footer {border:6px solid #e6ebe6;}
 #settings_wrapper, #results, footer {-moz-border-radius:15px; border-radius:15px;}
 #commitment.negative {color:#dd6e4c; white-space:nowrap;}
+.zero_line {border-right:1px solid #666; position:relative; top:-30px; width:50%; z-index:9999;}
 
 .glossary #main, .docs #main {border-top:6px solid #ffce73;}
 .glossary p {margin-top:0.75em;}

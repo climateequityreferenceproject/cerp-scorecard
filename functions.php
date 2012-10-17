@@ -594,6 +594,68 @@ function drawGraph($pledge1,$class1,$pledge2,$class2, $show_pledge1 = true)
 }
 
 /**
+ * Generate HTML for full set of bars, subtracting 100 and centering around zero
+ * 
+ * @param integer $score 
+ * 
+ * @return string The HTML to render
+ */
+function drawGraph5050($score)
+{
+    switch ($score) {
+        case ($score < -50):
+            $score = 50;
+            $score_class = 'neg';
+            $plug = 0;
+            $gap = 50;
+            $below_range = true;
+            break;
+        case ($score == -50):
+            $score = 50;
+            $score_class = 'neg';
+            $plug = 0;
+            $gap = 50;
+            break;
+        case ($score > -50 and $score < 0):
+            $score = abs($score);
+            $score_class = 'neg';
+            $plug = 50 - $score;
+            $gap = 50;
+            break;
+        case ($score == 0):
+            $score_class = 'zero';
+            $plug = 50;
+            $gap = 50;
+            break;
+        case ($score > 0 and $score < 50):
+            $score_class = 'pos';
+            $plug = 50;
+            $gap = 50 - $score;
+            break;
+        case ($score == 50):
+            $score_class = 'pos';
+            $plug = 50;
+            $gap = 0;
+            break;
+        case ($score > 50):
+            $score = 50;
+            $score_class = 'pos';
+            $plug = 50;
+            $gap = 0;
+            $above_range = true;
+            break;
+    }
+    
+    $retval = '';
+    $retval .= '<div class="plug" style="width:' . $plug . '%"></div>';
+    $retval .= '<div class="' . $score_class . '" style="width:' . $score . '%"></div>';
+    $retval .= '<div class="gap" style="width:' . $gap . '%"></div>';
+    $retval .= '<div class="zero_line"></div>';
+    return $retval;
+}
+
+
+/**
  * Trim spaces and remove any trailing punctuation: we want consistent punctuations
  * 
  * @param string $string Possibly "dirty" string with extra spaces and punctuation
