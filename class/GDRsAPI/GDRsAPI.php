@@ -56,6 +56,9 @@ class GDRsAPI
     public $pathwayIds = array();
     public $pathway_default = 'high';
     
+    // TODO: Get this by querying the API
+    public static $maxYear = 2030;
+    
     private $_pathway_array = array('low'=>'G-8', 'med'=>'CAT-2.0', 'high'=>'AOSIS3');
     // TODO allow authors to identify in pathway db which are used here
     

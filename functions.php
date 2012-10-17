@@ -245,11 +245,15 @@ function getMinTargetYear($code, $conditional)
     } else {
         $ctryrgn_str = 'region="' . $code . '"';
     }
-    $sql = 'SELECT MIN(by_year) AS year FROM pledge WHERE conditional=' . $conditional_bool . ' AND ' . $ctryrgn_str . ';';
+    $sql = 'SELECT MIN(by_year) AS year FROM pledge WHERE conditional=' . $conditional_bool . ' AND ' . $ctryrgn_str . ' AND public = 1;';
     $result = queryPledgeDB($sql);
     $row = mysql_fetch_array($result, MYSQL_ASSOC);
     mysql_free_result($result);
-    return $row['year'];
+    if (!$row) {
+        return NULL;
+    } else {
+        return $row['year'];
+    }
 }
 
 /**
@@ -323,7 +327,7 @@ function hasConditionalPledge($code, $year=null)
         $year_checked = intval($year);
         $sql = 'SELECT * FROM pledge WHERE conditional=1 AND ' . $ctryrgn_str . ' AND by_year=' . $year_checked . ';';
     } else {
-        $sql = 'SELECT * FROM pledge WHERE conditional=1 AND ' . $ctryrgn_str;
+        $sql = 'SELECT * FROM pledge WHERE conditional=1 AND ' . $ctryrgn_str . ' AND by_year <= ' . GDRsAPI::$maxYear;
     }
     
     return mysql_num_rows(queryPledgeDB($sql)) != 0;
@@ -341,6 +345,7 @@ function hasConditionalPledge($code, $year=null)
 function hasUnconditionalPledge($code, $year=null) 
 {
     // Protect against injection
+    echo GDRsAPI::$maxYear;
     if (isCountry($code)) {
         $ctryrgn_str = 'iso3="' . $code . '"';
     } else {
@@ -350,7 +355,7 @@ function hasUnconditionalPledge($code, $year=null)
         $year_checked = intval($year);
         $sql = 'SELECT * FROM pledge WHERE conditional=0 AND ' . $ctryrgn_str . ' AND by_year=' . $year_checked . ';';
     } else {
-        $sql = 'SELECT * FROM pledge WHERE conditional=0 AND ' . $ctryrgn_str;
+        $sql = 'SELECT * FROM pledge WHERE conditional=0 AND ' . $ctryrgn_str . ' AND by_year <= ' . GDRsAPI::$maxYear;
     }
     
     return mysql_num_rows(queryPledgeDB($sql)) != 0;
