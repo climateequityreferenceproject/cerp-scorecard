@@ -359,7 +359,7 @@ class HWTHelp implements Iterator
      * 
      * @return HTML Link markup for item you're getting help entry for
      */
-    public function getLink($id, $link_text = '', $to_lower = false)
+    public function getLink($id, $to_lower = false, $link_text = '')
     {
         if (!isset($this->_entries[$id])) {
             //throw new HWTHelpException('No entry for identifier "' . $id . '" found');
@@ -381,6 +381,20 @@ class HWTHelp implements Iterator
         $html .= '</a>';
         
         return $html;
+    }
+    
+    /**
+     * Output a single help entry text
+     * 
+     * @param string $id       Short name for the entry
+     * 
+     * @return HTML text 
+     */
+    // TODO Fix this broken fn, use it in getHelpPage below and uncomment in how.php (Acknowlegements)
+    public function getHelpEntry($id)
+    {
+        $retval = $this->_entries[$id]['text'];
+        return $retval;
     }
     
     /**
@@ -410,7 +424,6 @@ class HWTHelp implements Iterator
         }
         return $retval;
     }
-    
 }
 
 ?>

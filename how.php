@@ -105,8 +105,9 @@ $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
             <li>Fourth, show a Costa Rica, a country that is pledging more than its obligation even at the AOSIS level, and far, far more at the less-stringent G8 level.</li>
             <li>Finally, show China.</li>
         </ul>
-        <h2>Authors and programmers. And funders? And what about Kirk?</h2>
-        <p>This doc should identify the authors. Eric &amp; Tyler need special credit for programming and design.</p>
+        <h2><?php echo $glossary->getLink('sc_credits') ?></h2>
+<!--        <p><?php //getHelpEntry('sc_credits'); ?></p>-->
+<!--        <p><?php //echo stripslashes($glossary->getJSON('sc_credits')) ?></p>-->
     </section>
         
     </div> <!--! end of #main -->

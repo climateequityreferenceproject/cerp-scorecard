@@ -41,7 +41,7 @@ $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
   <body class="group docs">
     <div id="container" class="group">
     <header>
-        <h1>Warning: We&#8211;re not scoring national actions, but only national &#8220;pledges&#8221; to act. Call them promises.</h1>
+        <h1>Warning: We&#8217;re not scoring national actions, but only national &#8220;pledges&#8221; to act. Call them promises.</h1>
     </header>
     <div id="main" role="main" class="group">
         
@@ -53,15 +53,15 @@ $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
         
         <p>Some countries (like China) have made extremely ambitious pledges, and by all account intend to do their best to fulfill them. Other countries (like the US) are making pledges that seem adequate, though only barely, and only when evaluated against dangerously weak global emissions pathways. (The Scorecards system does not itself support such weak pathways, but if you <a href="http://gdrights.org/calculator_dev/">click through to the underlying Calculator</a>, you can easily explore their implications).</p>
         
-        <p>Also, a country may be doing, or planning to do, more that it&#8211;s willing to pledge. This is an important case because it appears to describe India, which from the perspective of domestic policy and even NAMAs, appears to be planning actions that are more ambitious than it is willing to pledge.</p>
+        <p>Also, a country may be doing, or planning to do, more that it&#8217;s willing to pledge. This is an important case because it appears to describe India, which from the perspective of domestic policy and even NAMAs, appears to be planning actions that are more ambitious than it is willing to pledge.</p>
         
         <h2>Countries have only made pledges for 2020</h2>
         
-        <p>The scores here are for 2020. This is only eight years out, and the level of ambition that a country (or its elites) are willing to pledge in 2020 does not necessarily represent its plans &#8217; or hopes &#8217; for the future. Nor does it necessarily represent its obligation to act &#8217; its &#8220;fair share&#8221; &#8217; in the longer term. You can see this if you ask the Scorecard for [More Detail], which will supplement the 2020 &#8220;score bar&#8221; with a country-specific &#8220;time series&#8221; graph that goes out to 2030. In any case, we can only show 2020 pledges because they&#8211;re the only pledges that exist.</p>
+        <p>The scores here are for 2020. At the time of this writing, this is only eight years out, and the level of ambition that a country (or its elites) are willing to pledge in 2020 does not necessarily represent its plans &#8211; or hopes &#8211; for the future. Nor does it necessarily represent its obligation to act &#8211; its &#8220;fair share&#8221; &#8211; in the longer term. You can see this if you ask the Scorecard for [More Detail], which will supplement the 2020 &#8220;score bar&#8221; with a country-specific &#8220;time series&#8221; graph that goes out to 2030. In any case, we can only show 2020 pledges because they&#8217;re the only pledges that exist.</p>
         
-        <h2>We say nothing about the fraction of a country&#8211;s action that&#8211;s &#8220;at home&#8221;</h2>
+        <h2>We say nothing about the fraction of a country&#8217;s action that&#8217;s &#8220;at home&#8221;</h2>
         
-        <p>The Greenhouse Development Rights framework does not have anything to say about how much mitigation a country (or region) does within its own borders. It rather assigns each country a share of the <em>global</em> mitigation burden &#8217; the amount of mitigation that must be done if the target global pathway is to be achieved. In the GDRs world, a country is doing its &#8220;fair share&#8221; if its domestic and international efforts sum to at least equal its national mitigation obligation. From a global efficiency perspective, this works because countries are free to discharge their obligations wherever they can. The assumption is that this happens in a transparent and honest manner, which is a challenge, but one we&#8211;ll have to face in any case.</p>
+        <p>The Greenhouse Development Rights framework does not have anything to say about how much mitigation a country (or region) does within its own borders. It rather assigns each country a share of the <em>global</em> mitigation burden &#8211; the amount of mitigation that must be done if the target global pathway is to be achieved. In the GDRs world, a country is doing its &#8220;fair share&#8221; if its domestic and international efforts sum to at least equal its national mitigation obligation. From a global efficiency perspective, this works because countries are free to discharge their obligations wherever they can. The assumption is that this happens in a transparent and honest manner, which is a challenge, but one we&#8217;ll have to face in any case.</p>
         
         <h2>International pledges (such as they are) are not yet considered in these scores</h2>
         

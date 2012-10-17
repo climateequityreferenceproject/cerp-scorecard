@@ -26,7 +26,11 @@ $resultsDefault = '<p>How do countries&#8217; emission-reduction pledges &#8211;
         <p>The Scorecard represents a country&#8217;s (or group of countries&#8217;) pledge to act, relative to its fair share of the international effort that would be needed to reach an ambitious temperate-stabilization target.</p>
         <p>This calculation is based on the Greenhouse Development Rights (GDRs) effort-sharing framework. The underlying <a href="http://gdrights.org/calculator/" target="_blank">GDRs calculator</a> offers much more detail, and many more options for exploring national fair shares.';
 
-
+/**
+ * Generate HTML to diplay bar chart and text information about pledge
+ * 
+ * @return string: Nicely-formatted HTML for displaying information about the pledge
+ */
 function getResults() 
 {
     $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
@@ -122,7 +126,6 @@ function getResults()
     $retval .= '<p><span class="dom"></span> Score = ( baseline – shortfall ) / baseline</p></div><!-- end #key -->';
 
     $retval .= '<br />';
-    //$retval .= $scoreview;
     $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
     if ($scoreview == 'scorebasic') {
         $switchview = 'Show more';

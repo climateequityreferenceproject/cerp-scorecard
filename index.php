@@ -72,8 +72,8 @@ if ($_POST && ($_POST['country']!=='none')) {
     <header>
         <h1>Climate Equity Scorecard <span>BETA</span></h1>
         <h2><span>DO NOT CITE OR PUBLICIZE</span></h2>
-        <!--<p>Please send feedback to <a href='m&#97;il&#116;o&#58;f%65&#37;65db%61ck&#64;gdri&#103;&#104;ts%2E%6F&#114;&#103;' class="ext">feed&#98;ack&#64;gdrig&#104;&#116;s&#46;org</a></p>-->      
-        <p><?php echo $glossary->getLink('sc_about','About') ?> &nbsp;|&nbsp; <a href='m&#97;il&#116;o&#58;f%65&#37;65db%61ck&#64;gdri&#103;&#104;ts%2E%6F&#114;&#103;' >feed&#98;ack&#64;gdrig&#104;&#116;s&#46;org</a></p>
+        
+        <p><?php echo $glossary->getLink('sc_about',0,'About') ?> &nbsp;|&nbsp;<a  href="&#109&#97&#105&#108&#116&#111&#58&#102&#101&#101&#100&#98&#97&#99&#107&#64&#103&#100&#114&#105&#103&#104&#116&#115&#46&#111&#114&#103&#63&#115&#117&#98&#106&#101&#99&#116&#61&#115&#99&#111&#114&#101&#99&#97&#114&#100&#32&#102&#101&#101&#100&#98&#97&#99&#107" title="&#115&#101&#110&#100&#32&#102&#101&#101&#100&#98&#97&#99&#107&#32&#111&#110&#32&#116&#104&#101&#32&#67&#108&#105&#109&#97&#116&#101&#32&#69&#113&#117&#105&#116&#121&#32&#83&#99&#111&#114&#101&#99&#97&#114&#100" >&#70&#101&#101&#100&#98&#97&#99&#107</a></p>
     </header>
     <div id="main" role="main" class="group">
         <form name="settings" id="settings" method="post" autocomplete="off" >
@@ -114,7 +114,7 @@ if ($_POST && ($_POST['country']!=='none')) {
                 </li>
                 <li class="setting">
                     <fieldset id="pathway">
-                        <legend><?php echo $glossary->getLink('gloss_path','Level of Global Ambition');?></legend>
+                        <legend><?php echo $glossary->getLink('gloss_path',0,'Level of Global Ambition');?></legend>
                         <?php
                         $checkedString = array();
                         if (isset($_POST['ambition'])) {
