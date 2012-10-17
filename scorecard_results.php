@@ -127,12 +127,23 @@ function getResults()
 
     $retval .= '<br />';
 
-    // TODO create new graph fn
+    // -50 to 50 graph
     $score_adj = round($score_no_kab - 100);
     $retval .= '<p><span class="score">Score: ' . $score_adj;
-    $retval .= '<div class="graph group">';
+    $retval .= '<div class="graph group" id="fifty_fifty">';
     $retval .= drawGraph5050($score_adj);
     $retval .= '</div><!-- end .graph -->';
+    $retval .= '<p>Left end is -50, line in middle is 0, right end is +50.</p>';
+    $retval .= '<br />';
+    
+    // -100 to 100 graph
+    //$score_adj = round($score_no_kab - 100);
+    $retval .= '<p><span class="score">Score: ' . $score_adj;
+    $retval .= '<div class="graph group" id="fifty_fifty">';
+    $retval .= drawGraph100100($score_adj);
+    $retval .= '</div><!-- end .graph -->';
+    $retval .= '<p>Left end is -100, line in middle is 0, right end is +100.</p>';
+
     
     $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
     if ($scoreview == 'scorebasic') {

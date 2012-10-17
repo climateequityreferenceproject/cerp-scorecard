@@ -594,7 +594,7 @@ function drawGraph($pledge1,$class1,$pledge2,$class2, $show_pledge1 = true)
 }
 
 /**
- * Generate HTML for full set of bars, subtracting 100 and centering around zero
+ * Generate HTML for full set of bars, -50 to 50
  * 
  * @param integer $score 
  * 
@@ -644,6 +644,78 @@ function drawGraph5050($score)
             $gap = 0;
             $above_range = true;
             break;
+    }
+    
+    $retval = '';
+    $retval .= '<div class="plug" style="width:' . $plug . '%"></div>';
+    $retval .= '<div class="' . $score_class . '" style="width:' . $score . '%"></div>';
+    $retval .= '<div class="gap" style="width:' . $gap . '%"></div>';
+    $retval .= '<div class="zero_line"></div>';
+    return $retval;
+}
+
+
+/**
+ * Generate HTML for full set of bars, -100 to 100
+ * 
+ * @param integer $score 
+ * 
+ * @return string The HTML to render
+ */
+function drawGraph100100($score)
+{
+    switch ($score) {
+        case ($score < -100):
+            $score = 100;
+            $score_class = 'neg';
+            $plug = 0;
+            $gap = 100;
+            $below_range = true;
+            break;
+        case ($score == -100):
+            $score = 100;
+            $score_class = 'neg';
+            $plug = 0;
+            $gap = 100;
+            break;
+        case ($score > -100 and $score < 0):
+            $score = abs($score);
+            $score_class = 'neg';
+            $plug = 100 - $score;
+            $gap = 100;
+            break;
+        case ($score == 0):
+            $score_class = 'zero';
+            $plug = 100;
+            $gap = 100;
+            break;
+        case ($score > 0 and $score < 100):
+            $score_class = 'pos';
+            $plug = 100;
+            $gap = 100 - $score;
+            break;
+        case ($score == 100):
+            $score_class = 'pos';
+            $plug = 100;
+            $gap = 0;
+            break;
+        case ($score > 100):
+            $score = 100;
+            $score_class = 'pos';
+            $plug = 100;
+            $gap = 0;
+            $above_range = true;
+            break;
+    }
+    
+    // graph is 200 wide, so divide by 2 to get percentage
+    $plug = $plug /2;
+    $score = $score /2;
+    $gap = $gap /2;
+    if (($plug + $score + $gap) > 100) {
+        $gap = $gap -1;
+    } else if (($plug + $score + $gap) <=99) {
+        $plug = $plug +1;
     }
     
     $retval = '';
