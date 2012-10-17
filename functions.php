@@ -345,7 +345,6 @@ function hasConditionalPledge($code, $year=null)
 function hasUnconditionalPledge($code, $year=null) 
 {
     // Protect against injection
-    echo GDRsAPI::$maxYear;
     if (isCountry($code)) {
         $ctryrgn_str = 'iso3="' . $code . '"';
     } else {
