@@ -229,7 +229,7 @@ class HWTHelp implements Iterator
     private $_help_page;
     private $_index;
     private $_ids;
-    
+
     /**
      * Constructor for the HWTHelp system
      * 
@@ -242,17 +242,49 @@ class HWTHelp implements Iterator
      */
     public function __construct($url, $markup_flag, $help_page)
     {
+        //$this->_url = $url;
         $this->_markup_flag = $markup_flag;
-        $this->_url = $url;
         $this->_help_page = $help_page;
-        
-        $parser = new HWTHelpParser();
-        $this->_entries = $parser->parse($url);
+        //$parser = new HWTHelpParser();
+        $this->_entries = self::getHelpDB();  // $parser->parse($url);
         $this->_ids = array_keys($this->_entries);
         
         // Initalize the iterator
         $this->_index = 0;
     }
+    
+     /**
+     * Connects to help entries database via remote helper file
+     * 
+     * @return an array of entries
+     */   
+    private static function getHelpDB()
+    {
+        include $_SERVER['DOCUMENT_ROOT'] . '/helpdb/includes/db_gdrs_help.inc.php';
+        try
+        {
+          $sql = 'SELECT id, code_id, entry_title, entry_text FROM entry';
+          $result = $pdo->query($sql);
+        }
+        catch (PDOException $e)
+        {
+          $error = 'Error fetching entries: ' . $e->getMessage();
+          include  $_SERVER['DOCUMENT_ROOT'] . '/helpdb/includes/error.html.php';
+          exit();
+        }
+
+        // ... store results of query in an array ...
+        foreach ($result as $row)
+        {
+          $temp_entries[$row['code_id']] = array(
+                    'db_id' => $row['id'], 
+                    'label' => $row['entry_title'], 
+                    'text'  => $row['entry_text']);
+          
+        }
+        return $temp_entries;
+    }
+    
     
     /**
      * Sends you to the first help entry
@@ -323,19 +355,24 @@ class HWTHelp implements Iterator
      * 
      * @param string  $id       Short name for the entry
      * @param boolean $to_lower Flag whether to convert to lower case
+     * @param string $link_text Text to display for link to help entry // TODO default back to $label if no link text provided 
      * 
      * @return HTML Link markup for item you're getting help entry for
      */
-    public function getLink($id, $to_lower = false)
+    public function getLink($id, $link_text = '', $to_lower = false)
     {
         if (!isset($this->_entries[$id])) {
-            throw new HWTHelpException('No entry for identifier "' . $id . '" found');
+            //throw new HWTHelpException('No entry for identifier "' . $id . '" found');
         }
         $html = '<a class="' . $this->_markup_flag . '"';
         $html .= ' href="' . $this->_help_page . '#' . $id . '"';
         $html .= ' target="_blank">';
         
-        $label = $this->_entries[$id]['label'];
+        if ($link_text == '') {
+            $label = $this->_entries[$id]['label'];
+        } else {
+            $label = $link_text;
+        }
         if ($to_lower) {
             $label = strtolower($label);
         }
@@ -356,6 +393,14 @@ class HWTHelp implements Iterator
     public function getHelpPage($label_elem = "h2")
     {
         $retval = '';
+        $retval .= '<nav>' . PHP_EOL;
+        $retval .= '<ul>' . PHP_EOL;
+        foreach ($this->_entries as $id => $entry) {
+            $retval .= '<li><a href="#' . $id . '">' . $entry['label'] . '</a></li>';
+        }
+        $retval .= '</ul>' . PHP_EOL;
+        $retval .= '</nav>' . PHP_EOL;
+
         foreach ($this->_entries as $id => $entry) {
             $retval .= '<div id="' . $id . '">' . PHP_EOL;
             $retval .= '<' . $label_elem . '>' . $entry['label'];

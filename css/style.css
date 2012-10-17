@@ -135,16 +135,16 @@ button {  width: auto; overflow: visible; }
 #container {margin:0.5em auto; min-width:800px; padding:0 3em; width:60em;}
 header {padding:0.5em 0 1.5em 0;}
 
-/* #settings_wrapper {float:left; margin:0 30px 1em 0; padding: 0 13px 22px 13px; min-width:180px; width:30%;} */
-#settings_wrapper {float:left; margin:0 2em 1em 0; padding: 0 1em 1em 1em; width:14em;}
+#settings_wrapper {float:left; margin:0 30px 1em 0; padding: 0 13px 22px 13px; min-width:180px; width:30%;}
+/*#settings_wrapper {float:left; margin:0 2em 1em 0; padding: 0 1em 1em 1em; width:15em;}*/
 fieldset {padding:0 0 0.5em;}
 legend {padding-top:0.75em;}
 label {display:block; padding:0 0.75em 0 0.25em;}
 select {margin-top:0.25em;}
 #submit {margin:1.75em auto 0;}
 
-/* #results {float:left; padding:0 20px 1.5em 20px; min-width:220px; width:50%;} */
-#results {float:left; padding:0 2em 1.5em 2em; width:32em;}
+#results {float:left; padding:0 20px 1.5em 20px; min-width:220px; width:50%;}
+/*#results {float:left; padding:0 2em 1.5em 2em; width:32em;}*/
 #summary {margin:1.5em 0 0.25em;}
 footer {margin-top:1.5em; padding: 0.25em 1em 1em 1em; width:35em}
 
@@ -219,7 +219,7 @@ a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover /*, le
 
 /* h1, h2, h3, h4, h5, h6, strong { font-weight: bold; } */
 
-@font-face {
+/*@font-face {
     font-family: 'ProximaNovaBold';
     src: url('../fonts/proximanova-bold-webfont.eot');
     src: url('../fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
@@ -238,12 +238,36 @@ a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover /*, le
          url('../fonts/proximanova-boldit-webfont.svg#ProximaNovaBoldItalic') format('svg');
     font-weight: normal;
     font-style: normal;
+}*/
+@font-face {
+    font-family: 'ProximaNova';
+    src: url('/fonts/proximanova-bold-webfont.eot');
+    src: url('/fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/proximanova-bold-webfont.woff') format('woff'),
+         url('/fonts/proximanova-bold-webfont.ttf') format('truetype'),
+         url('/fonts/proximanova-bold-webfont.svg#ProximaNovaBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ProximaNova';
+    src: url('/fonts/proximanova-boldit-webfont.eot');
+    src: url('/fonts/proximanova-boldit-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/proximanova-boldit-webfont.woff') format('woff'),
+         url('/fonts/proximanova-boldit-webfont.ttf') format('truetype'),
+         url('/fonts/proximanova-boldit-webfont.svg#ProximaNovaBoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+}
+h1, h2, h3, h4 {
+	font-family: ProximaNova, Arial, "Helvetica Neue", Helvetica, sans-serif; 
+	font-weight: bold;
 }
 
 body {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
-h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, .score, legend {font-family:ProximaNovaBold, "Helvetica Neue", Helvetica, Arial, sans-serif;}
+h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, .score, legend {font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold;}
 em {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif; font-style:italic;}
-h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {font-family:ProximaNovaBoldItalic, "Helvetica Neue", Helvetica, Arial, sans-serif;}
+h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold; font-style:italic;}
 
 h1 {font-size:250%; line-height:1;}
 h2 {font-size:150%; margin-top:0.75em;}
