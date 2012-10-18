@@ -174,11 +174,15 @@ function getResults()
     }
     $retval .= '<input type="submit" value="' . $switchview . '" name="switch_view" id="switch_view" />';
     
-//    $help_bau = $HWTHelp->getLink('gloss_bau', true, 0);
+    foreach ($glossary->getIds() as $gloss_id) {
+        $link_lower[$gloss_id] = $glossary->getLink($gloss_id, true, 0);
+    }
+    $marker_pathway = $glossary->getLink('gloss_path', true, 'marker pathway');
+    // $help_bau = $glossary->getLink('gloss_bau', true, 0);
     
     if ($pledge_gap_MtCO2 > 0) {
 $action_string = <<<FALLSSHORTTEXT
-falls short of its fair share by $pledge_gap_MtCO2 million tonnes. To close that gap, $country should raise its pledge by an additional $pledge_gap_perc_bau% of its business-as-usual emissions.
+falls short of its $link_lower[gloss_fair] by $pledge_gap_MtCO2 million tonnes. To close that $link_lower[gloss_gap], $country should raise its pledge by an additional $pledge_gap_perc_bau% of its $link_lower[gloss_bau] emissions.
 FALLSSHORTTEXT;
     } else {
 $action_string = <<<MEETSTEXT
@@ -193,7 +197,7 @@ MEETSTEXT;
             $retval .= ' negative';
         }
         $retval .= <<<LONGTEXT
-        ">$country</span>'s fair share of the global mitigation burden associated with the $ambition marker pathway is $fair_share_perc%. This fair share is calculated as the simple average of its share of global capacity and global responsibility. ($country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility.)</p>
+        ">$country</span>'s $link_lower[gloss_fair] of the global mitigation burden associated with the $ambition $marker_pathway is $fair_share_perc%. This fair share is calculated as the simple average of its share of global $link_lower[gloss_capacity] and global $link_lower[gloss_responsibility]. ($country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility.)</p>
 
         <p>$country has pledged to do $pledged_reduct_perc% of the mitigation that would be needed, globally, to reach the $ambition marker pathway.</p>
 

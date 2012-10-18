@@ -274,6 +274,7 @@ class HWTHelp implements Iterator
         }
 
         // ... store results of query in an array ...
+        $temp_entries = array();
         foreach ($result as $row)
         {
           $temp_entries[$row['code_id']] = array(
@@ -292,6 +293,15 @@ class HWTHelp implements Iterator
      */
     public function getEntries() {
         return $this->_entries;
+    }
+    
+    /**
+     * Get all the help ids
+     * 
+     * @return array of help ids 
+     */
+    public function getIds() {
+        return $this->_ids;
     }
     
     /**
