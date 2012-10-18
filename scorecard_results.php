@@ -186,7 +186,7 @@ falls short of its $link_lower[gloss_fair] by $pledge_gap_MtCO2 million tonnes. 
 FALLSSHORTTEXT;
     } else {
 $action_string = <<<MEETSTEXT
-meets its fair share.
+meets its $link_lower[gloss_fair].
 MEETSTEXT;
     }
     
