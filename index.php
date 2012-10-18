@@ -82,6 +82,10 @@ if ($_POST && ($_POST['country']!=='none')) {
             // Persist if set
             echo '<input type="hidden" name="kab_score" value="' . $_GET['kab_score'] . '">';
         }
+        if (isset($_GET['kab'])) {
+            // Persist if set
+            echo '<input type="hidden" name="kab" value="' . $_GET['kab'] . '">';
+        }
         ?>
         <div id="settings_wrapper">
             

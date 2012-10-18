@@ -138,7 +138,23 @@ function getResults()
 //    $retval .= '<br />';
     
     // -100 to 100 graph
-    $score_adj = round($score_no_kab - 100);
+    $kab_choice = 'no';
+    if (isset($_GET['kab'])) {
+        $kab_choice = $_GET['kab'];
+    }
+    if (isset($_POST['kab'])) {
+        $kab_choice = $_POST['kab'];
+    }
+    
+    switch ($kab_choice) {
+         case 'yes':
+            $score_adj = round($score_kab - 100);
+            break;
+        case 'no':
+        default:
+            $score_adj = round($score_no_kab - 100);
+            break;
+    }
     $retval .= '<p><span class="score">Score: ' . $score_adj;
     $retval .= '<div class="graph group" id="fifty_fifty">';
     $retval .= drawGraph100100($score_adj);
