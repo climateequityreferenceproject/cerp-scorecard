@@ -48,7 +48,7 @@ function getResults()
     else {
         $scoreview = 'scorebasic';
     }
-    
+
     // Get general pathway information
     $pathwayIds = GDRsAPI::connection()->pathwayIds;
     $pathwayLabel = GDRsAPI::connection()->pathwayLabel;
@@ -140,13 +140,13 @@ function getResults()
 //    $retval .= '<br />';
     
     // -100 to 100 graph
-    $kab_choice = 'no';
-    if (isset($_GET['kab'])) {
-        $kab_choice = $_GET['kab'];
-    }
-    if (isset($_POST['kab'])) {
-        $kab_choice = $_POST['kab'];
-    }
+    //$kab_choice = 'yes';
+//    if (isset($_GET['kab'])) {
+//        $kab_choice = $_GET['kab'];
+//    }
+//    if (isset($_POST['kab'])) {
+//        $kab_choice = $_POST['kab'];
+//    }
     
     switch ($kab_choice) {
          case 'yes':

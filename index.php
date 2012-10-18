@@ -77,16 +77,6 @@ if ($_POST && ($_POST['country']!=='none')) {
     </header>
     <div id="main" role="main" class="group">
         <form name="settings" id="settings" method="post" autocomplete="off" >
-        <?php
-        if (isset($_GET['kab_score'])) {
-            // Persist if set
-            echo '<input type="hidden" name="kab_score" value="' . $_GET['kab_score'] . '">';
-        }
-        if (isset($_GET['kab'])) {
-            // Persist if set
-            echo '<input type="hidden" name="kab" value="' . $_GET['kab'] . '">';
-        }
-        ?>
         <div id="settings_wrapper">
             
             <ul>
@@ -116,6 +106,7 @@ if ($_POST && ($_POST['country']!=='none')) {
                         </select>
                     </fieldset>
                 </li>
+
                 <li class="setting">
                     <fieldset id="pathway">
                         <legend><?php echo $glossary->getLink('gloss_path',0,'Level of Global Ambition');?></legend>
@@ -141,12 +132,52 @@ if ($_POST && ($_POST['country']!=='none')) {
                         TODO: fix 3-pathway workflow to 2-pathway workflow, with labels stored in API and not overridden here -->
                     </fieldset>
                 </li>
+                
+                <li class="setting">
+                     <fieldset id="kab_control">
+                        <legend><?php echo $glossary->getLink('gloss_kab'); ?></legend>
+                        <?php
+                        // set defaults TODO What am I not seeing, that these seem to do nothing? -TKB
+                        $kab_on = true;
+                        $kab_choice = 'yes';
+                        $kab_checked_on = 'checked="checked"';
+                        $kab_checked_off = '';
+                        
+                        if ((isset($_GET['kab']) and ($_GET['kab'] == 'yes')) or (isset($_POST['kab']) and $_POST['kab'] == 'yes')) {
+                            // KABs are on
+                            $kab_on = true;
+                            $kab_checked_on = 'checked="checked"';
+                            $kab_off = false;
+                            $kab_checked_off = '';
+                            $kab_choice = 'yes';
+                            //$score_adj = round($score_kab - 100);
+                            //echo '<input type="hidden" name="kab" value="yes">';
+                        } else {
+                            // KABs are off
+                            $kab_on = false;
+                            $kab_checked_on = '';
+                            $kab_off = true;
+                            $kab_checked_off = 'checked="checked"';
+                            $kab_choice = 'no';
+                            //$score_adj = round($score_no_kab - 100);
+                            //echo '<input type="hidden" name="kab" value="no">';
+                        }
+                        
+                        ?>
+                        
+                        <label for="kab_on"><input type="radio" name="kab" id="kab_on" value="<?php echo $kab_on; ?>" <?php echo $kab_checked_on; ?> /> Use Kyoto-adjusted baselines</label>
+                        <label for="kab_off"><input type="radio" name="kab" id="kab_off" value="<?php echo $kab_off; ?>" <?php echo $kab_checked_off; ?> /> No adjustment for Kyoto commitments</label>
+
+                     </fieldset>
+                </li>   
+                
                 <li class="setting">
                      <fieldset id="pledge_type">
                         <legend><?php echo $glossary->getLink('gloss_pledge');?></legend>
-                        <span id="pledge_controls"><?php include_once 'pledge_control.php'; ?></span>
+                        <div id="pledge_controls"><?php include_once 'pledge_control.php'; ?></div>
                      </fieldset>
                 </li>
+
             </ul>
 
             <input type="submit" value="get score" id="submit" />
