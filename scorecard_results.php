@@ -105,44 +105,45 @@ function getResults()
 
     $condition_string = $_POST['conditional'] ? 'conditional' : 'unconditional';
     
-    // Collect content for output
-    $retval = '<p><span class="score">Score: ' . $score_kab . '%';
-    //$retval = '<p><span class="score">Score: ' . $score_kab . '%';
-    $retval .= '</span>&nbsp; with baseline adjusted for Kyoto commitments</p>';
-    $retval .= '<div class="graph group">';
-    $retval .= drawGraph($pledge1, 'intl', $score_kab, 'kab', false);
-    $retval .= '</div><!-- end .graph -->';
-
-    $retval .= '<p><span class="score">Score: ' . $score_no_kab . '%';
-    $retval .= '</span>&nbsp; with no baseline adjustment</p>';
-    $retval .= '<div class="graph group">';
-    $retval .= drawGraph($pledge1, 'intl', $score_no_kab, 'no_kab', false);
-    $retval .= '</div><!-- end .graph -->';
-
-    $retval .= '<div id="key" class="group">';
-//    if ($effort_val < 100) {
-        $retval .= '<p><span class="gap"></span> Shortfall = gap between fair share and pledge, as percentage of baseline</p>';
-//    }
-    $retval .= '<p><span class="dom"></span> Score = ( baseline – shortfall ) / baseline</p></div><!-- end #key -->';
-
-    $retval .= '<br />';
-
-    // -50 to 50 graph
-    $score_adj = round($score_no_kab - 100);
-    $retval .= '<p><span class="score">Score: ' . $score_adj;
-    $retval .= '<div class="graph group" id="fifty_fifty">';
-    $retval .= drawGraph5050($score_adj);
-    $retval .= '</div><!-- end .graph -->';
-    $retval .= '<p>Left end is -50, line in middle is 0, right end is +50.</p>';
-    $retval .= '<br />';
+    $retval = '';
+//    // Collect content for output
+//    $retval .= '<p><span class="score">Score: ' . $score_kab . '%';
+//    //$retval = '<p><span class="score">Score: ' . $score_kab . '%';
+//    $retval .= '</span>&nbsp; with baseline adjusted for Kyoto commitments</p>';
+//    $retval .= '<div class="graph group">';
+//    $retval .= drawGraph($pledge1, 'intl', $score_kab, 'kab', false);
+//    $retval .= '</div><!-- end .graph -->';
+//
+//    $retval .= '<p><span class="score">Score: ' . $score_no_kab . '%';
+//    $retval .= '</span>&nbsp; with no baseline adjustment</p>';
+//    $retval .= '<div class="graph group">';
+//    $retval .= drawGraph($pledge1, 'intl', $score_no_kab, 'no_kab', false);
+//    $retval .= '</div><!-- end .graph -->';
+//
+//    $retval .= '<div id="key" class="group">';
+////    if ($effort_val < 100) {
+//        $retval .= '<p><span class="gap"></span> Shortfall = gap between fair share and pledge, as percentage of baseline</p>';
+////    }
+//    $retval .= '<p><span class="dom"></span> Score = ( baseline – shortfall ) / baseline</p></div><!-- end #key -->';
+//
+//    $retval .= '<br />';
+//
+//    // -50 to 50 graph
+//    $score_adj = round($score_no_kab - 100);
+//    $retval .= '<p><span class="score">Score: ' . $score_adj;
+//    $retval .= '<div class="graph group" id="fifty_fifty">';
+//    $retval .= drawGraph5050($score_adj);
+//    $retval .= '</div><!-- end .graph -->';
+//    $retval .= '<p>Left end is -50, line in middle is 0, right end is +50.</p>';
+//    $retval .= '<br />';
     
     // -100 to 100 graph
-    //$score_adj = round($score_no_kab - 100);
+    $score_adj = round($score_no_kab - 100);
     $retval .= '<p><span class="score">Score: ' . $score_adj;
     $retval .= '<div class="graph group" id="fifty_fifty">';
     $retval .= drawGraph100100($score_adj);
     $retval .= '</div><!-- end .graph -->';
-    $retval .= '<p>Left end is -100, line in middle is 0, right end is +100.</p>';
+//    $retval .= '<p>Left end is -100, line in middle is 0, right end is +100.</p>';
 
     
     $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
@@ -155,14 +156,23 @@ function getResults()
     
     $retval .= '<br />';
     
-    
+    if ($pledge_gap_MtCO2 > 0) {
+$action_string = <<<FALLSSHORTTEXT
+falls short of its fair share by $pledge_gap_MtCO2 million tonnes. To close that gap, $country should raise its pledge by an additional $pledge_gap_perc_bau% of its [business-as-usual] emissions.
+FALLSSHORTTEXT;
+    } else {
+$action_string = <<<MEETSTEXT
+meets its fair share.
+MEETSTEXT;
+    }
+
     if ($scoreview == 'scoreadv') {
         $retval .= <<<LONGTEXT
         <p><span class="score">$country</span>'s [fair share] of the global mitigation burden associated with the $ambition marker pathway is $fair_share_perc%. This fair share is calculated as the simple average of its share of global capacity and global responsibility. ($country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility.)</p>
 
         <p>$country has pledged to do $pledged_reduct_perc% of the mitigation that would be needed, globally, to reach the $ambition marker pathway.</p>
 
-        <p>Given a [$ambition target], $country's $by_year $condition_string [pledge] to mitigate $pledged_reduct_MtCO2 million tonnes falls short of its fair share by $pledge_gap_MtCO2 million tonnes. To close that gap, $country should raise its pledge by an additional $pledge_gap_perc_bau% of its [business-as-usual] emissions.</p>
+        <p>Given a [$ambition target], $country's $by_year $condition_string [pledge] to mitigate $pledged_reduct_MtCO2 million tonnes $action_string</p>
 LONGTEXT;
     
     $retval .= '<div id="details">';
@@ -180,7 +190,7 @@ LONGTEXT;
         
     } elseif ($scoreview == 'scorebasic') {
         $retval .= <<<SHORTTEXT
-        <p>Given a [$ambition target], <span class="score">$country&#8217;s</span> $by_year $condition_string [pledge] to mitigate $pledged_reduct_MtCO2 million tonnes falls short of its fair share by $pledge_gap_MtCO2 million tonnes. To close that gap, $country should raise its pledge by an additional $pledge_gap_perc_bau% of its [business-as-usual] emissions.</p>
+        <p>Given a [$ambition target], <span class="score">$country&#8217;s</span> $by_year $condition_string [pledge] to mitigate $pledged_reduct_MtCO2 million tonnes $action_string</p>
 SHORTTEXT;
     } else {
         // TODO make sure nothing else needs to go here
