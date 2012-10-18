@@ -172,12 +172,11 @@ function getResults()
     }
     $retval .= '<input type="submit" value="' . $switchview . '" name="switch_view" id="switch_view" />';
     
-//    $retval .= '<br />';
-//    $help_bau = $HWTHelp->getLink('gloss_bau', true, 0);
+    $retval .= '<br />';
     
     if ($pledge_gap_MtCO2 > 0) {
 $action_string = <<<FALLSSHORTTEXT
-falls short of its fair share by $pledge_gap_MtCO2 million tonnes. To close that gap, $country should raise its pledge by an additional $pledge_gap_perc_bau% of its business-as-usual emissions.
+falls short of its fair share by $pledge_gap_MtCO2 million tonnes. To close that gap, $country should raise its pledge by an additional $pledge_gap_perc_bau% of its [business-as-usual] emissions.
 FALLSSHORTTEXT;
     } else {
 $action_string = <<<MEETSTEXT
@@ -188,11 +187,11 @@ MEETSTEXT;
 
     if ($scoreview == 'scoreadv') {
         $retval .= <<<LONGTEXT
-        <p><span class="score">$country</span>'s fair share of the global mitigation burden associated with the $ambition marker pathway is $fair_share_perc%. This fair share is calculated as the simple average of its share of global capacity and global responsibility. ($country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility.)</p>
+        <p><span class="score">$country</span>'s <a href="http://gdrights.org/scorecard_dev/glossary.php#gloss_fair">fair share</a> of the global mitigation burden associated with the $ambition marker pathway is $fair_share_perc%. This fair share is calculated as the simple average of its share of global capacity and global responsibility. ($country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility.)</p>
 
         <p>$country has pledged to do $pledged_reduct_perc% of the mitigation that would be needed, globally, to reach the $ambition marker pathway.</p>
 
-        <p>Given a $ambition target, $country&#8217;s $by_year $condition_string pledge to mitigate $pledged_reduct_MtCO2 million tonnes $action_string</p>
+        <p>Given a <a href="http://gdrights.org/scorecard_dev/glossary.php#gloss_path">$ambition target</a>, $country's $by_year <a href="http://gdrights.org/scorecard_dev/glossary.php#gloss_pledge>$condition_string pledge</a> to mitigate $pledged_reduct_MtCO2 million tonnes $action_string</p>
 LONGTEXT;
     
     $retval .= '<div id="details">';
@@ -210,7 +209,7 @@ LONGTEXT;
         
     } elseif ($scoreview == 'scorebasic') {
         $retval .= <<<SHORTTEXT
-        <p>Given a $ambition target, <span class="score">$country&#8217;s</span> $by_year $condition_string pledge to mitigate $pledged_reduct_MtCO2 million tonnes $action_string</p>
+        <p>Given a <a href="http://gdrights.org/scorecard_dev/glossary.php#gloss_path">$ambition target</a>, <span class="score">$country&#8217;s</span> $by_year <a href="http://gdrights.org/scorecard_dev/glossary.php#gloss_pledge>$condition_string pledge</a> to mitigate $pledged_reduct_MtCO2 million tonnes $action_string</p>
 SHORTTEXT;
     } else {
         // TODO make sure nothing else needs to go here

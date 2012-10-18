@@ -723,6 +723,9 @@ function drawGraph100100($score)
     $retval .= '<div class="' . $score_class . '" style="width:' . $score . '%"></div>';
     $retval .= '<div class="gap" style="width:' . $gap . '%"></div>';
     $retval .= '<div class="zero_line"></div>';
+    $retval .= '<div class="axis_labels">';
+    $retval .= '  <span class="label_left">-100</span><span class="label_center">0</span><span class="label_right">100</span>';
+    $retval .= '</div>';
     return $retval;
 }
 

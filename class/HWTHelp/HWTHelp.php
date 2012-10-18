@@ -285,6 +285,14 @@ class HWTHelp implements Iterator
         return $temp_entries;
     }
     
+    /**
+     * Get all the help entries
+     * 
+     * @return array of help entries
+     */
+    public function getEntries() {
+        return $this->_entries;
+    }
     
     /**
      * Sends you to the first help entry

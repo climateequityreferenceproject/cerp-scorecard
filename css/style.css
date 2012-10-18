@@ -148,12 +148,16 @@ select {margin-top:0.25em;}
 #summary {margin:1.5em 0 0.25em;}
 footer {margin-top:1.5em; padding: 0.25em 1em 1em 1em; width:35em}
 
-.graph {width:100%}
+.graph {height:50px; overflow:hidden; position:relative; width:100%;}
 .graph .intl, .graph .dom, .graph .no_kab, .graph .kab, .graph .gap, .graph .plug, .graph .neg, .graph .pos {float:left; height:30px; margin-bottom:5px; margin-top:5px;}
-.graph {overflow:hidden; position:relative;}
 .graph img {left:0; position:absolute; top:20px; width:100%; z-index:-200;}
-#fifty_fifty {height:40px; position:relative;}
+#fifty_fifty {height:40px; margin-bottom:0.5em; position:relative;}
 .zero_line {border-right:2px solid #666; float:left; height:40px; left:0; position:absolute; top:0; width:50%; z-index:9999;}
+.axis_labels {bottom:0; height:20px; left:0; position:absolute; width:100%;}
+span.label_left, span.label_center, span.label_right {display:block; height:20px; width:6em;}
+span.label_left {float:left;}
+span.label_center {margin:0 auto;}
+span.label_right {float:right;}
 
 #key {clear:both; margin-top:0.5em;}
 .glossary #container, .docs #container {min-width:500px; max-width:900px;}
