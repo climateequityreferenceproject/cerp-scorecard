@@ -75,7 +75,7 @@ function getResults()
     $source_dom = cleanText($pledge_info['source']);
     $source_intl = cleanText($pledge_info['intl_source']);
 
-    echo '<br />';
+//    echo '<br />';
     if (isset($_POST['kab_score'])) {
         $kab_score = $_POST['kab_score'];
     } else if (isset($_GET['kab_score'])) {
@@ -157,12 +157,14 @@ function getResults()
             $score_adj = round($score_no_kab - 100);
             break;
     }
-    $retval .= '<p><span class="score">Score: ' . $score_adj;
+    $retval .= '<p><span class="score';
+    if ($score_adj < 0) {
+        $retval .= ' negative';
+    }
+    $retval .= '">Score: ' . $score_adj . '</span>';
     $retval .= '<div class="graph group" id="fifty_fifty">';
     $retval .= drawGraph100100($score_adj);
     $retval .= '</div><!-- end .graph -->';
-//    $retval .= '<p>Left end is -100, line in middle is 0, right end is +100.</p>';
-
     
     $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
     if ($scoreview == 'scorebasic') {
@@ -172,7 +174,6 @@ function getResults()
     }
     $retval .= '<input type="submit" value="' . $switchview . '" name="switch_view" id="switch_view" />';
     
-//    $retval .= '<br />';
 //    $help_bau = $HWTHelp->getLink('gloss_bau', true, 0);
     
     if ($pledge_gap_MtCO2 > 0) {
@@ -187,8 +188,12 @@ MEETSTEXT;
     
 
     if ($scoreview == 'scoreadv') {
+        $retval .= '<p><span class="score';
+        if ($score_adj < 0) {
+            $retval .= ' negative';
+        }
         $retval .= <<<LONGTEXT
-        <p><span class="score">$country</span>'s fair share of the global mitigation burden associated with the $ambition marker pathway is $fair_share_perc%. This fair share is calculated as the simple average of its share of global capacity and global responsibility. ($country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility.)</p>
+        ">$country</span>'s fair share of the global mitigation burden associated with the $ambition marker pathway is $fair_share_perc%. This fair share is calculated as the simple average of its share of global capacity and global responsibility. ($country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility.)</p>
 
         <p>$country has pledged to do $pledged_reduct_perc% of the mitigation that would be needed, globally, to reach the $ambition marker pathway.</p>
 
@@ -206,57 +211,29 @@ LONGTEXT;
         $retval .= '<p class="source">Source for international support: ' . $source_intl . '.</p>';            
     }
     $retval .= '<p><strong>Warning: the scores here are only meaningful if the underlying national pledges are in good faith.</strong></p>';
-    $retval .= '</div>';
+    $retval .= '</div><!-- end #details-->';
         
     } elseif ($scoreview == 'scorebasic') {
-        $retval .= <<<SHORTTEXT
-        <p>Given a $ambition target, <span class="score">$country&#8217;s</span> $by_year $condition_string pledge to mitigate $pledged_reduct_MtCO2 million tonnes $action_string</p>
-SHORTTEXT;
+        $retval .= '<p>Given a ' .  $ambition . ' target, <span class="score';
+        if ($score_adj < 0) {
+            $retval .= ' negative';
+        }
+
+        $retval .= '">' . $country . '</span>&#8217;s ' . $by_year . ' ' . $condition_string;
+        $retval .= 'pledge to mitigate ' .  $pledged_reduct_MtCO2 . ' million tonnes ' . $action_string . '</p>';
     } else {
         // TODO make sure nothing else needs to go here
     }
 
-    $retval .= '<p><a href="what.php" target="_blank">How do I interpret these scores?</a> &nbsp;|&nbsp; ';
+    $retval .= '<div class="results_links"><a href="what.php" target="_blank">How do I interpret these scores?</a> &nbsp;|&nbsp; ';
 
     $calc_url = getCalcUrl($iso3, $pathway_id);
     $retval .= '<a href="' . $calc_url . '" target="_blank">';
-    $retval .= 'More detailed calculations &#187;</a></p>';
-    
-    //$retval .= '<br /><br />';
-    //$retval .= print_r($_POST, true);
+    $retval .= 'More detailed calculations &#187;</a></div>';
     
     return $retval;
 }
 
-/**
- * Generate HTML to diplay bar chart and text information about pledge
- * 
- * @return string: Nicely-formatted HTML for displaying information about the pledge
- */
-//function getResults() {
-//    $retval = print_r($_POST, true);
-//    $retval .= '<br /><br />';
-//    
-//    if (!isset($_POST['scoreview'])) {
-//        $scoreview = 'scorebasic'; 
-//    }
-//    elseif (!isset($_POST['switch_view'])) {
-//        $scoreview = $_POST['scoreview'];
-//    }
-//    elseif ($_POST['scoreview'] == 'scorebasic') {
-//        $scoreview = 'scoreadv';
-//    }
-//    else {
-//        $scoreview = 'scorebasic';
-//    }
-//    $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
-//    $retval .= '<input type="submit" value="switch view" name="switch_view" id="switch_view" />';
-//    $retval .= '<br />' . $scoreview;
-//    // TODO replace 'scorebasic' with a function generating basic/short results, 
-//    // and replace 'scoreadv' with a function generating longer/more-info results
-//    
-//    return $retval;
-//}
 
 if (isset($_POST['ajax']) ) {
     if ($_POST['country']!=='none') {

@@ -1,3 +1,5 @@
+@charset "UTF-8";
+/* CSS Document */
 /**
  * HTML5 Boilerplate
  *
@@ -148,18 +150,19 @@ select {margin-top:0.25em;}
 #summary {margin:1.5em 0 0.25em;}
 footer {margin-top:1.5em; padding: 0.25em 1em 1em 1em; width:35em}
 
-.graph {height:50px; overflow:hidden; position:relative; width:100%;}
+.graph {height:60px; overflow:hidden; position:relative; width:100%;}
 .graph .intl, .graph .dom, .graph .no_kab, .graph .kab, .graph .gap, .graph .plug, .graph .neg, .graph .pos {float:left; height:30px; margin-bottom:5px; margin-top:5px;}
 .graph img {left:0; position:absolute; top:20px; width:100%; z-index:-200;}
-#fifty_fifty {height:40px; margin-bottom:0.5em; position:relative;}
-.zero_line {border-right:2px solid #666; float:left; height:40px; left:0; position:absolute; top:0; width:50%; z-index:9999;}
+#fifty_fifty {height:60px; margin-bottom:1.5em; position:relative;}
+.zero_line {border-right:2px solid #666; float:left; height:40px; left:0; position:absolute; top:0; width:49.5%; z-index:9999;}
 .axis_labels {bottom:0; height:20px; left:0; position:absolute; width:100%;}
 span.label_left, span.label_center, span.label_right {display:block; height:20px; width:6em;}
 span.label_left {float:left;}
-span.label_center {margin:0 auto;}
-span.label_right {float:right;}
+span.label_center {margin:0 auto; text-align:center;}
+span.label_right {position:absolute; right:0; text-align:right; top:0;}
 
 #key {clear:both; margin-top:0.5em;}
+.results_links {margin:1.25em 0 0.5em;}
 .glossary #container, .docs #container {min-width:500px; max-width:900px;}
 .glossary nav {margin-top:2em;}
 .glossary #main div p, .glossary #main div dl {padding-left:1em;}
@@ -186,16 +189,15 @@ a:link {-webkit-tap-highlight-color:#dd6e4c;}
 
 /*.graph {border-left:2px solid #999;}*/
 .intl {background:#707ac9;}
-.dom, .no_kab, .kab {background:#8ebd7f;}
-.score {color:#8ebd7f;}
+.dom, .no_kab, .kab, .pos {background:#6cad57;} /* #8ebd7f 59ad4c*/
+.score {color:#6cad57;}
 .gap {background:#ffce73;}
 .plug, #fifty_fifty .gap {background: #eee;}
-.neg {background:#dd6e4c;}
-.pos {background:green;}
+.neg {background:#dd6e4c;}  /* #dd6e4c */
+.negative {color:#dd6e4c; white-space:nowrap;}
 #results {border:6px solid #ffce73;}
 #settings_wrapper, footer {border:6px solid #e6ebe6;}
 #settings_wrapper, #results, footer {-moz-border-radius:15px; border-radius:15px;}
-#commitment.negative {color:#dd6e4c; white-space:nowrap;}
 
 .glossary #main, .docs #main {border-top:6px solid #ffce73;}
 .glossary p {margin-top:0.75em;}
@@ -218,7 +220,7 @@ footer a, footer a:active, footer a:visited,
 a.more, a.more:active, a.more:visited,
 a.ext, a.ext:active, a.ext:visited {color:#666;}
 
-a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover /*, legend a:hover, .glossary a:hover, .docs a:hover, #more_options a:hover, .source a:hover, .glossary header h1 a:hover, .glossary nav a:hover, .docs header h1 a:hover, h3 a:hover */ {color:#dd6e4c;}
+a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover /*, legend a:hover, .glossary a:hover, .docs a:hover, #more_options a:hover, .source a:hover, .glossary header h1 a:hover, .glossary nav a:hover, .docs header h1 a:hover, h3 a:hover */ {color:#3a4e85;}
 
 .disabled {color:#aaa;}
 
@@ -255,7 +257,7 @@ em {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif; font-style:itali
 h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold; font-style:italic;}
 
 h1 {font-size:250%; line-height:1;}
-h2 {font-size:150%; margin-top:0.75em;}
+h2 {font-size:150%; margin-top:1em;}
 
 /* #summary {font-size:120%; line-height:30px;} */
 #summary {line-height:24px;}
@@ -265,12 +267,16 @@ h2 {font-size:150%; margin-top:0.75em;}
 .docs h3 {font-size:115%;}
 header h1, header h2, .docs header h1, .docs header h2 {margin-top:0;}
 
+#results, #details {line-height:1.4em;}
+
 p {margin-top:1.2em;}
 #key p {margin-top:0.5em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
 .docs p {margin-top:0.5em;}
 #details, #key {font-size:85%;}
-#details p.first {margin-top:0;}
+#details h2 {margin-top:1.5em;}
+#details p {margin-top:0.5em;}
+#details p.first, .no_sb {margin-top:0;}
 .docs p.first {margin-top:2em;}
 header p {margin-top:0.5em;}
 /* p.source {margin-top:0.25em;} */

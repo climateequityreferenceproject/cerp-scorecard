@@ -691,18 +691,18 @@ function drawGraph100100($score)
             break;
         case ($score > 0 and $score < 100):
             $score_class = 'pos';
-            $plug = 100;
+            $plug = 99.5;
             $gap = 100 - $score;
             break;
         case ($score == 100):
             $score_class = 'pos';
-            $plug = 100;
+            $plug = 99.5;
             $gap = 0;
             break;
         case ($score > 100):
             $score = 100;
             $score_class = 'pos';
-            $plug = 100;
+            $plug = 99.5;
             $gap = 0;
             $above_range = true;
             break;
