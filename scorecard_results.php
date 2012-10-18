@@ -220,7 +220,7 @@ LONGTEXT;
         }
 
         $retval .= '">' . $country . '</span>&#8217;s ' . $by_year . ' ' . $condition_string;
-        $retval .= 'pledge to mitigate ' .  $pledged_reduct_MtCO2 . ' million tonnes ' . $action_string . '</p>';
+        $retval .= ' pledge to mitigate ' .  $pledged_reduct_MtCO2 . ' million tonnes ' . $action_string . '</p>';
     } else {
         // TODO make sure nothing else needs to go here
     }
