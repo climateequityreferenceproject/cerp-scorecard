@@ -666,14 +666,14 @@ function drawGraph100100($score)
 {
     switch ($score) {
         case ($score < -100):
-            $score = 100;
+            $score = 99.5;
             $score_class = 'neg';
             $plug = 0;
             $gap = 100;
             $below_range = true;
             break;
         case ($score == -100):
-            $score = 100;
+            $score = 99.5;
             $score_class = 'neg';
             $plug = 0;
             $gap = 100;
