@@ -50,8 +50,8 @@ class GDRsAPI
     // Decided not to use getters and setters
     public $pathwayLabel = array(
         'low' => 'LOW AMBITION', // G-8
-        'med' => '2&#8451;', // Climate Action Tracker 2.0
-        'high' => '1.5&#8451;' // AOSIS2
+        'med' => '2.0&#8451;',
+        'high' => '1.5&#8451;'
     );
     public $pathwayIds = array();
     public $pathway_default = 'high';
@@ -59,7 +59,7 @@ class GDRsAPI
     // TODO: Get this by querying the API
     public static $maxYear = 2030;
     
-    private $_pathway_array = array('low'=>'G-8', 'med'=>'CAT-2.0', 'high'=>'AOSIS3');
+    private $_pathway_array = array('low'=>'G-8', 'med'=>'2.0Cmarkerpathway', 'high'=>'1.5Cmarkerpathway');
     // TODO allow authors to identify in pathway db which are used here
     
     /**
