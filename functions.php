@@ -748,3 +748,24 @@ function cleanText($string)
     }
     return $retval;
 }
+
+/**
+ * Using current GET & POST settings, determine whether to use Kyoto-adjusted baselines or not
+ * 
+ * @return boolean Are KABs "on"? That is, are we using Kyoto-adjusted baselines?
+ */
+function kabsOn() {
+    if (!isset($_GET['kab']) and !isset($_POST['kab'])) {
+        // Default to KABs on
+        $retval = true;
+    } else {
+        if ((isset($_GET['kab']) and ($_GET['kab'] == 'yes')) or (isset($_POST['kab']) and $_POST['kab'] == 'yes')) {
+            // KABs are on
+            $retval = true;
+        } else {
+            // KABs are off
+            $retval = false;
+        }
+    }
+    return $retval;
+}

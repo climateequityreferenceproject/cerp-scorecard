@@ -87,16 +87,8 @@ function getResults()
     $effort_array = getGdrsInformation($pledge_info, $pathway_id, $kab_score);
     $score_kab = niceNumber($effort_array['score_kab']);
     $score_no_kab = niceNumber($effort_array['score']);
-//    $effort_val = $effort_array['dom_pledge'] + $effort_array['intl_pledge'];
-//    $effort = number_format($effort_val);
-
-//    $intl = niceNumber($effort_array['intl_pledge']);
-//    $dom = niceNumber($effort_array['dom_pledge']);
-//    $gap = niceNumber($effort_array['gap']);
-//    $pledge_over_bau = niceNumber($effort_array['pledge_over_bau']);
     $cap = niceNumber($effort_array['cap']);
     $resp = niceNumber($effort_array['resp']);
-//    $dom_rel_global = niceNumber($effort_array['dom_rel_global']);
     $fair_share_perc = niceNumber($effort_array['fair_share_perc']);
     $pledged_reduct_perc = niceNumber($effort_array['pledged_reduct_perc']);
     $pledged_reduct_MtCO2 = niceNumber($effort_array['pledged_reduct_MtCO2']);
@@ -108,55 +100,14 @@ function getResults()
     $condition_string = $_POST['conditional'] ? 'conditional' : 'unconditional';
     
     $retval = '';
-//    // Collect content for output
-//    $retval .= '<p><span class="score">Score: ' . $score_kab . '%';
-//    //$retval = '<p><span class="score">Score: ' . $score_kab . '%';
-//    $retval .= '</span>&nbsp; with baseline adjusted for Kyoto commitments</p>';
-//    $retval .= '<div class="graph group">';
-//    $retval .= drawGraph($pledge1, 'intl', $score_kab, 'kab', false);
-//    $retval .= '</div><!-- end .graph -->';
-//
-//    $retval .= '<p><span class="score">Score: ' . $score_no_kab . '%';
-//    $retval .= '</span>&nbsp; with no baseline adjustment</p>';
-//    $retval .= '<div class="graph group">';
-//    $retval .= drawGraph($pledge1, 'intl', $score_no_kab, 'no_kab', false);
-//    $retval .= '</div><!-- end .graph -->';
-//
-//    $retval .= '<div id="key" class="group">';
-////    if ($effort_val < 100) {
-//        $retval .= '<p><span class="gap"></span> Shortfall = gap between fair share and pledge, as percentage of baseline</p>';
-////    }
-//    $retval .= '<p><span class="dom"></span> Score = ( baseline – shortfall ) / baseline</p></div><!-- end #key -->';
-//
-//    $retval .= '<br />';
-//
-//    // -50 to 50 graph
-//    $score_adj = round($score_no_kab - 100);
-//    $retval .= '<p><span class="score">Score: ' . $score_adj;
-//    $retval .= '<div class="graph group" id="fifty_fifty">';
-//    $retval .= drawGraph5050($score_adj);
-//    $retval .= '</div><!-- end .graph -->';
-//    $retval .= '<p>Left end is -50, line in middle is 0, right end is +50.</p>';
-//    $retval .= '<br />';
     
-    // -100 to 100 graph
-    //$kab_choice = 'yes';
-//    if (isset($_GET['kab'])) {
-//        $kab_choice = $_GET['kab'];
-//    }
-//    if (isset($_POST['kab'])) {
-//        $kab_choice = $_POST['kab'];
-//    }
-    
-    switch ($kab_choice) {
-         case 'yes':
-            $score_adj = round($score_kab - 100);
-            break;
-        case 'no':
-        default:
-            $score_adj = round($score_no_kab - 100);
-            break;
+    if (kabsOn()) {
+        // KABs are on
+        $score_adj = round($score_kab - 100);
+    } else {
+        $score_adj = round($score_no_kab - 100);
     }
+
     $retval .= '<p><span class="score';
     if ($score_adj < 0) {
         $retval .= ' negative';
