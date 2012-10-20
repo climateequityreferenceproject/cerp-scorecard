@@ -131,7 +131,7 @@ function getResults()
     $marker_pathway = $glossary->getLink('gloss_path', true, 'marker pathway');
     // $help_bau = $glossary->getLink('gloss_bau', true, 0);
     
-    if ($effort_array['pledge_gap_MtCO2'] > 0) {
+    if ($score_adj < 0) {
 $action_string = <<<FALLSSHORTTEXT
 falls short of its $link_lower[gloss_fair] by $pledge_gap_MtCO2 million tonnes. To close that $link_lower[gloss_gap], $country should raise its pledge by an additional $pledge_gap_perc_bau% of its $link_lower[gloss_bau] emissions.
 FALLSSHORTTEXT;
