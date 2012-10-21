@@ -18,7 +18,7 @@ require_once "functions.php";
 require_once "scorecard_results.php";
 require_once "class/HWTHelp/HWTHelp.php";
 
-$glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
+$glossary = new HWTHelp('def_link', 'glossary.php');
 
 $api = GDRsAPI::connection();
 

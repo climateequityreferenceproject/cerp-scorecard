@@ -213,7 +213,7 @@ class HWTHelpParser
  * 
  * Provides a generic help class
  * Example usage:
- * $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
+ * $glossary = new HWTHelp('def_link', 'glossary.php');
  * $glossary->getLink('gloss_path'); // For making links in the page
  * $glossary->getJSON('gloss_path'); // For AJAX calls
  * foreach ($glossary as $id => $entry) {} // Iterator over help entries
@@ -225,7 +225,6 @@ class HWTHelp implements Iterator
 {
     private $_entries = array();
     private $_markup_flag;
-    private $_url;
     private $_help_page;
     private $_index;
     private $_ids;
@@ -240,7 +239,7 @@ class HWTHelp implements Iterator
      * @return void
      * @todo Make so that a URL can be used: right now only a file
      */
-    public function __construct($url, $markup_flag, $help_page)
+    public function __construct($markup_flag, $help_page)
     {
         //$this->_url = $url;
         $this->_markup_flag = $markup_flag;

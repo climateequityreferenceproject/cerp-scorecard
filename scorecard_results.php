@@ -19,7 +19,7 @@ require_once 'functions.php';
 require_once "class/HWTHelp/HWTHelp.php";
 
 if (!isset($glossary)) {
-    $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
+    $glossary = new HWTHelp('def_link', 'glossary.php');
 }
 $calc_path = getCalcPath() . '/';
 $resultsDefault = '<p>How do countries&#8217; emission-reduction pledges &#8211; their international promises &#8211; compare to the efforts they should be making, their ' . $glossary->getLink('gloss_fair', true, 0) . ' of the global effort needed to limit dangerous and avoidable climate change? <strong>This is the basic question that this Scorecard tries to answer.</strong></p>
@@ -34,7 +34,7 @@ $resultsDefault = '<p>How do countries&#8217; emission-reduction pledges &#8211;
  */
 function getResults() 
 {
-    $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
+    $glossary = new HWTHelp('def_link', 'glossary.php');
 
     // Check/set basic/advanced scorecard view (short/long text)
     if (!isset($_POST['scoreview'])) {

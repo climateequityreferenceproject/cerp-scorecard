@@ -399,7 +399,7 @@ function hasUnconditionalPledge($code, $year=null)
  */
 function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option1')
 {
-    $glossary = new HWTHelp('glossary.xml', 'def_link', 'glossary.php');
+    $glossary = new HWTHelp('def_link', 'glossary.php');
     
     if (!$pledge_info) {
         return null;
