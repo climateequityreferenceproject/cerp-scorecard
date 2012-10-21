@@ -44,7 +44,7 @@ class GDRsAPIException extends Exception
 class GDRsAPI
 {
     private $_db = array();
-    private $_url = "http://gdrights.org/calculator_dev/api/";
+    private $_url = '';
     private static $_instance;
     
     // Decided not to use getters and setters
@@ -113,6 +113,11 @@ class GDRsAPI
      */
     private function __construct()
     {
+        if (strpos($_SERVER['PHP_SELF'], 'dev')===false) {
+            $this->_url = "http://gdrights.org/calculator_dev/api/";
+        } else {
+            $this->_url = "http://gdrights.org/calculator/api/";
+        }
         $response = $this->get('pathways');
         foreach ($this->_pathway_array as $key => $val) {
             foreach ($response as $pathway) {

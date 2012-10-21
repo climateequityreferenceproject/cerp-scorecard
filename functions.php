@@ -14,6 +14,33 @@ require_once "HTTP/Request.php";
 require_once "class/GDRsAPI/GDRsAPI.php";
 require_once "class/HWTHelp/HWTHelp.php";
 
+
+/**
+ * Say whether the scoreard is being called from a directory with "dev" in the name
+ * @return boolean 
+ */
+function isDev() {
+    // Note: might return "0" (a correct, non-false value)--have to check for false
+    if (strpos($_SERVER['PHP_SELF'], 'dev')===false) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/**
+ * Get the path to the calculator, with no trailing slash
+ * 
+ * @return string 
+ */
+function getCalcPath() {
+    if (isDev()) {
+        return 'http://gdrights.org/calculator_dev';
+    } else {
+        return 'http://gdrights.org/calculator';
+    }
+}
+
 /**
  * Build URL for GDRs calculator country report page
  * 
@@ -29,7 +56,7 @@ function getCalcUrl($iso3, $pathway_id)
     } else {
         $db_string = '';
     }
-    return 'http://gdrights.org/calculator_dev/?iso3=' . $iso3 . $db_string;
+    return getCalcPath() . '/?iso3=' . $iso3 . $db_string;
 }
 
 /**
