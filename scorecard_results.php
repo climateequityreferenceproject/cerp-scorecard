@@ -84,10 +84,8 @@ function getResults()
     } else {
         $kab_score = 'option1';
     }
-    // $pledge1 = 0.0;
     $effort_array = getGdrsInformation($pledge_info, $pathway_id, $kab_score);
-    $score_kab = niceNumber($effort_array['score_kab']);
-    $score_no_kab = niceNumber($effort_array['score']);
+    $score = niceNumber($effort_array['score']);
     $cap = niceNumber($effort_array['cap']);
     $resp = niceNumber($effort_array['resp']);
     $fair_share_perc = niceNumber($effort_array['fair_share_perc']);
@@ -107,12 +105,7 @@ function getResults()
     
     $retval = '';
     
-    if (kabsOn()) {
-        // KABs are on
-        $score_adj = round($score_kab - 100);
-    } else {
-        $score_adj = round($score_no_kab - 100);
-    }
+    $score_adj = round($score - 100);
 
     $retval .= '<p><span class="score';
     if ($score_adj < 0) {

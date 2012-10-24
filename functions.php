@@ -400,6 +400,7 @@ function hasUnconditionalPledge($code, $year=null)
 function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option1')
 {
     $glossary = new HWTHelp('def_link', 'glossary.php');
+    $retval = array();
     
     if (!$pledge_info) {
         return null;
@@ -420,67 +421,63 @@ function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option1')
         $years = $pledge_info['by_year'];
     }
     if (isset($pledge_info['iso3'])) {
-        $ctryrgn = $pledge_info['iso3'];
+        $ctrycode = $pledge_info['iso3'];
+        $ctryrgn =  $ctrycode . ',world';
     } elseif (isset($pledge_info['region'])) {
-        $ctryrgn = $pledge_info['region'];
+        $ctrycode = $pledge_info['region'];
+        $ctryrgn =  $ctrycode . ',world';
     } else {
         $ctryrgn = null;
     }
     // TODO: For regions, it is not getting values for 1990
     $post_array = array('years' => $years, 'countries' => $ctryrgn);
-    $response = GDRsAPI::connection()->post($post_array, $pathway);
-    $response_kab = GDRsAPI::connection()->post($post_array, $pathway, 'all');
-    // TODO: This is probably unnecessary; use RCI
-    $post_array = array('years' => $years, 'countries' => GDRsAPI::connection()->get_world_code());
-    $response_world = GDRsAPI::connection()->post($post_array, $pathway);
+    if (kabsOn()) {
+        $kab = 'all';
+    } else {
+        $kab = 'none';
+    }
+    $response = GDRsAPI::connection()->post($post_array, $pathway, $kab);
     
     foreach ($response as $year_data_obj) {
         $year_data = (array) $year_data_obj;
         $year = $year_data['year'];
-        $gdp[$year] = $year_data['gdp_blnUSDMER'];
-        $bau[$year] = $year_data['fossil_CO2_MtCO2'];
-        $c_frac[$year] = $year_data['gdrs_c_frac'];
-        $r_frac[$year] = $year_data['gdrs_r_frac'];
-        $rci[$year] = $year_data['gdrs_rci'];
-        if ($use_lulucf['value']) {
-            $bau[$year] += $year_data['LULUCF_MtCO2'];
+        if ($year_data['code'] === $ctrycode) {
+            $gdp[$year] = $year_data['gdp_blnUSDMER'];
+            $bau[$year] = $year_data['fossil_CO2_MtCO2'];
+            $bau_kab[$year] = $bau[$year] - $year_data['kyoto_gap_MtCO2'];
+            $c_frac[$year] = $year_data['gdrs_c_frac'];
+            $r_frac[$year] = $year_data['gdrs_r_frac'];
+            $rci[$year] = $year_data['gdrs_rci'];
+            if ($use_lulucf['value']) {
+                $bau[$year] += $year_data['LULUCF_MtCO2'];
+            }
+            if ($use_nonco2['value']) {
+                $bau[$year] += $year_data['NonCO2_MtCO2e'];
+            }
+            $alloc[$year] = $year_data['gdrs_alloc_MtCO2'];
+        } else {
+            $bau_world[$year] = $year_data['fossil_CO2_MtCO2'];
+            if ($use_lulucf['value']) {
+                $bau_world[$year] += $year_data['LULUCF_MtCO2'];
+            }
+            if ($use_nonco2['value']) {
+                $bau_world[$year] += $year_data['NonCO2_MtCO2e'];
+            }
+            $alloc_world[$year] = $year_data['gdrs_alloc_MtCO2'];
         }
-        if ($use_nonco2['value']) {
-            $bau[$year] += $year_data['NonCO2_MtCO2e'];
-        }
-        $alloc[$year] = $year_data['gdrs_alloc_MtCO2'];
     }
     
-    foreach ($response_kab as $year_data_obj) {
-        $year_data = (array) $year_data_obj;
-        $year = $year_data['year'];
-        $bau_kab[$year] = $bau[$year] - $year_data['kyoto_gap_MtCO2'];
-//        $c_frac_kab[$year] = $year_data['gdrs_c_frac'];
-//        $r_frac_kab[$year] = $year_data['gdrs_r_frac'];
-//        $rci_kab[$year] = $year_data['gdrs_rci'];
-        $alloc_kab[$year] = $year_data['gdrs_alloc_MtCO2'];
-    }
-    
-    foreach ($response_world as $year_data_obj) {
-        $year_data = (array) $year_data_obj;
-        $year = $year_data['year'];
-        $bau_world[$year] = $year_data['fossil_CO2_MtCO2'];
-        if ($use_lulucf['value']) {
-            $bau_world[$year] += $year_data['LULUCF_MtCO2'];
+    if (kabsOn()) {
+        if ($kab_score === 'option1') {
+            $gdrs_reduction = $bau[$pledge_info['by_year']] - $alloc[$pledge_info['by_year']];
+        } else {
+            $gdrs_reduction = $bau_kab[$pledge_info['by_year']] - $alloc[$pledge_info['by_year']];
         }
-        if ($use_nonco2['value']) {
-            $bau_world[$year] += $year_data['NonCO2_MtCO2e'];
-        }
-        $alloc_world[$year] = $year_data['gdrs_alloc_MtCO2'];
-    }
-
-    $gdrs_reduction_world = $bau_world[$pledge_info['by_year']] - $alloc_world[$pledge_info['by_year']];
-    $gdrs_reduction = $bau[$pledge_info['by_year']] - $alloc[$pledge_info['by_year']];
-    if ($kab_score === 'option1') {
-        $gdrs_kab_reduction = $bau[$pledge_info['by_year']] - $alloc_kab[$pledge_info['by_year']];
     } else {
-        $gdrs_kab_reduction = $bau_kab[$pledge_info['by_year']] - $alloc_kab[$pledge_info['by_year']];
+        $gdrs_reduction = $bau[$pledge_info['by_year']] - $alloc[$pledge_info['by_year']];
     }
+    $gdrs_reduction_world = $bau_world[$pledge_info['by_year']] - $alloc_world[$pledge_info['by_year']];
+    
     switch ($pledge_info['rel_to']) {
         case 'below':
             $factor = 1 - $pledge_info['reduction_percent']/100.0;
@@ -519,33 +516,18 @@ function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option1')
         default:
             // Shouldn't reach here
     }
-//    $retval['pledge_over_bau'] = 100 * (1 - $pledged_reduction/$bau[$pledge_info['by_year']]);
+    
     $retval['pledge_description'] = $description . '.';
-//    
-//    //$pledged_reduction = min(max(0, $pledged_reduction), $gdrs_reduction);
-//    $retval['intl_pledge'] = 0.0; //100.0 * $pledge_info['intl_pledge']/$gdrs_reduction;
-//    $retval['dom_pledge'] = 100.0 * $pledged_reduction/$gdrs_reduction;
-//    $retval['gap'] = 100.0 - $retval['dom_pledge'] - $retval['intl_pledge'];
-//    
-//    $retval['dom_rel_global'] = $retval['dom_pledge'] * $rci[$pledge_info['by_year']];
     
     $retval['cap'] = 100.0 * $c_frac[$pledge_info['by_year']];
     $retval['resp'] = 100.0 * $r_frac[$pledge_info['by_year']];
     
-//    $retval['neg_pledge'] = false;
-//    if ($retval['dom_pledge'] < 0) {
-//        $retval['dom_pledge'] = 0.0;
-//        $retval['gap'] = 100.0 - $retval['intl_pledge'];
-//        $retval['neg_pledge'] = true;
-//    }
     $gdrs_reduction_perc_bau = 100 * $gdrs_reduction/$bau[$pledge_info['by_year']];
-    $gdrs_kab_reduction_perc_bau = 100 * $gdrs_kab_reduction/$bau_kab[$pledge_info['by_year']];
     $pledged_reduction_perc_bau = 100 * $pledged_reduction/$bau[$pledge_info['by_year']];
     $retval['score'] = 100 - ($gdrs_reduction_perc_bau - $pledged_reduction_perc_bau);
-    $retval['score_kab'] = 100 - ($gdrs_kab_reduction_perc_bau - $pledged_reduction_perc_bau);
     
     $retval['fair_share_perc'] = 100 * $rci[$pledge_info['by_year']];
-    // Don't allow negative values
+    // Don't allow negative values (at least for some)
     $retval['pledged_reduct_perc'] = 100 * max(0, $pledged_reduction)/$gdrs_reduction_world;
     $retval['pledged_reduct_MtCO2'] = $pledged_reduction;
     $retval['pledge_gap_MtCO2'] = max(0, $gdrs_reduction - $pledged_reduction);

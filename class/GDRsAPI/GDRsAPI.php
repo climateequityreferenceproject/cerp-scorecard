@@ -105,6 +105,27 @@ class GDRsAPI
         }
     }
     
+    /**
+     * Check whether the database still exists
+     * 
+     * @param type string $db Our database identifier
+     * @return boolean
+     * @throws GDRsAPIException 
+     */
+    public function db_exists($db) {
+        $req = new HTTP_Request($this->_buildGet('db=' . $db . '&q=calc_ver'));
+        $req->setMethod(HTTP_REQUEST_METHOD_GET);
+        if (!PEAR::isError($req->sendRequest())) {
+            if ($req->getResponseCode() != 410) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            throw new GDRsAPIException($req->getMessage());
+        }
+    }
+    
     // 
     /**
      * Generate the array mapping pathway ids to pathway names
@@ -173,16 +194,17 @@ class GDRsAPI
         }
         // Do we have it already?
         $key = self::get_db_key($pwId, $kab);
-        if (!(isset($this->_db[$key]))) {
+        if (!isset($this->_db[$key])) {
             // Have we stored it in a session variable?
             if (isset($_SESSION['gdrs_db'])) {
                 $this->_db = $_SESSION['gdrs_db'];
             }
-            // Does a database exist for this pathway?
-            if (!(isset($this->_db[$key])) || !$this->get('calc_ver', $pwId)) {
-                $response = $this->get('new_db');
-                $this->_db[$key] = $response['db'];
-            }
+        }
+        
+        // Does a database exist for this pathway?
+        if (!isset($this->_db[$key]) || !$this->db_exists($this->_db[$key])) {
+            $response = $this->get('new_db');
+            $this->_db[$key] = $response['db'];
         }
         $_SESSION['gdrs_db'] = $this->_db;
         return $this->_db[$key];
