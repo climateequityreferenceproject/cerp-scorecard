@@ -547,7 +547,7 @@ function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option1')
     $retval['fair_share_perc'] = 100 * $rci[$pledge_info['by_year']];
     // Don't allow negative values
     $retval['pledged_reduct_perc'] = 100 * max(0, $pledged_reduction)/$gdrs_reduction_world;
-    $retval['pledged_reduct_MtCO2'] = max(0, $pledged_reduction);
+    $retval['pledged_reduct_MtCO2'] = $pledged_reduction;
     $retval['pledge_gap_MtCO2'] = max(0, $gdrs_reduction - $pledged_reduction);
     $retval['pledge_gap_perc_bau'] = max(0, $gdrs_reduction_perc_bau - $pledged_reduction_perc_bau);
     

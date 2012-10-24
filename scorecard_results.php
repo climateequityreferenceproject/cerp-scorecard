@@ -92,7 +92,12 @@ function getResults()
     $resp = niceNumber($effort_array['resp']);
     $fair_share_perc = niceNumber($effort_array['fair_share_perc']);
     $pledged_reduct_perc = niceNumber($effort_array['pledged_reduct_perc']);
-    $pledged_reduct_MtCO2 = niceNumber($effort_array['pledged_reduct_MtCO2']);
+    if ($effort_array['pledged_reduct_MtCO2'] < 0) {
+        $pledge_is_negative = true;
+    } else {
+        $pledge_is_negative = false;
+    }
+    $pledged_reduct_MtCO2 = niceNumber(abs($effort_array['pledged_reduct_MtCO2']));
     $pledge_gap_MtCO2 = niceNumber($effort_array['pledge_gap_MtCO2']);
     $pledge_gap_perc_bau = niceNumber($effort_array['pledge_gap_perc_bau']);
 
@@ -142,6 +147,12 @@ meets its $link_lower[gloss_fair].
 MEETSTEXT;
     }
     
+    if ($pledge_is_negative) {
+        $pledged_string = _('pledged emissions is higher than its ') . $glossary->getLink('gloss_bau', true) . ' emissions by ' . $pledged_reduct_MtCO2 . ' million tonnes. This level of emissions';
+    } else {
+        $pledged_string = _('pledge to mitigate ') . $pledged_reduct_MtCO2 . ' million tonnes';
+    }
+    
 
     if ($scoreview == 'scoreadv') {
         $retval .= '<p><span class="score';
@@ -153,7 +164,7 @@ MEETSTEXT;
 
         <p>$country has pledged to do $pledged_reduct_perc% of the mitigation that would be needed, globally, to reach the $ambition marker pathway.</p>
 
-        <p>Given a $ambition target, $country&#8217;s $by_year $condition_string pledge to mitigate $pledged_reduct_MtCO2 million tonnes $action_string</p>
+        <p>Given a $ambition target, $country&#8217;s $by_year $condition_string $pledged_string $action_string</p>
 LONGTEXT;
     
     $retval .= '<div id="details">';
@@ -176,7 +187,7 @@ LONGTEXT;
         }
 
         $retval .= '">' . $country . '</span>&#8217;s ' . $by_year . ' ' . $condition_string;
-        $retval .= ' pledge to mitigate ' .  $pledged_reduct_MtCO2 . ' million tonnes ' . $action_string . '</p>';
+        $retval .= ' ' . $pledged_string . ' ' . $action_string . '</p>';
     } else {
         // TODO make sure nothing else needs to go here
     }
