@@ -82,7 +82,7 @@ function getResults()
     } else if (isset($_GET['kab_score'])) {
         $kab_score = $_GET['kab_score'];
     } else {
-        $kab_score = 'option1';
+        $kab_score = 'option2';
     }
     $effort_array = getGdrsInformation($pledge_info, $pathway_id, $kab_score);
     $score = niceNumber($effort_array['score']);

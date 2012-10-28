@@ -407,7 +407,7 @@ function hasUnconditionalPledge($code, $year=null)
  * 
  * @return array Contains information about the pledge and how it matches up to the GDRs requirement
  */
-function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option1')
+function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option2')
 {
     $glossary = new HWTHelp('def_link', 'glossary.php');
     $retval = array();
