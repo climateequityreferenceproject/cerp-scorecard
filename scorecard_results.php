@@ -186,8 +186,8 @@ LONGTEXT;
     }
 
     $retval .= '<div class="results_links"><a href="what.php" target="_blank">How do I interpret these scores?</a> &nbsp;|&nbsp; ';
-
-    $calc_url = getCalcUrl($iso3, $pathway_id);
+    
+    $calc_url = getCalcUrl($iso3, $by_year, $pathway_id);
     $retval .= '<a href="' . $calc_url . '" target="_blank">';
     $retval .= 'More detailed calculations &#187;</a></div>';
     

@@ -48,7 +48,7 @@ function getCalcPath() {
  * 
  * @return URL for GDRs calculator country report page
  */
-function getCalcUrl($iso3, $pathway_id)
+function getCalcUrl($iso3, $by_year, $pathway_id)
 {
     if (isset($_SESSION['gdrs_db'])) {
         $key = GDRsAPI::get_db_key($pathway_id);
@@ -60,7 +60,7 @@ function getCalcUrl($iso3, $pathway_id)
     } else {
         $db_string = '';
     }
-    return getCalcPath() . '/?iso3=' . $iso3 . $db_string;
+    return getCalcPath() . '/?iso3=' . $iso3 . '&year=' . $by_year . $db_string;
 }
 
 /**
