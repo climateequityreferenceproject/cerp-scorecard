@@ -52,7 +52,11 @@ function getCalcUrl($iso3, $pathway_id)
 {
     if (isset($_SESSION['gdrs_db'])) {
         $key = GDRsAPI::get_db_key($pathway_id);
-        $db_string = '&db=' . $_SESSION['gdrs_db'][$key];
+        if (isset($_SESSION['gdrs_db'][$key])) {
+            $db_string = '&db=' . $_SESSION['gdrs_db'][$key];
+        } else {
+            $db_string = '';
+        }
     } else {
         $db_string = '';
     }
@@ -66,11 +70,17 @@ function getCalcUrl($iso3, $pathway_id)
  */
 function pledgeDBConnect()
 {
-    $db = mysql_connect('localhost', 'pledges', '***REMOVED***');
+//    if (isDev()) {
+//        $db_name = 'pledges-dev';
+//    } else {
+//        $db_name = 'pledges';
+//    }
+    $db_name = 'pledges';
+    $db = mysql_connect('localhost', $db_name, '***REMOVED***');
     if (!$db) {
         die('Could not connect: ' . mysql_error());
     }
-    mysql_select_db("pledges", $db);
+    mysql_select_db($db_name, $db);
     
     return $db;
 }
