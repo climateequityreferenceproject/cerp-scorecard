@@ -151,7 +151,7 @@ select {margin-top:0.25em;}
 footer {margin-top:1.5em; padding: 0.25em 1em 1em 1em; width:35em}
 
 .graph {height:60px; overflow:hidden; position:relative; width:100%;}
-.graph .intl, .graph .dom, .graph .no_kab, .graph .kab, .graph .gap, .graph .plug, .graph .neg, .graph .pos {float:left; height:30px; margin-bottom:5px; margin-top:5px;}
+.graph .intl, .graph .dom, .graph .gap, .graph .plug, .graph .neg, .graph .pos {float:left; height:30px; margin-bottom:5px; margin-top:5px;}
 .graph img {left:0; position:absolute; top:20px; width:100%; z-index:-200;}
 #fifty_fifty {height:60px; margin-bottom:1.5em; position:relative;}
 .zero_line {border-right:2px solid #666; float:left; height:40px; left:0; position:absolute; top:0; width:49.5%; z-index:9999;}
@@ -189,7 +189,7 @@ a:link {-webkit-tap-highlight-color:#dd6e4c;}
 
 /*.graph {border-left:2px solid #999;}*/
 .intl {background:#707ac9;}
-.dom, .no_kab, .kab, .pos {background:#6cad57;} /* #8ebd7f 59ad4c*/
+.dom, .pos {background:#6cad57;} /* #8ebd7f 59ad4c*/
 .score {color:#6cad57;}
 .gap {background:#ffce73;}
 .plug, #fifty_fifty .gap {background: #eee;}

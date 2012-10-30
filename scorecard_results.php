@@ -77,14 +77,7 @@ function getResults()
     $source_intl = cleanText($pledge_info['intl_source']);
 
 //    echo '<br />';
-    if (isset($_POST['kab_score'])) {
-        $kab_score = $_POST['kab_score'];
-    } else if (isset($_GET['kab_score'])) {
-        $kab_score = $_GET['kab_score'];
-    } else {
-        $kab_score = 'option2';
-    }
-    $effort_array = getGdrsInformation($pledge_info, $pathway_id, $kab_score);
+    $effort_array = getGdrsInformation($pledge_info, $pathway_id);
     $score = niceNumber($effort_array['score']);
     $cap = niceNumber($effort_array['cap']);
     $resp = niceNumber($effort_array['resp']);

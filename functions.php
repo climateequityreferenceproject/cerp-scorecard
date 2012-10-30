@@ -407,7 +407,7 @@ function hasUnconditionalPledge($code, $year=null)
  * 
  * @return array Contains information about the pledge and how it matches up to the GDRs requirement
  */
-function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option2')
+function getGdrsInformation($pledge_info, $pathway)
 {
     $glossary = new HWTHelp('def_link', 'glossary.php');
     $retval = array();
@@ -441,12 +441,7 @@ function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option2')
     }
     // TODO: For regions, it is not getting values for 1990
     $post_array = array('years' => $years, 'countries' => $ctryrgn);
-    if (kabsOn()) {
-        $kab = 'all';
-    } else {
-        $kab = 'none';
-    }
-    $response = GDRsAPI::connection()->post($post_array, $pathway, $kab);
+    $response = GDRsAPI::connection()->post($post_array, $pathway);
     
     foreach ($response as $year_data_obj) {
         $year_data = (array) $year_data_obj;
@@ -454,7 +449,6 @@ function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option2')
         if ($year_data['code'] === $ctrycode) {
             $gdp[$year] = $year_data['gdp_blnUSDMER'];
             $bau[$year] = $year_data['fossil_CO2_MtCO2'];
-            $bau_kab[$year] = $bau[$year] - $year_data['kyoto_gap_MtCO2'];
             $c_frac[$year] = $year_data['gdrs_c_frac'];
             $r_frac[$year] = $year_data['gdrs_r_frac'];
             $rci[$year] = $year_data['gdrs_rci'];
@@ -477,15 +471,7 @@ function getGdrsInformation($pledge_info, $pathway, $kab_score = 'option2')
         }
     }
     
-    if (kabsOn()) {
-        if ($kab_score === 'option1') {
-            $gdrs_reduction = $bau[$pledge_info['by_year']] - $alloc[$pledge_info['by_year']];
-        } else {
-            $gdrs_reduction = $bau_kab[$pledge_info['by_year']] - $alloc[$pledge_info['by_year']];
-        }
-    } else {
-        $gdrs_reduction = $bau[$pledge_info['by_year']] - $alloc[$pledge_info['by_year']];
-    }
+    $gdrs_reduction = $bau[$pledge_info['by_year']] - $alloc[$pledge_info['by_year']];
     $gdrs_reduction_world = $bau_world[$pledge_info['by_year']] - $alloc_world[$pledge_info['by_year']];
     
     switch ($pledge_info['rel_to']) {
@@ -764,27 +750,6 @@ function cleanText($string)
     while (in_array($end, array('.', ',', ';', '?', '!'))) {
         $retval = trim(substr($retval, 0, -1));
         $end = substr($retval, -1);
-    }
-    return $retval;
-}
-
-/**
- * Using current GET & POST settings, determine whether to use Kyoto-adjusted baselines or not
- * 
- * @return boolean Are KABs "on"? That is, are we using Kyoto-adjusted baselines?
- */
-function kabsOn() {
-    if (!isset($_GET['kab']) and !isset($_POST['kab'])) {
-        // Default to KABs on
-        $retval = true;
-    } else {
-        if ((isset($_GET['kab']) and ($_GET['kab'] == 'yes')) or (isset($_POST['kab']) and $_POST['kab'] == 'yes')) {
-            // KABs are on
-            $retval = true;
-        } else {
-            // KABs are off
-            $retval = false;
-        }
     }
     return $retval;
 }

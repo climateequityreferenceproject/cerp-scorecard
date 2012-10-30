@@ -134,28 +134,6 @@ if ($_POST && ($_POST['country']!=='none')) {
                 </li>
                 
                 <li class="setting">
-                     <fieldset id="kab_control">
-                        <legend><?php echo $glossary->getLink('gloss_kab'); ?></legend>
-                        <?php
-                        if (kabsOn()) {
-                            // KABs are on
-                            $kab_checked_on = 'checked="checked"';
-                            $kab_checked_off = '';
-                        } else {
-                            // KABs are off
-                            $kab_checked_on = '';
-                            $kab_checked_off = 'checked="checked"';
-                        }
-                        
-                        ?>
-                        
-                        <label for="kab_on"><input type="radio" name="kab" id="kab_on" value="yes" <?php echo $kab_checked_on; ?> /> Use Kyoto-adjusted baselines</label>
-                        <label for="kab_off"><input type="radio" name="kab" id="kab_off" value="no" <?php echo $kab_checked_off; ?> /> No adjustment for Kyoto commitments</label>
-
-                     </fieldset>
-                </li>   
-                
-                <li class="setting">
                      <fieldset id="pledge_type">
                         <legend><?php echo $glossary->getLink('gloss_pledge');?></legend>
                         <div id="pledge_controls"><?php include_once 'pledge_control.php'; ?></div>
