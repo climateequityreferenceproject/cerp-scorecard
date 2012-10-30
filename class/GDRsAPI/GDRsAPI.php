@@ -134,11 +134,12 @@ class GDRsAPI
      */
     private function __construct()
     {
-        if (strpos($_SERVER['PHP_SELF'], 'dev')===false) {
+        if (strpos($_SERVER['PHP_SELF'], 'dev')!==false) {
             $this->_url = "http://gdrights.org/calculator_dev/api/";
         } else {
             $this->_url = "http://gdrights.org/calculator/api/";
         }
+        echo $this->_url . '<br />';
         $response = $this->get('pathways');
         foreach ($this->_pathway_array as $key => $val) {
             foreach ($response as $pathway) {
