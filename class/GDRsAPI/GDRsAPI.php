@@ -113,7 +113,8 @@ class GDRsAPI
      * @throws GDRsAPIException 
      */
     public function db_exists($db) {
-        $req = new HTTP_Request($this->_buildGet('db=' . $db . '&q=calc_ver'));
+        $get_string = $this->_url . '?' . 'q=calc_ver&db=' . $db;
+        $req = new HTTP_Request($get_string);
         $req->setMethod(HTTP_REQUEST_METHOD_GET);
         if (!PEAR::isError($req->sendRequest())) {
             if ($req->getResponseCode() != 410) {
