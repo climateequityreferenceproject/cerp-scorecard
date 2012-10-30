@@ -139,7 +139,6 @@ class GDRsAPI
         } else {
             $this->_url = "http://gdrights.org/calculator/api/";
         }
-        echo $this->_url . '<br />';
         $response = $this->get('pathways');
         foreach ($this->_pathway_array as $key => $val) {
             foreach ($response as $pathway) {
