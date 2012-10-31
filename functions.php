@@ -60,7 +60,7 @@ function getCalcUrl($iso3, $by_year, $pathway_id)
     } else {
         $db_string = '';
     }
-    return getCalcPath() . '/?iso3=' . $iso3 . '&year=' . $by_year . $db_string;
+    return getCalcPath() . '/?copydb=yes&iso3=' . $iso3 . '&year=' . $by_year . $db_string;
 }
 
 /**
