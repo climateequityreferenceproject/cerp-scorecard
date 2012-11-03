@@ -23,7 +23,9 @@ function get_def_by_id(e) {
     $.getJSON('glossary_array.php', {id: def_id}, function(definition){
        $('#popup').html(definition.text).dialog({
             autoOpen: false,
-            title: definition.label
+            title: definition.label,
+            width: 500,
+            height: 300
        });
        
        $('#popup').dialog('open');
