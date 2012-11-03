@@ -69,92 +69,97 @@ if ($_POST && ($_POST['country']!=='none')) {
   <body class="group">
     <div id="loading"></div>
     <div id="container" class="group">
-    <header>
-        <h1>Climate Equity Scorecard <span>BETA</span></h1>
-        <h2><span>DO NOT CITE OR PUBLICIZE</span></h2>
-        
-        <p><?php echo $glossary->getLink('sc_about',0,'About') ?> &nbsp;|&nbsp;<a  href="&#109&#97&#105&#108&#116&#111&#58&#102&#101&#101&#100&#98&#97&#99&#107&#64&#103&#100&#114&#105&#103&#104&#116&#115&#46&#111&#114&#103&#63&#115&#117&#98&#106&#101&#99&#116&#61&#115&#99&#111&#114&#101&#99&#97&#114&#100&#32&#102&#101&#101&#100&#98&#97&#99&#107" title="&#115&#101&#110&#100&#32&#102&#101&#101&#100&#98&#97&#99&#107&#32&#111&#110&#32&#116&#104&#101&#32&#67&#108&#105&#109&#97&#116&#101&#32&#69&#113&#117&#105&#116&#121&#32&#83&#99&#111&#114&#101&#99&#97&#114&#100" >&#70&#101&#101&#100&#98&#97&#99&#107</a></p>
-    </header>
-    <div id="main" role="main" class="group">
-        <form name="settings" id="settings" method="post" autocomplete="off" >
-        <div id="settings_wrapper">
-            
-            <ul>
-                <li class="setting">
-                    <fieldset>
-                        <legend>Country or Region</legend>
-                        <select id="country" name="country">
-                        <?php
-                        if (isset($_POST['country']) && ($_POST['country']!=='none')) {
-                            echo '<option value="none">-Select-</option>';
-                            // 'country' can be either a region or a country
-                            if (isCountry($_POST['country'])) {
+        <header>
+            <h1>Climate Equity Scorecard <span>BETA</span></h1>
+            <h2><span>DO NOT CITE OR PUBLICIZE</span></h2>
+
+            <p><?php //echo $glossary->getLink('sc_about',0,'About the Scorecard') ?><a href="http://gdrights.org/scorecard-info/about/">About the Scorecard</a> &nbsp;|&nbsp; <a href="http://gdrights.org/scorecard/glossary.php">Glossary</a> &nbsp;|&nbsp; <a  href="&#109&#97&#105&#108&#116&#111&#58&#102&#101&#101&#100&#98&#97&#99&#107&#64&#103&#100&#114&#105&#103&#104&#116&#115&#46&#111&#114&#103&#63&#115&#117&#98&#106&#101&#99&#116&#61&#115&#99&#111&#114&#101&#99&#97&#114&#100&#32&#102&#101&#101&#100&#98&#97&#99&#107" title="&#115&#101&#110&#100&#32&#102&#101&#101&#100&#98&#97&#99&#107&#32&#111&#110&#32&#116&#104&#101&#32&#67&#108&#105&#109&#97&#116&#101&#32&#69&#113&#117&#105&#116&#121&#32&#83&#99&#111&#114&#101&#99&#97&#114&#100" >&#70&#101&#101&#100&#98&#97&#99&#107</a></p>
+        </header>
+        <div id="main" role="main" class="group">
+            <form name="settings" id="settings" method="post" autocomplete="off" >
+            <div id="settings_wrapper">
+
+                <ul>
+                    <li class="setting">
+                        <fieldset>
+                            <legend>Country or Region</legend>
+                            <select id="country" name="country">
+                            <?php
+                            if (isset($_POST['country']) && ($_POST['country']!=='none')) {
+                                echo '<option value="none">-Select-</option>';
+                                // 'country' can be either a region or a country
+                                if (isCountry($_POST['country'])) {
+                                    echo availRegionsOptions();
+                                    echo '<option value="none">--------</option>';
+                                    echo availCountriesOptions($_POST['country']);
+                                } else {
+                                    echo availRegionsOptions($_POST['country']);
+                                    echo '<option value="none">--------</option>';
+                                    echo availCountriesOptions();
+                                }
+                            } else {
+                                echo '<option value="none" selected="selected">-Select-</option>';
                                 echo availRegionsOptions();
                                 echo '<option value="none">--------</option>';
-                                echo availCountriesOptions($_POST['country']);
-                            } else {
-                                echo availRegionsOptions($_POST['country']);
-                                echo '<option value="none">--------</option>';
                                 echo availCountriesOptions();
-                            }
-                        } else {
-                            echo '<option value="none" selected="selected">-Select-</option>';
-                            echo availRegionsOptions();
-                            echo '<option value="none">--------</option>';
-                            echo availCountriesOptions();
-                        }?>
-                        </select>
-                    </fieldset>
-                </li>
+                            }?>
+                            </select>
+                        </fieldset>
+                    </li>
 
-                <li class="setting">
-                    <fieldset id="pathway">
-                        <legend><?php echo $glossary->getLink('gloss_path',0,'Level of Global Ambition');?></legend>
-                        <?php
-                        $checkedString = array();
-                        if (isset($_POST['ambition'])) {
-                            foreach ($api->pathwayIds as $pwType => $pwId) {
-                                if ($pwId===$_POST['ambition']) {
-                                    $checkedString[$pwType] = 'checked="checked"';
-                                } else {
-                                    $checkedString[$pwType] = '';
+                    <li class="setting">
+                        <fieldset id="pathway">
+                            <legend><?php echo $glossary->getLink('gloss_path',0,'Level of Global Ambition');?></legend>
+                            <?php
+                            $checkedString = array();
+                            if (isset($_POST['ambition'])) {
+                                foreach ($api->pathwayIds as $pwType => $pwId) {
+                                    if ($pwId===$_POST['ambition']) {
+                                        $checkedString[$pwType] = 'checked="checked"';
+                                    } else {
+                                        $checkedString[$pwType] = '';
+                                    }
                                 }
+                            } else {
+                                $checkedString['low'] = '';
+                                $checkedString['med'] = 'checked="checked"';
+                                $checkedString['high'] = '';
                             }
-                        } else {
-                            $checkedString['low'] = '';
-                            $checkedString['med'] = 'checked="checked"';
-                            $checkedString['high'] = '';
-                        }
-                        ?>
-                        <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathwayIds['high'] ?>" <?php echo $checkedString['high']; ?> /> <?php echo $api->pathwayLabel['high'] ?> marker pathway</label>
-                        <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathwayIds['med'] ?>" <?php echo $checkedString['med']; ?> /> <?php echo $api->pathwayLabel['med'] ?> marker pathway</label>
-                        <!-- No more low[est]-ambition pathway, for now
-                        TODO: fix 3-pathway workflow to 2-pathway workflow, with labels stored in API and not overridden here -->
-                    </fieldset>
-                </li>
-                
-                <li class="setting">
-                     <fieldset id="pledge_type">
-                        <legend><?php echo $glossary->getLink('gloss_pledge');?></legend>
-                        <div id="pledge_controls"><?php include_once 'pledge_control.php'; ?></div>
-                     </fieldset>
-                </li>
+                            ?>
+                            <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathwayIds['med'] ?>" <?php echo $checkedString['med']; ?> /> <?php echo $api->pathwayLabel['med'] ?> marker pathway (lower ambition)</label>
+                            <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathwayIds['high'] ?>" <?php echo $checkedString['high']; ?> /> <?php echo $api->pathwayLabel['high'] ?> marker pathway (higher ambition)</label>
+                            <!-- No more low[est]-ambition pathway, for now
+                            TODO: fix 3-pathway workflow to 2-pathway workflow, with labels stored in API and not overridden here -->
+                        </fieldset>
+                    </li>
 
-            </ul>
+                    <li class="setting">
+                         <fieldset id="pledge_type">
+                            <legend><?php echo $glossary->getLink('gloss_pledge');?></legend>
+                            <div id="pledge_controls"><?php include_once 'pledge_control.php'; ?></div>
+                         </fieldset>
+                    </li>
 
-            <input type="submit" value="get score" id="submit" />
+                </ul>
 
-        </div><!-- end of #settings -->
-        
-        <div id="results" class="group">
-            <?php echo $html; ?>
-        </div> <!--! end of #results -->
-        </form>
-        
-        <div id="popup"></div>
-        
-    </div> <!--! end of #main -->
-        <?php include_once ("footer.php"); ?>
+                <input type="submit" value="get score" id="submit" />
+
+            </div><!-- end of #settings -->
+
+            <div id="results" class="group">
+                <?php echo $html; ?>
+            </div> <!--! end of #results -->
+            </form>
+
+            <div id="popup"></div>
+
+        </div> <!--! end of #main -->
+
+        <footer>
+            <p class="first">Thanks to the <a href="http://www.minor-foundation.no/" target="_blank">Minor Foundation for Major Challenges</a>, and to the <a href="http://www.rbf.org/">Rockefeller Brothers Fund</a>, <a href="http://www.christianaid.org.uk/">Christian Aid</a>, and the <a href="http://www.sei-international.org/">Stockholm Environment Institute</a> for supporting this effort.</p>
+            <p><?php echo $glossary->getLink('sc_credits') ?></p>
+            <p>Please send feedback on the Climate Equity Scorecard to <a href='m&#97;il&#116;o&#58;f%65&#37;65db%61ck&#64;gdri&#103;&#104;ts%2E%6F&#114;&#103;'>feed&#98;ack&#64;gdrig&#104;&#116;s&#46;org</a></p>
+        </footer>
     </div> <!--! end of #container -->
 
 

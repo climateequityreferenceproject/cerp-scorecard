@@ -154,7 +154,7 @@ footer {margin-top:1.5em; padding: 0.25em 1em 1em 1em; width:35em}
 .graph .intl, .graph .dom, .graph .gap, .graph .plug, .graph .neg, .graph .pos {float:left; height:30px; margin-bottom:5px; margin-top:5px;}
 .graph img {left:0; position:absolute; top:20px; width:100%; z-index:-200;}
 #fifty_fifty {height:60px; margin-bottom:1.5em; position:relative;}
-.zero_line {border-right:2px solid #666; float:left; height:40px; left:0; position:absolute; top:0; width:49.5%; z-index:9999;}
+.zero_line {border-right:2px solid #666; float:left; height:40px; left:0; position:absolute; top:0; width:49.5%; z-index:500;}
 .axis_labels {bottom:0; height:20px; left:0; position:absolute; width:100%;}
 span.label_left, span.label_center, span.label_right {display:block; height:20px; width:6em;}
 span.label_left {float:left;}
@@ -172,11 +172,24 @@ img.right {float:right; margin-left:2em;}
 p.right {text-align:right;}
 .note { border:1px solid #999; margin:0.5em 0; padding:0.5em; }
 
-/* color ***************************************/
+/* color ***************************************/ 
+/*
+ * #3a4e85 blue xtra dk
+ * #4d59a4 blue dk
+ * #6b87c3 blue med
+ * #ffce73 yellow-gold
+ * #dd6e4c red-orange
+ * #a23b1e red dk [no longer used?]
+ * #6cad57 green med
+ * #e6ebe6 green pale
+ * #eee
+ * #aaa
+ * #666
+ * #999
+ */
 body {background:#fff;}
 body, select, input, textarea {color:#666;}
-h1, h2, h3, h4, #country_name, #commitment, .score,
-legend/*, legend a, legend a:active, legend a:visited */ {color:#4d59a4;}
+h1, h2, h3, h4, #country_name, #commitment, .score, legend {color:#4d59a4;}
 fieldset {background:#fff;}
 h1 span, h2 span {color:#999; letter-spacing:0.035em;}
 
@@ -187,13 +200,12 @@ h1 span, h2 span {color:#999; letter-spacing:0.035em;}
 /* j.mp/webkit-tap-highlight-color */
 a:link {-webkit-tap-highlight-color:#dd6e4c;}
 
-/*.graph {border-left:2px solid #999;}*/
-.intl {background:#707ac9;}
-.dom, .pos {background:#6cad57;} /* #8ebd7f 59ad4c*/
+.intl {background:#6b87c3;}
+.dom, .no_kab, .kab, .pos {background:#6cad57;}
 .score {color:#6cad57;}
 .gap {background:#ffce73;}
 .plug, #fifty_fifty .gap {background: #eee;}
-.neg {background:#dd6e4c;}  /* #dd6e4c */
+.neg {background:#dd6e4c;}
 .negative {color:#dd6e4c; white-space:nowrap;}
 #results {border:6px solid #ffce73;}
 #settings_wrapper, footer {border:6px solid #e6ebe6;}
@@ -214,13 +226,13 @@ h3 a, h3 a:active, h3 a:visited,
 .source a, .source a:active, .source a:visited, 
 footer a, footer a:active, footer a:visited */ {color:#6b87c3;}
 
-#more_options a, #more_options a:active, #more_options a:visited {color:#a23b1e;}
+/*#more_options a, #more_options a:active, #more_options a:visited {color:#a23b1e;}*/
 
 footer a, footer a:active, footer a:visited,
 a.more, a.more:active, a.more:visited,
 a.ext, a.ext:active, a.ext:visited {color:#666;}
 
-a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover /*, legend a:hover, .glossary a:hover, .docs a:hover, #more_options a:hover, .source a:hover, .glossary header h1 a:hover, .glossary nav a:hover, .docs header h1 a:hover, h3 a:hover */ {color:#3a4e85;}
+a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover {color:#3a4e85;}
 
 .disabled {color:#aaa;}
 
@@ -316,8 +328,7 @@ dd {
 	width: 80%;
 }
 .glossary div {clear:both;}
-footer div {font-size:80%;}
-footer div div {font-size:100%;}
+footer {font-size:80%;}
 
 /* miscellaneous ***************************************/
 /* a.def_link {background:url(../img/info-icon.gif) center right no-repeat; padding-right: 16px;} */

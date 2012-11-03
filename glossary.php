@@ -58,12 +58,11 @@ require_once "class/HWTHelp/HWTHelp.php";
         <?php
             $glossary = new HWTHelp('def_link', 'glossary.php');
             echo $glossary->getHelpPage();
-            
         ?>
 
-    </div> <!--! end of #main -->
+    </div> <!-- end of #main -->
     <?php include_once ("footer.php"); ?>
-  </div> <!--! end of #container -->
+  </div> <!-- end of #container -->
 
 
   <!-- JavaScript at the bottom for fast page loading -->
