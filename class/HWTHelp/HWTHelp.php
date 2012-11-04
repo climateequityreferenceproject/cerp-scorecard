@@ -79,7 +79,7 @@ class HWTHelp implements Iterator
         }
         try
         {
-          $sql = 'SELECT id, code_id, entry_title, entry_text FROM entry' . $filter_text;
+          $sql = 'SELECT id, code_id, entry_title, entry_text FROM entry' . $filter_text . ' ORDER BY entry_title;';
           $result = $pdo->query($sql);
         }
         catch (PDOException $e)
