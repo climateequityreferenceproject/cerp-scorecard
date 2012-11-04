@@ -1,7 +1,7 @@
 <?php
 require_once "functions.php";
 require_once "class/HWTHelp/HWTHelp.php";
-$glossary = new HWTHelp('def_link', 'glossary.php');
+$glossary = new HWTHelp('def_link', 'glossary.php', 'sc_gloss');
 ?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->

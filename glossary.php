@@ -56,7 +56,7 @@ require_once "class/HWTHelp/HWTHelp.php";
     <div id="main" role="main" class="group">
 
         <?php
-            $glossary = new HWTHelp('def_link', 'glossary.php');
+            $glossary = new HWTHelp('def_link', 'glossary.php', 'sc_gloss');
             echo $glossary->getHelpPage();
         ?>
 

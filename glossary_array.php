@@ -13,7 +13,7 @@
 require_once "class/HWTHelp/HWTHelp.php";
 
 if (isset($_GET['id'])) {
-    $glossary = new HWTHelp('def_link', 'glossary.php');
+    $glossary = new HWTHelp('def_link', 'glossary.php', 'sc_gloss');
     
     echo $glossary->getJSON($_GET['id']);
 }

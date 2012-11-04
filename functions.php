@@ -409,7 +409,7 @@ function hasUnconditionalPledge($code, $year=null)
  */
 function getGdrsInformation($pledge_info, $pathway)
 {
-    $glossary = new HWTHelp('def_link', 'glossary.php');
+    $glossary = new HWTHelp('def_link', 'glossary.php', 'sc_gloss');
     $retval = array();
     
     if (!$pledge_info) {
