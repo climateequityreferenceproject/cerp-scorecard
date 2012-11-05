@@ -528,6 +528,7 @@ function getGdrsInformation($pledge_info, $pathway)
     $retval['pledged_reduct_MtCO2'] = $pledged_reduction;
     $retval['pledge_gap_MtCO2'] = max(0, $gdrs_reduction - $pledged_reduction);
     $retval['pledge_gap_perc_bau'] = max(0, $gdrs_reduction_perc_bau - $pledged_reduction_perc_bau);
+    $retval['bau_score'] = -$gdrs_reduction_perc_bau;
     
     return $retval;
 }

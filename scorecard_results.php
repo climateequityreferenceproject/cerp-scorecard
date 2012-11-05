@@ -78,6 +78,7 @@ function getResults()
 
 //    echo '<br />';
     $effort_array = getGdrsInformation($pledge_info, $pathway_id);
+    // TYLER use this for the BAU line: $effort_array['bau_score'];
     $score = niceNumber($effort_array['score']);
     $cap = niceNumber($effort_array['cap']);
     $resp = niceNumber($effort_array['resp']);
