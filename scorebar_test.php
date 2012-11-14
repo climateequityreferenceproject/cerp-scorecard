@@ -1,3 +1,11 @@
+<?php
+if (isset($_GET['debug']) && $_GET['debug'] == 'yes') {
+    ini_set('display_errors',1); 
+    error_reporting(E_ALL);
+}
+
+require_once 'functions.php';
+?>
 <!doctype html>
   <head>
   <meta charset="utf-8">
@@ -129,89 +137,28 @@ span.label_right {position:absolute; right:0; text-align:right; top:0;}*/
             <div id="results" class="group">
 
                 <p><span class="score negative">Score: -42</span> (basic)</p>
-                <div class="graph basic">
-                    <div class="bg"></div> <!-- always 100%, gray bar under everything else -->
-                    <div class="axis_labels"><span class="left">-150</span><span class="zero">0</span><span class="right">100</span></div>
-                    <div class="score_neg" style="left:43.2%; width:16.8%;"></div> <!-- |score| = 42 x 0.4 = 16.8; 60 - 16.8 = 43.2 -->
-                </div> <!-- end .graph -->     
+                    <?php echo drawScoreBar(-42, -61.26, 'basic'); ?>
                 
                 <p><span class="score negative">Score: -42</span> (brackets, case 1, based on USA)</p>
-                <div class="graph brackets"> <!-- total width from -150 to +100 points is 100%; zero is nominally at 60%; zero line is at 59.5%; 1 score point width = 0.4% -->
-                    <div class="bg"></div>
-                    <div class="axis_labels"><span class="left">-150</span><span class="zero">0</span><span class="right">100</span></div>
-                    <!-- score bar gets class score_neg or score_pos -->
-                    <div class="score_neg" style="left:43.2%; width:16.8%;"></div> <!-- |score| = 42 x 0.4 = 16.8; 60 - 16.8 = 43.2 -->
-                    <div class="bau_line" style="left:35.5%;"></div> <!-- |BAU| = 61.26 x 0.4 = 24.5; 60 - 24.5 = 35.5 [left edge of BAU line div] -->
-                    <div class="bau label" style="left:30.5%;">BAU</div> <!-- bau_line left - 5 [because BAU label is 10% wide] -->
-                    <div class="bracket fair" style="left:35.5%; width:24.5%;"></div> <!-- left = bau_line left; ; width = 60 - left -->
-                    <div class="label fair" style="left:37.25%;">fair share</div> <!-- fair bracket left + 1/2 fair bracket width - 10 [because fair label is 20% wide] -->
-                    
-                    <!-- next line is case 1 specific -->
-                    <div class="bracket pledge" style="left:35.5%; width:7.7%;"></div> <!-- left = bau_line left; width = score_neg left - bau_line left -->
-
-                    <div class="label pledge" style="left:29.35%;">pledge</div> <!-- pledge bracket left + 1/2 pledge bracket width - 10 [because pledge label is 20% wide] -->
-                </div><!-- end .graph -->
+                    <?php echo drawScoreBar(-42, -61.26, 'brackets'); ?>                    
                 
 
                 <p><span class="score">Score: 8</span> (basic)</p>
-                <div class="graph basic">
-                    <div class="bg"></div>
-                    <div class="axis_labels"><span class="left">-150</span><span class="zero">0</span><span class="right">100</span></div>
-                    <div class="score_pos" style="left:60%; width:3.2%;"></div> <!-- left at zero line; |score| = 8; width = 8 x 0.4 = 3.2 -->
-                </div> <!-- end .graph -->     
+                    <?php echo drawScoreBar(8, -31.4, 'basic'); ?>
                 
                 <!-- case 2 [like Brazil] -->
                 <p><span class="score">Score: 8</span> (brackets, case 2, based on Brazil)</p>
-                <div class="graph brackets"> <!-- total width from -150 to +100 points is 100%; zero is nominally at 60%; 1 score point width = 0.4% -->
-                    <div class="bg"></div>
-                    <div class="axis_labels"><span class="left">-150</span><span class="zero">0</span><span class="right">100</span></div>
-                    <div class="bau_line" style="left:47.44%;"></div> <!-- |BAU| = 31.40 x 0.4 = 12.56; 60 - 12.56 = 47.44 [left edge of BAU line div] -->
-                    <div class="bau label" style="left:42.44%;">BAU</div> <!-- bau_line left - 5 [because BAU label is 10% wide] -->
-                    <div class="bracket fair" style="left:47.44%; width:12.56%;"></div> <!-- left = bau_line left; width = 60 - left -->
-                    <div class="label fair" style="left:43.72%;">fair share</div> <!-- fair bracket left + 1/2 fair bracket width - 10 [because fair label is 20% wide] -->
-                    
-                    <!-- next two lines are case 2 specific -->
-                    <div class="score_pos" style="left:60%; width:3.2%;"></div> <!-- left at zero line; |score| = 8; width = 8 x 0.4 = 3.2 -->
-                    <div class="bracket pledge" style="left:47.44%; width:15.76%;"></div> <!-- left = bau_line left; width = bracket fair width + score_pos width -->
-                    
-                    <div class="label pledge" style="left:45.32%;">pledge</div> <!-- pledge bracket left + 1/2 pledge bracket width - 10 [because pledge label is 20% wide] -->
-                </div><!-- end .graph -->
+                    <?php echo drawScoreBar(8, -31.4, 'brackets'); ?>
 
                 
                 <!-- case 3 [like India] -->
                 <p><span class="score negative">Score: -13</span> (brackets, case 3, based on India)</p>
-                <div class="graph brackets">
-                    <div class="bg"></div>
-                    <div class="axis_labels"><span class="left">-150</span><span class="zero">0</span><span class="right">100</span></div>
-                    <div class="score_neg" style="left:54.8%; width:5.2%;"></div> <!-- |score| = 13 x 0.4 = 5.2; 60 - 5.2 = 54.8 -->
-                    <div class="bau_line" style="left:58.828%;"></div> <!-- |BAU| = 2.93 x 0.4 = 1.172; 60 - 1.172 = 58.828 [left edge of BAU line div] -->
-                    <div class="bau label" style="left:53.828%;">BAU</div> <!-- bau_line left - 5 [because BAU label is 10% wide] -->
-                    <div class="bracket fair" style="left:58.828%; width:1.172%;"></div> <!-- left = bau_line left; width = 60 - left -->
-                    <div class="label fair" style="left:49.414%;">fair share</div> <!-- fair bracket left + 1/2 fair bracket width - 10 [because fair label is 20% wide] -->
-                    
-                    <!-- next line is case 3 specific -->
-                    <div class="bracket pledge" style="left:54.8%; width:4.028%;"></div> <!-- left = score_neg left; width = score_neg width - bracket fair width -->
-                    
-                    <div class="label pledge" style="left:46.814%;">pledge</div> <!-- pledge bracket left + 1/2 pledge bracket width - 10 [because pledge label is 20% wide] -->
-                </div><!-- end .graph -->
+                    <?php echo drawScoreBar(-13, -2.93, 'brackets'); ?>
 
                 
                 <!-- case 3 [like Ukraine] -->
                 <p><span class="score negative">Score: -101</span> (brackets, case 3, based on Ukraine)</p>
-                <div class="graph brackets">
-                    <div class="bg"></div>
-                    <div class="axis_labels"><span class="left">-150</span><span class="zero">0</span><span class="right">100</span></div>
-                    <div class="score_neg" style="left:19.6%; width:40.4%;"></div> <!-- |score| = 101 x 0.4 = 40.4; 60 - 40.4 = 19.6 -->
-                    <div class="bau_line" style="left:54.848%;"></div> <!-- |BAU| = 12.88 x 0.4 = 5.152; 60 - 5.152 = 54.848 [left edge of BAU line div] -->
-                    <div class="bau label" style="left:49.848%;">BAU</div> <!-- bau_line left - 5 [because BAU label is 10% wide] -->
-                    <div class="bracket fair" style="left:54.848%; width:5.152%;"></div> <!-- left = bau_line left; width = 60 - left -->
-                    <div class="label fair" style="left:47.424%;">fair share</div> <!-- fair bracket left + 1/2 fair bracket width - 10 [because fair label is 20% wide] -->
-                    
-                    <!-- next line is case 3 specific -->
-                    <div class="bracket pledge" style="left:19.6%; width:35.248%;"></div> <!-- left = score_neg left; width = score_neg width - bracket fair width -->
-                    
-                    <div class="label pledge" style="left:27.224%;">pledge</div> <!-- pledge bracket left + 1/2 pledge bracket width - 10 [because pledge label is 20% wide] -->
-                </div><!-- end .graph -->
+                    <?php echo drawScoreBar(-101, -12.88, 'brackets'); ?>
                 
 
 

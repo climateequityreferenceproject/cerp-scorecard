@@ -45,11 +45,19 @@ function getResults()
         $scoreview = $_POST['scoreview'];
     }
     elseif ($_POST['scoreview'] == 'scorebasic') {
-        $scoreview = 'scoreadv';
-    }
-    else {
         $scoreview = 'scorebasic';
     }
+    else {
+        $scoreview = 'scoreadv';
+    }
+    
+    if ($scoreview === 'scorebasic') {
+        $display = 'basic';
+    } else {
+        $display = 'brackets';
+    }
+    // Tyler: Clean this up -- it should figure it out from the interface
+    $display = 'brackets';
 
     // Get general pathway information
     $pathwayIds = GDRsAPI::connection()->pathwayIds;
@@ -79,7 +87,6 @@ function getResults()
 
 //    echo '<br />';
     $effort_array = getGdrsInformation($pledge_info, $pathway_id);
-    // TYLER use this for the BAU line: $effort_array['bau_score'];
     $score = niceNumber($effort_array['score']);
     $cap = niceNumber($effort_array['cap']);
     $resp = niceNumber($effort_array['resp']);
@@ -107,9 +114,7 @@ function getResults()
         $retval .= ' negative';
     }
     $retval .= '">Score: ' . $score_adj . '</span>';
-    $retval .= '<div class="graph group" id="fifty_fifty">';
-    $retval .= drawGraph100100($score_adj);
-    $retval .= '</div><!-- end .graph -->';
+    $retval .= drawScoreBar($effort_array['score'] - 100, $effort_array['bau_score'], $display); 
     
     $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
     if ($scoreview == 'scorebasic') {

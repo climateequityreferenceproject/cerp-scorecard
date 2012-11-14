@@ -534,204 +534,88 @@ function getGdrsInformation($pledge_info, $pathway)
 }
 
 /**
- * Generate the HTML containint the divs that represent the bars on the bar chart
+ * Generate HTML for full set of bars from given limits
  * 
- * @param integer $pledge The value of the pledge as a percentage of GDRs obligation (may be > 100%)
- * @param string  $class  The CSS class used to style the bar
- * 
- * @return array The remaining part of the bar and the HTML to render the current bar
- */
-function drawBarsGetRemainder($pledge, $class)
-{
-    $html = '';
-    for ($i = $pledge; $i >= 100; $i -= 100) {
-        $html .= '<div class="' . $class . '" style="width:100%"></div>';
-    }     
-    $html .= '<div class="' . $class . '" style="width:' . $i . '%"></div>';
-    return array(
-        'remainder' => (100 - $i),
-        'html' => $html
-    );
-}
-
-/**
- * Generate HTML for full set of bars
- * 
- * The final part of the bar has class "gap"
- * 
- * @param integer $pledge1 The percentage of GDRs obligation covered by pledge of class1
- * @param string  $class1  The CSS class label for 1st part of bar (international pledge)
- * @param integer $pledge2 The percentage of GDRs obligation covered by pledge of class2
- * @param string  $class2  The CSS class label for 2nd part of bar (domestic effort)
+ * @param integer   $score      integer between min & max limits representing pledge relative to fair share
+ * @param integer   $bau_score  representation of BAU relative to fair share as a pledge
+ * @param string    $display    either "basic" or "brackets"
+ * @param array     $limits     array with elements 'min' and 'max'
  * 
  * @return string The HTML to render
  */
-// TODO determine whether drawGraph needs to continue to accommodate international pledges,
-// and if not, change function to simplify arguments
-
-function drawGraph($pledge1,$class1,$pledge2,$class2, $show_pledge1 = true)
+function drawScoreBar($score, $bau_score, $display, $limits=array('min'=>-150,'max'=>100))
 {
-    if ($show_pledge1) {
-        $pledge1 = round($pledge1);
-    } else {
-        $pledge1 = 0.0;
+    $scale_factor = 100/($limits['max'] - $limits['min']);
+    // The min limit should be negative
+    if ($limits['min'] > 0) {
+        throw new Exception('drawScoreBar: Must have a negative min limit');
     }
-    $pledge2 = round($pledge2);
-    if (($pledge1 + $pledge2) >= 100) {
-        $gap = 0;
+    $zero_line = -$limits['min'] * $scale_factor;
+    $zero_line_string = number_format($zero_line, 1);
+    if ($score < 0) {
+        $score_class = 'score_neg';
+        $left = $zero_line - abs($score) * $scale_factor;
+        $width = $zero_line - $left;
     } else {
-        // In theory this is what it is, but was getting rounding errors
-        $gap = 100 - ($pledge1 + $pledge2);
-    }
-    //$bar_info1 = drawBarsGetRemainder($pledge1, $class1);
-    //$retval .= $bar_info1['html'];
-    $retval = '';
-    $remainder_pledge1 = 100; //$remainder_pledge1 = $bar_info1['remainder'];
-    if ($pledge2 <= $remainder_pledge1) {
-        $retval .= '<div class="' . $class2 . '" style="width:' . $pledge2 . '%"></div>';
-    } else {
-        $retval .= '<div class="' . $class2 . '" style="width:' . $remainder_pledge1 . '%"></div>';
-        $pledge2 = $pledge2 - $remainder_pledge1;
-        $bar_info2 = drawBarsGetRemainder($pledge2, $class2);
-        $retval .= $bar_info2['html'];
-    }
-    $retval .= '<div class="gap" style="width:' . $gap . '%"></div>';
-    return $retval;
-}
-
-/**
- * Generate HTML for full set of bars, -50 to 50
- * 
- * @param integer $score 
- * 
- * @return string The HTML to render
- */
-function drawGraph5050($score)
-{
-    switch ($score) {
-        case ($score < -50):
-            $score = 50;
-            $score_class = 'neg';
-            $plug = 0;
-            $gap = 50;
-            $below_range = true;
-            break;
-        case ($score == -50):
-            $score = 50;
-            $score_class = 'neg';
-            $plug = 0;
-            $gap = 50;
-            break;
-        case ($score > -50 and $score < 0):
-            $score = abs($score);
-            $score_class = 'neg';
-            $plug = 50 - $score;
-            $gap = 50;
-            break;
-        case ($score == 0):
-            $score_class = 'zero';
-            $plug = 50;
-            $gap = 50;
-            break;
-        case ($score > 0 and $score < 50):
-            $score_class = 'pos';
-            $plug = 50;
-            $gap = 50 - $score;
-            break;
-        case ($score == 50):
-            $score_class = 'pos';
-            $plug = 50;
-            $gap = 0;
-            break;
-        case ($score > 50):
-            $score = 50;
-            $score_class = 'pos';
-            $plug = 50;
-            $gap = 0;
-            $above_range = true;
-            break;
+        $score_class = 'score_pos';
+        $left = $zero_line;
+        $width = $score * $scale_factor;
     }
     
-    $retval = '';
-    $retval .= '<div class="plug" style="width:' . $plug . '%"></div>';
-    $retval .= '<div class="' . $score_class . '" style="width:' . $score . '%"></div>';
-    $retval .= '<div class="gap" style="width:' . $gap . '%"></div>';
-    $retval .= '<div class="zero_line"></div>';
-    return $retval;
-}
+    $left_string = number_format($left, 1);
+    $width_string = number_format($width, 1);
+    
+    // always 100%, gray bar under everything else (class="bg")
+$retval = <<<EOHTML
+<div class="graph $display">
+    <div class="bg"></div>
+    <div class="axis_labels"><span class="left">$limits[min]</span><span class="zero">0</span><span class="right">$limits[max]</span></div>
+    <div class="$score_class" style="left:$left_string%; width:$width_string%;"></div>
+EOHTML;
 
+    if ($display === 'brackets') {
+        $bau_label_width = 10; // BAU label is 10% wide
+        $bau_string = _('BAU');
+        $fair_label_width = 20; // Fair share label is 20% wide
+        $fair_string = _('fair share');
+        $pledge_label_width = 20; // Pledge label is 20% wide
+        $pledge_string = _('pledge');
+        $bau_left = $zero_line - abs($bau_score) * $scale_factor;
+        $bau_left_string = number_format($bau_left, 1);
+        $bau_label_left_pos = number_format($bau_left - 0.5 * $bau_label_width, 1);
+        $fair_width = $zero_line - $bau_left;
+        $fair_width_string = number_format($fair_width, 1);
+        $fair_label_left_pos = number_format($bau_left + 0.5 * ($fair_width - $fair_label_width), 1);
+$retval .= <<<EOHTML
+    <div class="bau_line" style="left:$bau_left_string%;"></div>
+    <div class="bau label" style="left:$bau_label_left_pos%;">$bau_string</div>
+    <div class="bracket fair" style="left:$bau_left_string%; width:$fair_width_string%;"></div>
+    <div class="label fair" style="left:$fair_label_left_pos%;">$fair_string</div>
+EOHTML;
+        if ($bau_score < $score && $score < 0) {
+            $pledge_left = $bau_left;
+            $pledge_width = $left - $bau_left;
+        } else if ($score > 0) {
+            // Case 2
+            // Draw positive score
+            $retval .= '<div class="score_pos" style="left:' . $zero_line_string . '%; width:' . $width_string . '%;"></div>';
+            $pledge_left = $bau_left;
+            $pledge_width = $fair_width + $width;
+        } else {
+            // Case 3:  <!-- left = score_neg left; width = score_neg width - bracket fair width -->
+            $pledge_left = $left;
+            $pledge_width = $width - $fair_width;
+        }
+        $pledge_left_string = number_format($pledge_left, 1);
+        $pledge_width_string = number_format($pledge_width, 1);
+        $retval .= '<div class="bracket pledge" style="left:' . $pledge_left_string . '%; width:' . $pledge_width_string . '%;"></div>';
+        $pledge_label_left_pos = number_format($pledge_left + 0.5 * ($pledge_width - $pledge_label_width), 1);
+        $retval .= '<div class="label pledge" style="left:' . $pledge_label_left_pos . '%;">' . $pledge_string . '</div>';
 
-/**
- * Generate HTML for full set of bars, -100 to 100
- * 
- * @param integer $score 
- * 
- * @return string The HTML to render
- */
-function drawGraph100100($score)
-{
-    switch ($score) {
-        case ($score < -100):
-            $score = 99.5;
-            $score_class = 'neg';
-            $plug = 0;
-            $gap = 100;
-            $below_range = true;
-            break;
-        case ($score == -100):
-            $score = 99.5;
-            $score_class = 'neg';
-            $plug = 0;
-            $gap = 100;
-            break;
-        case ($score > -100 and $score < 0):
-            $score = abs($score);
-            $score_class = 'neg';
-            $plug = 100 - $score;
-            $gap = 100;
-            break;
-        case ($score == 0):
-            $score_class = 'zero';
-            $plug = 100;
-            $gap = 100;
-            break;
-        case ($score > 0 and $score < 100):
-            $score_class = 'pos';
-            $plug = 99.5;
-            $gap = 100 - $score;
-            break;
-        case ($score == 100):
-            $score_class = 'pos';
-            $plug = 99.5;
-            $gap = 0;
-            break;
-        case ($score > 100):
-            $score = 100;
-            $score_class = 'pos';
-            $plug = 99.5;
-            $gap = 0;
-            $above_range = true;
-            break;
     }
     
-    // graph is 200 wide, so divide by 2 to get percentage
-    $plug = $plug /2;
-    $score = $score /2;
-    $gap = $gap /2;
-    if (($plug + $score + $gap) > 100) {
-        $gap = $gap -1;
-    } else if (($plug + $score + $gap) <=99) {
-        $plug = $plug +1;
-    }
-    
-    $retval = '';
-    $retval .= '<div class="plug" style="width:' . $plug . '%"></div>';
-    $retval .= '<div class="' . $score_class . '" style="width:' . $score . '%"></div>';
-    $retval .= '<div class="gap" style="width:' . $gap . '%"></div>';
-    $retval .= '<div class="zero_line"></div>';
-    $retval .= '<div class="axis_labels">';
-    $retval .= '  <span class="label_left">-100</span><span class="label_center">0</span><span class="label_right">100</span>';
-    $retval .= '</div>';
+    $retval .= '</div> <!-- end .graph -->';
+
     return $retval;
 }
 
