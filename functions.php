@@ -112,7 +112,7 @@ function queryPledgeDB($query)
  * 
  * @param number $val A floating-point number
  * 
- * @return string A formatted string that either uses number_format() or "<0.5",">-0.5" for small but nonzero values
+ * @return string A formatted string that either uses number_format() or "<0.1",">-0.1" for small but nonzero values
  */
 function niceNumber($val)
 {
@@ -170,12 +170,14 @@ function getIntlPledge($iso3, $year)
  * @param string $iso3 ISO 3-letter code for selected country, defaults to null
  * 
  * @return string HTML-formatted option list
+ * 
+ * @todo Get rid of fixed <= 2030; might change max year later
  */
 function availCountriesOptions($iso3=null)
 {
     $db = pledgeDBConnect();
     
-    $sql = "SELECT pledge.iso3 AS iso3, name FROM country, pledge WHERE pledge.iso3 = country.iso3 AND public = 1 ORDER BY name;";
+    $sql = "SELECT pledge.iso3 AS iso3, name FROM country, pledge WHERE pledge.iso3 = country.iso3 AND public = 1 AND by_year <= 2030 ORDER BY name;";
     
     $result = mysql_query($sql, $db);
     if (!$result) {
@@ -209,12 +211,14 @@ function availCountriesOptions($iso3=null)
  * @param string $region Code for selected region, defaults to null
  * 
  * @return string HTML-formatted option list
+ * 
+ * @todo Get rid of fixed <= 2030; might change max year later
  */
 function availRegionsOptions($region=null)
 {
     $db = pledgeDBConnect();
     
-    $sql = "SELECT pledge.region AS region, name FROM region, pledge WHERE pledge.region = region.region_code AND public = 1 ORDER BY name;";
+    $sql = "SELECT pledge.region AS region, name FROM region, pledge WHERE pledge.region = region.region_code AND public = 1 AND by_year <= 2030 ORDER BY name;";
     
     $result = mysql_query($sql, $db);
     if (!$result) {
