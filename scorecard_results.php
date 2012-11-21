@@ -36,7 +36,10 @@ $resultsDefault = '<p>How do countries&#8217; emission-reduction pledges &#8211;
 function getResults() 
 {
     $glossary = new HWTHelp('def_link', 'glossary.php', 'sc_gloss');
-
+    
+    // Figure out if Annex 1 or not
+    $is_annex_1 = array_key_exists('annex_1', getRegions($_POST['country']));
+    
     // Check/set basic/advanced scorecard view (short/long text)
     if (!isset($_POST['scoreview'])) {
         $scoreview = 'scorebasic'; 
@@ -58,6 +61,7 @@ function getResults()
     }
     // Tyler: Clean this up -- it should figure it out from the interface
     $display = 'brackets';
+    $scoreview = 'scoreadv';
 
     // Get general pathway information
     $pathwayIds = GDRsAPI::connection()->pathwayIds;
@@ -83,38 +87,41 @@ function getResults()
     // TODO cull unnecessary stuff here - TKB copied all over from earlier version for now
 //    $details = cleanText($pledge_info['details']);
     $source_dom = cleanText($pledge_info['source']);
-    $source_intl = cleanText($pledge_info['intl_source']);
+//    $source_intl = cleanText($pledge_info['intl_source']);
 
 //    echo '<br />';
     $effort_array = getGdrsInformation($pledge_info, $pathway_id);
-    $score = niceNumber($effort_array['score']);
+    $score = number_format($effort_array['score']); // No decimals
     $cap = niceNumber($effort_array['cap']);
     $resp = niceNumber($effort_array['resp']);
     $fair_share_perc = niceNumber($effort_array['fair_share_perc']);
-    $pledged_reduct_perc = niceNumber($effort_array['pledged_reduct_perc']);
+    $glob_mit_req_MtCO2 = niceNumber($effort_array['glob_mit_req_MtCO2']);
+//    $pledged_reduct_perc = niceNumber($effort_array['pledged_reduct_perc']);
     if ($effort_array['pledged_reduct_MtCO2'] < 0) {
         $pledge_is_negative = true;
     } else {
         $pledge_is_negative = false;
     }
-    $pledged_reduct_MtCO2 = niceNumber(abs($effort_array['pledged_reduct_MtCO2']));
-    $pledge_gap_MtCO2 = niceNumber($effort_array['pledge_gap_MtCO2']);
-    $pledge_gap_perc_bau = niceNumber($effort_array['pledge_gap_perc_bau']);
+//    $pledged_reduct_MtCO2 = niceNumber(abs($effort_array['pledged_reduct_MtCO2']));
+    $pledge_gap_MtCO2 = niceNumber(abs($effort_array['pledge_gap_MtCO2']));
+//print_r($effort_array); echo '<br /><br />';
+//    $pledge_gap_perc_bau = niceNumber(abs($effort_array['pledge_gap_perc_bau']));
+    $pledge_gap_as_score = number_format(abs($effort_array['score']));
+    $gdrs_perc_1990 = niceNumber($effort_array['gdrs_perc_1990']);
+    $pledge_perc_1990 = niceNumber($effort_array['pledge_perc_1990']);
 
     $iso3 = $_POST['country'];
 
     $condition_string = $_POST['conditional'] ? 'conditional' : 'unconditional';
     
     $retval = '';
-    
-    $score_adj = round($score - 100);
 
     $retval .= '<p><span class="score';
-    if ($score_adj < 0) {
+    if ($score < 0) {
         $retval .= ' negative';
     }
-    $retval .= '">Score: ' . $score_adj . '</span>';
-    $retval .= drawScoreBar($effort_array['score'] - 100, $effort_array['bau_score'], $display); 
+    $retval .= '">Score: ' . $score . '</span>';
+    $retval .= drawScoreBar($effort_array['score'], $effort_array['bau_score'], $display); 
     
     $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
     if ($scoreview == 'scorebasic') {
@@ -127,63 +134,134 @@ function getResults()
     foreach ($glossary->getIds() as $gloss_id) {
         $link_lower[$gloss_id] = $glossary->getLink($gloss_id, true, 0);
     }
-    $marker_pathway = $glossary->getLink('gloss_path', true, 'marker pathway');
+    $marker_pathway = $glossary->getLink('gloss_path', true, $ambition);
     // $help_bau = $glossary->getLink('gloss_bau', true, 0);
     
-    if ($score_adj < 0) {
-$action_string = <<<FALLSSHORTTEXT
-falls short of its $link_lower[gloss_fair] by $pledge_gap_MtCO2 million tonnes. To close that $link_lower[gloss_gap], $country should raise its pledge by an additional $pledge_gap_perc_bau% of its $link_lower[gloss_bau] emissions.
-FALLSSHORTTEXT;
-    } else {
-$action_string = <<<MEETSTEXT
-meets its $link_lower[gloss_fair].
-MEETSTEXT;
+    switch ($effort_array['case']) {
+        case 2:
+$simple_text = <<<EOHTML
+   <p>Given a $marker_pathway target, the $by_year $link_lower[gloss_mitreq] is $glob_mit_req_MtCO2 tonnes.
+       <span class="score positive">$country</span>&#8217;s  $by_year $condition_string mitigation pledge
+       <span class="positive">exceeds</span> its $link_lower[gloss_fair]
+       ($fair_share_perc%) of that global requirement by $pledge_gap_MtCO2 million tonnes. This is $pledge_gap_as_score% of its $by_year
+       $link_lower[gloss_bau] (BAU) emissions. Its score is therefore $score.</p>
+EOHTML;
+            break;
+        case 1:
+        case 3:
+$simple_text = <<<EOHTML
+   <p>Given a $marker_pathway target, the $by_year $link_lower[gloss_mitreq] is $glob_mit_req_MtCO2 tonnes.
+       <span class="score negative">$country</span>&#8217;s  $by_year $condition_string mitigation pledge
+       <span class="negative">falls short of</span> its $link_lower[gloss_fair]
+       ($fair_share_perc%) of that global requirement by $pledge_gap_MtCO2 million tonnes. To close this $link_lower[gloss_gap],
+       $country should raise its pledge by an additional $pledge_gap_as_score% of its $by_year
+       $link_lower[gloss_bau] (BAU) emissions. Its score is therefore $score.</p>
+EOHTML;
+            break;
+        default:
+            throw new Exception('Invalid case id: ' . $effort_array['case']);
     }
     
-    if ($pledge_is_negative) {
-        $pledged_string = _('pledged emissions is higher than its ') . $glossary->getLink('gloss_bau', true) . ' emissions by ' . $pledged_reduct_MtCO2 . ' million tonnes. This level of emissions';
+    if ($is_annex_1) {
+$annex1_text = <<<EOHTML
+<p>In 1990 terms: To meet its $link_lower[gloss_mitob], $country should limit its emissions in $by_year to
+    $gdrs_perc_1990% of its 1990 emissions. Its current pledge implies $by_year emissions of $pledge_perc_1990% of 1990 emissions.</p>
+EOHTML;
     } else {
-        $pledged_string = _('pledge to mitigate ') . $pledged_reduct_MtCO2 . ' million tonnes';
+        $annex1_text = '<p>NOT ANNEX 1</p>';
     }
     
-
-    if ($scoreview == 'scoreadv') {
-        $retval .= '<p><span class="score';
-        if ($score_adj < 0) {
-            $retval .= ' negative';
+    if ($scoreview === 'scoreadv') {
+        if ($effort_array['fund_others']) {
+$net_donor_text = <<<EOHTML
+ To meet its mitigation obligation, $country could either limit its own emissions, or contribute to reducing global emissions,
+or act both domestically and internationally.
+EOHTML;
+        } else {
+            $net_donor_text = '';
         }
-        $retval .= <<<LONGTEXT
-        ">$country</span>'s $link_lower[gloss_fair] of the global mitigation burden associated with the $ambition $marker_pathway is $fair_share_perc%. This fair share is calculated as the simple average of its share of global $link_lower[gloss_capacity] and global $link_lower[gloss_responsibility]. ($country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility.)</p>
-
-        <p>$country has pledged to do $pledged_reduct_perc% of the mitigation that would be needed, globally, to reach the $ambition marker pathway.</p>
-
-        <p>Given a $ambition target, $country&#8217;s $by_year $condition_string $pledged_string $action_string</p>
-LONGTEXT;
-    
-    $retval .= '<div id="details">';
-    $retval .= '<h2>Details about this pledge</h2>';
-    $retval .= '<p>' . $effort_array['pledge_description'];
-    
-    if ($source_dom) {
-        $retval .= '<p>Source for domestic effort: ' . $source_dom . '.</p>';            
-    }
-    if ($source_intl) {
-        $retval .= '<p class="source">Source for international support: ' . $source_intl . '.</p>';            
-    }
-    $retval .= '<p><strong>Warning: the scores here are only meaningful if the underlying national pledges are in good faith.</strong></p>';
-    $retval .= '</div><!-- end #details-->';
         
-    } elseif ($scoreview == 'scorebasic') {
-        $retval .= '<p>Given a ' .  $ambition . ' target, <span class="score';
-        if ($score_adj < 0) {
-            $retval .= ' negative';
+        if ($source_dom) {
+            $source_dom_text = '<p>Source for domestic effort: ' . $source_dom . '.</p>';
+        } else {
+            $source_dom_text = '';
         }
+        
+$detailed_text = <<<EOHTML
+<p>If $country&#8217;s pledge were equal to its fair share, its score would be zero. On the scorebar above,
+    $country&#8217;s fair share of $by_year global emissions reductions is expressed as the distance from its BAU to the zero point.
+    Its pledge is expressed as the distance from its BAU to its score.</p>
 
-        $retval .= '">' . $country . '</span>&#8217;s ' . $by_year . ' ' . $condition_string;
-        $retval .= ' ' . $pledged_string . ' ' . $action_string . '</p>';
-    } else {
-        // TODO make sure nothing else needs to go here
+<p>$country&#8217;s obligation is a share of a common global effort and a function of its $link_lower[gloss_capacity]
+    and its $link_lower[gloss_responsibility]. $country is projected in $by_year to have
+    $cap% of global capacity and $resp% of global responsibility.$net_donor_text</p>
+
+<div id="details">
+<h2>Details about this pledge</h2>
+<p>$effort_array[pledge_description]</p>
+$source_dom_text
+<p><strong>Warning: the scores here are only meaningful if the underlying national pledges are in good faith.</strong></p>
+</div><!-- end #details-->
+EOHTML;
     }
+    $retval .= $simple_text;
+    $retval .= $annex1_text;
+    $retval .= $detailed_text;
+    
+//    if ($score < 0) {
+//$action_string = <<<FALLSSHORTTEXT
+//falls short of its $link_lower[gloss_fair] by $pledge_gap_MtCO2 million tonnes. To close that $link_lower[gloss_gap], $country should raise its pledge by an additional $pledge_gap_perc_bau% of its $link_lower[gloss_bau] emissions.
+//FALLSSHORTTEXT;
+//    } else {
+//$action_string = <<<MEETSTEXT
+//meets its $link_lower[gloss_fair].
+//MEETSTEXT;
+//    }
+//    
+//    if ($pledge_is_negative) {
+//        $pledged_string = _('pledged emissions is higher than its ') . $glossary->getLink('gloss_bau', true) . ' emissions by ' . $pledged_reduct_MtCO2 . ' million tonnes. This level of emissions';
+//    } else {
+//        $pledged_string = _('pledge to mitigate ') . $pledged_reduct_MtCO2 . ' million tonnes';
+//    }
+//    
+//
+//    if ($scoreview == 'scoreadv') {
+//        $retval .= '<p><span class="score';
+//        if ($score < 0) {
+//            $retval .= ' negative';
+//        }
+//        $retval .= <<<LONGTEXT
+//        ">$country</span>'s $link_lower[gloss_fair] of the global mitigation burden associated with the $ambition $marker_pathway is $fair_share_perc%. This fair share is calculated as the simple average of its share of global $link_lower[gloss_capacity] and global $link_lower[gloss_responsibility]. ($country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility.)</p>
+//
+//        <p>$country has pledged to do $pledged_reduct_perc% of the mitigation that would be needed, globally, to reach the $ambition marker pathway.</p>
+//
+//        <p>Given a $ambition target, $country&#8217;s $by_year $condition_string $pledged_string $action_string</p>
+//LONGTEXT;
+//    
+//    $retval .= '<div id="details">';
+//    $retval .= '<h2>Details about this pledge</h2>';
+//    $retval .= '<p>' . $effort_array['pledge_description'];
+//    
+//    if ($source_dom) {
+//        $retval .= '<p>Source for domestic effort: ' . $source_dom . '.</p>';            
+//    }
+//    if ($source_intl) {
+//        $retval .= '<p class="source">Source for international support: ' . $source_intl . '.</p>';            
+//    }
+//    $retval .= '<p><strong>Warning: the scores here are only meaningful if the underlying national pledges are in good faith.</strong></p>';
+//    $retval .= '</div><!-- end #details-->';
+//        
+//    } elseif ($scoreview == 'scorebasic') {
+//        $retval .= '<p>Given a ' .  $ambition . ' target, <span class="score';
+//        if ($score < 0) {
+//            $retval .= ' negative';
+//        }
+//
+//        $retval .= '">' . $country . '</span>&#8217;s ' . $by_year . ' ' . $condition_string;
+//        $retval .= ' ' . $pledged_string . ' ' . $action_string . '</p>';
+//    } else {
+//        // TODO make sure nothing else needs to go here
+//    }
 
     $retval .= '<div class="results_links"><a href="http://gdrights.org/scorecard-info/interpret-scorecard/" target="_blank">How do I interpret these scores?</a> &nbsp;|&nbsp; ';
     

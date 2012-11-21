@@ -206,6 +206,26 @@ function availCountriesOptions($iso3=null)
 }
 
 /**
+ * Find the list of regions to which a country (identified by ISO 3-letter code) belongs
+ * 
+ * @param string $iso3 ISO 3-letter country code as defined by GDRs
+ * 
+ * @return array List of region codes and names to which the country belongs
+ */
+function getRegions($iso3) {
+    $region_array_raw = (array) GDRsAPI::connection()->get('regions&country=' . $iso3);
+    $region_array = array();
+    
+    // Have to convert to a proper array
+    foreach ($region_array_raw as $entry) {
+        $entry_array = (array) $entry;
+        $region_array[$entry_array['region_code']] = $entry_array['name'];
+    }
+    
+    return $region_array;
+}
+
+/**
  * Return an options list consisting of GDRs region codes (as option value) and region names (as displayed text)
  * 
  * @param string $region Code for selected region, defaults to null
@@ -429,10 +449,11 @@ function getGdrsInformation($pledge_info, $pathway)
     // unset($req);
     
     // Build up API query
-    if ($pledge_info['rel_to_year']) {
-        $years = $pledge_info['rel_to_year'] . "," . $pledge_info['by_year'];
+    $years = "1990,";
+    if ($pledge_info['rel_to_year'] && $pledge_info['rel_to_year'] != 1990) {
+        $years .= $pledge_info['rel_to_year'] . "," . $pledge_info['by_year'];
     } else {
-        $years = $pledge_info['by_year'];
+        $years .= $pledge_info['by_year'];
     }
     if (isset($pledge_info['iso3'])) {
         $ctrycode = $pledge_info['iso3'];
@@ -475,6 +496,7 @@ function getGdrsInformation($pledge_info, $pathway)
         }
     }
     
+    $dulline = $bau[$pledge_info['by_year']] * $alloc_world[$pledge_info['by_year']]/$bau_world[$pledge_info['by_year']];
     $gdrs_reduction = $bau[$pledge_info['by_year']] - $alloc[$pledge_info['by_year']];
     $gdrs_reduction_world = $bau_world[$pledge_info['by_year']] - $alloc_world[$pledge_info['by_year']];
     
@@ -524,15 +546,28 @@ function getGdrsInformation($pledge_info, $pathway)
     
     $gdrs_reduction_perc_bau = 100 * $gdrs_reduction/$bau[$pledge_info['by_year']];
     $pledged_reduction_perc_bau = 100 * $pledged_reduction/$bau[$pledge_info['by_year']];
-    $retval['score'] = 100 - ($gdrs_reduction_perc_bau - $pledged_reduction_perc_bau);
+    $retval['gdrs_perc_1990'] = 100 * $alloc[$pledge_info['by_year']]/$bau[1990];
+    $retval['pledge_perc_1990'] = 100 * ($bau[$pledge_info['by_year']] - $pledged_reduction)/$bau[1990];
     
+    $retval['score'] = $pledged_reduction_perc_bau - $gdrs_reduction_perc_bau;
+    
+    $retval['glob_mit_req_MtCO2'] = $gdrs_reduction_world;
+    $retval['fair_share_MtCO2'] = $gdrs_reduction;
     $retval['fair_share_perc'] = 100 * $rci[$pledge_info['by_year']];
     // Don't allow negative values (at least for some)
     $retval['pledged_reduct_perc'] = 100 * max(0, $pledged_reduction)/$gdrs_reduction_world;
     $retval['pledged_reduct_MtCO2'] = $pledged_reduction;
-    $retval['pledge_gap_MtCO2'] = max(0, $gdrs_reduction - $pledged_reduction);
-    $retval['pledge_gap_perc_bau'] = max(0, $gdrs_reduction_perc_bau - $pledged_reduction_perc_bau);
+    $retval['pledge_gap_MtCO2'] = $gdrs_reduction - $pledged_reduction;
+    $retval['pledge_gap_perc_bau'] = $gdrs_reduction_perc_bau - $pledged_reduction_perc_bau;
     $retval['bau_score'] = -$gdrs_reduction_perc_bau;
+    
+    $retval['fund_others'] = $alloc[$pledge_info['by_year']] < $dulline;
+    
+    if ($retval['bau_score'] < $retval['score']) {
+        $retval['case'] = $retval['score'] < 0 ? 1 : 2;
+    } else {
+        $retval['case'] = 3;
+    }
     
     return $retval;
 }

@@ -202,7 +202,7 @@ a:link {-webkit-tap-highlight-color:#dd6e4c;}
 
 .intl {background:#6b87c3;}
 .dom, .no_kab, .kab, .pos {background:#6cad57;}
-.score {color:#6cad57;}
+.positive {color:#6cad57;}
 .gap {background:#ffce73;}
 .plug, #fifty_fifty .gap {background: #eee;}
 .neg {background:#dd6e4c;}
