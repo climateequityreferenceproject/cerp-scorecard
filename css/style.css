@@ -453,7 +453,7 @@ footer {font-size:80%;}
 
 .graph {margin-bottom:1em; position:relative; width:100%;}
 /* remove the following line when replacing main css */
-.graph .bg, .graph .score_neg, .graph .score_pos, .zero_line, .graph.brackets .bg, .brackets .score_neg, .brackets .score_pos {float:none; margin:0;}
+/*.graph .bg, .graph .score_neg, .graph .score_pos, .zero_line, .graph.brackets .bg, .brackets .score_neg, .brackets .score_pos {float:none; margin:0;}*/
 .graph .bg, .graph .score_neg, .graph .score_pos {height:30px; position:absolute;}
 .graph .bg {background: #eee; width:100%; z-index:10;}
 .graph .score_neg, .graph .score_pos {z-index:100;}
@@ -470,7 +470,7 @@ footer {font-size:80%;}
 .axis_labels span.zero  {left:55%; text-align:center;}
 .axis_labels span.right  {right:0; text-align:right;}
 
-.graph.basic {height:60px;}
+.graph.basic {height:60px; margin-top:0.35em;}
 .graph.basic .bg, .graph.basic .score_neg, .graph.basic .score_pos {top:5px;}
 /*.graph.basic .zero_line {height:40px; top:0;}*/
 .graph.basic .axis_labels {top:35px;}

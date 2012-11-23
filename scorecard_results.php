@@ -48,10 +48,10 @@ function getResults()
         $scoreview = $_POST['scoreview'];
     }
     elseif ($_POST['scoreview'] == 'scorebasic') {
-        $scoreview = 'scorebasic';
+        $scoreview = 'scoreadv';
     }
     else {
-        $scoreview = 'scoreadv';
+        $scoreview = 'scorebasic';
     }
     
     if ($scoreview === 'scorebasic') {
@@ -60,8 +60,8 @@ function getResults()
         $display = 'brackets';
     }
     // Tyler: Clean this up -- it should figure it out from the interface
-    $display = 'brackets';
-    $scoreview = 'scoreadv';
+    // $display = 'brackets';
+    // $scoreview = 'scoreadv';
 
     // Get general pathway information
     $pathwayIds = GDRsAPI::connection()->pathwayIds;
@@ -113,14 +113,15 @@ function getResults()
     $iso3 = $_POST['country'];
 
     $condition_string = $_POST['conditional'] ? 'conditional' : 'unconditional';
+    if ($score < 0) {
+        $score_class = 'negative';
+    } else {
+        $score_class = 'positive';
+    }
     
     $retval = '';
-
-    $retval .= '<p><span class="score';
-    if ($score < 0) {
-        $retval .= ' negative';
-    }
-    $retval .= '">Score: ' . $score . '</span>';
+    $retval .= '<p><span class="score ' . $score_class . '">';
+    $retval .= 'Score: ' . $score . '</span></p>';
     $retval .= drawScoreBar($effort_array['score'], $effort_array['bau_score'], $display); 
     
     $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
@@ -137,12 +138,16 @@ function getResults()
     $marker_pathway = $glossary->getLink('gloss_path', true, $ambition);
     // $help_bau = $glossary->getLink('gloss_bau', true, 0);
     
+    // case 1 means score is negative, but pledge is between BAU and fair share (zero score)
+    // case 2 means score is positive
+    // case 3 means score is negative, and plege is worse than BAU, to the left of BAU on the graph
     switch ($effort_array['case']) {
         case 2:
 $simple_text = <<<EOHTML
-   <p>Given a $marker_pathway target, the $by_year $link_lower[gloss_mitreq] is $glob_mit_req_MtCO2 tonnes.
-       <span class="score positive">$country</span>&#8217;s  $by_year $condition_string mitigation pledge
-       <span class="positive">exceeds</span> its $link_lower[gloss_fair]
+   <p>Given a $marker_pathway target, the $by_year $link_lower[gloss_mitreq] is $glob_mit_req_MtCO2 tonnes.</p>
+            
+       <p><span class="score $score_class">$country</span>&#8217;s $by_year $condition_string mitigation pledge
+       exceeds its $link_lower[gloss_fair]
        ($fair_share_perc%) of that global requirement by $pledge_gap_MtCO2 million tonnes. This is $pledge_gap_as_score% of its $by_year
        $link_lower[gloss_bau] (BAU) emissions. Its score is therefore $score.</p>
 EOHTML;
@@ -150,9 +155,10 @@ EOHTML;
         case 1:
         case 3:
 $simple_text = <<<EOHTML
-   <p>Given a $marker_pathway target, the $by_year $link_lower[gloss_mitreq] is $glob_mit_req_MtCO2 tonnes.
-       <span class="score negative">$country</span>&#8217;s  $by_year $condition_string mitigation pledge
-       <span class="negative">falls short of</span> its $link_lower[gloss_fair]
+   <p>Given a $marker_pathway target, the $by_year $link_lower[gloss_mitreq] is $glob_mit_req_MtCO2 tonnes.</p>
+            
+       <p><span class="score $score_class">$country</span>&#8217;s $by_year $condition_string mitigation pledge
+       falls short of its $link_lower[gloss_fair]
        ($fair_share_perc%) of that global requirement by $pledge_gap_MtCO2 million tonnes. To close this $link_lower[gloss_gap],
        $country should raise its pledge by an additional $pledge_gap_as_score% of its $by_year
        $link_lower[gloss_bau] (BAU) emissions. Its score is therefore $score.</p>
@@ -168,7 +174,7 @@ $annex1_text = <<<EOHTML
     $gdrs_perc_1990% of its 1990 emissions. Its current pledge implies $by_year emissions of $pledge_perc_1990% of 1990 emissions.</p>
 EOHTML;
     } else {
-        $annex1_text = '<p>NOT ANNEX 1</p>';
+        $annex1_text = ''; // NOT ANNEX 1
     }
     
     if ($scoreview === 'scoreadv') {
