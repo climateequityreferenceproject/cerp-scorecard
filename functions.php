@@ -514,7 +514,7 @@ function getGdrsInformation($pledge_info, $pathway)
     $by_factor = $pledge_info['reduction_percent'];
     switch ($pledge_info['quantity']) {
         case 'absolute':
-            $description .= 'total emissions by ' . $by_factor . '% compared to ';
+            $description .= 'total emissions ' . $by_factor . '% by ' . $pledge_info['by_year'] . ' compared to ';
             if ($pledge_info['year_or_bau'] === 'bau') {
                 $description .= $glossary->getLink('gloss_bau', true);
                 $pledged_reduction = (1 - $factor) * $bau[$pledge_info['by_year']];
@@ -524,7 +524,7 @@ function getGdrsInformation($pledge_info, $pathway)
             }
             break;
         case 'intensity':
-            $description .= $glossary->getLink('gloss_ei', true) . ' by ' . $by_factor . '% compared to ';
+            $description .= $glossary->getLink('gloss_ei', true) . ' ' . $by_factor . '% by ' . $pledge_info['by_year'] . ' compared to ';
             if ($pledge_info['year_or_bau'] === 'bau') {
                 // This option actually makes no sense, but take care of it just in case:
                  $description .= $glossary->getLink('gloss_bau', true);
