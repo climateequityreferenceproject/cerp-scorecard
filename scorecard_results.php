@@ -209,7 +209,10 @@ $source_dom_text
 <p><strong>Warning: the scores here are only meaningful if the underlying national pledges are in good faith.</strong></p>
 </div><!-- end #details-->
 EOHTML;
+    } else {
+        $detailed_text = '';
     }
+    
     $retval .= $simple_text;
     $retval .= $annex1_text;
     $retval .= $detailed_text;
