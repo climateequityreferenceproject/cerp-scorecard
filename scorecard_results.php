@@ -59,15 +59,10 @@ function getResults()
     } else {
         $display = 'brackets';
     }
-    // Tyler: Clean this up -- it should figure it out from the interface
-    // $display = 'brackets';
-    // $scoreview = 'scoreadv';
 
     // Get general pathway information
     $pathwayIds = GDRsAPI::connection()->pathwayIds;
     $pathwayLabel = GDRsAPI::connection()->pathwayLabel;
-
-    //$help_entries = $HWTHelp->getEntries();
 
     // Get params
     $params = array();
@@ -84,28 +79,15 @@ function getResults()
     $pledge_info = getPledgeInformation($iso3, $conditional_or_not, $by_year);
 
     // Remove surrounding spaces and any ending punctuation: we have no control over this text, so clean it up a bit
-    // TODO cull unnecessary stuff here - TKB copied all over from earlier version for now
-//    $details = cleanText($pledge_info['details']);
     $source_dom = cleanText($pledge_info['source']);
-//    $source_intl = cleanText($pledge_info['intl_source']);
-
-//    echo '<br />';
+    
     $effort_array = getGdrsInformation($pledge_info, $pathway_id);
     $score = number_format($effort_array['score']); // No decimals
     $cap = niceNumber($effort_array['cap']);
     $resp = niceNumber($effort_array['resp']);
     $fair_share_perc = niceNumber($effort_array['fair_share_perc']);
     $glob_mit_req_MtCO2 = niceNumber($effort_array['glob_mit_req_MtCO2']);
-//    $pledged_reduct_perc = niceNumber($effort_array['pledged_reduct_perc']);
-    if ($effort_array['pledged_reduct_MtCO2'] < 0) {
-        $pledge_is_negative = true;
-    } else {
-        $pledge_is_negative = false;
-    }
-//    $pledged_reduct_MtCO2 = niceNumber(abs($effort_array['pledged_reduct_MtCO2']));
     $pledge_gap_MtCO2 = niceNumber(abs($effort_array['pledge_gap_MtCO2']));
-//print_r($effort_array); echo '<br /><br />';
-//    $pledge_gap_perc_bau = niceNumber(abs($effort_array['pledge_gap_perc_bau']));
     $pledge_gap_as_score = number_format(abs($effort_array['score']));
     $gdrs_perc_1990 = niceNumber($effort_array['gdrs_perc_1990']);
     $pledge_perc_1990 = niceNumber($effort_array['pledge_perc_1990']);
@@ -136,7 +118,6 @@ function getResults()
         $link_lower[$gloss_id] = $glossary->getLink($gloss_id, true, 0);
     }
     $marker_pathway = $glossary->getLink('gloss_path', true, $ambition);
-    // $help_bau = $glossary->getLink('gloss_bau', true, 0);
     
     // case 1 means score is negative, but pledge is between BAU and fair share (zero score)
     // case 2 means score is positive
@@ -217,61 +198,6 @@ EOHTML;
     $retval .= $annex1_text;
     $retval .= $detailed_text;
     
-//    if ($score < 0) {
-//$action_string = <<<FALLSSHORTTEXT
-//falls short of its $link_lower[gloss_fair] by $pledge_gap_MtCO2 million tonnes. To close that $link_lower[gloss_gap], $country should raise its pledge by an additional $pledge_gap_perc_bau% of its $link_lower[gloss_bau] emissions.
-//FALLSSHORTTEXT;
-//    } else {
-//$action_string = <<<MEETSTEXT
-//meets its $link_lower[gloss_fair].
-//MEETSTEXT;
-//    }
-//    
-//    if ($pledge_is_negative) {
-//        $pledged_string = _('pledged emissions is higher than its ') . $glossary->getLink('gloss_bau', true) . ' emissions by ' . $pledged_reduct_MtCO2 . ' million tonnes. This level of emissions';
-//    } else {
-//        $pledged_string = _('pledge to mitigate ') . $pledged_reduct_MtCO2 . ' million tonnes';
-//    }
-//    
-//
-//    if ($scoreview == 'scoreadv') {
-//        $retval .= '<p><span class="score';
-//        if ($score < 0) {
-//            $retval .= ' negative';
-//        }
-//        $retval .= <<<LONGTEXT
-//        ">$country</span>'s $link_lower[gloss_fair] of the global mitigation burden associated with the $ambition $marker_pathway is $fair_share_perc%. This fair share is calculated as the simple average of its share of global $link_lower[gloss_capacity] and global $link_lower[gloss_responsibility]. ($country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility.)</p>
-//
-//        <p>$country has pledged to do $pledged_reduct_perc% of the mitigation that would be needed, globally, to reach the $ambition marker pathway.</p>
-//
-//        <p>Given a $ambition target, $country&#8217;s $by_year $condition_string $pledged_string $action_string</p>
-//LONGTEXT;
-//    
-//    $retval .= '<div id="details">';
-//    $retval .= '<h2>Details about this pledge</h2>';
-//    $retval .= '<p>' . $effort_array['pledge_description'];
-//    
-//    if ($source_dom) {
-//        $retval .= '<p>Source for domestic effort: ' . $source_dom . '.</p>';            
-//    }
-//    if ($source_intl) {
-//        $retval .= '<p class="source">Source for international support: ' . $source_intl . '.</p>';            
-//    }
-//    $retval .= '<p><strong>Warning: the scores here are only meaningful if the underlying national pledges are in good faith.</strong></p>';
-//    $retval .= '</div><!-- end #details-->';
-//        
-//    } elseif ($scoreview == 'scorebasic') {
-//        $retval .= '<p>Given a ' .  $ambition . ' target, <span class="score';
-//        if ($score < 0) {
-//            $retval .= ' negative';
-//        }
-//
-//        $retval .= '">' . $country . '</span>&#8217;s ' . $by_year . ' ' . $condition_string;
-//        $retval .= ' ' . $pledged_string . ' ' . $action_string . '</p>';
-//    } else {
-//        // TODO make sure nothing else needs to go here
-//    }
-
     $retval .= '<div class="results_links"><a href="http://gdrights.org/scorecard-info/interpret-scorecard/" target="_blank">How do I interpret these scores?</a> &nbsp;|&nbsp; ';
     
     $calc_url = getCalcUrl($iso3, $by_year, $pathway_id);
