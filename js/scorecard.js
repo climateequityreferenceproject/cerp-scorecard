@@ -13,7 +13,7 @@ $(function() {
     );
         
    $('#popup').hide();
-        
+   
 });
 
 function get_def_by_id(e) {
@@ -66,6 +66,9 @@ function submit() {
             $('a.def_link').click(
                 get_def_by_id
             );
+            $('#switch_links a').click(function() {
+                $('#switch_view').click();
+            });
     });
 }
 
