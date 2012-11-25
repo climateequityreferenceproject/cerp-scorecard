@@ -172,6 +172,11 @@ img.right {float:right; margin-left:2em;}
 p.right {text-align:right;}
 .note { border:1px solid #999; margin:0.5em 0; padding:0.5em; }
 
+#switch_links {display:block;}
+#switch_view {display:none;}
+.no-js #switch_links {display:none;}
+.no-js #switch_view {display:block;}
+
 /* color ***************************************/ 
 /*
  * #3a4e85 blue xtra dk
