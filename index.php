@@ -151,7 +151,7 @@ if ($_POST && ($_POST['country']!=='none')) {
 
                 <input type="submit" value="get score" id="submit" />
                 
-                <p id="no-script-warning">Warning: you are viewing this page without JavaScript enabled. If the selected country or group has not made the selected type of pledge, you will get an error message after clicking GET SCORE. In that case, reload the page to return to the scorecard.</p>
+                <p id="no-script-warning">Warning: you are viewing this page without JavaScript enabled. If the selected country or group has not made the selected type of pledge, you may see an error message and/or strange results after clicking GET SCORE. In that case, reload the page.</p>
 
             </div><!-- end of #settings_wrapper -->
 
