@@ -171,7 +171,7 @@ if ($_POST && ($_POST['country']!=='none')) {
         </footer>
     </div> <!--! end of #container -->
 
-
+    
   <!-- JavaScript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
@@ -186,7 +186,23 @@ if ($_POST && ($_POST['country']!=='none')) {
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
   <script src="js/scorecard.js"></script>
-  <script src="js/libs/jquery.pageslide.min.js"></script>
+  <!--<script src="js/libs/jquery.pageslide.min.js"></script>-->
+<!--  <script src ="js/libs/jquery.ba-outside-events.min.js"></script>-->
+      <script>
+              $('body')
+                      .bind(
+                       'click',
+                       function(e){
+                        if(
+                         $('#popup').dialog('isOpen')
+                         && !$(e.target).is('.ui-dialog, a')
+                         && !$(e.target).closest('.ui-dialog').length
+                        ){
+                         $('#popup').dialog('close');
+                        }
+                       }
+                      );
+    </script>
 
   <!-- end scripts-->
 	
