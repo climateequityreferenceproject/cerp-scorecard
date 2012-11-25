@@ -29,7 +29,14 @@ function get_def_by_id(e) {
        });
        
        $('#popup').dialog('open');
-
+       
+       $('#popup').find('a').each(function() {
+            if ($(this).attr('target') == '_self') {
+                $(this).addClass('def_link');
+                $(this).click(get_def_by_id);
+            }
+        });
+        
     });
     e.preventDefault();
 }
