@@ -584,6 +584,11 @@ function getGdrsInformation($pledge_info, $pathway)
  */
 function drawScoreBar($score, $bau_score, $display, $limits=array('min'=>-150,'max'=>100))
 {
+    if ($limits['min'] < -150 or $limits['max'] > 100) {
+        $scale_warning = '<p id="scale_warning">This score bar has been scaled to show values outside the common range.</p>';
+    } else {
+        $scale_warning = '';
+    }
     $scale_factor = 100/($limits['max'] - $limits['min']);
     // The min limit should be negative
     if ($limits['min'] > 0) {
@@ -591,6 +596,7 @@ function drawScoreBar($score, $bau_score, $display, $limits=array('min'=>-150,'m
     }
     $zero_line = -$limits['min'] * $scale_factor;
     $zero_line_string = number_format($zero_line, 1);
+    $zero_label_left = $zero_line_string - 4.9;
     if ($score < 0) {
         $score_class = 'score_neg';
         $left = $zero_line - abs($score) * $scale_factor;
@@ -608,7 +614,7 @@ function drawScoreBar($score, $bau_score, $display, $limits=array('min'=>-150,'m
 $retval = <<<EOHTML
 <div class="graph $display">
     <div class="bg"></div>
-    <div class="axis_labels"><span class="left">$limits[min]</span><span class="zero">0</span><span class="right">$limits[max]</span></div>
+    <div class="axis_labels"><span class="left">$limits[min]</span><span class="zero" style="left:$zero_label_left%">0</span><span class="right">$limits[max]</span></div>
     <div class="$score_class" style="left:$left_string%; width:$width_string%;"></div>
 EOHTML;
 
@@ -652,8 +658,8 @@ EOHTML;
         $retval .= '<div class="label pledge" style="left:' . $pledge_label_left_pos . '%;">' . $pledge_string . '</div>';
 
     }
-    
     $retval .= '</div> <!-- end .graph -->';
+    $retval .= $scale_warning;
 
     return $retval;
 }

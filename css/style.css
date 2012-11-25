@@ -241,6 +241,8 @@ a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover {color
 
 .disabled {color:#aaa;}
 
+#scale_warning {color:#a23b1e;}
+
 /* typography ***************************************/
 
 @font-face {
@@ -270,7 +272,7 @@ h1, h2, h3, h4 {
 
 body {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, .score, legend, 
-#switch_links, #no-script-warning, .results_links {font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold;}
+#switch_links, #no-script-warning, .results_links, #scale_warning {font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold;}
 em {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif; font-style:italic;}
 h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold; font-style:italic;}
 
@@ -291,7 +293,7 @@ p {margin-top:1.2em;}
 #key p {margin-top:0.5em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
 .docs p {margin-top:0.5em;}
-#details, #key, #switch_links, #no-script-warning, .results_links {font-size:85%;}
+#details, #key, #switch_links, #no-script-warning, .results_links, #scale_warning {font-size:85%;}
 #details h2 {margin-top:1.5em;}
 #details p {margin-top:0.5em;}
 #details p.first, .no_sb {margin-top:0;}
@@ -404,6 +406,61 @@ footer {font-size:80%;}
 .group { zoom: 1; }
 
 
+
+.graph {margin-bottom:1em; position:relative; width:100%;}
+/* remove the following line when replacing main css */
+/*.graph .bg, .graph .score_neg, .graph .score_pos, .zero_line, .graph.brackets .bg, .brackets .score_neg, .brackets .score_pos {float:none; margin:0;}*/
+.graph .bg, .graph .score_neg, .graph .score_pos {height:30px; position:absolute;}
+.graph .bg {background: #eee; width:100%; z-index:10;}
+.graph .score_neg, .graph .score_pos {z-index:100;}
+.graph .score_neg {background:#dd6e4c; border-right:2px solid #666;}
+.graph .score_pos {background:#6cad57; border-left:2px solid #666;}
+
+/* nominally 60%, zero line fudged to avoid gap between line and score bar in Safari */
+/*.zero_line {border-right:2px solid #666; left:0; position:absolute; width:59.5%; z-index:500;} */
+.zero_line {background:transparent; border:none; left:59.5%; position:absolute; width:2px; z-index:500;}
+
+.axis_labels {font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-weight:normal; height:20px; left:0; position:absolute; width:100%;}
+.axis_labels span {position:absolute; width:10%;}
+.axis_labels span.left {left:0; text-align:left;}
+.axis_labels span.zero {left:55%; text-align:center;}
+.axis_labels span.right {right:0; text-align:right;}
+
+.graph.basic {height:60px; margin-top:0.35em;}
+.graph.basic .bg, .graph.basic .score_neg, .graph.basic .score_pos {top:5px;}
+/*.graph.basic .zero_line {height:40px; top:0;}*/
+.graph.basic .axis_labels {top:35px;}
+
+/*span.label_left, span.label_center, span.label_right {display:block; height:20px; width:6em;}
+span.label_left {float:left;}
+span.label_center {margin:0 auto; text-align:center;}
+span.label_right {position:absolute; right:0; text-align:right; top:0;}*/
+
+/*#key {clear:both; margin-top:0.5em;}*/
+
+      .graph.brackets {height:150px;}
+      .graph.brackets .bg, .graph.brackets .score_neg, .graph.brackets .score_pos {top:42px;}
+/*      .graph.brackets .zero_line {height:30px; top:42px;} */
+      .graph.brackets .bau_line {border-left:2px solid #666; height:50px; position:absolute; top:42px; z-index:500;}
+/*      .graph.brackets .bau_line {background:#666; border:none; height:50px; left:30%; position:absolute; top:42px; width:0.5%; z-index:500;}*/
+      .graph.brackets .label {
+        display:block; 
+	font-family: ProximaNova, Arial, "Helvetica Neue", Helvetica, sans-serif; 
+        font-size:1em;
+	font-weight:bold;
+        height:20px; 
+        position:absolute; 
+        text-align:center;
+        z-index:200;
+      }
+      .graph.brackets .axis_labels {top:72px;}
+      .graph.brackets .label.pledge {top:0; width:20%;}
+      .graph.brackets .label.bau {top:92px; width:10%;}
+      .graph.brackets .label.fair {top:130px; width:20%;}
+      .bracket {border:1px solid #999; color:#999; height:12px; position:absolute; z-index:200;}
+      .bracket.pledge {border-bottom:none; border-top-width:4px; top:22px;}
+      .bracket.fair {border-bottom-width:4px; border-top:none; top:113px;}
+
 /**
  * Media queries for responsive design.
  *
@@ -449,65 +506,10 @@ footer {font-size:80%;}
   a[href]:after { content: " (" attr(href) ")"; }
   abbr[title]:after { content: " (" attr(title) ")"; }
   .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
-  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-  thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
-  tr, img { page-break-inside: avoid; }
-  @page { margin: 0.5cm; }
-  p, h2, h3 { orphans: 3; widows: 3; }
-  h2, h3{ page-break-after: avoid; }
+  pre, blockquote { border: 1px solid #999; page-break-inside:avoid; }
+  thead { display:table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
+  tr, img { page-break-inside:avoid; }
+  @page { margin:1cm; }
+  p, h2, h3 { orphans:3; widows:3; }
+  h2, h3 { page-break-after:avoid; }
 }
-
-.graph {margin-bottom:1em; position:relative; width:100%;}
-/* remove the following line when replacing main css */
-/*.graph .bg, .graph .score_neg, .graph .score_pos, .zero_line, .graph.brackets .bg, .brackets .score_neg, .brackets .score_pos {float:none; margin:0;}*/
-.graph .bg, .graph .score_neg, .graph .score_pos {height:30px; position:absolute;}
-.graph .bg {background: #eee; width:100%; z-index:10;}
-.graph .score_neg, .graph .score_pos {z-index:100;}
-.graph .score_neg {background:#dd6e4c; border-right:2px solid #666;}
-.graph .score_pos {background:#6cad57; border-left:2px solid #666;}
-
-/* nominally 60%, zero line fudged to avoid gap between line and score bar in Safari */
-/*.zero_line {border-right:2px solid #666; left:0; position:absolute; width:59.5%; z-index:500;} */
-.zero_line {background:transparent; border:none; left:59.5%; position:absolute; width:2px; z-index:500;}
-
-.axis_labels {font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-weight:normal; height:20px; left:0; position:absolute; width:100%;}
-.axis_labels span {position:absolute; width:10%;}
-.axis_labels span.left  {left:0; text-align:left;}
-.axis_labels span.zero  {left:55%; text-align:center;}
-.axis_labels span.right  {right:0; text-align:right;}
-
-.graph.basic {height:60px; margin-top:0.35em;}
-.graph.basic .bg, .graph.basic .score_neg, .graph.basic .score_pos {top:5px;}
-/*.graph.basic .zero_line {height:40px; top:0;}*/
-.graph.basic .axis_labels {top:35px;}
-
-/*span.label_left, span.label_center, span.label_right {display:block; height:20px; width:6em;}
-span.label_left {float:left;}
-span.label_center {margin:0 auto; text-align:center;}
-span.label_right {position:absolute; right:0; text-align:right; top:0;}*/
-
-/*#key {clear:both; margin-top:0.5em;}*/
-
-      .graph.brackets {height:150px;}
-      .graph.brackets .bg, .graph.brackets .score_neg, .graph.brackets .score_pos {top:42px;}
-/*      .graph.brackets .zero_line {height:30px; top:42px;} */
-      .graph.brackets .bau_line {border-left:2px solid #666; height:50px; position:absolute; top:42px; z-index:500;}
-/*      .graph.brackets .bau_line {background:#666; border:none; height:50px; left:30%; position:absolute; top:42px; width:0.5%; z-index:500;}*/
-      .graph.brackets .label {
-        display:block; 
-	font-family: ProximaNova, Arial, "Helvetica Neue", Helvetica, sans-serif; 
-        font-size:1em;
-	font-weight:bold;
-        height:20px; 
-        position:absolute; 
-        text-align:center;
-        z-index:200;
-      }
-      .graph.brackets .axis_labels {top:72px;}
-      .graph.brackets .label.pledge {top:0; width:20%;}
-      .graph.brackets .label.bau {top:92px; width:10%;}
-      .graph.brackets .label.fair {top:130px; width:20%;}
-      .bracket {border:1px solid #999; color:#999; height:12px; position:absolute; z-index:200;}
-      .bracket.pledge {border-bottom:none; border-top-width:4px; top:22px;}
-      .bracket.fair {border-bottom-width:4px; border-top:none; top:113px;}
-

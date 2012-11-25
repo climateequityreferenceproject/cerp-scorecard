@@ -101,10 +101,23 @@ function getResults()
         $score_class = 'positive';
     }
     
+    if (($effort_array['score'] < -150) or ($effort_array['bau_score'] < -150)) {
+        $scale_min = round(min($effort_array['score'],$effort_array['bau_score']), -2) - 50;
+    } else {
+        $scale_min = -150;
+    }
+    if ($effort_array['score'] > 100) {
+        $scale_max = round($effort_array['score'], -2) + 50;
+    } else {
+        $scale_max = 100;
+    }
+    $scale_array = array('min'=>$scale_min,'max'=>$scale_max);
+    
     $retval = '';
     $retval .= '<p><span class="score ' . $score_class . '">';
     $retval .= 'Score: ' . $score . '</span></p>';
-    $retval .= drawScoreBar($effort_array['score'], $effort_array['bau_score'], $display); 
+    $retval .= drawScoreBar($effort_array['score'], $effort_array['bau_score'], $display, $scale_array); 
+//    $retval .= drawScoreBar($effort_array['score'], $effort_array['bau_score'], $display); 
     
     $retval .= '<input type="hidden" value=' . $scoreview . ' name="scoreview" id="scoreview" />';
     if ($scoreview == 'scorebasic') {
