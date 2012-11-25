@@ -151,7 +151,7 @@ if ($_POST && ($_POST['country']!=='none')) {
 
                 <input type="submit" value="get score" id="submit" />
 
-            </div><!-- end of #settings -->
+            </div><!-- end of #settings_wrapper -->
 
             <div id="results" class="group">
                 <?php echo $html; ?>
@@ -185,6 +185,32 @@ if ($_POST && ($_POST['country']!=='none')) {
   <script defer src="js/script.js"></script>
   <script src="js/scorecard.js"></script>
   <script src="js/libs/jquery.pageslide.min.js"></script>
+  
+  <script>
+    $(function () {
+    $('#switch_links a').on('click', function () {
+
+        //cache the form element for use later
+        var $form = $('#settings');
+        $.ajax({
+            url     : $form.attr('action') || '',//set the action of the AJAX request
+            type    : $form.attr('method') || 'post',//set the method of the AJAX reqeuest
+            data    : $form.serialize(),
+            success : function (serverResponse) {
+
+                //you can do what you want now, the form has been submitted, and you have received the serverResponse
+                //alert('Form Submitted!');
+            }
+        });
+    });
+
+    $('#settings').on('submit', function () {
+
+        //stop the normal submission of the form, for instance if someone presses the enter key inside a text input
+        return false;
+    });
+  });
+  </script>
   <!-- end scripts-->
 	
   <!-- Change UA-XXXXX-X to be your site's ID -->

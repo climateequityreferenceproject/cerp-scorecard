@@ -264,7 +264,7 @@ h1, h2, h3, h4 {
 }
 
 body {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
-h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, .score, legend {font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold;}
+h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, .score, legend, #switch_links {font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold;}
 em {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif; font-style:italic;}
 h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold; font-style:italic;}
 
@@ -285,7 +285,7 @@ p {margin-top:1.2em;}
 #key p {margin-top:0.5em;}
 #key p span {display:inline-block; height:15px; margin-right:0.5em; vertical-align:middle; width:15px;}
 .docs p {margin-top:0.5em;}
-#details, #key {font-size:85%;}
+#details, #key, #switch_links {font-size:85%;}
 #details h2 {margin-top:1.5em;}
 #details p {margin-top:0.5em;}
 #details p.first, .no_sb {margin-top:0;}
