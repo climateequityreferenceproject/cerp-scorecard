@@ -11,8 +11,12 @@ $(function() {
     $('a.def_link').click(
         get_def_by_id
     );
-        
-   $('#popup').hide();
+
+    $('#switch_links a').click(function() {
+        $('#switch_view').click();
+    });
+
+    $('#popup').hide();
    
 });
 
