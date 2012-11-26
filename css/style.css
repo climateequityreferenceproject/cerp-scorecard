@@ -194,7 +194,7 @@ p.right {text-align:right;}
  */
 body {background:#fff;}
 body, select, input, textarea {color:#666;}
-h1, h2, h3, h4, #country_name, #commitment, .score, legend {color:#4d59a4;}
+h1, h2, h3, h4, #country_name, #commitment, .score, legend, a.title, a.title:hover, a.title:visited {color:#4d59a4;}
 fieldset {background:#fff;}
 h1 span, h2 span {color:#999; letter-spacing:0.035em;}
 
@@ -310,6 +310,7 @@ legend {font-size:125%;}
 
 a, a:active, a:visited {border-bottom-width:1px; border-bottom-style:dotted; text-decoration: none;}
 a:hover {border-bottom-style:solid;}
+h1 a, h1 a:hover {text-decoration: none; border: none;}
 
 .glossary #container, .docs #container {font-size:90%;}
 dl {

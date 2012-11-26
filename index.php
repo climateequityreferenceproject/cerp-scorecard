@@ -70,7 +70,7 @@ if ($_POST && ($_POST['country']!=='none')) {
     <div id="loading"></div>
     <div id="container" class="group">
         <header>
-            <h1>Climate Equity Scorecard <span>BETA</span></h1>
+            <h1><a class="title" href="index.php">Climate Equity Scorecard <span>BETA</span></a></h1>
             <h2><span>DO NOT CITE OR PUBLICIZE</span></h2>
 
             <?php
