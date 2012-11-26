@@ -219,7 +219,7 @@ EOHTML;
     $retval .= $annex1_text;
     $retval .= $detailed_text;
     
-    $retval .= '<div class="results_links"><a href="http://gdrights.org/scorecard-info/interpret-scorecard/" target="_blank">How do I interpret these scores?</a> &nbsp;|&nbsp; ';
+    $retval .= '<div class="results_links"><a href="http://gdrights.org/scorecard-info/interpret-scorecard/" target="_blank">Guide to scores</a> &nbsp;|&nbsp; ';
     
     $calc_url = getCalcUrl($iso3, $by_year, $pathway_id);
     $retval .= '<a href="' . $calc_url . '" target="_blank">';
