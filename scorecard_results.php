@@ -80,6 +80,7 @@ function getResults()
 
     // Remove surrounding spaces and any ending punctuation: we have no control over this text, so clean it up a bit
     $source_dom = cleanText($pledge_info['source']);
+    $caveat_dom = cleanText($pledge_info['caveat']);
     
     $effort_array = getGdrsInformation($pledge_info, $pathway_id);
     $score = number_format($effort_array['score']); // No decimals
@@ -190,6 +191,12 @@ EOHTML;
             $source_dom_text = '';
         }
         
+        if ($caveat_dom) {
+            $caveat_dom_text = '<p>Please note: ' . $caveat_dom . '.</p>';
+        } else {
+            $caveat_dom_text = '';
+        }
+        
 $detailed_text = <<<EOHTML
 <p>If $country&#8217;s pledge were equal to its fair share, its score would be zero. On the scorebar above,
     $country&#8217;s fair share of $by_year global emissions reductions is expressed as the distance from its BAU to the zero point.
@@ -203,6 +210,7 @@ $detailed_text = <<<EOHTML
 <h2>Details about this pledge</h2>
 <p>$effort_array[pledge_description]</p>
 $source_dom_text
+$caveat_dom_text
 <p><strong>Warning: the scores here are only meaningful if the underlying national pledges are in good faith.</strong></p>
 </div><!-- end #details-->
 EOHTML;
