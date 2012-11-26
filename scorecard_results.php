@@ -123,10 +123,10 @@ function getResults()
     if ($scoreview == 'scorebasic') {
         $switchview = 'Show more';
         $linkview = '<p>Basic view | <a href="#">Detailed view</a></p>';
-        } else {
+    } else {
         $switchview = 'Show less';
         $linkview = '<p><a href="#">Basic view</a> | Detailed view</p>';
-        }
+    }
     $retval .= '<input type="submit" value="' . $switchview . '" name="switch_view" id="switch_view" />';
     $retval .= '<div id="switch_links">' . $linkview . '</div>';
     

@@ -4,6 +4,10 @@ $(function() {
     
     $("#settings :input").change(update_pledge_controls);
     $("#pledge_controls").change(submit);
+    $("#switch_view").click(function() {
+        submit("switch_view=yes");
+        return false;
+    });
     
     $('#loading').hide();
     $('#loading').html('<img src="img/spinner.gif" alt="loading indicator" />');
@@ -57,13 +61,15 @@ function update_pledge_controls() {
     );
 }
 
-function submit() {
+function submit(cmds) {
+    cmds = cmds || ""; // If nothing is passed for additional commands, then just use an empty string
+    
     $('#loading').show();
     
     // Get new results
     $.post(
         "scorecard_results.php",
-        $('#settings').serialize() + "&ajax=ajax",
+        $('#settings').serialize() + "&" + cmds + "&ajax=ajax",
         function(data) {
             $('#results').html(data);
             $('#loading').hide();
@@ -72,6 +78,10 @@ function submit() {
             );
             $('#switch_links a').click(function() {
                 $('#switch_view').click();
+            });
+            $("#switch_view").click(function() {
+                submit("switch_view=yes");
+                return false;
             });
     });
 }
