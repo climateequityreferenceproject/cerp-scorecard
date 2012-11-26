@@ -176,22 +176,23 @@ p.right {text-align:right;}
 #switch_view, #no-script-warning {display:none;}
 .no-js #switch_links {display:none;}
 .no-js #switch_view, .no-js #no-script-warning {display:block;}
+#switch_links a, #switch_links span {
+  border: 2px solid #dcdcdc;
+  -moz-border-radius:3px; border-radius:3px;
+  letter-spacing: 0.035em;
+  margin: 2px;
+  padding: 3px 5px;
+}
 #switch_links a {
   background: #dcdcdc;
-  padding: 3px 5px;
-  margin: 0;
   color: #999;
-  border: none;
 }
 #switch_links a:hover {
   color: #666;
 }
 #switch_links span {
-  background: #eee;
-  padding: 3px 5px;
-  margin: 0;
+  background: #fff;
   color: #666;
-  border: none;
 }
 
 /* color ***************************************/ 
@@ -282,16 +283,24 @@ a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover {color
     font-weight: bold;
     font-style: italic;
 }
-h1, h2, h3, h4 {
+/*h1, h2, h3, h4 {
 	font-family: ProximaNova, Arial, "Helvetica Neue", Helvetica, sans-serif; 
 	font-weight: bold;
-}
+}*/
 
-#switch_links, body {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+body {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+
 h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, .score, legend, 
-#no-script-warning, .results_links, #scale_warning {font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold;}
+#no-script-warning, .results_links, #scale_warning, #switch_links {
+    font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-weight:bold;
+}
 em {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif; font-style:italic;}
-h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold; font-style:italic;}
+h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {
+    font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-style:italic;
+    font-weight:bold; 
+}
 
 h1 {font-size:250%; line-height:1;}
 h2 {font-size:150%; margin-top:1em;}

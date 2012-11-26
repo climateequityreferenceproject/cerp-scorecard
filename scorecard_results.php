@@ -126,7 +126,7 @@ function getResults()
         $linkview = '<p><a href="#">Basic view</a><span>Detailed view</span></p>';
     }
     $retval .= '<input type="submit" value="' . $switchview . '" name="switch_view" id="switch_view" />';
-    $retval .= '<div id="switch_links">' . $linkview . '</div>';
+    $retval .= '<div id="switch_links" class="group">' . $linkview . '</div>';
     
     foreach ($glossary->getIds() as $gloss_id) {
         $link_lower[$gloss_id] = $glossary->getLink($gloss_id, true, 0);
