@@ -22,7 +22,7 @@ if (!isset($glossary)) {
     $glossary = new HWTHelp('def_link', 'glossary.php', 'sc_gloss');
 }
 $calc_path = getCalcPath() . '/';
-//TODO store default 'results' text in Help DB where authors can edit it, pull into page on first load
+//TODO be able to return to default state
 $resultsDefault = $glossary->getHelpEntry('sc_intro');
 
 /**
