@@ -178,10 +178,14 @@ p.right {text-align:right;}
 .no-js #switch_view, .no-js #no-script-warning {display:block;}
 #switch_links a, #switch_links span {
   border: 2px solid #dcdcdc;
-  -moz-border-radius:3px; border-radius:3px;
+  -moz-border-radius:3px;border-radius:3px;
   letter-spacing: 0.035em;
-  margin: 2px;
+  margin: -2px;
   padding: 3px 5px;
+  display: block;
+  float: left;
+  width: 7em;
+  text-align: center;
 }
 #switch_links a {
   background: #dcdcdc;
