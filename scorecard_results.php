@@ -23,10 +23,7 @@ if (!isset($glossary)) {
 }
 $calc_path = getCalcPath() . '/';
 //TODO store default 'results' text in Help DB where authors can edit it, pull into page on first load
-$resultsDefault = '<p>How do countries&#8217; emission-reduction pledges &#8211; their international promises &#8211; compare to the efforts they should be making, their ' . $glossary->getLink('gloss_fair', true, 0) . ' of the global effort needed to limit dangerous and avoidable climate change? <strong>This is the basic question that this Scorecard tries to answer.</strong></p>
-        <p>The Climate Equity Scorecard aims to express the principle of &#8220;Common but differentiated responsibilities and respective capabilities&#8221; &#8211; a keystone of global climate diplomacy &#8211; in terms of a simple but meaningful analysis of national pledges.</p>
-        <p>The Scorecard represents a country&#8217;s (or group of countries&#8217;) pledge to act, relative to its fair share of the international effort that would be needed to reach an ambitious temperate-stabilization target.</p>
-        <p>This calculation is based on the Greenhouse Development Rights (GDRs) effort-sharing framework. The underlying <a href="' . $calc_path . '" target="_blank">GDRs calculator</a> offers much more detail, and many more options for exploring national fair shares.</p>';
+$resultsDefault = $glossary->getHelpEntry('sc_intro');
 
 /**
  * Generate HTML to diplay bar chart and text information about pledge
