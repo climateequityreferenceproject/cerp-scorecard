@@ -44,7 +44,7 @@ if ($_POST && ($_POST['country']!=='none')) {
        More info: h5bp.com/b/378 -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Climate Equity Scorecard - BETA</title>
+  <title>Climate Equity Scorecard</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
