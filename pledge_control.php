@@ -57,11 +57,11 @@ pledge_control($disabledString, $checkedString);
 ?>
 <label for="conditional-no" <?php if ($disabledString['no'] == 'disabled="disabled"') { echo 'class="disabled"'; } ?> >
     <input type="radio" name="conditional" id="conditional-no" value="0" 
-<?php echo $checkedString['no']; ?> <?php echo $disabledString['no']; ?> /> Unconditional
+<?php echo $checkedString['no']; ?> <?php echo $disabledString['no']; ?> /> <?php echo _('Weaker pledge (Unconditional)') ?>
 </label>
 
 <label for="conditional-yes" <?php if ($disabledString['yes'] == 'disabled="disabled"') { echo 'class="disabled"'; } ?> >
     <input type="radio" name="conditional" id="conditional-yes" value="1" 
-<?php echo $checkedString['yes']; ?> <?php echo $disabledString['yes']; ?> /> Conditional
+<?php echo $checkedString['yes']; ?> <?php echo $disabledString['yes']; ?> /> <?php echo _('Stronger pledge (Conditional)') ?>
 </label>
 

@@ -133,8 +133,8 @@ if ($_POST && ($_POST['country']!=='none')) {
                                 $checkedString['high'] = '';
                             }
                             ?>
-                            <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathwayIds['med'] ?>" <?php echo $checkedString['med']; ?> /> Try to limit warming to <?php echo $api->pathwayLabel['med'] ?></label>
-                            <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathwayIds['high'] ?>" <?php echo $checkedString['high']; ?> /> Try to limit warming to <?php echo $api->pathwayLabel['high'] ?></label>
+                            <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathwayIds['med'] ?>" <?php echo $checkedString['med']; ?> /> <?php printf(_("Try to limit warming to %s"), $api->pathwayLabel['med']); ?></label>
+                            <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathwayIds['high'] ?>" <?php echo $checkedString['high']; ?> /> <?php printf(_("Try to limit warming to %s"), $api->pathwayLabel['high']); ?></label>
                             <!-- No more low[est]-ambition pathway, for now
                             TODO: fix 3-pathway workflow to 2-pathway workflow, with labels stored in API and not overridden here -->
                         </fieldset>
