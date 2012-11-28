@@ -64,13 +64,16 @@ function update_pledge_controls() {
 
 function submit(cmds) {
     cmds = cmds || ""; // If nothing is passed for additional commands, then just use an empty string
+    if (cmds != "") {
+        cmds = "&" + cmds;
+    }
     
     $('#loading').show();
     
     // Get new results
     $.post(
         "scorecard_results.php",
-        $('#settings').serialize() + "&" + cmds + "&ajax=ajax",
+        $('#settings').serialize() + cmds + "&ajax=ajax",
         function(data) {
             $('#results').html(data);
             $('#loading').hide();
