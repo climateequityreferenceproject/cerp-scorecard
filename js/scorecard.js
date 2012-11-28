@@ -12,7 +12,7 @@ $(function() {
     $('#loading').hide();
     $('#loading').html('<img src="img/spinner.gif" alt="loading indicator" />');
     
-    $('a.def_link').click(
+    $('a.def_link, a[target="_self"]').click(
         get_def_by_id
     );
 
