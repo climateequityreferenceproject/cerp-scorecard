@@ -46,7 +46,7 @@ require_once "class/HWTHelp/HWTHelp.php";
   <!-- All JavaScript at the bottom, except for Modernizr / Respond.
        Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
        For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  <script src="js/libs/modernizr-2.6.2.min.js"></script>
   </head>  
   <body class="glossary group">
     <div id="container" class="group">

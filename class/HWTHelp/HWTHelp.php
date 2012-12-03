@@ -224,7 +224,7 @@ class HWTHelp implements Iterator
      * 
      * @return HTML text 
      */
-    // TODO Fix this broken fn, use it in getHelpPage below and uncomment in how.php (Acknowlegements)
+    // TODO Fix this broken fn, use it in getHelpPage below
     public function getHelpEntry($id)
     {
         $retval = $this->_entries[$id]['text'];

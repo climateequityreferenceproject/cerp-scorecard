@@ -64,7 +64,7 @@ if ($_POST && ($_POST['country']!=='none')) {
   <!-- All JavaScript at the bottom, except for Modernizr / Respond.
        Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
        For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  <script src="js/libs/modernizr-2.6.2.min.js"></script>
   </head>  
   <body class="group">
     <div id="loading"></div>
