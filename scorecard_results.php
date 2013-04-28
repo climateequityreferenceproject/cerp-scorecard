@@ -86,10 +86,13 @@ function getResults()
     $cap = niceNumber($effort_array['cap']);
     $resp = niceNumber($effort_array['resp']);
     $fair_share_perc = niceNumber($effort_array['fair_share_perc']);
+    $fair_share_MtCO2 = '[fair share MtCO2]';
     $glob_mit_req_MtCO2 = niceNumber($effort_array['glob_mit_req_MtCO2']);
+    $glob_mit_req_GtCO2 = number_format($effort_array['glob_mit_req_MtCO2']/1000, 1);
     $pledge_gap_MtCO2 = niceNumber(abs($effort_array['pledge_gap_MtCO2']));
     $pledge_gap_as_score = number_format(abs($effort_array['score']));
     $gdrs_perc_1990 = niceNumber($effort_array['gdrs_perc_1990']);
+    $gdrs_perc_1990_abs = abs($gdrs_perc_1990);
     $pledge_perc_1990 = niceNumber($effort_array['pledge_perc_1990']);
 
     $iso3 = $_POST['country'];
@@ -141,7 +144,7 @@ function getResults()
     switch ($effort_array['case']) {
         case 2:
 $simple_text = <<<EOHTML
-   <p>Given a $marker_pathway target, the $by_year $link_lower[gloss_mitreq] is $glob_mit_req_MtCO2 tonnes.</p>
+       <p>Given a $marker_pathway target, the $by_year $link_lower[gloss_mitreq] is $glob_mit_req_GtCO2 gigatonnes.</p>
             
        <p><span class="score $score_class">$country</span>&#8217;s $by_year $condition_string mitigation pledge
        exceeds its $link_lower[gloss_fair]
@@ -152,11 +155,11 @@ EOHTML;
         case 1:
         case 3:
 $simple_text = <<<EOHTML
-   <p>Given a $marker_pathway target, the $by_year $link_lower[gloss_mitreq] is $glob_mit_req_MtCO2 tonnes.</p>
+       <p>Given a $marker_pathway target, the $by_year $link_lower[gloss_mitreq] is $glob_mit_req_GtCO2 gigatonnes.</p>
             
        <p><span class="score $score_class">$country</span>&#8217;s $by_year $condition_string mitigation pledge
        falls short of its $link_lower[gloss_fair]
-       ($fair_share_perc%) of that global requirement by $pledge_gap_MtCO2 million tonnes. To close this $link_lower[gloss_gap],
+       ($fair_share_perc%, or $fair_share_MtCO2 million tonnes) of that global requirement by $pledge_gap_MtCO2 million tonnes. To close this $link_lower[gloss_gap],
        $country should raise its pledge by an additional $pledge_gap_as_score% of its $by_year
        $link_lower[gloss_bau] (BAU) emissions. Its score is therefore $score.</p>
 EOHTML;
@@ -165,11 +168,24 @@ EOHTML;
             throw new Exception('Invalid case id: ' . $effort_array['case']);
     }
     
+    // same cases as above, for 1990 terms
+    
     if ($is_annex_1) {
+        switch ($effort_array['case']) {
+            case 2:
 $annex1_text = <<<EOHTML
-<p>In 1990 terms: To meet its $link_lower[gloss_mitob], $country should limit its emissions in $by_year to
-    $gdrs_perc_1990% of its 1990 emissions. Its current pledge implies $by_year emissions of $pledge_perc_1990% of 1990 emissions.</p>
+<p>For $country to meet its $link_lower[gloss_mitob] with domestic mitigation alone, it would have to limit its $by_year emissions to $gdrs_perc_1990% of its 1990 emissions. Its current pledge implies $by_year emissions of $pledge_perc_1990% of 1990 emissions.</p>
 EOHTML;
+                break;
+            case 1:
+            case 3:
+$annex1_text = <<<EOHTML
+<p>For $country to meet its $link_lower[gloss_mitob] with domestic mitigation alone, its net $by_year emissions would have to be negative by an amount equal to $gdrs_perc_1990_abs% of its 1990 emissions. Its current pledge implies $by_year emissions of $pledge_perc_1990% of 1990 emissions.</p>
+EOHTML;
+                break;
+            default:
+                throw new Exception('Invalid case id: ' . $effort_array['case']);
+        }
     } else {
         $annex1_text = ''; // NOT ANNEX 1
     }
