@@ -51,11 +51,13 @@ function getResults()
         $scoreview = 'scorebasic';
     }
     
-    if ($scoreview === 'scorebasic') {
-        $display = 'basic';
-    } else {
-        $display = 'brackets';
-    }
+//    if ($scoreview === 'scorebasic') {
+//        $display = 'basic';
+//    } else {
+//        $display = 'brackets';
+//    }
+    
+    $display = 'brackets';
 
     // Get general pathway information
     $pathwayIds = GDRsAPI::connection()->pathwayIds;

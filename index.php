@@ -116,7 +116,7 @@ if ($_POST && ($_POST['country']!=='none')) {
 
                     <li class="setting">
                         <fieldset id="pathway">
-                            <legend><?php echo $glossary->getLink('gloss_path',0,'Level of Global Ambition');?></legend>
+                            <legend><?php echo $glossary->getLink('gloss_path',0,_('Level of Global Ambition'));?></legend>
                             <?php
                             $checkedString = array();
                             if (isset($_POST['ambition'])) {
@@ -146,7 +146,14 @@ if ($_POST && ($_POST['country']!=='none')) {
                             <div id="pledge_controls"><?php include_once 'pledge_control.php'; ?></div>
                          </fieldset>
                     </li>
-
+                    
+                    <li class="setting">
+                         <fieldset id="kyoto_obligations">
+                            <legend><?php echo $glossary->getLink('gloss_kab',0,_('Kyoto Obligations'));?></legend>
+                            <p>NOTE: not actually implemented yet</p>
+                            <div id="kyoto_controls"><?php include_once 'kyoto_control.php'; ?></div>
+                         </fieldset>
+                    </li>
                 </ul>
 
                 <input type="submit" value="get score" id="submit" />
