@@ -86,8 +86,7 @@ function getResults()
     $cap = niceNumber($effort_array['cap']);
     $resp = niceNumber($effort_array['resp']);
     $fair_share_perc = niceNumber($effort_array['fair_share_perc']);
-    $fair_share_MtCO2 = '[fair share MtCO2]';
-    $glob_mit_req_MtCO2 = niceNumber($effort_array['glob_mit_req_MtCO2']);
+    $fair_share_MtCO2 = niceNumber($effort_array['fair_share_MtCO2']);;
     $glob_mit_req_GtCO2 = number_format($effort_array['glob_mit_req_MtCO2']/1000, 1);
     $pledge_gap_MtCO2 = niceNumber(abs($effort_array['pledge_gap_MtCO2']));
     $pledge_gap_as_score = number_format(abs($effort_array['score']));
