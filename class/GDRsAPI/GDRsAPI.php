@@ -238,8 +238,6 @@ class GDRsAPI
         // Check whether we're using the same KAB setting as the calculator default
         $response = $this->get('params');
         $use_kabs_array = (array) $response['use_kab'];
-//        echo '<br />' . $use_kabs_array['value'] . '<br />';
-//        echo '<br />' . gettype($use_kabs_array['value']) . '<br />';
         $kabs_match = true;
         if (($use_kabs_array['value'] === 1) && !self::$use_kab_on) {
             $use_kab = 0;

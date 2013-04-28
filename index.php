@@ -150,7 +150,6 @@ if ($_POST && ($_POST['country']!=='none')) {
                     <li class="setting">
                          <fieldset id="kyoto_obligations">
                             <legend><?php echo $glossary->getLink('gloss_kyoto',0,_('Kyoto Obligations'));?></legend>
-                            <p>NOTE: not actually implemented yet</p>
                             <div id="kyoto_controls"><?php include_once 'kyoto_control.php'; ?></div>
                          </fieldset>
                     </li>
