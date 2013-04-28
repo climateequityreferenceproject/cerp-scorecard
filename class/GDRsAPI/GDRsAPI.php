@@ -56,6 +56,9 @@ class GDRsAPI
     public $pathwayIds = array();
     public $pathway_default = 'high';
     
+    // KABs
+    public static $use_kab_on = true;
+    
     // TODO: Get this by querying the API
     public static $maxYear = 2030;
     
@@ -175,7 +178,8 @@ class GDRsAPI
      * @return string       The key
      */
     public static function get_db_key($pwId) {
-        return '_' . $pwId;
+        $kab_key = self::$use_kab_on ? 'kab' : 'nokab';
+        return '_' . $pwId . '_' . $kab_key;
     }
     
     /**
@@ -224,13 +228,29 @@ class GDRsAPI
         $req->setMethod(HTTP_REQUEST_METHOD_POST);
         // If pwId not defined, next line will throw an exception
         $db = $this->_getDB($pwId);
-        
+
         $req->addPostData("emergency_path", $pwId);
         $req->addPostData("db", $db);
         foreach ($post_array as $key => $val) {
             $req->addPostData($key, $val);
         }
-        
+                    
+        // Check whether we're using the same KAB setting as the calculator default
+        $response = $this->get('params');
+        $use_kabs_array = (array) $response['use_kab'];
+//        echo '<br />' . $use_kabs_array['value'] . '<br />';
+//        echo '<br />' . gettype($use_kabs_array['value']) . '<br />';
+        $kabs_match = true;
+        if (($use_kabs_array['value'] === 1) && !self::$use_kab_on) {
+            $use_kab = 0;
+            $kabs_match = false;
+        } elseif (($use_kabs_array['value'] === 0) && self::$use_kab_on) {
+            $use_kab = 1;
+            $kabs_match = false;
+        }
+        if (!$kabs_match) {
+            $req->addPostData("use_kab", $use_kab);
+        }
         // json_decode sometimes duplicating first element -- find out how many we expect
         $numitems = count(explode(",", $post_array['years'])) * count(explode(",", $post_array['countries']));
         
