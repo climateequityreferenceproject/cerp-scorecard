@@ -78,6 +78,7 @@ nav ul, nav li, form ul, form li { margin: 0; list-style:none; list-style-image:
 
 small { font-size: 85%; }
 strong, th { font-weight: bold; }
+.small_intro { font-size: 85%; font-weight: bold; line-height: 1.2; margin: 1em 0 0.5em 0; }
 
 td { vertical-align: top; }
 
@@ -218,7 +219,7 @@ body {background:#fff;}
 body, select, input, textarea {color:#666;}
 h1, h2, h3, h4, #country_name, #commitment, .score, legend, a.title, a.title:hover, a.title:visited {color:#4d59a4;}
 fieldset {background:#fff;}
-h1 span, h2 span {color:#999; letter-spacing:0.035em;}
+h1 span, h2 span, .small_intro {color:#999; letter-spacing:0.035em;}
 
 /* These selection declarations have to be separate
    No text-shadow: twitter.com/miketaylr/status/12228805301   */
@@ -295,7 +296,7 @@ a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover {color
 body {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 
 h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, .score, legend, 
-#no-script-warning, .results_links, #scale_warning, #switch_links {
+#no-script-warning, .results_links, #scale_warning, #switch_links, .small_intro {
     font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; 
     font-weight:bold;
 }

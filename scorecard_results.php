@@ -114,10 +114,19 @@ function getResults()
         $scale_max = 100;
     }
     $scale_array = array('min'=>$scale_min,'max'=>$scale_max);
+    foreach ($glossary->getIds() as $gloss_id) {
+        $link_lower[$gloss_id] = $glossary->getLink($gloss_id, true, 0);
+    }
     
     $retval = '';
     $retval .= '<p><span class="score ' . $score_class . '">';
     $retval .= 'Score: ' . $score . '</span></p>';
+$score_intro_text = <<<EOHTML
+    <p class="small_intro">If a country&#8217;s pledge is equal to its fair share, its $link_lower[gloss_score] is zero. 
+        A negative score means a country&#8217;s pledge falls short of its fair share. 
+        A positive score means a country&#8217;s pledge surpasses its fair share.</p>
+EOHTML;
+    $retval .= $score_intro_text;
     $retval .= drawScoreBar($effort_array['score'], $effort_array['bau_score'], $display, $scale_array); 
 //    $retval .= drawScoreBar($effort_array['score'], $effort_array['bau_score'], $display); 
     
@@ -132,9 +141,6 @@ function getResults()
     $retval .= '<input type="submit" value="' . $switchview . '" name="switch_view" id="switch_view" />';
     $retval .= '<div id="switch_links" class="group">' . $linkview . '</div>';
     
-    foreach ($glossary->getIds() as $gloss_id) {
-        $link_lower[$gloss_id] = $glossary->getLink($gloss_id, true, 0);
-    }
     $marker_pathway = $glossary->getLink('gloss_path', true, $ambition);
     
     // case 1 means score is negative, but pledge is between BAU and fair share (zero score)
@@ -143,25 +149,23 @@ function getResults()
     switch ($effort_array['case']) {
         case 2:
 $simple_text = <<<EOHTML
-       <p>Given a $marker_pathway target, the $by_year $link_lower[gloss_mitreq] is $glob_mit_req_GtCO2 gigatonnes.</p>
+       <p>Given a $marker_pathway target, the $link_lower[gloss_mitreq] in $by_year is $glob_mit_req_GtCO2 gigatonnes.</p>
             
        <p><span class="score $score_class">$country</span>&#8217;s $by_year $condition_string mitigation pledge
-       exceeds its $link_lower[gloss_fair]
-       ($fair_share_perc%) of that global requirement by $pledge_gap_MtCO2 million tonnes. This is $pledge_gap_as_score% of its $by_year
-       $link_lower[gloss_bau] (BAU) emissions. Its score is therefore $score.</p>
+       exceeds its $link_lower[gloss_fair] ($fair_share_perc%) of that global requirement by $pledge_gap_MtCO2 million tonnes. 
+       This is $pledge_gap_as_score% of its $by_year $link_lower[gloss_bau] (BAU) emissions. Its score is therefore $score.</p>
 EOHTML;
             break;
         case 1:
         case 3:
 $simple_text = <<<EOHTML
-       <p>Given a $marker_pathway target, the $by_year $link_lower[gloss_mitreq] is $glob_mit_req_GtCO2 gigatonnes.</p>
-            
-       <p><span class="score $score_class">$country</span>&#8217;s $by_year $condition_string mitigation pledge
-       falls short of its $link_lower[gloss_fair]
-       ($fair_share_perc%, or $fair_share_MtCO2 million tonnes) of that global requirement by $pledge_gap_MtCO2 million tonnes. To close this $link_lower[gloss_gap],
-       $country should raise its pledge by an additional $pledge_gap_as_score% of its $by_year
-       $link_lower[gloss_bau] (BAU) emissions. Its score is therefore $score.</p>
+        <p>Given a $marker_pathway target, the $link_lower[gloss_mitreq] in $by_year is $glob_mit_req_GtCO2 gigatonnes.</p>
+        <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] of this global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge falls short of its fair share by $pledge_gap_MtCO2 million tonnes. To make up this shortfall and meet its fair share, $country would need to strengthen its pledge and commit to reduce an additional $pledge_gap_MtCO2 million tonnes, or an additional $pledge_gap_as_score% of its $by_year $link_lower[gloss_bau] (BAU) emissions. Its score is therefore $score.</p>
+<p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, as a percent below BAU emissions, as a percent below 1990 emissions, etc. In the case of $country, the fair share can be expressed as $fair_share_MtCO2 million tonnes, [fair_share_perc_below_bau]% reduction below national BAU emissions, or [fair_share_perc_below_1990]% reduction below national 1990 emissions. [Eric, is this the same as gdrs_perc_1990_abs, which is $gdrs_perc_1990_abs%?]</p>
 EOHTML;
+            if ($scoreview === 'scorebasic') {
+                $simple_text .= '<p>In any case, as a fair share of a global effort, it explicitly includes both reductions undertaken domestically well as support for reductions undertaken internationally.</p>';
+            }
             break;
         default:
             throw new Exception('Invalid case id: ' . $effort_array['case']);
@@ -169,38 +173,38 @@ EOHTML;
     
     // same cases as above, for 1990 terms
     
-    if ($is_annex_1) {
-        switch ($effort_array['case']) {
-            case 2:
-$annex1_text = <<<EOHTML
-<p>For $country to meet its $link_lower[gloss_mitob] with domestic mitigation alone, it would have to limit its $by_year emissions to $gdrs_perc_1990% of its 1990 emissions. Its current pledge implies $by_year emissions of $pledge_perc_1990% of 1990 emissions.</p>
-EOHTML;
-                break;
-            case 1:
-            case 3:
-$annex1_text = <<<EOHTML
-<p>For $country to meet its $link_lower[gloss_mitob] with domestic mitigation alone, its net $by_year emissions would have to be negative by an amount equal to $gdrs_perc_1990_abs% of its 1990 emissions. Its current pledge implies $by_year emissions of $pledge_perc_1990% of 1990 emissions.</p>
-EOHTML;
-                break;
-            default:
-                throw new Exception('Invalid case id: ' . $effort_array['case']);
-        }
-    } else {
-        $annex1_text = ''; // NOT ANNEX 1
-    }
+//    if ($is_annex_1) {
+//        switch ($effort_array['case']) {
+//            case 2:
+//$annex1_text = <<<EOHTML
+//<p>For $country to meet its $link_lower[gloss_mitob] with domestic mitigation alone, it would have to limit its $by_year emissions to $gdrs_perc_1990% of its 1990 emissions. Its current pledge implies $by_year emissions of $pledge_perc_1990% of 1990 emissions.</p>
+//EOHTML;
+//                break;
+//            case 1:
+//            case 3:
+//$annex1_text = <<<EOHTML
+//<p>For $country to meet its $link_lower[gloss_mitob] with domestic mitigation alone, its net $by_year emissions would have to be negative by an amount equal to $gdrs_perc_1990_abs% of its 1990 emissions. Its current pledge implies $by_year emissions of $pledge_perc_1990% of 1990 emissions.</p>
+//EOHTML;
+//                break;
+//            default:
+//                throw new Exception('Invalid case id: ' . $effort_array['case']);
+//        }
+//    } else {
+//        $annex1_text = ''; // NOT ANNEX 1
+//    }
     
     if ($scoreview === 'scoreadv') {
-        if ($effort_array['fund_others']) {
-$net_donor_text = <<<EOHTML
- To meet its mitigation obligation, $country could either limit its own emissions, or contribute to reducing global emissions,
-or act both domestically and internationally.
-EOHTML;
-        } else {
-            $net_donor_text = '';
-        }
+//        if ($effort_array['fund_others']) {
+//$net_donor_text = <<<EOHTML
+// To meet its mitigation obligation, $country could either limit its own emissions, or contribute to reducing global emissions,
+//or act both domestically and internationally.
+//EOHTML;
+//        } else {
+//            $net_donor_text = '';
+//        }
         
         if ($source_dom) {
-            $source_dom_text = '<p>Source for domestic effort: ' . $source_dom . '.</p>';
+            $source_dom_text = '<p>Source for pledge details: ' . $source_dom . '.</p>';
         } else {
             $source_dom_text = '';
         }
@@ -212,20 +216,32 @@ EOHTML;
         }
         
 $detailed_text = <<<EOHTML
-<p>If $country&#8217;s pledge were equal to its fair share, its score would be zero. On the scorebar above,
-    $country&#8217;s fair share of $by_year global emissions reductions is expressed as the distance from its BAU to the zero point.
-    Its pledge is expressed as the distance from its BAU to its score.</p>
-
-<p>$country&#8217;s obligation is a share of a common global effort and a function of its $link_lower[gloss_capacity]
-    and its $link_lower[gloss_responsibility]. $country is projected in $by_year to have
-    $cap% of global capacity and $resp% of global responsibility.$net_donor_text</p>
+<p>A country&#8217;s fair share is relative to a common global effort, and explicitly includes both 
+        reductions undertaken domestically and support for reductions undertaken internationally. 
+        (This is in keeping with how pledges are generally presented, which includes both reductions 
+        undertaken at home and those supported abroad through, say, the Clean Development Mechanism.)</p>
+        
+        <p>A country&#8217;s fair share is a function of its $link_lower[gloss_capacity] and its $link_lower[gloss_responsibility].
+        $country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility. 
+        To meet its $link_lower[gloss_mitob], $country could either act nationally to limit its own emissions, 
+        or provide support for reducing emissions internationally, or act both nationally and internationally.</p>
+        
+        <p>Note that the fair share calculated for countries with high capability and responsibility can be 
+        quite large compared to national emissions, generally implying greater reductions than can be 
+        cost-effectively undertaken domestically, reflecting the ethical and practical importance of 
+        providing support for mitigation in countries with lower capability and responsibility.</p>
 
 <div id="details">
 <h2>Details about this pledge</h2>
 <p>$effort_array[pledge_description]</p>
 $source_dom_text
 $caveat_dom_text
-<p><strong>Warning: the scores here are only meaningful if the underlying national pledges are in good faith.</strong></p>
+<p><strong>Warnings:</strong></p> 
+<p><strong>These scores are only meaningful if the underlying national pledges are in good faith. 
+For example, they assume that "loopholes" such as the carryover of surplus AAUs and inflated land-use baselines 
+(projected reference emissions levels) are not exploited by the Annex 1 countries to which they are available.</strong></p>
+<p><strong>For the moment, only domestic mitigation pledges are quantified and available. 
+These scores do not include any adaptation actions or contributions to international means of implementation.</strong></p>
 </div><!-- end #details-->
 EOHTML;
     } else {
@@ -233,7 +249,7 @@ EOHTML;
     }
     
     $retval .= $simple_text;
-    $retval .= $annex1_text;
+//    $retval .= $annex1_text;
     $retval .= $detailed_text;
     
     $retval .= '<div class="results_links"><a href="http://gdrights.org/scorecard-info/interpret-scorecard/" target="_blank">Guide to scores</a> &nbsp;|&nbsp; ';
