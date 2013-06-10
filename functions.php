@@ -555,6 +555,7 @@ function getGdrsInformation($pledge_info, $pathway)
     $pledged_reduction_perc_bau = 100 * $pledged_reduction/$bau[$pledge_info['by_year']];
     $retval['gdrs_perc_1990'] = 100 * $alloc[$pledge_info['by_year']]/$bau[1990];
     $retval['pledge_perc_1990'] = 100 * ($bau[$pledge_info['by_year']] - $pledged_reduction)/$bau[1990];
+    $retval['fair_share_perc_below_1990'] = 100 - $retval['gdrs_perc_1990'];
     
     $retval['score'] = $pledged_reduction_perc_bau - $gdrs_reduction_perc_bau;
     
@@ -567,6 +568,7 @@ function getGdrsInformation($pledge_info, $pathway)
     $retval['pledge_gap_MtCO2'] = $gdrs_reduction - $pledged_reduction;
     $retval['pledge_gap_perc_bau'] = $gdrs_reduction_perc_bau - $pledged_reduction_perc_bau;
     $retval['bau_score'] = -$gdrs_reduction_perc_bau;
+    $retval['fair_share_perc_below_bau'] = $gdrs_reduction_perc_bau; // redundant with previous line (aside from sign), for clarity
     
     $retval['fund_others'] = $alloc[$pledge_info['by_year']] < $dulline;
     

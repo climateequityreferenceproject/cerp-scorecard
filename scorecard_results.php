@@ -92,7 +92,10 @@ function getResults()
     $pledge_gap_as_score = number_format(abs($effort_array['score']));
     $gdrs_perc_1990 = niceNumber($effort_array['gdrs_perc_1990']);
     $gdrs_perc_1990_abs = abs($gdrs_perc_1990);
-    $pledge_perc_1990 = niceNumber($effort_array['pledge_perc_1990']);
+    $fair_share_perc_below_bau = niceNumber($effort_array['fair_share_perc_below_bau']);
+    $fair_share_perc_below_1990 = niceNumber($effort_array['fair_share_perc_below_1990']);
+    
+    // $pledge_perc_1990 = niceNumber($effort_array['pledge_perc_1990']);
 
     $iso3 = $_POST['country'];
 
@@ -160,9 +163,8 @@ $simple_text = <<<EOHTML
             <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, 
             as a percent below BAU emissions, as a percent below 1990 emissions, etc. 
             In the case of $country, the fair share can be expressed as $fair_share_MtCO2 million tonnes, 
-            [fair_share_perc_below_bau]% reduction below national BAU emissions, or 
-            [fair_share_perc_below_1990]% reduction below national 1990 emissions. 
-            [Eric, is this the same as gdrs_perc_1990_abs, which is $gdrs_perc_1990_abs%?]</p>
+            $fair_share_perc_below_bau% reduction below national BAU emissions, or 
+            $fair_share_perc_below_1990% reduction below national 1990 emissions.</p>
 EOHTML;
             break;
         case 1:
@@ -182,9 +184,8 @@ $simple_text = <<<EOHTML
             <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, 
             as a percent below BAU emissions, as a percent below 1990 emissions, etc. 
             In the case of $country, the fair share can be expressed as $fair_share_MtCO2 million tonnes, 
-            [fair_share_perc_below_bau]% reduction below national BAU emissions, or 
-            [fair_share_perc_below_1990]% reduction below national 1990 emissions. 
-            [Eric, is this the same as gdrs_perc_1990_abs, which is $gdrs_perc_1990_abs%?]</p>
+            $fair_share_perc_below_bau% reduction below national BAU emissions, or 
+            $fair_share_perc_below_1990% reduction below national 1990 emissions.</p>
 EOHTML;
             if ($scoreview === 'scorebasic') {
                 $simple_text .= '<p>In any case, as a fair share of a global effort, 
