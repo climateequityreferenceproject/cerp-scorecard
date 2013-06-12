@@ -95,6 +95,12 @@ function getResults()
     $fair_share_perc_below_bau = niceNumber($effort_array['fair_share_perc_below_bau']);
     $fair_share_perc_below_1990 = niceNumber($effort_array['fair_share_perc_below_1990']);
     
+    if ($fair_share_perc_below_1990 >= 0) {
+        $perc_below_1990_text = "as " . $fair_share_perc_below_1990. "% reduction below national 1990 emissions";
+    } else {
+        $perc_below_1990_text = "as a " . -$fair_share_perc_below_1990. "% increase above national 1990 emissions";
+    }
+    
     // $pledge_perc_1990 = niceNumber($effort_array['pledge_perc_1990']);
 
     $iso3 = $_POST['country'];
@@ -163,8 +169,8 @@ $simple_text = <<<EOHTML
             <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, 
             as a percent below BAU emissions, as a percent below 1990 emissions, etc. 
             In the case of $country, the fair share can be expressed as $fair_share_MtCO2 million tonnes, 
-            $fair_share_perc_below_bau% reduction below national BAU emissions, or 
-            $fair_share_perc_below_1990% reduction below national 1990 emissions.</p>
+            as $fair_share_perc_below_bau% reduction below national BAU emissions, or 
+            $perc_below_1990_text.</p>
 EOHTML;
             break;
         case 1:
@@ -184,8 +190,8 @@ $simple_text = <<<EOHTML
             <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, 
             as a percent below BAU emissions, as a percent below 1990 emissions, etc. 
             In the case of $country, the fair share can be expressed as $fair_share_MtCO2 million tonnes, 
-            $fair_share_perc_below_bau% reduction below national BAU emissions, or 
-            $fair_share_perc_below_1990% reduction below national 1990 emissions.</p>
+            as $fair_share_perc_below_bau% reduction below national BAU emissions, or 
+            $perc_below_1990_text.</p>
 EOHTML;
             if ($scoreview === 'scorebasic') {
                 $simple_text .= '<p>In any case, a country’s fair share is relative to a common global effort,
