@@ -188,9 +188,9 @@ $simple_text = <<<EOHTML
             $fair_share_perc_below_1990% reduction below national 1990 emissions.</p>
 EOHTML;
             if ($scoreview === 'scorebasic') {
-                $simple_text .= '<p>In any case, as a fair share of a global effort, 
-                    it explicitly includes both reductions undertaken domestically 
-                    and support for reductions undertaken internationally.</p>';
+                $simple_text .= '<p>In any case, a country’s fair share is relative to a common global effort,
+                    and explicitly includes both reductions undertaken domestically and support for
+                    reductions undertaken internationally.</p>';
             }
             break;
         default:
@@ -242,8 +242,8 @@ EOHTML;
         }
         
 $detailed_text = <<<EOHTML
-        <p>A country&#8217;s fair share is relative to a common global effort, and explicitly includes both 
-        reductions undertaken domestically and support for reductions undertaken internationally. 
+        <p>In any case, a country’s fair share is relative to a common global effort, and explicitly includes
+        both reductions undertaken domestically and support for reductions undertaken internationally.
         (This is in keeping with how pledges are generally presented, which includes both reductions 
         undertaken at home and those supported abroad through, say, the Clean Development Mechanism.)</p>
         
