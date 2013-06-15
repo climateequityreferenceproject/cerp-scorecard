@@ -481,14 +481,21 @@ function getGdrsInformation($pledge_info, $pathway)
         if ($year_data['code'] === $ctrycode) {
             $gdp[$year] = $year_data['gdp_blnUSDMER'];
             $bau[$year] = $year_data['fossil_CO2_MtCO2'];
+            $ref_bau[$year] = $bau[$year];
             $c_frac[$year] = $year_data['gdrs_c_frac'];
             $r_frac[$year] = $year_data['gdrs_r_frac'];
             $rci[$year] = $year_data['gdrs_rci'];
             if ($use_lulucf['value']) {
                 $bau[$year] += $year_data['LULUCF_MtCO2'];
+                if ($pledge_info['include_lulucf']) {
+                    $ref_bau[$year] += $year_data['LULUCF_MtCO2'];
+                }
             }
             if ($use_nonco2['value']) {
                 $bau[$year] += $year_data['NonCO2_MtCO2e'];
+                if ($pledge_info['include_nonco2']) {
+                    $ref_bau[$year] += $year_data['NonCO2_MtCO2e'];
+                }
             }
             $alloc[$year] = $year_data['gdrs_alloc_MtCO2'];
         } else {
@@ -524,10 +531,10 @@ function getGdrsInformation($pledge_info, $pathway)
             $description .= 'total emissions ' . $by_factor . '% by ' . $pledge_info['by_year'] . ' compared to ';
             if ($pledge_info['year_or_bau'] === 'bau') {
                 $description .= $glossary->getLink('gloss_bau', true);
-                $pledged_reduction = (1 - $factor) * $bau[$pledge_info['by_year']];
+                $pledged_reduction = (1 - $factor) * $ref_bau[$pledge_info['by_year']];
             } else {
                 $description .= $pledge_info['rel_to_year'];
-                $pledged_reduction = $bau[$pledge_info['by_year']] - $factor * $bau[$pledge_info['rel_to_year']];
+                $pledged_reduction = $ref_bau[$pledge_info['by_year']] - $factor * $ref_bau[$pledge_info['rel_to_year']];
             }
             break;
         case 'intensity':
@@ -535,11 +542,11 @@ function getGdrsInformation($pledge_info, $pathway)
             if ($pledge_info['year_or_bau'] === 'bau') {
                 // This option actually makes no sense, but take care of it just in case:
                  $description .= $glossary->getLink('gloss_bau', true);
-                $pledged_reduction = (1 - $factor) * $bau[$pledge_info['by_year']];
+                $pledged_reduction = (1 - $factor) * $ref_bau[$pledge_info['by_year']];
             } else {
                 $description .= $pledge_info['rel_to_year'];
-                $scaled_emiss = $gdp[$pledge_info['by_year']] * $bau[$pledge_info['rel_to_year']]/$gdp[$pledge_info['rel_to_year']];
-                $pledged_reduction = $bau[$pledge_info['by_year']] - $factor * $scaled_emiss;
+                $scaled_emiss = $gdp[$pledge_info['by_year']] * $ref_bau[$pledge_info['rel_to_year']]/$gdp[$pledge_info['rel_to_year']];
+                $pledged_reduction = $ref_bau[$pledge_info['by_year']] - $factor * $scaled_emiss;
             }
             break;
         default:
