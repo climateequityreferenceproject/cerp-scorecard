@@ -162,12 +162,12 @@ $simple_text = <<<EOHTML
 
             <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] 
             of this global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
-            million tones. $country&#8217;s $by_year $condition_string mitigation pledge 
+            million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
             exceeds its fair share by $pledge_gap_MtCO2 million tonnes. This is $pledge_gap_as_score% 
             of its $by_year $link_lower[gloss_bau] (BAU) emissions. Its score is therefore $score.</p>
             
             <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, 
-            as a peraardvark below BAU emissions, as a percent below 1990 emissions, etc. 
+            as a percent below BAU emissions, as a percent below 1990 emissions, etc. 
             In the case of $country, the fair share can be expressed as $fair_share_MtCO2 million tonnes, 
             as $fair_share_perc_below_bau% reduction below national BAU emissions, or 
             $perc_below_1990_text.</p>
