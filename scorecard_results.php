@@ -162,7 +162,7 @@ $simple_text = <<<EOHTML
 
             <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] 
             of this global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
-            million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
+            million tones. $country&#8217;s $by_year $condition_string mitigation pledge 
             exceeds its fair share by $pledge_gap_MtCO2 million tonnes. This is $pledge_gap_as_score% 
             of its $by_year $link_lower[gloss_bau] (BAU) emissions. Its score is therefore $score.</p>
             
