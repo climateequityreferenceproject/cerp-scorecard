@@ -269,11 +269,16 @@ $detailed_text = <<<EOHTML
 $source_dom_text
 $caveat_dom_text
 <p><strong>Warnings:</strong></p> 
-<p><strong>These scores are only meaningful if the underlying national pledges are in good faith. 
-For example, they assume that "loopholes" such as the carryover of surplus AAUs and inflated land-use baselines 
-(projected reference emissions levels) are not exploited by the Annex 1 countries to which they are available.</strong></p>
-<p><strong>For the moment, only domestic mitigation pledges are quantified and available. 
-These scores do not include any adaptation actions or contributions to international means of implementation.</strong></p>
+<p><strong>These scores are only meaningful if the underlying national pledges are in good faith, and if the policies 
+needed to realize these pledges are fully implemented. This implies that all "loopholes" must be closed. For example, 
+the carryover of surplus AAUs and inflated land-use baselines (projected reference emissions levels) must not be 
+exploited by the Annex 1 countries to which they are available.
+        
+These scores only reflect domestic emissions reduction pledges, for only these domestic pledge are quantified and available.  
+Given this, most developed countries score very badly indeed.  When and if these countries make financial pledges that are in 
+line with their global obligations, their scores will improve considerably.  For more on this, see 
+<a href="http://http://gdrights.org/gdrs-scorecard-calculator-information/gdrs-obligations/" target="_blank">On domestic action in a 
+global crisis</a></strong></p>
 </div><!-- end #details-->
 EOHTML;
     } else {
