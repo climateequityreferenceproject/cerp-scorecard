@@ -274,11 +274,11 @@ needed to realize these pledges are fully implemented. This implies that all "lo
 the carryover of surplus AAUs and inflated land-use baselines (projected reference emissions levels) must not be 
 exploited by the Annex 1 countries to which they are available.
         
-These scores only reflect domestic emissions reduction pledges, for only these domestic pledge are quantified and available.  
-Given this, most developed countries score very badly indeed.  When and if these countries make financial pledges that are in 
-line with their global obligations, their scores will improve considerably.  For more on this, see 
-<a href="http://http://gdrights.org/gdrs-scorecard-calculator-information/gdrs-obligations/" target="_blank">On domestic action in a 
-global crisis</a></strong></p>
+These scores only reflect domestic emissions reduction pledges, for only these domestic pledge are quantified and 
+available.  Given this, most developed countries score very badly indeed.  When and if these countries make accountable 
+financial pledges, their scores will improve.  For more on this, see 
+<a href="http://http://gdrights.org/gdrs-scorecard-calculator-information/gdrs-obligations/" target="_blank">On 
+domestic action in a global crisis</a></strong></p>
 </div><!-- end #details-->
 EOHTML;
     } else {
