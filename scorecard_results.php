@@ -268,17 +268,17 @@ $detailed_text = <<<EOHTML
 <p>$effort_array[pledge_description]</p>
 $source_dom_text
 $caveat_dom_text
-<p><strong>Warnings:</strong></p> 
-<p><strong>These scores are only meaningful if the underlying national pledges are in good faith, and if the policies 
-needed to realize these pledges are fully implemented. This implies that all "loopholes" must be closed. For example, 
-the carryover of surplus AAUs and inflated land-use baselines (projected reference emissions levels) must not be 
-exploited by the Annex 1 countries to which they are available.
-        
-These scores only reflect domestic emissions reduction pledges, for only these domestic pledge are quantified and 
+<div id="warnings">
+<h2>Warnings</h2>
+<p><strong>&#8226; These scores only reflect domestic emissions reduction pledges, for only domestic emissions reduction pledges are quantified and 
 available.  Given this, most developed countries score very badly indeed.  When and if these countries make accountable 
 financial pledges, their scores will improve.  For more on this, see 
-<a href="http://http://gdrights.org/gdrs-scorecard-calculator-information/gdrs-obligations/" target="_blank">On 
-domestic action in a global crisis</a></strong></p>
+<a href="http://gdrights.org/gdrs-scorecard-calculator-information/gdrs-obligations/" target="_blank">On domestic action in a global crisis</a>
+</strong></p>
+<p></p> 
+<p><strong>&#8226; These scores are only meaningful if the underlying national pledges are in good faith, and if the policies 
+needed to realize these pledges are fully implemented. This implies that all "loopholes" must be closed before these scores are meaningful.  For example, 
+inflated land-use baselines (projected reference emissions levels) must not be exploited by those countries to which they are available.</strong></p>
 </div><!-- end #details-->
 EOHTML;
     } else {
