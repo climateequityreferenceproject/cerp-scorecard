@@ -5,7 +5,7 @@
  * PHP Version 5
  *
  * @package GDRsScorecard
- * @copyright 2011-2012 EcoEquity and Stockholm Environment Institute
+ * @copyright 2011-2013 EcoEquity and Stockholm Environment Institute
  * @license All rights reserved
  * @link http://www.gdrights.org/
  */
@@ -52,7 +52,7 @@ if ($_POST && ($_POST['country']!=='none')) {
        More info: h5bp.com/b/378 -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Climate Equity Scorecard</title>
+  <title>Climate Equity Pledge Scorecard</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -75,17 +75,18 @@ if ($_POST && ($_POST['country']!=='none')) {
   <script src="js/libs/modernizr-2.6.2.min.js"></script>
   </head>  
   <body class="group">
-    <div id="equity-settings-splash">
-        <?php
-        if ($use_splash) {
-            include_once 'includes/equity_settings_panel.inc';
-        }
-        ?>
-    </div>
+        <div id="lightbox"></div>
+        <div id="equity_settings_container">
+            <?php
+            if ($use_splash) {
+                include_once 'includes/equity_settings_panel.inc';
+            }
+            ?>
+        </div>
     <div id="loading"></div>
     <div id="container" class="group">
         <header>
-            <h1><a class="title" href="index.php">Climate Equity Scorecard</a></h1>
+            <h1><a class="title" href="index.php">Climate Equity Pledge Scorecard</a></h1>
 <!--            <h2><span>DO NOT CITE OR PUBLICIZE</span></h2>-->
 
             <?php
@@ -95,7 +96,7 @@ if ($_POST && ($_POST['country']!=='none')) {
                 $gloss_url = "http://gdrights.org/scorecard/glossary.php";
             }
             ?>
-            <p><?php //echo $glossary->getLink('sc_about',0,'About the Scorecard') ?><a href="http://gdrights.org/scorecard-info/about/">About the Scorecard</a> &nbsp;|&nbsp; <a href="<?php echo $gloss_url;?>">Glossary</a> &nbsp;|&nbsp; <a  href="&#109&#97&#105&#108&#116&#111&#58&#102&#101&#101&#100&#98&#97&#99&#107&#64&#103&#100&#114&#105&#103&#104&#116&#115&#46&#111&#114&#103&#63&#115&#117&#98&#106&#101&#99&#116&#61&#115&#99&#111&#114&#101&#99&#97&#114&#100&#32&#102&#101&#101&#100&#98&#97&#99&#107" title="&#115&#101&#110&#100&#32&#102&#101&#101&#100&#98&#97&#99&#107&#32&#111&#110&#32&#116&#104&#101&#32&#67&#108&#105&#109&#97&#116&#101&#32&#69&#113&#117&#105&#116&#121&#32&#83&#99&#111&#114&#101&#99&#97&#114&#100" >&#83;en&#100; &#70;&#101;&#101;db&#97;ck</a></p>
+            <p><?php //echo $glossary->getLink('sc_about',0,'About the Pledge Scorecard') ?><a href="http://gdrights.org/scorecard-info/about/">About the Pledge Scorecard</a> &nbsp;|&nbsp; <a href="<?php echo $gloss_url;?>">Glossary</a> &nbsp;|&nbsp; <a  href="&#109&#97&#105&#108&#116&#111&#58&#102&#101&#101&#100&#98&#97&#99&#107&#64&#103&#100&#114&#105&#103&#104&#116&#115&#46&#111&#114&#103&#63&#115&#117&#98&#106&#101&#99&#116&#61&#115&#99&#111&#114&#101&#99&#97&#114&#100&#32&#102&#101&#101&#100&#98&#97&#99&#107" title="&#115&#101&#110&#100&#32&#102&#101&#101&#100&#98&#97&#99&#107&#32&#111&#110&#32&#116&#104&#101&#32&#67&#108&#105&#109&#97&#116&#101&#32&#69&#113&#117&#105&#116&#121&#32&#83&#99&#111&#114&#101&#99&#97&#114&#100" >&#83;en&#100; &#70;&#101;&#101;db&#97;ck</a></p>
         </header>
         <div id="main" role="main" class="group">
             <form name="settings" id="settings" method="post" autocomplete="off" >
@@ -162,12 +163,18 @@ if ($_POST && ($_POST['country']!=='none')) {
                          </fieldset>
                     </li>
                     
-                    <li class="setting">
+                    <li>
+                        <div  id="equity_settings_button" class="group">
+                            <a href="#">Review equity settings</a>
+                        </div>
+                    </li>
+                    
+<!--                    <li class="setting">
                          <fieldset id="kyoto_obligations">
                             <legend><?php echo $glossary->getLink('gloss_kyoto',0,_('Kyoto Obligations'));?></legend>
                             <div id="kyoto_controls"><?php include_once 'kyoto_control.php'; ?></div>
                          </fieldset>
-                    </li>
+                    </li>-->
                 </ul>
 
                 <input type="submit" value="get score" id="submit" />
@@ -188,7 +195,7 @@ if ($_POST && ($_POST['country']!=='none')) {
         <footer>
             <p class="first">Thanks to the <a href="http://www.minor-foundation.no/" target="_blank">Minor Foundation for Major Challenges</a>, and to the <a href="http://www.rbf.org/">Rockefeller Brothers Fund</a>, <a href="http://www.christianaid.org.uk/">Christian Aid</a>, and the <a href="http://www.sei-international.org/">Stockholm Environment Institute</a> for supporting this effort.</p>
             <p><?php echo $glossary->getLink('sc_credits') ?></p>
-            <p>Please send feedback on the Climate Equity Scorecard to <a href='m&#97;il&#116;o&#58;f%65&#37;65db%61ck&#64;gdri&#103;&#104;ts%2E%6F&#114;&#103;'>feed&#98;ack&#64;gdrig&#104;&#116;s&#46;org</a></p>
+            <p>Please send feedback on the Climate Equity Pledge Scorecard to <a href='m&#97;il&#116;o&#58;f%65&#37;65db%61ck&#64;gdri&#103;&#104;ts%2E%6F&#114;&#103;'>feed&#98;ack&#64;gdrig&#104;&#116;s&#46;org</a></p>
         </footer>
     </div> <!--! end of #container -->
 

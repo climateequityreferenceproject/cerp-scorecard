@@ -18,7 +18,7 @@
  * html5doctor.com/html-5-reset-stylesheet/
  */
 
-html, body, div, span, object, iframe,
+/*html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
 small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
@@ -47,7 +47,105 @@ del { text-decoration: line-through; }
 abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
 table { border-collapse: collapse; border-spacing: 0; }
 hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
-input, select { vertical-align: middle; }
+input, select { vertical-align: middle; }*/
+
+/* from Meyer */
+html, body, div, h1, h2, h3, h4, ul, ol, li, p, form, fieldset, legend, img,
+input, textarea, table, caption, tbody, tfoot, thead, tr, td, th, dl, dd, dt {
+    border:none;
+    font-size:100%;
+    margin:0;
+    padding:0;
+    font:inherit;
+    vertical-align:baseline;
+}
+img { outline:none; }
+ul { list-style:inside; }
+#calc_container ul { list-style:none; }
+table { /* cellspacing and cellpadding are not valid CSS - these attributes must be added to the html */
+    border-collapse:collapse;
+    border-spacing:0;
+    width:100%;
+}
+
+/* from normalize.css */
+article, aside, details, figcaption, figure, footer, 
+header, hgroup, main, nav, section, summary { display: block; }
+html {
+    font-size: 100%; 
+    -ms-text-size-adjust: 100%; 
+    -webkit-text-size-adjust: 100%; 
+}
+html, button, input, select, textarea { font-family: sans-serif; }
+a:focus { outline: thin dotted; }
+a:active, a:hover { outline: 0; }
+small { font-size: 80%; }
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+nav ul, nav ol, #nav ul, #nav ol {
+    list-style: none;
+    list-style-image: none;
+}
+img {
+    border: 0; 
+    -ms-interpolation-mode: bicubic; 
+}
+svg:not(:root) { overflow: hidden; }
+button, input, select, textarea {
+    font-size: 100%; 
+    margin: 0; 
+    vertical-align: baseline; 
+    *vertical-align: middle; 
+}
+button, input { line-height: normal; }
+button, select { text-transform: none; }
+button, 
+html input[type="button"], 
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; 
+    cursor: pointer; 
+    *overflow: visible;  
+}
+button[disabled],
+html input[disabled] { cursor: default; }
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box; 
+    padding: 0; 
+    *height: 13px; 
+    *width: 13px; 
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+textarea {
+    overflow: auto; 
+    vertical-align: top; 
+}
+
+/* other resets */
+/*fieldset {
+-webkit-margin-start: 0;
+-webkit-margin-end: 0;
+-webkit-padding-before: 0;
+-webkit-padding-start: 0;
+-webkit-padding-end: 0;
+-webkit-padding-after: 0;
+border:none;
+}
+legend {
+    -webkit-padding-start: 0 !important;
+    -webkit-padding-end: 0 !important;
+}*/
 
 /**
  * Font normalization inspired by YUI Library's fonts.css: developer.yahoo.com/yui/
@@ -131,6 +229,11 @@ button {  width: auto; overflow: visible; }
  * Primary styles
  *
  * Author: Tyler Kemp-Benedict
+ *
+ *  layout
+ *  color palette
+ *  typography
+ *  miscellaneous
  */
  
 /* layout ***************************************/
@@ -178,29 +281,33 @@ p.right {text-align:right;}
 .no-js #switch_links {display:none;}
 .no-js #switch_view, .no-js #no-script-warning {display:block;}
 #switch_links a, #switch_links span {
-  border: 2px solid #dcdcdc;
+  border: 2px solid;
   -moz-border-radius:3px;border-radius:3px;
+  display: block;
+  float: left;
   letter-spacing: 0.035em;
   margin: -2px;
   padding: 3px 5px;
+  text-align: center;
+  width: 8em;
+}
+#equity_settings_button a { 
+  border: 2px solid;
+  -moz-border-radius:3px;border-radius:3px;
   display: block;
   float: left;
-  width: 8em;
+  font-size:90%; 
+  letter-spacing: 0.1em;
+  line-height:1;
+  padding:0.5em 1em;
+  margin: 1em 0 0.5em;
   text-align: center;
-}
-#switch_links a {
-  background: #dcdcdc;
-  color: #999;
-}
-#switch_links a:hover {
-  color: #666;
-}
-#switch_links span {
-  background: #fff;
-  color: #666;
+  text-decoration: none;
+  text-transform: uppercase;
+  width:auto; 
 }
 
-/* color ***************************************/ 
+/* color palette ***************************************/ 
 /*
  * #3a4e85 blue xtra dk
  * #4d59a4 blue dk
@@ -237,7 +344,7 @@ a:link {-webkit-tap-highlight-color:#dd6e4c;}
 .negative {color:#dd6e4c; white-space:nowrap;}
 #results {border:6px solid #ffce73;}
 #settings_wrapper, footer {border:6px solid #e6ebe6;}
-#settings_wrapper, #results, footer {-moz-border-radius:15px; border-radius:15px;}
+#settings_wrapper, #results, footer, #equity_settings {-moz-border-radius:15px; border-radius:15px;}
 
 .glossary #main, .docs #main {border-top:6px solid #ffce73;}
 .glossary p {margin-top:0.75em;}
@@ -265,6 +372,28 @@ a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover {color
 .disabled {color:#aaa;}
 
 #scale_warning {color:#a23b1e;}
+
+#switch_links a, #switch_links span { border-color:#dcdcdc; }
+#switch_links a {
+  background: #dcdcdc;
+  color: #999;
+}
+#switch_links a:hover {
+  color: #666;
+}
+#switch_links span {
+  background: #fff;
+  color: #666;
+}
+
+#equity_settings_button a {
+  border-color:#40822e;
+  background: #40822e;
+  color: #fff;
+}
+#equity_settings_button a:hover {
+  background: #2e5e21;
+}
 
 /* typography ***************************************/
 
@@ -296,7 +425,8 @@ a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover {color
 body {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 
 h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, .score, legend, 
-#no-script-warning, .results_links, #scale_warning, #switch_links, .small_intro {
+#no-script-warning, .results_links, #scale_warning, #switch_links, 
+.small_intro, #equity_settings_button {
     font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; 
     font-weight:bold;
 }
@@ -370,11 +500,138 @@ dd {
 .glossary div {clear:both;}
 footer {font-size:80%;}
 
+/* Equity Settings Panel *******************************/
+/*** Equity settings panel ***/
+#lightbox { 
+    background-color:#000; 
+    opacity:0.5; 
+    position: absolute;
+    top:0;
+    left:0;
+    height:1000%; 
+    width:100%;
+    z-index:100;
+}
+#equity_settings_container { 
+    font-size:80%;
+    line-height:1.4;
+    margin:3.2em auto;
+    position:absolute;
+    top:5%;
+    left:5%;
+    width:90%;
+    z-index:101;
+}
+#equity_settings_container ul { list-style:none; }
+#equity_settings { 
+    background:#fff;
+    border:6pt solid #e6ebe6;
+    margin:0 auto;
+    padding:1.5em 2em 2em; 
+    width:60em; 
+}
+#equity_settings h2 { 
+    float:left; 
+    font-size:200%; 
+    line-height:1; 
+    margin:0 1em 0 0; 
+    padding-top:0; 
+}
+#equity_settings h4 { float:left; margin:0.75em 0 0.25em; width:100%;}
+/*#equity_settings h4 { margin:0; }
+#equity_settings  #cbdr-radio-containerh4 { margin-top:1em; }*/
+#equity_settings input[type="submit"], 
+#equity_settings input[type="button"] { 
+    background:#e6ebe6; 
+    border:1px solid #c9d4c9; 
+    -moz-border-radius:3px; 
+    border-radius:3px;
+    color:#4d59a4; 
+    margin-right:0.5em; 
+    padding:0.2em 0.5em;
+}
+#equity_settings fieldset { border-bottom:1px solid #4d59a4; position:relative; } 
+/* background:yellow; border-top-width:2em; padding:1em; padding-bottom:1em; width:54em; */
+#equity_settings fieldset#pathway { margin-top:1.5em; }
+#equity_settings fieldset#cbdr { position:relative; }
+#equity_settings fieldset#historical_date { margin-bottom:1em; padding-bottom:1em; }
+#equity_settings fieldset#historical_date label { float:left; margin-right:2em; }
+#equity_settings legend { padding:0; }
+/*#equity_settings legend { line-height:2em; width:54em; }*/
+/*#equity_settings legend, #equity_settings legend span { height:2em; }*/
+/*#equity_settings h4 { clear:both; font-weight:bold; padding-top:1em; }*/
+#equity_settings label { float:none; width:auto; } /* margin-right:2em; */
+#equity_settings label input.click { margin:0 0.5em 0 0; padding:0 0 0.25em 0; }
+#equity_settings li { margin-bottom:0.5em;}
+#equity_settings #cbdr-radio-container { float:left; width:34em; }
+
+#equity_settings #cbdr-grid-container { 
+    float:left; 
+    font-size:85%; 
+    margin:0; 
+    position:relative; 
+    width:29em; 
+}
+#equity_settings #cbdr-grid-container #grid-col-1 { float:left; margin-right:0.5em; width:5em; }
+#equity_settings #cbdr-grid-container #grid-col-2 { 
+    float:left; 
+    margin-right:0; 
+    position:relative; 
+    width:16em; 
+}
+#equity_settings #cbdr-grid-container p { margin-top:0; }
+#equity_settings #cbdr-grid-container #grid-col-3 { float:left; width:6em; }
+#equity_settings #cbdr-grid-container p { line-height:1.2; padding-top:0; }
+#equity_settings #cbdr-grid-container #grid-row-middle { 
+    margin:0 auto; 
+    position:relative; 
+    text-align:center; 
+    width:100%; }
+#equity_settings #cbdr-grid-container #top-label { margin:1em auto 0.25em; text-align:center; }
+#equity_settings #cbdr-grid-container #left-label, 
+#equity_settings #cbdr-grid-container #right-label { margin:8em 0; }
+#equity_settings #cbdr-grid-container #left-label { text-align:right; }
+#equity_settings #cbdr-grid-container #right-label { text-align:left; }
+#equity_settings #cbdr-grid-container #bot-label { margin:0.25em auto 0.5em; text-align:center; }
+#equity_settings #cbdr-grid-container ul { 
+    float:left; 
+    margin:0.5em auto 0.25em; 
+    position:relative; 
+    width:100%; 
+}
+#equity_settings #cbdr-grid-container li { 
+    float:left; 
+    height:4em; 
+    margin:0 3% 0.6em 0; 
+    position:relative; 
+    width:30%; 
+}
+#equity_settings #cbdr-grid-container li a, 
+#equity_settings #cbdr-grid-container li a:link, 
+#equity_settings #cbdr-grid-container li a:visited { 
+    background:#ccc; 
+    border-width:0; 
+    display:block; 
+    height:4em; 
+    text-align:center; 
+    width:100%; 
+}
+#equity_settings #cbdr-grid-container li a:hover { background:#8884D1; } 
+#equity_settings #cbdr-grid-container li a:active,
+#equity_settings #cbdr-grid-container li a.selected { background:#221E6B; }
+
 /* miscellaneous ***************************************/
 /* a.def_link {background:url(../img/info-icon.gif) center right no-repeat; padding-right: 16px;} */
 #fair-share {background:transparent url(../img/arrow-lr.gif) 100% 85% no-repeat; margin:0; padding:0 12px 5px 0; text-align:right;}
-
-#submit {display:block; text-indent:-5000px; width:200px!important; height:47px; background-image:url(../img/send-button-sprite.png)!important; background-repeat:no-repeat; border:0px!important; padding:0px!important; }
+#submit {
+    background-image:url(../img/send-button-sprite.png)!important; 
+    background-repeat:no-repeat; border:0px!important; 
+    display:block; 
+    height:47px; 
+    padding:0px!important; 
+    text-indent:-5000px; 
+    width:200px!important; 
+}
 .js #submit {display:none;}
 #submit {background-position: 0 0;}
 #submit:hover {background-position: 0 -47px;}
@@ -384,8 +641,8 @@ footer {font-size:80%;}
     position:fixed;
     z-index:3000;
 }
-#pageslide {
-    /* These styles MUST be included. Do not change. */
+/*#pageslide {
+     These styles MUST be included. Do not change. 
     display:none;
     position:absolute;
     position:fixed;
@@ -393,19 +650,22 @@ footer {font-size:80%;}
     height:100%;
     z-index:999999;
     
-    /* Specify the width of your pageslide here */
+     Specify the width of your pageslide here 
     width:14em;
     padding:1em 1em 1em;
     overflow:scroll;
     
-    /* These styles are optional, and describe how the pageslide will look */
+     These styles are optional, and describe how the pageslide will look 
     background-color:#fff;
     font-size:80%;
     
     -webkit-box-shadow: 0 0 5px 5px #ccc;
     -moz-shadow: 0 0 5px 5px #ccc;
     box-shadow: 0 0 5px 5px #ccc;
-}
+}*/
+/* for WP pages */
+#pageContent { line-height:1.4; }
+#pageContent li { margin-top: 1em; }
 
 /****************************************************************************************/
 
@@ -436,7 +696,6 @@ footer {font-size:80%;}
 .group:after { clear: both; }
 /* Fix clearfix (here called 'group'): blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
 .group { zoom: 1; }
-
 
 
 .graph {margin-bottom:1em; position:relative; width:100%;}
@@ -493,6 +752,7 @@ span.label_right {position:absolute; right:0; text-align:right; top:0;}*/
       .bracket.pledge {border-bottom:none; border-top-width:4px; top:22px;}
       .bracket.fair {border-bottom-width:4px; border-top:none; top:113px;}
 
+      
 /**
  * Media queries for responsive design.
  *

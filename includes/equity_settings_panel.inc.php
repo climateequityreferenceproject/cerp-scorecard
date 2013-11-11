@@ -88,15 +88,15 @@ if (true) {
 
 <form action="" method="post" name="equity_settings" id="equity_settings" class="group">
     <h2>Equity Settings</h2>
-    <?php echo $glossary->getLink('equity_settings', false, _("Help")); ?>
     <input type="button" name="equity_reset_top" id="equity_reset_top" class="click" value='<?php echo _("Reset to defaults") ?>' />
     <input type="submit" name="equity_submit_top" id="equity_submit_top" class="click" value='<?php echo _("Save these settings") ?>' />
     <input type="submit" name="equity_cancel_top" id="equity_cancel_top" class="click" value='<?php echo _("Cancel") ?>' />
+    <?php echo $glossary->getLink('equity_settings', false, _("Help")); ?>
     
     <ul>
         <li class="setting">
             <fieldset id="pathway">
-                <legend class="open"><span>&nbsp;</span><?php echo $glossary->getLink('gloss_path', false, _("Level of Global Ambition")); ?></legend>
+                <legend><?php echo $glossary->getLink('gloss_path', false, _("Level of Global Ambition")); ?></legend>
                 <div class="input_set group">
                     <h4>Select a mitigation pathway:</h4>
                     <ul>
@@ -115,7 +115,7 @@ if (true) {
         </li>
         <li class="setting">
             <fieldset id="cbdr">
-                <legend class="open"><span>&nbsp;</span>Common but Differentiated <?php echo $glossary->getLink('gloss_rci', false, _("Responsibilities and Capacities")); ?> </legend>
+                <legend>Common but Differentiated <?php echo $glossary->getLink('gloss_rci', false, _("Responsibilities and Capacities")); ?> </legend>
                 <div class="input_set group">
                     <div id="cbdr-radio-container">
 
@@ -151,7 +151,7 @@ if (true) {
                                                     <p id="left-label"><strong>More regressive</strong></p>
                         </div>
                         <div id="grid-col-2" class="group">
-                            <p id="top-label"><strong>Responsibility <br />given more weight</strong></p>
+                            <p id="top-label"><strong>Responsibility given more weight</strong></p>
                             <ul>
                                 <?php
                                     for ($i = 1; $i <= 9; $i++) {
@@ -163,7 +163,7 @@ if (true) {
                                     }
                                 ?>
                             </ul>
-                            <p id="bot-label"><strong>Capacity <br />given more weight</strong></p>
+                            <p id="bot-label"><strong>Capacity given more weight</strong></p>
                         </div>
                         <div id="grid-col-3" class="group">
                             <p id="right-label"><strong>More progressive</strong></p>
@@ -175,7 +175,7 @@ if (true) {
 
         <li class="setting">
             <fieldset id="historical_date">
-                <legend class="open"><span>&nbsp;</span><?php echo $glossary->getLink('gloss_responsibility', false, _("Historical Responsibility")); ?> Start Date</legend>
+                <legend><?php echo $glossary->getLink('gloss_responsibility', false, _("Historical Responsibility")); ?> Start Date</legend>
                     <h4>Calculate responsibility based on emissions cumulative since:</h4>
                     <div class="input_set group">
                         <label for="d1850"><input type="radio" name="cum_since_yr" id="d1850" class="click" value="1850" <?php echo $cumsince_checked[1850]; ?> />1850</label>
