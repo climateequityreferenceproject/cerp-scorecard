@@ -29,17 +29,26 @@ if (true) {
     
     $checked_string = 'checked="checked"';
     $params = $api->get('params');
+    $user_params = $api->get_params();
     
-    $ep_array = (array) $params['emergency_path'];
-    $ep_val = $ep_array['value'];
+    if (isset($user_params['emergency_path'])) {
+        $ep_val = $user_params['emergency_path'];
+    } else {
+        $ep_array = (array) $params['emergency_path'];
+        $ep_val = $ep_array['value'];
+    }
     foreach ($emerg_path_id as $key => $val) {
         if ($val == $ep_val) {
             $ambition_checked[$key] = $checked_string;
         }
     }
     
-    $rwt_array = (array) $params['r_wt'];
-    $rwt_val = $rwt_array['value'];
+    if (isset($user_params['r_wt'])) {
+        $rwt_val = $user_params['r_wt'];
+    } else {
+        $rwt_array = (array) $params['r_wt'];
+        $rwt_val = $rwt_array['value'];
+    }
     if ($rwt_val == 1.0) {
         $rc_checked["r100"] = $checked_string;
         $cbdr_ndx = 0;
@@ -54,10 +63,18 @@ if (true) {
         $cbdr_ndx = -10;
     }
     
-    $dt_array = (array) $params['dev_thresh'];
-    $dt_val = $dt_array['value'];
-    $interp_array = (array) $params['interp_btwn_thresh'];
-    $interp_val = $interp_array['value'];
+    if (isset($user_params['dev_thresh'])) {
+        $dt_val = $user_params['dev_thresh'];
+    } else {
+        $dt_array = (array) $params['dev_thresh'];
+        $dt_val = $dt_array['value'];
+    }
+    if (isset($user_params['interp_btwn_thresh'])) {
+        $interp_val = $user_params['interp_btwn_thresh'];
+    } else {
+        $interp_array = (array) $params['interp_btwn_thresh'];
+        $interp_val = $interp_array['value'];
+    }
     if (($dt_val == 2500) && ($interp_val == 0)) {
         $dt_checked['low'] = $checked_string;
         $cbdr_ndx += 1;
@@ -73,8 +90,12 @@ if (true) {
         $cbdr_ndx = -10;
     }
     
-    $cumsince_array = (array) $params['cum_since_yr'];
-    $cumsince_val = $cumsince_array['value'];
+    if (isset($user_params['cum_since_yr'])) {
+        $cumsince_val = $user_params['cum_since_yr'];
+    } else {
+        $cumsince_array = (array) $params['cum_since_yr'];
+        $cumsince_val = $cumsince_array['value'];
+    }
     if ($cumsince_val == 1850) {
         $cumsince_checked[1850] = $checked_string;
     } elseif ($cumsince_val == 1950) {
@@ -101,13 +122,13 @@ if (true) {
                     <h4>Select a mitigation pathway:</h4>
                     <ul>
                         <li>
-                            <label for="ambition-high"><input type="radio" name="emergency_path" id="ambition-high" class="click" value=<?php echo '"' . $emerg_path_id["1.5"] . '" ' . $ambition_checked["1.5"]; ?> />1.5&#176;C marker pathway (Try to limit warming to 1.5&#176;C)</label>
+                            <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" class="click" value=<?php echo '"' . $emerg_path_id["1.5"] . '" ' . $ambition_checked["1.5"]; ?> />1.5&#176;C marker pathway (Try to limit warming to 1.5&#176;C)</label>
                         </li>
                         <li>
-                            <label for="ambition-med"><input type="radio" name="emergency_path" id="ambition-med" class="click" value=<?php echo '"' . $emerg_path_id["2.0"] . '" ' . $ambition_checked["2.0"]; ?> />2&#176;C marker pathway (Try to limit warming to 2.0&#176;C)</label>
+                            <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" class="click" value=<?php echo '"' . $emerg_path_id["2.0"] . '" ' . $ambition_checked["2.0"]; ?> />2&#176;C marker pathway (Try to limit warming to 2.0&#176;C)</label>
                         </li>
                         <li>
-                            <label for="ambition-low"><input type="radio" name="emergency_path" id="ambition-low" class="click" value=<?php echo '"' . $emerg_path_id["G8"] . '" ' . $ambition_checked["G8"]; ?> />G8 marker pathway (As per the 2009 G8 declaration in L’Aquila)</label>
+                            <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" class="click" value=<?php echo '"' . $emerg_path_id["G8"] . '" ' . $ambition_checked["G8"]; ?> />G8 marker pathway (As per the 2009 G8 declaration in L’Aquila)</label>
                         </li>
                     </ul>
                 </div>

@@ -49,7 +49,7 @@ class GDRsAPI
     
     // Decided not to use getters and setters
     public $pathwayLabel = array(
-        'low' => 'LOW AMBITION', // G-8
+        'low' => 'G-8 marker pathway', // G-8
         'med' => '2.0&#8451;',
         'high' => '1.5&#8451;'
     );
@@ -116,6 +116,15 @@ class GDRsAPI
      */
     public function clear_params() {
         $this->_user_params = array();
+    }
+    
+    /**
+     * Get user parameter values
+     * 
+     * @return array Array of parameter values
+     */
+    public function get_params() {
+        return $this->_user_params;
     }
     
     /**

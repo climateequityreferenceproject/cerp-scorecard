@@ -29,13 +29,26 @@ foreach (array_keys($_GET) as $get_var) {
 }
 $user_params_clean = $api->set_params($user_params);
 $use_splash = empty($user_params_clean);
+if (isset($_POST['equity_cancel_top']) || isset($_POST['equity_cancel'])) {
+    $use_splash = false;
+}
+if (isset($_POST['equity_submit_top']) || isset($_POST['equity_submit'])) {
+    $user_params = array();
+    foreach (array_keys($_POST) as $get_var) {
+        $user_params[$get_var] = filter_input(INPUT_POST, $get_var, FILTER_SANITIZE_STRING);
+    }
+    $user_params_clean = $api->set_params($user_params);
+    $use_splash = false;
+}
 
-if ($_POST && ($_POST['country']!=='none')) {    
+if (isset($_POST['country']) && ($_POST['country']!=='none')) {    
     $html = getResults();
     //$html = resultsTest();
 } else {
     $html = $resultsDefault;
 }
+
+print_r($_POST);
 
 ?>
 <!doctype html>
@@ -79,7 +92,7 @@ if ($_POST && ($_POST['country']!=='none')) {
             if ($use_splash) {
                 echo '<div id="lightbox"></div>';
                 echo '<div id="equity_settings_container">';
-                include_once 'includes/equity_settings_panel.inc';
+                include_once 'includes/equity_settings_panel.inc.php';
                 echo '</div>';
             }
             ?>
@@ -145,14 +158,14 @@ if ($_POST && ($_POST['country']!=='none')) {
                                 }
                             } else {
                                 $checkedString['low'] = '';
-                                $checkedString['med'] = 'checked="checked"';
-                                $checkedString['high'] = '';
+                                $checkedString['med'] = '';
+                                $checkedString['high'] = 'checked="checked"';
                             }
                             ?>
+                            <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $api->pathwayIds['low'] ?>" <?php echo $checkedString['low']; ?> /> <?php printf(_("%s"), $api->pathwayLabel['low']); ?></label>
                             <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathwayIds['med'] ?>" <?php echo $checkedString['med']; ?> /> <?php printf(_("Try to limit warming to %s"), $api->pathwayLabel['med']); ?></label>
                             <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathwayIds['high'] ?>" <?php echo $checkedString['high']; ?> /> <?php printf(_("Try to limit warming to %s"), $api->pathwayLabel['high']); ?></label>
-                            <!-- No more low[est]-ambition pathway, for now
-                            TODO: fix 3-pathway workflow to 2-pathway workflow, with labels stored in API and not overridden here -->
+                            <!-- TODO: fix 3-pathway workflow to 2-pathway workflow, with labels stored in API and not overridden here -->
                         </fieldset>
                     </li>
 
