@@ -160,9 +160,9 @@ if (isset($_POST['country']) && ($_POST['country']!=='none')) {
                                 $checkedString['high'] = 'checked="checked"';
                             }
                             ?>
-                            <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $api->pathwayIds['low'] ?>" <?php echo $checkedString['low']; ?> /> <?php printf(_("%s"), $api->pathwayLabel['low']); ?></label>
-                            <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathwayIds['med'] ?>" <?php echo $checkedString['med']; ?> /> <?php printf(_("Try to limit warming to %s"), $api->pathwayLabel['med']); ?></label>
                             <label for="ambition-high"><input type="radio" name="ambition" id="ambition-high" value="<?php echo $api->pathwayIds['high'] ?>" <?php echo $checkedString['high']; ?> /> <?php printf(_("Try to limit warming to %s"), $api->pathwayLabel['high']); ?></label>
+                            <label for="ambition-med"><input type="radio" name="ambition" id="ambition-med" value="<?php echo $api->pathwayIds['med'] ?>" <?php echo $checkedString['med']; ?> /> <?php printf(_("Try to limit warming to %s"), $api->pathwayLabel['med']); ?></label>
+                            <label for="ambition-low"><input type="radio" name="ambition" id="ambition-low" value="<?php echo $api->pathwayIds['low'] ?>" <?php echo $checkedString['low']; ?> /> <?php printf(_("%s"), $api->pathwayLabel['low']); ?></label>
                             <!-- TODO: fix 3-pathway workflow to 2-pathway workflow, with labels stored in API and not overridden here -->
                         </fieldset>
                     </li>
