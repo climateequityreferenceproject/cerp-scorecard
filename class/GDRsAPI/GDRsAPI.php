@@ -207,7 +207,19 @@ class GDRsAPI
         
         // Does a database exist for this pathway?
         if (!isset($this->_db[$key]) || !$this->db_exists($this->_db[$key])) {
-            $response = $this->get('new_db');
+            // Make a copy of an existing db if possible, in case it was modified
+            $existing_db = null;
+            foreach ($this->_db as $db) {
+                if ($db) {
+                    $existing_db = $db;
+                    break;
+                }
+            }
+            $get_string = 'new_db';
+            if ($existing_db) {
+                $get_string .= '&old_db=' . $existing_db;
+            }
+            $response = $this->get($get_string);
             $this->_db[$key] = $response['db'];
         }
         $_SESSION['gdrs_db'] = $this->_db;
