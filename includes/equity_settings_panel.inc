@@ -27,9 +27,8 @@ $cbdr_ndx = 5;
 if (true) {
     // NOTE: Use '==', not '===': sometimes comparing strings to ints
     
-    $pwId = $api->pathwayIds['high'];
     $checked_string = 'checked="checked"';
-    $params = $api->get('params', $pwId);
+    $params = $api->get('params');
     
     $ep_array = (array) $params['emergency_path'];
     $ep_val = $ep_array['value'];

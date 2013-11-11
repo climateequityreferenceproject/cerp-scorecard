@@ -22,6 +22,14 @@ $glossary = new HWTHelp('def_link', 'glossary.php', 'sc_gloss');
 
 $api = GDRsAPI::connection();
 
+// Collect user parameters from the URL and apply them
+$user_params = array();
+foreach (array_keys($_GET) as $get_var) {
+    $user_params[$get_var] = filter_input(INPUT_GET, $get_var, FILTER_SANITIZE_STRING);
+}
+$user_params_clean = $api->set_params($user_params);
+$use_splash = empty($user_params_clean);
+
 if ($_POST && ($_POST['country']!=='none')) {    
     $html = getResults();
     //$html = resultsTest();
@@ -67,7 +75,13 @@ if ($_POST && ($_POST['country']!=='none')) {
   <script src="js/libs/modernizr-2.6.2.min.js"></script>
   </head>  
   <body class="group">
-    <div id="equity-settings-splash"><?php include_once 'includes/equity_settings_panel.inc';?></div>
+    <div id="equity-settings-splash">
+        <?php
+        if ($use_splash) {
+            include_once 'includes/equity_settings_panel.inc';
+        }
+        ?>
+    </div>
     <div id="loading"></div>
     <div id="container" class="group">
         <header>

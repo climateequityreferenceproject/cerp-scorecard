@@ -62,6 +62,9 @@ class GDRsAPI
     // TODO: Get this by querying the API
     public static $maxYear = 2030;
     
+    // Store additional parameters for POST
+    private $_user_params = array();
+    
     private $_pathway_array = array('low'=>'G8Pathway', 'med'=>'2.0Cmarkerpathway', 'high'=>'1.5Cmarkerpathway');
     // TODO allow authors to identify in pathway db which are used here
     
@@ -83,6 +86,36 @@ class GDRsAPI
             $retval .= '&db=' . $this->_getDB($pwId, 'none');
         }
         return $retval;
+    }
+    
+    /**
+     * Set additional parameters to be sent in post calls
+     * 
+     * Will check whether the parameters are in the list of acceptable parameters,
+     * and discard any that are not.
+     * 
+     * @param array $new_params An array of param => value pairs
+     * 
+     * @return array Array of accepted parameters
+     * 
+     */
+    public function set_params($new_params) {
+        $ok_params = array_keys($this->get('params'));
+        $return_params = array();
+        foreach (array_keys($new_params) as $param) {
+            if (in_array($param, $ok_params)) {
+                $return_params[$param] = $new_params[$param];
+            }
+        }
+        $this->_user_params = $return_params;
+        return $return_params;
+    }
+    
+    /**
+     * Set additional parameters to an empty array
+     */
+    public function clear_params() {
+        $this->_user_params = array();
     }
     
     /**
@@ -236,6 +269,8 @@ class GDRsAPI
      */
     public function post($post_array, $pwId)
     {
+        // Add in any generally defined user parameters: order matters, and post_array supercedes _user_paramers
+        $post_array = array_merge($this->_user_params, $post_array);
         $req = new HTTP_Request($this->_url);
         $req->setMethod(HTTP_REQUEST_METHOD_POST);
         // If pwId not defined, next line will throw an exception
