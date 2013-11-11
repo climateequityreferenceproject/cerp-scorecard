@@ -174,11 +174,11 @@ if (isset($_POST['country']) && ($_POST['country']!=='none')) {
                          </fieldset>
                     </li>
                     
-                    <li>
+<!--                    <li>
                         <div  id="equity_settings_button" class="group">
                             <a href="#">Review equity settings</a>
                         </div>
-                    </li>
+                    </li>-->
                     
 <!--                    <li class="setting">
                          <fieldset id="kyoto_obligations">

@@ -108,6 +108,7 @@ class GDRsAPI
             }
         }
         $this->_user_params = $return_params;
+        $_SESSION['user_params'] = $return_params;
         return $return_params;
     }
     
@@ -124,6 +125,12 @@ class GDRsAPI
      * @return array Array of parameter values
      */
     public function get_params() {
+        if (count($this->_user_params) === 0) {
+            // Have we stored it in a session variable?
+            if (isset($_SESSION['user_params'])) {
+                $this->_user_params = $_SESSION['user_params'];
+            }
+        }
         return $this->_user_params;
     }
     
@@ -279,7 +286,7 @@ class GDRsAPI
     public function post($post_array, $pwId)
     {
         // Add in any generally defined user parameters: order matters, and post_array supercedes _user_paramers
-        $post_array = array_merge($this->_user_params, $post_array);
+        $post_array = array_merge($this->get_params(), $post_array);
         $req = new HTTP_Request($this->_url);
         $req->setMethod(HTTP_REQUEST_METHOD_POST);
         // If pwId not defined, next line will throw an exception
