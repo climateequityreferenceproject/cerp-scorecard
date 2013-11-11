@@ -21,8 +21,117 @@ $(function() {
     });
 
     $('#popup').hide();
+    
+    // Equity settings panel
+    $("a[id|='cbdr']").click(cbdr_grid_select);
+    
+    $('#dev-low, #dev-med').click(function() {
+        $('#equity_progressivity').val(0);
+        cbdr_select();
+    });
+    $('#dev-high').click(function() {
+        $('#equity_progressivity').val(1);
+        cbdr_select();
+    });
+    
+    $('#r100, #r50c50, #c100').click(cbdr_select);
+    
+    $('#equity_reset, #equity_reset_top').click(function() {
+        $('#equity_progressivity').val(0);
+        $('#ambition-med').attr('checked','checked');
+        $('#r50c50').attr('checked','checked');
+        $('#dev-med').attr('checked','checked');
+        $('#d1990').attr('checked','checked');
+        cbdr_select();
+        // Short-circuit form submission
+        return false;
+    })
+
    
 });
+
+function cbdr_grid_select() {
+    var id_match = /\d+/.exec($(this).attr('id'));
+    var id = parseInt(id_match[0]);
+    
+    var rvsc = Math.floor((id - 1)/3);
+    var prog = (id - 1) % 3;
+    
+    switch (rvsc.toString()) {
+        case '0':
+            $('#r100').attr('checked',true);
+            break;
+        case '1':
+            $('#r50c50').attr('checked',true);
+            break;
+        case '2':
+            $('#c100').attr('checked',true);
+            break;
+        default:
+            ;
+    }
+
+    switch (prog.toString()) {
+        case '0':
+            $('#dev-low').attr('checked',true);
+            break;
+        case '1':
+            $('#dev-med').attr('checked',true);
+            break;
+        case '2':
+            $('#dev-high').attr('checked',true);
+            break;
+        default:
+            ;
+    }
+    
+    for (var i = 1; i <= 9; i++) {
+        var istring = '#cbdr-' + i;
+        if (i === id) {
+            $(istring).addClass('selected');
+        } else {
+            $(istring).removeClass('selected');
+        }
+    }
+}
+
+function cbdr_select() {
+    switch ($('#equity_settings input[name=r_wt]:checked').attr("id")) {
+        case 'r100':
+            id = 0;
+            break;
+        case 'r50c50':
+            id = 3;
+            break;
+        case 'c100':
+            id = 6;
+            break;
+        default:
+            id = -10;
+    }
+    
+    switch ($('#equity_settings input[name=dev_thresh]:checked').attr("id")) {
+        case 'dev-low':
+            id += 1;
+            break;
+        case 'dev-med':
+            id += 2;
+            break;
+        case 'dev-high':
+            id +=3;
+            break;
+        default:
+            id = -10;
+    }
+    for (var i = 1; i <= 9; i++) {
+        var istring = '#cbdr-' + i;
+        if (i === id) {
+            $(istring).addClass('selected');
+        } else {
+            $(istring).removeClass('selected');
+        }
+    }
+}
 
 function get_def_by_id(e) {
     href = $(e.currentTarget).attr("href");

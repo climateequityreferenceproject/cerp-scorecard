@@ -75,14 +75,14 @@ if ($_POST && ($_POST['country']!=='none')) {
   <script src="js/libs/modernizr-2.6.2.min.js"></script>
   </head>  
   <body class="group">
-        <div id="lightbox"></div>
-        <div id="equity_settings_container">
             <?php
             if ($use_splash) {
+                echo '<div id="lightbox"></div>';
+                echo '<div id="equity_settings_container">';
                 include_once 'includes/equity_settings_panel.inc';
+                echo '</div>';
             }
             ?>
-        </div>
     <div id="loading"></div>
     <div id="container" class="group">
         <header>
