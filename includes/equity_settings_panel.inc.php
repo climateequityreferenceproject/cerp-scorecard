@@ -4,9 +4,10 @@ $emerg_path_id["1.5"] = $api->pathwayIds['high'];
 $emerg_path_id["2.0"] = $api->pathwayIds['med'];
 $emerg_path_id["G8"] = $api->pathwayIds['low'];
 
-$ambition_checked["1.5"] = '';
-$ambition_checked["2.0"] = '';
-$ambition_checked["G8"] = '';
+// Just to make it more DRY
+foreach (array_keys($emerg_path_id) as $pwCode) {
+    $ambition_checked[$pwCode] = '';
+}
 
 $rc_checked["r100"] = '';
 $rc_checked["r50c50"] = '';

@@ -48,8 +48,6 @@ if (isset($_POST['country']) && ($_POST['country']!=='none')) {
     $html = $resultsDefault;
 }
 
-print_r($_POST);
-
 ?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->

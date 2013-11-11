@@ -150,7 +150,7 @@ EOHTML;
     $retval .= '<input type="submit" value="' . $switchview . '" name="switch_view" id="switch_view" />';
     $retval .= '<div id="switch_links" class="group">' . $linkview . '</div>';
     
-    $marker_pathway = $glossary->getLink('gloss_path', true, $ambition);
+    $marker_pathway = $glossary->getLink('gloss_path', false, $ambition);
     
     // case 1 means score is negative, but pledge is between BAU and fair share (zero score)
     // case 2 means score is positive
