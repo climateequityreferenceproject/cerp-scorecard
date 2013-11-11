@@ -67,6 +67,7 @@ if ($_POST && ($_POST['country']!=='none')) {
   <script src="js/libs/modernizr-2.6.2.min.js"></script>
   </head>  
   <body class="group">
+    <div id="equity-settings-splash"><?php include_once 'includes/equity_settings_panel.inc';?></div>
     <div id="loading"></div>
     <div id="container" class="group">
         <header>

@@ -62,7 +62,7 @@ class GDRsAPI
     // TODO: Get this by querying the API
     public static $maxYear = 2030;
     
-    private $_pathway_array = array('low'=>'G-8', 'med'=>'2.0Cmarkerpathway', 'high'=>'1.5Cmarkerpathway');
+    private $_pathway_array = array('low'=>'G8Pathway', 'med'=>'2.0Cmarkerpathway', 'high'=>'1.5Cmarkerpathway');
     // TODO allow authors to identify in pathway db which are used here
     
     /**
@@ -101,7 +101,7 @@ class GDRsAPI
             if ($req->getResponseCode() == 200) {
                 return (array) json_decode($req->getResponseBody());
             } else {
-                return null;
+                throw new GDRsAPIException('Error code ' . $req->getResponseCode());
             }
         } else {
             throw new GDRsAPIException($req->getMessage());
