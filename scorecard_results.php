@@ -2,7 +2,7 @@
 /**
  * scorecard_results.php
  * 
- * PHP Version 5
+ * PHP Version 5  
  *
  * @package GDRsScorecard
  * @copyright 2011-2012 EcoEquity and Stockholm Environment Institute
@@ -131,9 +131,10 @@ function getResults()
     $retval .= '<p><span class="score ' . $score_class . '">';
     $retval .= 'Score: ' . $score . '</span></p>';
 $score_intro_text = <<<EOHTML
-    <p class="small_intro">If a country&#8217;s pledge is equal to its fair share, its $link_lower[gloss_score] is zero. 
-        A negative score means a country&#8217;s pledge falls short of its fair share. 
-        A positive score means a country&#8217;s pledge surpasses its fair share.</p>
+    <p class="small_intro">A country&#8217;s pledge is scored against its fair share, and is expressed in tons per capita.
+        If its pledge (domestic mitigation plus international finance) equals its fair share,its $link_lower[gloss_score] is zero. 
+        If its pledge falls short of its fair share, it is given a negative score.
+        If its pledge surpasses its fair share, it is given a positive score.</p>
 EOHTML;
     $retval .= $score_intro_text;
     $retval .= drawScoreBar($effort_array['score'], $effort_array['bau_score'], $display, $scale_array); 
@@ -163,8 +164,8 @@ $simple_text = <<<EOHTML
             <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] 
             of this global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
-            exceeds its fair share by $pledge_gap_MtCO2 million tonnes. This is $pledge_gap_as_score% 
-            of its $by_year $link_lower[gloss_bau] (BAU) emissions. Its score is therefore $score.</p>
+            exceeds its fair share by $pledge_gap_MtCO2 million tonnes. This surpasses its fair share by XXX tons, or YYY tons per capita. 
+            Its score is therefore $score.</p>
             
             <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, 
             as a percent below BAU emissions, as a percent below 1990 emissions, etc. 
@@ -182,10 +183,7 @@ $simple_text = <<<EOHTML
             of this global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
             falls short of its fair share by $pledge_gap_MtCO2 million tonnes. 
-            To make up this shortfall and meet its fair share, $country would need to 
-            strengthen its pledge and commit to reduce an additional $pledge_gap_MtCO2 million tonnes, 
-            or an additional $pledge_gap_as_score% of its $by_year $link_lower[gloss_bau] 
-            (BAU) emissions. Its score is therefore $score.</p>
+            This shortfall, expressed in per-capita terms, is XXX tonnes. Its score is therefore -$score.</p>
             
             <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, 
             as a percent below BAU emissions, as a percent below 1990 emissions, etc. 
@@ -250,18 +248,18 @@ EOHTML;
 $detailed_text = <<<EOHTML
         <p>In any case, a country’s fair share is relative to a common global effort, and explicitly includes
         both reductions undertaken domestically and support for reductions undertaken internationally.
-        (This is in keeping with how pledges are generally presented, which includes both reductions 
-        undertaken at home and those supported abroad through, say, the Clean Development Mechanism.)</p>
+        (This is how pledges are generally presented, for example including both reductions supported abroad through the Clean Development Mechanism
+        as well as those undertaken at home.)</p>
         
-        <p>A country&#8217;s fair share is a function of its $link_lower[gloss_capacity] and its $link_lower[gloss_responsibility].
+        <p>Note that a country&#8217;s fair share is a function of both its $link_lower[gloss_capacity] and its $link_lower[gloss_responsibility].
         $country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility. 
         To meet its $link_lower[gloss_mitob], $country could either act nationally to limit its own emissions, 
         or provide support for reducing emissions internationally, or act both nationally and internationally.</p>
         
-        <p>Note that the fair share calculated for countries with high capability and responsibility can be 
+        <p>The fair share calculated for countries with high capability and responsibility can be 
         quite large compared to national emissions, generally implying greater reductions than can be 
-        cost-effectively undertaken domestically, reflecting the ethical and practical importance of 
-        providing support for mitigation in countries with lower capability and responsibility.</p>
+        cost-effectively undertaken domestically.  This reflects the practical (as well as ethical) imperative of 
+        having high capacity / responsibility countries (like $country) support mitigation in countries with lower capability and responsibility.</p>
 
 <div id="details">
 <h2>Details about this pledge</h2>
