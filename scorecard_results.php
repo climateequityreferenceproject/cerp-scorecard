@@ -192,11 +192,6 @@ $simple_text = <<<EOHTML
             as $fair_share_perc_below_bau% reduction below national BAU emissions, or 
             $perc_below_1990_text.</p>
 EOHTML;
-            if ($scoreview === 'scorebasic') {
-                $simple_text .= '<p>To be absolutely clear, a country’s fair share of the common global 
-                    mitigation effort is here calculated in the only meaningful way -- as including both 
-                    domestic emissions reductions and internationally upported reductions.</p>';
-            }
             break;
         default:
             throw new Exception('Invalid case id: ' . $effort_array['case']);
