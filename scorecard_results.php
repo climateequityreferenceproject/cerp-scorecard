@@ -165,7 +165,7 @@ $simple_text = <<<EOHTML
             <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] 
             of this global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
-            exceeds its fair share by $pledge_gap_MtCO2 million tonnes. This surpasses its fair share by XXX tons, or YYY tons 
+            exceeds its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. This comes to YYY tons 
             per capita. Its score is therefore $score.</p>
             
             <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, 
@@ -183,8 +183,8 @@ $simple_text = <<<EOHTML
             <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] 
             of this global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
-            falls short of its fair share by $pledge_gap_MtCO2 million tonnes. 
-            In per-capita terms, is comes to XXX tonnes per person. Its score is therefore $score.</p>
+            falls short of its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
+            In per-capita terms, this comes to XXX tonnes per person. Its score is therefore $score.</p>
             
             <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, 
             as a percent below BAU emissions, as a percent below 1990 emissions, and so on.
