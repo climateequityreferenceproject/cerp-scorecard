@@ -131,11 +131,11 @@ function getResults()
     $retval .= '<p><span class="score ' . $score_class . '">';
     $retval .= 'Score: ' . $score . '</span></p>';
 $score_intro_text = <<<EOHTML
-    <p class="small_intro">A country&#8217;s pledge is scored against its fair share.  The $link_lower[gloss_score] is given in tons per capita.</p>
-    <p class="small_intro">   
-        If a country&#8217;s pledge (domestic mitigation plus international finance) equals its fair share,its score is zero. 
-         If its pledge falls short of its fair share, its score is negative.
-         If its pledge surpasses its fair share, its score is positive.</p>
+    <p class="small_intro">A country&#8217;s pledge is scored against its fair share.  
+        The $link_lower[gloss_score] is given in tons per capita. 
+        If a country&#8217;s pledge (domestic mitigation plus international finance) equals its fair share, its score is zero. 
+        If its pledge falls short of its fair share, its score is negative. 
+        If its pledge surpasses its fair share, its score is positive.</p>
 EOHTML;
     $retval .= $score_intro_text;
     $retval .= drawScoreBar($effort_array['score'], $effort_array['bau_score'], $display, $scale_array); 
