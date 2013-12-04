@@ -131,7 +131,7 @@ function getResults()
     $retval .= '<p><span class="score ' . $score_class . '">';
     $retval .= 'Score: ' . $score . '</span></p>';
 $score_intro_text = <<<EOHTML
-    <p class="small_intro">A country&#8217;s pledge is scored against its fair share.  
+    <p class="small_intro"><strong>A country&#8217;s pledge is scored against its fair share.  
         The $link_lower[gloss_score] is given in tons per capita. 
         If a country&#8217;s pledge (domestic mitigation plus international finance) equals its fair share, its score is zero. 
         If its pledge falls short of its fair share, its score is negative. 
@@ -184,7 +184,7 @@ $simple_text = <<<EOHTML
             of this global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
             falls short of its fair share by $pledge_gap_MtCO2 million tonnes. 
-            In per-capita terms, is comes to XXX tonnes. Its score is therefore $score.</p>
+            In per-capita terms, is comes to XXX tonnes per person. Its score is therefore $score.</p>
             
             <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, 
             as a percent below BAU emissions, as a percent below 1990 emissions, and so on.
