@@ -456,7 +456,7 @@ p {margin-top:1.2em;}
 .docs p {margin-top:0.5em;}
 #details, #key, #switch_links, #no-script-warning, .results_links, #scale_warning {font-size:85%;}
 #details h2 {margin-top:1.5em;}
-#details p {margin-top:0.5em;}
+#details p {margin-top:1em;}
 #details p.first, .no_sb {margin-top:0;}
 .docs p.first {margin-top:2em;}
 header p {margin-top:0.5em;}

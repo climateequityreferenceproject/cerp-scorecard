@@ -110,7 +110,7 @@ if (true) {
 
 <form action="" method="post" name="equity_settings" id="equity_settings" class="group">
     <h2>Equity Settings</h2>
-    <input type="button" name="equity_reset_top" id="equity_reset_top" class="click" value='<?php echo _("Reset to defaults") ?>' />
+    <input type="button" name="equity_reset_top" id="equity_reset_top" class="click" value='<?php echo _("Reset to initial settings") ?>' />
     <input type="submit" name="equity_submit_top" id="equity_submit_top" class="click" value='<?php echo _("Save and continue") ?>' />
     <input type="submit" name="equity_cancel_top" id="equity_cancel_top" class="click" value='<?php echo _("Cancel") ?>' />
     <?php echo $glossary->getLink('equity_settings', false, _("Help")); ?>
@@ -208,7 +208,7 @@ if (true) {
         </li>
 
     </ul>
-    <input type="button" name="equity_reset" id="equity_reset" class="click" value='<?php echo _("Reset to defaults") ?>' />
+    <input type="button" name="equity_reset" id="equity_reset" class="click" value='<?php echo _("Reset to initial settings") ?>' />
     <input type="submit" name="equity_submit" id="equity_submit" class="click" value='<?php echo _("Save and continue") ?>' />
     <input type="submit" name="equity_cancel" id="equity_cancel" class="click" value='<?php echo _("Cancel") ?>' />
 

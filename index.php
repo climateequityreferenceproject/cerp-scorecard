@@ -174,16 +174,16 @@ if (isset($_POST['country']) && ($_POST['country']!=='none')) {
                          </fieldset>
                     </li>
                     
-<!--                    <li>
+                    <li>
                         <div  id="equity_settings_button" class="group">
                             <a href="#">Review equity settings</a>
                         </div>
-                    </li>-->
+                    </li>
                     
 <!--                    <li class="setting">
                          <fieldset id="kyoto_obligations">
-                            <legend><?php echo $glossary->getLink('gloss_kyoto',0,_('Kyoto Obligations'));?></legend>
-                            <div id="kyoto_controls"><?php include_once 'kyoto_control.php'; ?></div>
+                            <legend><?php //echo $glossary->getLink('gloss_kyoto',0,_('Kyoto Obligations'));?></legend>
+                            <div id="kyoto_controls"><?php //include_once 'kyoto_control.php'; ?></div>
                          </fieldset>
                     </li>-->
                 </ul>
