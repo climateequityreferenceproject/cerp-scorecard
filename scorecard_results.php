@@ -165,14 +165,11 @@ $simple_text = <<<EOHTML
             <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] 
             of this global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
-            exceeds its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. This comes to YYY tons 
-            per capita. Its score is therefore $score.</p>
+            exceeds its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
+                
+            <p>In per-capita terms, $country&#8217;s $by_year fair share comes to YYY tonnes. Its pledge, however, is YYY 
+            tonnes per person, which exceeds that fair share by YYY tonnes per person.  Its score is therefore YYY.</p>
             
-            <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, 
-            as a percent reduction below BAU emissions, as a percent below 1990 emissions, and so on.  
-            $country&#8217;s fair share can be expressed as $fair_share_MtCO2 million tonnes, 
-            as $fair_share_perc_below_bau% reduction below national BAU emissions, or 
-            $perc_below_1990_text.</p>
 EOHTML;
             break;
         case 1:
@@ -186,7 +183,7 @@ $simple_text = <<<EOHTML
             falls short of its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
             
             <p>In per-capita terms, $country&#8217;s $by_year fair share comes to XXX tonnes. Its pledge, however, is only                 
-            XXX tonnes per person. Its shortfall, and thus its score, is therefore $score.</p>
+            XXX tonnes per person, which falls short of its fair share by XXX tones per perspm. Its score is therefore XXX.</p>
             
 EOHTML;
             break;
@@ -239,17 +236,17 @@ EOHTML;
         }
         
 $detailed_text = <<<EOHTML
-       <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, as tonnes per capita, 
-       as a percent below BAU emissions, as a percent below 1990 emissions, and so on.  $country&#8217;s fair share can 
-       be expressed as $fair_share_MtCO2 million tonnes, as $fair_share_perc_below_bau% reduction below national BAU 
-       emissions, or $perc_below_1990_text.</p>
+        <p>Note that a country&#8217;s fair share can be expressed in various ways: as millions of tonnes, as tonnes per capita, 
+        as a percent below BAU emissions, as a percent below 1990 emissions, and so on.  For example, $country&#8217;s fair share can 
+        be expressed as $fair_share_MtCO2 million tonnes, as $fair_share_perc_below_bau% reduction below national BAU 
+        emissions, or $perc_below_1990_text.</p>
                 
         <p>In any case, a country’s fair share is relative to a common global effort, and explicitly includes
         both reductions undertaken domestically and support for reductions undertaken internationally.
         (This is how pledges are generally presented, for example including both reductions supported abroad through the Clean Development Mechanism
         as well as those undertaken at home.)</p>
         
-        <p>Note that a country&#8217;s fair share is a function of both its $link_lower[gloss_capacity] and its $link_lower[gloss_responsibility].
+        <p>A country&#8217;s fair share is a function of both its $link_lower[gloss_capacity] and its $link_lower[gloss_responsibility].
         $country is projected in $by_year to have $cap% of global capacity and $resp% of global responsibility. 
         To meet its $link_lower[gloss_mitob], $country could either act nationally to limit its own emissions, 
         or provide support for reducing emissions internationally, or act both nationally and internationally.</p>
