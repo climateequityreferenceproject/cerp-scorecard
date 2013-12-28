@@ -183,7 +183,7 @@ $simple_text = <<<EOHTML
             falls short of its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
             
             <p>In per-capita terms, $country&#8217;s $by_year fair share comes to XXX tonnes. Its pledge, however, is only                 
-            XXX tonnes per person, which falls short of its fair share by XXX tones per persom. Its score is therefore XXX.</p>
+            XXX tonnes per person, which falls short of its fair share by XXX tones per person. Its score is therefore XXX.</p>
             
 EOHTML;
             break;
