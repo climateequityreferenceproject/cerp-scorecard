@@ -163,7 +163,7 @@ $simple_text = <<<EOHTML
            <p>Given a $marker_pathway target, the $link_lower[gloss_mitreq] in $by_year is $glob_mit_req_GtCO2 gigatonnes.</p>
 
             <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] 
-            of this global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
+            of this $by_year global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
             exceeds its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
                 
@@ -178,7 +178,7 @@ $simple_text = <<<EOHTML
             <p>Given a $marker_pathway target, the $link_lower[gloss_mitreq] in $by_year is $glob_mit_req_GtCO2 gigatonnes.</p>
             
             <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] 
-            of this global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
+            of this $by_year global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
             falls short of its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
             
