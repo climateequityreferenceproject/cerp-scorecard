@@ -184,13 +184,10 @@ $simple_text = <<<EOHTML
             of this global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
             falls short of its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
-            In per-capita terms, this comes to XXX tonnes per person. Its score is therefore $score.</p>
             
-            <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, 
-            as a percent below BAU emissions, as a percent below 1990 emissions, and so on.
-            $country&#8217;s fair share can be expressed as $fair_share_MtCO2 million tonnes, 
-            as $fair_share_perc_below_bau% reduction below national BAU emissions, or 
-            $perc_below_1990_text.</p>
+            <p>In per-capita terms, $country&#8217;s $by_year fair share comes to XXX tonnes. Its pledge, however, is only                 
+            XXX tonnes per person. Its shortfall, and thus its score, is therefore $score.</p>
+            
 EOHTML;
             break;
         default:
@@ -242,6 +239,11 @@ EOHTML;
         }
         
 $detailed_text = <<<EOHTML
+       <p>A country&#8217;s fair share can be expressed in various ways: as millions of tonnes, as tonnes per capita, 
+       as a percent below BAU emissions, as a percent below 1990 emissions, and so on.  $country&#8217;s fair share can 
+       be expressed as $fair_share_MtCO2 million tonnes, as $fair_share_perc_below_bau% reduction below national BAU 
+       emissions, or $perc_below_1990_text.</p>
+                
         <p>In any case, a country’s fair share is relative to a common global effort, and explicitly includes
         both reductions undertaken domestically and support for reductions undertaken internationally.
         (This is how pledges are generally presented, for example including both reductions supported abroad through the Clean Development Mechanism
