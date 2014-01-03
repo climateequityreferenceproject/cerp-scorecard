@@ -82,13 +82,16 @@ function getResults()
     $caveat_dom = cleanText($pledge_info['caveat']);
     
     $effort_array = getGdrsInformation($pledge_info, $pathway_id);
-    $score = number_format($effort_array['score']); // No decimals
+    $score = niceNumber($effort_array['score']); // number_format($effort_array['score']); // No decimals
     $cap = niceNumber($effort_array['cap']);
     $resp = niceNumber($effort_array['resp']);
     $fair_share_perc = niceNumber($effort_array['fair_share_perc']);
-    $fair_share_MtCO2 = niceNumber($effort_array['fair_share_MtCO2']);;
+    $fair_share_MtCO2 = niceNumber($effort_array['fair_share_MtCO2']);
+    $fair_share_percap = niceNumber($effort_array['fair_share_percap']);
     $glob_mit_req_GtCO2 = number_format($effort_array['glob_mit_req_MtCO2']/1000, 1);
     $pledge_gap_MtCO2 = niceNumber(abs($effort_array['pledge_gap_MtCO2']));
+    $pledge_gap_percap = niceNumber(abs($effort_array['pledge_gap_percap']));
+    $pledge_percap = niceNumber($effort_array['pledge_percap']);
     $pledge_gap_as_score = number_format(abs($effort_array['score']));
     $gdrs_perc_1990 = niceNumber($effort_array['gdrs_perc_1990']);
     $gdrs_perc_1990_abs = abs($gdrs_perc_1990);
@@ -182,8 +185,8 @@ $simple_text = <<<EOHTML
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
             falls short of its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
             
-            <p>In per-capita terms, $country&#8217;s $by_year fair share comes to XXX tonnes. Its pledge, however, is only                 
-            XXX tonnes per person, which falls short of its fair share by XXX tones per person. Its score is therefore XXX.</p>
+            <p>In per-capita terms, $country&#8217;s $by_year fair share comes to $fair_share_percap tonnes. Its pledge, however, is only                 
+            $pledge_percap tonnes per person, which falls short of its fair share by $pledge_gap_percap tonnes per person. Its score is therefore $score.</p>
             
 EOHTML;
             break;

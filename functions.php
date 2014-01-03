@@ -479,6 +479,7 @@ function getGdrsInformation($pledge_info, $pathway)
         $year_data = (array) $year_data_obj;
         $year = $year_data['year'];
         if ($year_data['code'] === $ctrycode) {
+            $pop[$year] = $year_data['pop_mln'];
             $gdp[$year] = $year_data['gdp_blnUSDMER'];
             $bau[$year] = $year_data['fossil_CO2_MtCO2'];
             $ref_bau[$year] = $bau[$year];
@@ -552,9 +553,7 @@ function getGdrsInformation($pledge_info, $pathway)
         default:
             // Shouldn't reach here
     }
-    
     $retval['pledge_description'] = $description . '.';
-    
     $retval['cap'] = 100.0 * $c_frac[$pledge_info['by_year']];
     $retval['resp'] = 100.0 * $r_frac[$pledge_info['by_year']];
     
@@ -563,19 +562,22 @@ function getGdrsInformation($pledge_info, $pathway)
     $retval['gdrs_perc_1990'] = 100 * $alloc[$pledge_info['by_year']]/$bau[1990];
     $retval['pledge_perc_1990'] = 100 * ($bau[$pledge_info['by_year']] - $pledged_reduction)/$bau[1990];
     $retval['fair_share_perc_below_1990'] = 100 - $retval['gdrs_perc_1990'];
-    
-    $retval['score'] = $pledged_reduction_perc_bau - $gdrs_reduction_perc_bau;
+    $retval['pledge_percap'] = $pledged_reduction/$pop[$pledge_info['by_year']];
     
     $retval['glob_mit_req_MtCO2'] = $gdrs_reduction_world;
     $retval['fair_share_MtCO2'] = $gdrs_reduction;
+    $retval['fair_share_percap'] = $gdrs_reduction/$pop[$pledge_info['by_year']];
     $retval['fair_share_perc'] = 100 * $rci[$pledge_info['by_year']];
     // Don't allow negative values (at least for some)
     $retval['pledged_reduct_perc'] = 100 * max(0, $pledged_reduction)/$gdrs_reduction_world;
     $retval['pledged_reduct_MtCO2'] = $pledged_reduction;
     $retval['pledge_gap_MtCO2'] = $gdrs_reduction - $pledged_reduction;
+    $retval['pledge_gap_percap'] = $retval['pledge_gap_MtCO2']/$pop[$pledge_info['by_year']];
     $retval['pledge_gap_perc_bau'] = $gdrs_reduction_perc_bau - $pledged_reduction_perc_bau;
-    $retval['bau_score'] = -$gdrs_reduction_perc_bau;
     $retval['fair_share_perc_below_bau'] = $gdrs_reduction_perc_bau; // redundant with previous line (aside from sign), for clarity
+    
+    $retval['score'] = $retval['pledge_percap'] - $retval['fair_share_percap']; // $pledged_reduction_perc_bau - $gdrs_reduction_perc_bau;
+    $retval['bau_score'] = -$retval['fair_share_percap']; // -$gdrs_reduction_perc_bau;
     
     $retval['fund_others'] = $alloc[$pledge_info['by_year']] < $dulline;
     
@@ -584,7 +586,6 @@ function getGdrsInformation($pledge_info, $pathway)
     } else {
         $retval['case'] = 3;
     }
-    
     return $retval;
 }
 
