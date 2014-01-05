@@ -57,7 +57,7 @@ class GDRsAPI
     public $pathway_default = 'high';
     
     // KABs
-    public static $use_kab_on = true;
+    public static $use_kab_on = false;
     
     // TODO: Get this by querying the API
     public static $maxYear = 2030;

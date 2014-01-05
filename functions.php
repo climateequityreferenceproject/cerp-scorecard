@@ -440,11 +440,11 @@ function getGdrsInformation($pledge_info, $pathway)
         return null;
     }
 
-    // Use KABs by default
-    if (isset($_POST['kyoto']) && $_POST['kyoto'] === '0') {
-        GDRsAPI::$use_kab_on = false;
-    } else {
+    // KABs are off by default
+    if (isset($_POST['kyoto']) && $_POST['kyoto'] === '1') {
         GDRsAPI::$use_kab_on = true;
+    } else {
+        GDRsAPI::$use_kab_on = false;
     }
     
     $params = GDRsAPI::connection()->get('params');
