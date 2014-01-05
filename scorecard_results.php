@@ -115,15 +115,15 @@ function getResults()
         $score_class = 'positive';
     }
     
-    if (($effort_array['score'] < -150) or ($effort_array['bau_score'] < -150)) {
-        $scale_min = round(min($effort_array['score'],$effort_array['bau_score']), -2) - 50;
+    if (($effort_array['score'] < -25) or ($effort_array['bau_score'] < -25)) {
+        $scale_min = round(min($effort_array['score'],$effort_array['bau_score']), -1) - 5;
     } else {
-        $scale_min = -150;
+        $scale_min = -25;
     }
-    if ($effort_array['score'] > 100) {
-        $scale_max = round($effort_array['score'], -2) + 50;
+    if ($effort_array['score'] > 15) {
+        $scale_max = round($effort_array['score'], -1) + 5;
     } else {
-        $scale_max = 100;
+        $scale_max = 15;
     }
     $scale_array = array('min'=>$scale_min,'max'=>$scale_max);
     foreach ($glossary->getIds() as $gloss_id) {
