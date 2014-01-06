@@ -49,7 +49,7 @@ class GDRsAPI
     
     // Decided not to use getters and setters
     public $pathwayLabel = array(
-        'low' => 'G8 pathway (official, and even weaker)',
+        'low' => 'G8 pathway (very weak)',
         'med' => 'Weak 2&#8451; pathway',
         'high' => 'Strong 2&#8451; pathway'
     );
