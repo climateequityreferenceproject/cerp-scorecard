@@ -82,17 +82,17 @@ function getResults()
     $caveat_dom = cleanText($pledge_info['caveat']);
     
     $effort_array = getGdrsInformation($pledge_info, $pathway_id);
-    $score = niceNumber($effort_array['score']); // number_format($effort_array['score']); // No decimals
+    $score = number_format($effort_array['score'], 1);
     $cap = niceNumber($effort_array['cap']);
     $resp = niceNumber($effort_array['resp']);
     $fair_share_perc = niceNumber($effort_array['fair_share_perc']);
     $fair_share_MtCO2 = niceNumber($effort_array['fair_share_MtCO2']);
-    $fair_share_percap = niceNumber($effort_array['fair_share_percap']);
+    $fair_share_percap = number_format($effort_array['fair_share_percap'], 1);
     $glob_mit_req_GtCO2 = number_format($effort_array['glob_mit_req_MtCO2']/1000, 1);
     $pledge_gap_MtCO2 = niceNumber(abs($effort_array['pledge_gap_MtCO2']));
-    $pledge_gap_percap = niceNumber(abs($effort_array['pledge_gap_percap']));
-    $pledge_percap = niceNumber($effort_array['pledge_percap']);
-    $pledge_gap_as_score = number_format(abs($effort_array['score']));
+    $pledge_gap_percap = number_format(abs($effort_array['pledge_gap_percap']), 1);
+    $pledge_percap = number_format($effort_array['pledge_percap'], 1);
+    $pledge_gap_as_score = number_format(abs($effort_array['score']), 1);
     $gdrs_perc_1990 = niceNumber($effort_array['gdrs_perc_1990']);
     $gdrs_perc_1990_abs = abs($gdrs_perc_1990);
     $fair_share_perc_below_bau = niceNumber($effort_array['fair_share_perc_below_bau']);
