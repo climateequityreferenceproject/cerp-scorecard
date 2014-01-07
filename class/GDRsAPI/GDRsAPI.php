@@ -100,6 +100,8 @@ class GDRsAPI
      * 
      */
     public function set_params($new_params) {
+        // Remove "emergency_path" from array
+        unset($new_params['emergency_path']);
         $ok_params = array_keys($this->get('params'));
         $return_params = array();
         foreach (array_keys($new_params) as $param) {

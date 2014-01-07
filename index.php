@@ -146,9 +146,17 @@ if (isset($_POST['country']) && ($_POST['country']!=='none')) {
                             <legend><?php echo $glossary->getLink('gloss_path',0,_('Level of Global Ambition'));?></legend>
                             <?php
                             $checkedString = array();
+                            $ambition = null;
+                            if (isset($user_params['emergency_path'])) {
+                                $ambition = $user_params['emergency_path'];
+                            }
+                            // POST trumps user parameter
                             if (isset($_POST['ambition'])) {
+                                $ambition = $_POST['ambition'];
+                            }
+                            if (!is_null($ambition)) {
                                 foreach ($api->pathwayIds as $pwType => $pwId) {
-                                    if ($pwId===$_POST['ambition']) {
+                                    if ($pwId===$ambition) {
                                         $checkedString[$pwType] = 'checked="checked"';
                                     } else {
                                         $checkedString[$pwType] = '';
