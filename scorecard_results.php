@@ -170,8 +170,8 @@ $simple_text = <<<EOHTML
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge 
             exceeds its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
                 
-            <p>In per-capita terms, $country&#8217;s $by_year fair share comes to YYY tonnes. Its pledge, however, is YYY 
-            tonnes per person, which exceeds that fair share by YYY tonnes per person.  Its score is therefore YYY.</p>
+            <p>In per-capita terms, $country&#8217;s $by_year fair share comes to $fair_share_percap tonnes. Its pledge, however, is $pledge_percap 
+            tonnes per person, which exceeds that fair share by $pledge_gap_percap tonnes per person.  Its score is therefore $score.</p>
             
 EOHTML;
             break;
