@@ -30,12 +30,12 @@ $resultsDefault = $glossary->getHelpEntry('sc_intro');
  * 
  * @return string: Nicely-formatted HTML for displaying information about the pledge
  */
-function getResults() 
+function getResults($country_code, $pathway_id) 
 {
     $glossary = new HWTHelp('def_link', 'glossary.php', 'sc_gloss');
     
     // Figure out if Annex 1 or not
-    $is_annex_1 = array_key_exists('annex_1', getRegions($_POST['country']));
+    $is_annex_1 = array_key_exists('annex_1', getRegions($country_code));
     
     // Check/set basic/advanced scorecard view (short/long text)
     if (!isset($_POST['scoreview'])) {
@@ -65,13 +65,13 @@ function getResults()
 
     // Get params
     $params = array();
-    $params['min_target_year'] = getMinTargetYear($_POST['country'], $_POST['conditional']);
+    $params['min_target_year'] = getMinTargetYear($country_code, $_POST['conditional']);
     $conditional_or_not = $_POST['conditional'];
     $by_year = $params['min_target_year'];
-    $iso3 = $_POST['country'];
-    $params['country_name'] = getCountryRegionName($_POST['country']);
+    $iso3 = $country_code;
+    $params['country_name'] = getCountryRegionName($country_code);
     $country = $params['country_name'];
-    $pathway_id = $_POST['ambition'];
+    // $pathway_id = $_POST['ambition'];
     $params['ambition'] = $pathwayLabel[array_search($pathway_id, $pathwayIds)];
     $ambition = $params['ambition'];
 
@@ -106,7 +106,7 @@ function getResults()
     
     // $pledge_perc_1990 = niceNumber($effort_array['pledge_perc_1990']);
 
-    $iso3 = $_POST['country'];
+    $iso3 = $country_code;
 
     $condition_string = $_POST['conditional'] ? 'conditional' : 'unconditional';
     if ($score < 0) {
@@ -297,7 +297,7 @@ EOHTML;
 
 if (isset($_POST['ajax']) ) {
     if ($_POST['country']!=='none') {
-        echo getResults();
+        echo getResults($_POST['country'], $_POST['ambition']);
     } else {
         echo $resultsDefault;
     }

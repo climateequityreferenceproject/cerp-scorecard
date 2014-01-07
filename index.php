@@ -41,8 +41,25 @@ if (isset($_POST['equity_submit_top']) || isset($_POST['equity_submit'])) {
     $use_splash = false;
 }
 
-if (isset($_POST['country']) && ($_POST['country']!=='none')) {    
-    $html = getResults();
+$ambition = $api->pathwayIds[$api->pathway_default];
+// GET trumps default
+if (isset($user_params['emergency_path'])) {
+    $ambition = $user_params['emergency_path'];
+}
+// POST trumps GET
+if (isset($_POST['ambition'])) {
+    $ambition = $_POST['ambition'];
+}
+
+$country = 'none';
+if (isset($user_params['country'])) {
+    $country = $user_params['country'];
+}
+if (isset($_POST['country'])) {
+    $country = $_POST['country'];
+}
+if ($country!=='none') {    
+    $html = getResults($country, $ambition);
     //$html = resultsTest();
 } else {
     $html = $resultsDefault;
@@ -119,15 +136,15 @@ if (isset($_POST['country']) && ($_POST['country']!=='none')) {
                             <legend>Country or Region</legend>
                             <select id="country" name="country">
                             <?php
-                            if (isset($_POST['country']) && ($_POST['country']!=='none')) {
+                            if ($country !=='none') {
                                 echo '<option value="none">-Select-</option>';
                                 // 'country' can be either a region or a country
-                                if (isCountry($_POST['country'])) {
+                                if (isCountry($country)) {
                                     echo availRegionsOptions();
                                     echo '<option value="none">--------</option>';
-                                    echo availCountriesOptions($_POST['country']);
+                                    echo availCountriesOptions($country);
                                 } else {
-                                    echo availRegionsOptions($_POST['country']);
+                                    echo availRegionsOptions($country);
                                     echo '<option value="none">--------</option>';
                                     echo availCountriesOptions();
                                 }
@@ -146,14 +163,6 @@ if (isset($_POST['country']) && ($_POST['country']!=='none')) {
                             <legend><?php echo $glossary->getLink('gloss_path',0,_('Level of Global Ambition'));?></legend>
                             <?php
                             $checkedString = array();
-                            $ambition = null;
-                            if (isset($user_params['emergency_path'])) {
-                                $ambition = $user_params['emergency_path'];
-                            }
-                            // POST trumps user parameter
-                            if (isset($_POST['ambition'])) {
-                                $ambition = $_POST['ambition'];
-                            }
                             if (!is_null($ambition)) {
                                 foreach ($api->pathwayIds as $pwType => $pwId) {
                                     if ($pwId===$ambition) {
