@@ -51,14 +51,14 @@ if (isset($_POST['ambition'])) {
     $ambition = $_POST['ambition'];
 }
 
-$country = 'none';
+$country = null;
 if (isset($user_params['country'])) {
     $country = $user_params['country'];
 }
 if (isset($_POST['country'])) {
     $country = $_POST['country'];
 }
-if ($country!=='none') {    
+if (!is_null($country)) {
     $html = getResults($country, $ambition);
     //$html = resultsTest();
 } else {
@@ -136,7 +136,7 @@ if ($country!=='none') {
                             <legend>Country or Region</legend>
                             <select id="country" name="country">
                             <?php
-                            if ($country !=='none') {
+                            if (!is_null($country)) {
                                 echo '<option value="none">-Select-</option>';
                                 // 'country' can be either a region or a country
                                 if (isCountry($country)) {
@@ -187,7 +187,18 @@ if ($country!=='none') {
                     <li class="setting">
                          <fieldset id="pledge_type">
                             <legend><?php echo $glossary->getLink('gloss_pledge');?></legend>
-                            <div id="pledge_controls"><?php include_once 'pledge_control.php'; ?></div>
+                            <div id="pledge_controls">
+                                <?php  get_pledges($disabledString, $checkedString, $country); ?>
+                                <label for="conditional-no" <?php if ($disabledString['no'] == 'disabled="disabled"') { echo 'class="disabled"'; } ?> >
+                                    <input type="radio" name="conditional" id="conditional-no" value="0" 
+                                <?php echo $checkedString['no']; ?> <?php echo $disabledString['no']; ?> /> <?php echo _('Weaker pledge (Unconditional)') ?>
+                                </label>
+
+                                <label for="conditional-yes" <?php if ($disabledString['yes'] == 'disabled="disabled"') { echo 'class="disabled"'; } ?> >
+                                    <input type="radio" name="conditional" id="conditional-yes" value="1" 
+                                <?php echo $checkedString['yes']; ?> <?php echo $disabledString['yes']; ?> /> <?php echo _('Stronger pledge (Conditional)') ?>
+                                </label>
+                            </div>
                          </fieldset>
                     </li>
                     

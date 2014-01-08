@@ -51,6 +51,22 @@ function getResults($country_code, $pathway_id)
         $scoreview = 'scorebasic';
     }
     
+    if (hasConditionalPledge($country_code)) {
+        $conditional = 1;
+    } elseif (hasUnconditionalPledge($country_code)) {
+        $conditional = 0;
+    } else {
+        return ''; // Should not get here -- if no pledge, not in the DB
+    }
+    // GET trumps default
+    if (isset($_GET['conditional'])) {
+        $conditional = $_GET['conditional'];
+    }
+    // POST trumps GET
+    if (isset($_POST['conditional'])) {
+        $conditional = $_POST['conditional'];
+    }
+    
 //    if ($scoreview === 'scorebasic') {
 //        $display = 'basic';
 //    } else {
@@ -65,8 +81,8 @@ function getResults($country_code, $pathway_id)
 
     // Get params
     $params = array();
-    $params['min_target_year'] = getMinTargetYear($country_code, $_POST['conditional']);
-    $conditional_or_not = $_POST['conditional'];
+    $params['min_target_year'] = getMinTargetYear($country_code, $conditional);
+    $conditional_or_not = $conditional;
     $by_year = $params['min_target_year'];
     $iso3 = $country_code;
     $params['country_name'] = getCountryRegionName($country_code);
@@ -108,7 +124,7 @@ function getResults($country_code, $pathway_id)
 
     $iso3 = $country_code;
 
-    $condition_string = $_POST['conditional'] ? 'conditional' : 'unconditional';
+    $condition_string = $conditional ? 'conditional' : 'unconditional';
     if ($score < 0) {
         $score_class = 'negative';
     } else {

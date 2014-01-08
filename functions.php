@@ -41,6 +41,44 @@ function getCalcPath() {
     }
 }
 
+function get_pledges(&$disabledString, &$checkedString, $country = null, $use_conditional = false) {
+    if (!is_null($country)) {
+        $pledge_uncond = hasUnconditionalPledge($country);
+        $pledge_cond = hasConditionalPledge($country);
+    } else {
+        $pledge_uncond = false;
+        $pledge_cond = false;
+    }
+//    echo $_POST['country'] . '<br />uncond: ';
+//    echo $pledge_uncond ? 'true' : 'false';
+//    echo '<br />cond: ';
+//    echo $pledge_cond ? 'true' : 'false'; 
+
+    if ($pledge_cond and !$pledge_uncond) { // conditional pledge only
+        $checkedString['yes'] = 'checked="checked"';
+        $disabledString['yes'] = '';
+        $checkedString['no'] = '';
+        $disabledString['no'] = 'disabled="disabled"';
+    } else if (!$pledge_cond and $pledge_uncond) { // unconditional pledge only
+        $checkedString['yes'] = '';
+        $disabledString['yes'] = 'disabled="disabled"';
+        $checkedString['no'] = 'checked="checked"';
+        $disabledString['no'] = '';
+    } else if ($pledge_cond and $pledge_uncond) { // conditional AND unconditional pledges are available for this country/region
+        if ($use_conditional) { 
+            $checkedString['yes'] = 'checked="checked"';
+            $disabledString['yes'] = '';
+            $checkedString['no'] = '';
+            $disabledString['no'] = '';
+        } else {
+            $checkedString['yes'] = '';
+            $disabledString['yes'] = '';
+            $checkedString['no'] = 'checked="checked"';
+            $disabledString['no'] = '';
+        }
+    }
+}
+
 /**
  * Build URL for GDRs calculator country report page
  * 
