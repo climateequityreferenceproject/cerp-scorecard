@@ -188,7 +188,15 @@ if (!is_null($country)) {
                          <fieldset id="pledge_type">
                             <legend><?php echo $glossary->getLink('gloss_pledge');?></legend>
                             <div id="pledge_controls">
-                                <?php  get_pledges($disabledString, $checkedString, $country); ?>
+                                <?php
+                                $use_conditional = false;
+                                if (isset($_GET['conditional'])) {
+                                    $use_conditional = $_GET['conditional'];
+                                }
+                                if (isset($_POST['conditional'])) {
+                                    $use_conditional = $_POST['conditional'];
+                                }
+                                get_pledges($disabledString, $checkedString, $country, $use_conditional); ?>
                                 <label for="conditional-no" <?php if ($disabledString['no'] == 'disabled="disabled"') { echo 'class="disabled"'; } ?> >
                                     <input type="radio" name="conditional" id="conditional-no" value="0" 
                                 <?php echo $checkedString['no']; ?> <?php echo $disabledString['no']; ?> /> <?php echo _('Weaker pledge (Unconditional)') ?>
