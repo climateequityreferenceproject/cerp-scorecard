@@ -485,13 +485,22 @@ function getGdrsInformation($pledge_info, $pathway)
         GDRsAPI::$use_kab_on = false;
     }
     
-    $params = GDRsAPI::connection()->get_params();
-    if (count($params) === 0) {
-        $params = GDRsAPI::connection()->get('params');
+    $params = (array) GDRsAPI::connection()->get('params');
+    $user_params = GDRsAPI::connection()->get_params();
+    
+    if (isset($user_params['use_lulucf'])) {
+        $use_lulucf = (int) $user_params['use_lulucf'];
+    } else {
+        $tmp_array = (array) $params['use_lulucf'];
+        $use_lulucf = (int) $tmp_array['value'];
     }
     
-    $use_lulucf = (array) $params['use_lulucf'];
-    $use_nonco2 = (array) $params['use_nonco2'];
+    if (isset($user_params['use_nonco2'])) {
+        $use_nonco2 = (int) $user_params['use_nonco2'];
+    } else {
+        $tmp_array = (array) $params['use_nonco2'];
+        $use_nonco2 = (int) $tmp_array['value'];
+    }
     
     // Announce that we'd like to free up memory before reusing the variable
     // unset($req);
@@ -527,13 +536,13 @@ function getGdrsInformation($pledge_info, $pathway)
             $c_frac[$year] = $year_data['gdrs_c_frac'];
             $r_frac[$year] = $year_data['gdrs_r_frac'];
             $rci[$year] = $year_data['gdrs_rci'];
-            if ($use_lulucf['value']) {
+            if ($use_lulucf) {
                 $bau[$year] += $year_data['LULUCF_MtCO2'];
                 if ($pledge_info['include_lulucf']) {
                     $ref_bau[$year] += $year_data['LULUCF_MtCO2'];
                 }
             }
-            if ($use_nonco2['value']) {
+            if ($use_nonco2) {
                 $bau[$year] += $year_data['NonCO2_MtCO2e'];
                 if ($pledge_info['include_nonco2']) {
                     $ref_bau[$year] += $year_data['NonCO2_MtCO2e'];
@@ -542,10 +551,10 @@ function getGdrsInformation($pledge_info, $pathway)
             $alloc[$year] = $year_data['gdrs_alloc_MtCO2'];
         } else {
             $bau_world[$year] = $year_data['fossil_CO2_MtCO2'];
-            if ($use_lulucf['value']) {
+            if ($use_lulucf) {
                 $bau_world[$year] += $year_data['LULUCF_MtCO2'];
             }
-            if ($use_nonco2['value']) {
+            if ($use_nonco2) {
                 $bau_world[$year] += $year_data['NonCO2_MtCO2e'];
             }
             $alloc_world[$year] = $year_data['gdrs_alloc_MtCO2'];
