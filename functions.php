@@ -485,7 +485,10 @@ function getGdrsInformation($pledge_info, $pathway)
         GDRsAPI::$use_kab_on = false;
     }
     
-    $params = GDRsAPI::connection()->get('params');
+    $params = GDRsAPI::connection()->get_params();
+    if (count($params) === 0) {
+        $params = GDRsAPI::connection()->get('params');
+    }
     
     $use_lulucf = (array) $params['use_lulucf'];
     $use_nonco2 = (array) $params['use_nonco2'];
