@@ -105,12 +105,11 @@ function getResults($country_code, $pathway_id)
     $fair_share_MtCO2 = niceNumber($effort_array['fair_share_MtCO2']);
     $fair_share_percap = number_format($effort_array['fair_share_percap'], 1);
     $glob_mit_req_GtCO2 = number_format($effort_array['glob_mit_req_MtCO2']/1000, 1);
+    $pledged_reduction_MtCO2 = niceNumber($effort_array['pledged_reduct_MtCO2']);
     $pledge_gap_MtCO2 = niceNumber(abs($effort_array['pledge_gap_MtCO2']));
     $pledge_gap_percap = number_format(abs($effort_array['pledge_gap_percap']), 1);
     $pledge_percap = number_format($effort_array['pledge_percap'], 1);
-    $pledge_gap_as_score = number_format(abs($effort_array['score']), 1);
     $gdrs_perc_1990 = niceNumber($effort_array['gdrs_perc_1990']);
-    $gdrs_perc_1990_abs = abs($gdrs_perc_1990);
     $fair_share_perc_below_bau = niceNumber($effort_array['fair_share_perc_below_bau']);
     $fair_share_perc_below_1990 = niceNumber($effort_array['fair_share_perc_below_1990']);
     
@@ -183,7 +182,7 @@ $simple_text = <<<EOHTML
 
             <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] 
             of this $by_year global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
-            million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge (XXX tonnes)
+            million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge ($pledged_reduction_MtCO2 tonnes)
             exceeds its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
                 
             <p>In per-capita terms, $country&#8217;s $by_year fair share comes to $fair_share_percap tonnes. Its pledge, however, is $pledge_percap 
@@ -198,7 +197,7 @@ $simple_text = <<<EOHTML
             
             <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] 
             of this $by_year global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
-            million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge (XXX tonnes)
+            million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge ($pledged_reduction_MtCO2 tonnes)
             falls short of its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
             
             <p>In per-capita terms, $country&#8217;s $by_year fair share comes to $fair_share_percap tonnes. Its pledge, however, is only                 
