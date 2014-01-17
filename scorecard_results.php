@@ -176,7 +176,7 @@ EOHTML;
     if ($ambition == 'G8 pathway (very weak)') {
         $weak_ambition_warning = 'Warning: This pledge looks stronger than it really is because it is being evaluated against a dangerously weak global mitigation pathway. For more information see <a href="http://gdrights.org/gdrs-scorecard-calculator-information/mitig-path-overview/">Global Mitigation Pathways</a>.';
     } else {
-        $weak_ambition_warning = 'xxx';
+        $weak_ambition_warning = '';
     }
     
     // case 1 means score is negative, but pledge is between BAU and fair share (zero score)
@@ -192,8 +192,10 @@ $simple_text = <<<EOHTML
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge ($pledged_reduction_MtCO2 million tonnes)
             exceeds its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
                 
-            <p>In per-capita terms, $country&#8217;s $by_year fair share comes to $fair_share_percap tonnes. Its pledge, however, is $pledge_percap 
+            <p>In per-capita terms, $country&#8217;s $by_year fair share comes to $fair_share_percap tonnes. Its pledge is $pledge_percap 
             tonnes per person, which exceeds that fair share by $pledge_gap_percap tonnes per person.  Its score is therefore $score.</p>
+                
+            <p><strong>$weak_ambition_warning</strong></p>
             
 EOHTML;
             break;
