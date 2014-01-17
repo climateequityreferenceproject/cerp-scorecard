@@ -176,7 +176,7 @@ EOHTML;
     if ($ambition == 'G8 pathway (very weak)') {
         $weak_ambition_warning = 'Warning: This pledge looks stronger than it really is because it is being evaluated against a dangerously weak global mitigation pathway. For more information see <a href="http://gdrights.org/gdrs-scorecard-calculator-information/mitig-path-overview/">Global Mitigation Pathways</a>.';
     } else {
-        $weak_ambition_warning = '';
+        $weak_ambition_warning = 'xxx';
     }
     
     // case 1 means score is negative, but pledge is between BAU and fair share (zero score)
