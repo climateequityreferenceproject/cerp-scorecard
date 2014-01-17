@@ -130,15 +130,15 @@ function getResults($country_code, $pathway_id)
         $score_class = 'positive';
     }
     
-    if (($effort_array['score'] < -25) or ($effort_array['bau_score'] < -25)) {
-        $scale_min = round(min($effort_array['score'],$effort_array['bau_score']), -1) - 5;
+    if (($effort_array['score'] < -35) or ($effort_array['bau_score'] < -35)) {
+        $scale_min = round(min($effort_array['score'],$effort_array['bau_score']), -1) - 10;
     } else {
-        $scale_min = -25;
+        $scale_min = -35;
     }
-    if ($effort_array['score'] > 15) {
-        $scale_max = round($effort_array['score'], -1) + 5;
+    if ($effort_array['score'] > 25) {
+        $scale_max = round($effort_array['score'], -1) + 10;
     } else {
-        $scale_max = 15;
+        $scale_max = 25;
     }
     $scale_array = array('min'=>$scale_min,'max'=>$scale_max);
     foreach ($glossary->getIds() as $gloss_id) {
@@ -171,6 +171,13 @@ EOHTML;
     $retval .= '<div id="switch_links" class="group">' . $linkview . '</div>';
     
     $marker_pathway = $glossary->getLink('gloss_path', false, $ambition);
+
+    // TODO: replace $ambition with short path name as condition (find variable name and value for G8 pathway)
+    if ($ambition == 'G8 pathway (very weak)') {
+        $weak_ambition_warning = 'Warning: This pledge looks stronger than it really is because it is being evaluated against a dangerously weak global mitigation pathway. For more information see <a href="http://gdrights.org/gdrs-scorecard-calculator-information/mitig-path-overview/">Global Mitigation Pathways</a>.';
+    } else {
+        $weak_ambition_warning = '';
+    }
     
     // case 1 means score is negative, but pledge is between BAU and fair share (zero score)
     // case 2 means score is positive
@@ -202,7 +209,8 @@ $simple_text = <<<EOHTML
             
             <p>In per-capita terms, $country&#8217;s $by_year fair share comes to $fair_share_percap tonnes. Its pledge, however, is only                 
             $pledge_percap tonnes per person, which falls short of its fair share by $pledge_gap_percap tonnes per person. Its score is therefore $score.</p>
-            
+                
+            <p><strong>$weak_ambition_warning</strong></p>
 EOHTML;
             break;
         default:
@@ -304,7 +312,7 @@ EOHTML;
     
     $calc_url = getCalcUrl($iso3, $by_year, $pathway_id);
     $retval .= '<a href="' . $calc_url . '" target="_blank">';
-    $retval .= 'More detailed calculations &#187;</a></div>';
+    $retval .= 'Open in Climate Equity Reference Calculator &#187;</a></div>';
     
     return $retval;
 }
