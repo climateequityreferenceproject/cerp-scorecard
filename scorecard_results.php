@@ -172,8 +172,7 @@ EOHTML;
     
     $marker_pathway = $glossary->getLink('gloss_path', false, $ambition);
 
-    // TODO: replace $ambition with short path name as condition (find variable name and value for G8 pathway)
-    if ($ambition == 'G8 pathway (very weak)') {
+    if ($pathway_id == $pathwayIds['low']) {
         $weak_ambition_warning = 'Warning: This pledge looks stronger than it really is because it is being evaluated against a dangerously weak global mitigation pathway. For more information see <a href="http://gdrights.org/gdrs-scorecard-calculator-information/mitig-path-overview/">Global Mitigation Pathways</a>.';
     } else {
         $weak_ambition_warning = '';
