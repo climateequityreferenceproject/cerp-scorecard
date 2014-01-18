@@ -173,7 +173,7 @@ EOHTML;
     $marker_pathway = $glossary->getLink('gloss_path', false, $ambition);
 
     if ($pathway_id == $pathwayIds['low']) {
-        $weak_ambition_warning = 'Warning: This pledge looks stronger than it really is because it is being evaluated against a dangerously weak global mitigation pathway. For more information see <a href="http://gdrights.org/gdrs-scorecard-calculator-information/mitig-path-overview/">Mitigation Pathway Overview</a>.';
+        $weak_ambition_warning = 'Warning: This pledge looks stronger than it really is because it is being evaluated against a dangerously weak global mitigation pathway. For more information see the <a href="http://gdrights.org/gdrs-scorecard-calculator-information/mitig-path-overview/">Mitigation Pathway Overview</a>.';
     } else {
         $weak_ambition_warning = '';
     }
