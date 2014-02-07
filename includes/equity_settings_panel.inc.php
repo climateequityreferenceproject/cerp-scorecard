@@ -32,8 +32,8 @@ if (true) {
     $params = $api->get('params');
     $user_params = $api->get_params();
     
-    if (isset($user_params['emergency_path'])) {
-        $ep_val = $user_params['emergency_path'];
+    if ($api->get_user_pwId() > 0) {
+        $ep_val = $api->get_user_pwId();
     } else {
         $ep_array = (array) $params['emergency_path'];
         $ep_val = $ep_array['value'];

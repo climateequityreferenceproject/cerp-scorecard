@@ -64,6 +64,7 @@ class GDRsAPI
     
     // Store additional parameters for POST
     private $_user_params = array();
+    private $_user_pathway = -1;
     
     private $_pathway_array = array('low'=>'G8Pathway', 'med'=>'2.0Cmarkerpathway', 'high'=>'1.5Cmarkerpathway');
     // TODO allow authors to identify in pathway db which are used here
@@ -100,8 +101,11 @@ class GDRsAPI
      * 
      */
     public function set_params($new_params) {
-        // Remove "emergency_path" from array
-        unset($new_params['emergency_path']);
+        // Remove "emergency_path" from array, but save it first
+        if (isset($new_params['emergency_path'])) {
+            $this->_user_pathway = $new_params['emergency_path'];
+            unset($new_params['emergency_path']);
+        }
         $ok_params = array_keys($this->get('params'));
         $return_params = array();
         foreach (array_keys($new_params) as $param) {
@@ -134,6 +138,15 @@ class GDRsAPI
             }
         }
         return $this->_user_params;
+    }
+    
+     /**
+     * Get user pathway
+     * 
+     * @return int Id of the pathway
+     */
+    public function get_user_pwId() {
+        return $this->_user_pathway;
     }
     
     /**

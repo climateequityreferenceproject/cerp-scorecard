@@ -26,7 +26,20 @@ $(function() {
     $("a[id|='cbdr']").click(cbdr_grid_select);
     
     $("#equity_settings_button a").click(function() {
-        window.location = window.location.pathname;
+        var search_string = window.location.search;
+        // Get rid of any "splash=yes" inserted previously
+        search_string = search_string.replace(/splash=yes/gi, '');
+        // Might leave double &&s if embedded in the string -- collapse to a single &
+        search_string = search_string.replace(/&&/g, '&');
+        // Or might leave a stranded & at the end of the string -- get rid of it
+        search_string = search_string.replace(/&$/, '');
+        if (search_string === '') {
+            search_string = '?';
+        } else {
+            search_string += '&';
+        }
+        search_string += 'splash=yes';
+        window.location = window.location.pathname + search_string;
     });
     
     $('#dev-low, #dev-med').click(function() {
@@ -39,6 +52,11 @@ $(function() {
     });
     
     $('#r100, #r50c50, #c100').click(cbdr_select);
+    
+    $("#equity_settings :input").change(function() {
+        // Possibly rewrite the URL to make sure all is in sync
+        rewrite_url('#equity_settings', true);
+    });
     
     $('#equity_reset, #equity_reset_top').click(function() {
         $('#equity_progressivity').val(0);
@@ -163,8 +181,10 @@ function get_def_by_id(e) {
     e.preventDefault();
 }
 
-function update_pledge_controls() {
-    // Update pledge controls
+function update_pledge_controls() { 
+    rewrite_url('#settings', false);
+    
+   // Update pledge controls
     $.post(
         'pledge_control.php',
         $('#settings').serialize(),
@@ -173,6 +193,54 @@ function update_pledge_controls() {
             submit();
         }
     );
+}
+
+//function rewrite_url(form, show_splash) {
+//    // Possibly rewrite the URL to ensure pathway is in sync
+//    var re = /emergency_path=\d+/;
+//    var search_string = window.location.search;
+//    if (re.test(search_string)) {
+//        var pwID = $('input[name=ambition]:checked', form).val();
+//        search_string = search_string.replace(re, 'emergency_path=' + pwID.toString());
+//        // Get rid of any "splash=yes" inserted previously
+//        if (!show_splash) {
+//            search_string = search_string.replace(/splash=yes/gi, '');
+//        }
+//        window.location = window.location.pathname + search_string;
+//    }
+//    console.log($(form).serializeArray());
+//}
+
+function rewrite_url(form, show_splash) {
+    // Possibly rewrite the URL to ensure chosen values are in sync
+    var search_string = window.location.search;
+    var form_obj = $(form).serializeArray();
+    var have_elem = false;
+    var re = / /;
+    jQuery.each(form_obj, function(i, elem) {
+        switch (elem.name) {
+            case 'ambition':
+                name = 'emergency_path';
+                break;
+            case 'country':
+                name = 'iso3';
+                break;
+            default:
+                name = elem.name;
+        }
+        re = new RegExp(name + "=[^&]+");
+        if (re.test(search_string)) {
+            have_elem = true;
+            search_string = search_string.replace(re, name + '=' + elem.value);
+        }
+    });
+    if (have_elem) {
+        // Get rid of any "splash=yes" inserted previously
+        if (!show_splash) {
+            search_string = search_string.replace(/splash=yes/gi, '');
+        }
+        window.location = window.location.pathname + search_string;
+    }
 }
 
 function submit(cmds) {

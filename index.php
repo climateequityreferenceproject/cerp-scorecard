@@ -29,6 +29,8 @@ foreach (array_keys($_GET) as $get_var) {
 }
 $user_params_clean = $api->set_params($user_params);
 $use_splash = empty($user_params_clean);
+// This can be inserted in the url query string, if want to override
+if (isset($user_params['splash']) && $user_params['splash'] === 'yes') $use_splash = true;
 if (isset($_POST['equity_cancel_top']) || isset($_POST['equity_cancel'])) {
     $use_splash = false;
 }
