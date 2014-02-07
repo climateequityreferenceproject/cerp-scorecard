@@ -510,7 +510,7 @@ footer {font-size:80%;}
     left:0;
     height:1000%; 
     width:100%;
-    z-index:100;
+    z-index:1000;
 }
 #equity_settings_container { 
     font-size:80%;
@@ -520,7 +520,7 @@ footer {font-size:80%;}
     top:5%;
     left:5%;
     width:90%;
-    z-index:101;
+    z-index:1010;
 }
 #equity_settings_container ul { list-style:none; }
 #equity_settings { 
