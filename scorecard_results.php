@@ -281,7 +281,8 @@ $detailed_text = <<<EOHTML
         <p>The fair share calculated for countries with high capability and responsibility can be 
         quite large compared to national emissions, generally implying greater reductions than can be 
         cost-effectively undertaken domestically.  This reflects the practical (and ethical) imperative of 
-        having high capacity and responsibility countries (like $country) support mitigation in countries with lower capability and responsibility.</p>
+        having high capacity and responsibility countries support mitigation in countries with lower 
+        capability and responsibility.</p>
 
 <div id="details">
 <h2>Details about this pledge</h2>
