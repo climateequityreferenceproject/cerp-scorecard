@@ -649,9 +649,9 @@ function getGdrsInformation($pledge_info, $pathway)
  * 
  * @return string The HTML to render
  */
-function drawScoreBar($score, $bau_score, $display, $limits=array('min'=>-25,'max'=>15))
+function drawScoreBar($score, $bau_score, $display, $limits=array('min'=>-35,'max'=>25))
 {
-    if ($limits['min'] < -25 or $limits['max'] > 15) {
+    if ($limits['min'] < -35 or $limits['max'] > 25) {
         $scale_warning = '<p id="scale_warning">This score bar has been scaled to show values outside the common range.</p>';
     } else {
         $scale_warning = '';

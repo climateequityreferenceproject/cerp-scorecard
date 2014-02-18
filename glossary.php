@@ -51,7 +51,7 @@ require_once "class/HWTHelp/HWTHelp.php";
   <body class="glossary group">
     <div id="container" class="group">
     <header>
-        <h1><a href="http://gdrights.org/scorecard/">Climate Equity Pledge Scorecard</a> Glossary</h1>
+        <h1>Climate Equity Pledge Scorecard Glossary</h1>
     </header>
     <div id="main" role="main" class="group">
 

@@ -237,9 +237,92 @@ button {  width: auto; overflow: visible; }
  */
  
 /* layout ***************************************/
-#container {margin:0.5em auto; min-width:720px; max-width:1280px; width:90%;} 
+#container {margin:0 auto 0.5em; min-width:720px; max-width:1280px; width:90%;} 
 /* #container {margin:0.5em auto; min-width:800px; padding:0 3em; width:60em;}*/
-header {padding:0.5em 0 1.5em 0;}
+/*header {padding:0.5em 0 1.5em 0;}*/
+
+/* IE6 treats width as min-width, but does not recognize CSS child selectors */
+body>#container {
+    min-width:950px;
+    width:95%;
+}
+
+/*** header layout ***/
+header, #header { 
+    font-size:90%;
+    height:5em; 
+    overflow:hidden; 
+    position:relative
+}
+header h1, #header h1 { 
+    height:1em;
+    left:0;
+    letter-spacing: 0.05em;
+    line-height:1em; 
+    margin:0; 
+    padding:0.75em; 
+    position:absolute; 
+    text-align:center;
+    top:0; 
+    z-index:10;
+}
+
+header h1 span, #header h1 span {
+    bottom:0.75em;
+    color:#6b87c3;
+    display:block;
+    font-size:80%;
+    font-style:italic;
+    font-weight:bold;
+    position:absolute;
+    right:-2.75em;
+}
+#partners {
+    bottom:0;
+    position:absolute;
+    right:0;
+}
+#partners ul li {
+    float:left;
+    list-style:none;
+}
+#partners a {
+    border:0;
+    display:block;
+    height:78px;
+    overflow:hidden;
+    text-indent:-9999px;
+}
+#partners ul li a#ecoequity {
+    background:#fff url('../img/GDR-EE-headercalculator.png') no-repeat;
+    width:148px;
+}
+#partners ul li a#seius {
+    background:#fff url('../img/GDR-SEI-headercalculator.png') no-repeat;
+    width:167px;
+}
+nav, #nav { 
+/*    border-bottom:2px solid #4d59a4; */
+    font-size:90%; 
+    margin:0 0 0.5em 0; 
+    padding:0.5em 0;
+}
+nav ul, #nav ul {margin:0; padding:0;}
+nav li, #nav li {float:left; width:auto;}
+nav a, nav a:link, nav a:visited, nav a:hover, nav a:active, 
+#nav a, #nav a:link, #nav a:visited, #nav a:hover, #nav a:active {
+    border-bottom:none;
+    display:block; 
+    float:left; 
+    height:1.5em; 
+    line-height:1.5em; 
+    padding:0 1em; 
+    text-decoration:none;
+    width:auto;
+}
+nav li.last a, #nav li.last a { border:none;}
+/*** end header layout ***/
+
 
 #settings_wrapper {float:left; margin:0 30px 1em 0; padding: 0 13px 22px 13px; min-width:180px; width:30%;}
 /*#settings_wrapper {float:left; margin:0 2em 1em 0; padding: 0 1em 1em 1em; width:15em;}*/
@@ -268,7 +351,7 @@ span.label_right {position:absolute; right:0; text-align:right; top:0;}
 #key {clear:both; margin-top:0.5em;}
 .results_links {margin:1.25em 0 0.5em;}
 .glossary #container, .docs #container {min-width:500px; max-width:900px;}
-.glossary nav {margin-top:2em;}
+.glossary nav {margin:0;}
 .glossary #main div p, .glossary #main div dl {padding-left:1em;}
 
 img.left {float:left; margin-right:2em;}
@@ -328,6 +411,21 @@ h1, h2, h3, h4, #country_name, #commitment, .score, legend, a.title, a.title:hov
 fieldset {background:#fff;}
 h1 span, h2 span, .small_intro {color:#999; letter-spacing:0.035em;}
 
+header h1, #header h1 { 
+    background:#4d59a4; 
+    color:#fff; 
+}
+nav, #nav { border-color:#4d59a4; }
+nav a, nav a:link, nav a:visited, nav a:hover, nav a:active, 
+#nav a, #nav a:link, #nav a:visited, #nav a:hover, #nav a:active {
+    border-right:2px solid #d2dbef;
+    color:#6b87c3; 
+}
+nav a:link, nav a:visited, 
+#nav a:link, #nav a:visited {color:#6b87c3;}
+nav a:hover, nav a:active, 
+#nav a:hover, #nav a:active {background:#f0f3fa; color:#4d59a4;}
+
 /* These selection declarations have to be separate
    No text-shadow: twitter.com/miketaylr/status/12228805301   */
 ::-moz-selection{background:#dd6e4c; color:#fff; text-shadow:none;}
@@ -346,7 +444,7 @@ a:link {-webkit-tap-highlight-color:#dd6e4c;}
 #settings_wrapper, footer {border:6px solid #e6ebe6;}
 #settings_wrapper, #results, footer, #equity_settings {-moz-border-radius:15px; border-radius:15px;}
 
-.glossary #main, .docs #main {border-top:6px solid #ffce73;}
+.glossary #main, .docs #main {border-top:6px solid #ffce73; margin-top:0.5em;}
 .glossary p {margin-top:0.75em;}
 .glossary h2, .docs h2 {margin-top:1.5em;}
 
@@ -426,7 +524,7 @@ body {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 
 h1,h2,h3,h4,h5,h6, strong, #country_name, #commitment, .score, legend, 
 #no-script-warning, .results_links, #scale_warning, #switch_links, 
-.small_intro, #equity_settings_button {
+.small_intro, #equity_settings_button, nav a, #nav a {
     font-family:ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif; 
     font-weight:bold;
 }
@@ -439,6 +537,7 @@ h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, strong em {
 
 h1 {font-size:250%; line-height:1;}
 h2 {font-size:150%; margin-top:1em;}
+header h1, #header h1 {font-size:2em;}
 
 /* #summary {font-size:120%; line-height:30px;} */
 #summary {line-height:24px;}
@@ -510,7 +609,7 @@ footer {font-size:80%;}
     left:0;
     height:1000%; 
     width:100%;
-    z-index:1000;
+    z-index:900;
 }
 #equity_settings_container { 
     font-size:80%;
@@ -520,7 +619,7 @@ footer {font-size:80%;}
     top:5%;
     left:5%;
     width:90%;
-    z-index:1010;
+    z-index:910;
 }
 #equity_settings_container ul { list-style:none; }
 #equity_settings { 
