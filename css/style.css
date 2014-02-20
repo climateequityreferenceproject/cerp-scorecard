@@ -11,7 +11,7 @@
  * - camendesign.com/design/
  * - praegnanz.de/weblog/htmlcssjs-kickstart
  */
-
+/*  adapted for GDRs Climate Equity Pledge Scorecard by Tyler Kemp-Benedict */
 /**
  * html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
  * v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
@@ -395,6 +395,7 @@ p.right {text-align:right;}
  * #3a4e85 blue xtra dk
  * #4d59a4 blue dk
  * #6b87c3 blue med
+ * #b8d4ff blue light
  * #ffce73 yellow-gold
  * #dd6e4c red-orange
  * #a23b1e red dk [no longer used?]
@@ -448,18 +449,7 @@ a:link {-webkit-tap-highlight-color:#dd6e4c;}
 .glossary p {margin-top:0.75em;}
 .glossary h2, .docs h2 {margin-top:1.5em;}
 
-a, a:active, a:visited /*, 
-.glossary nav a, .glossary nav a:active, .glossary nav a:visited,
-legend a, legend a:active, legend a:visited,
-h3 a, h3 a:active, h3 a:visited,
-.docs a, .docs a:active, .docs a:visited,
-.docs header h1 a, .docs header h1 a:active, .docs header h1 a:visited,
-.glossary a, .glossary a:active, .glossary a:visited,
-.glossary header h1 a, .glossary header h1 a:active, .glossary header h1 a:visited,
-.source a, .source a:active, .source a:visited, 
-footer a, footer a:active, footer a:visited */ {color:#6b87c3;}
-
-/*#more_options a, #more_options a:active, #more_options a:visited {color:#a23b1e;}*/
+a, a:active, a:visited {color:#6b87c3;}
 
 footer a, footer a:active, footer a:visited,
 a.more, a.more:active, a.more:visited,
@@ -492,6 +482,8 @@ a:hover, #more_options a:hover, footer a:hover, a.more:hover, a.ext:hover {color
 #equity_settings_button a:hover {
   background: #2e5e21;
 }
+header h1 a, #header h1 a { color:#fff; border:none; }
+header h1 a:hover, #header h1 a:hover { color:#b8d4ff; }
 
 /* typography ***************************************/
 
@@ -573,6 +565,8 @@ a:hover {border-bottom-style:solid;}
 h1 a, h1 a:hover {text-decoration: none; border: none;}
 
 .glossary #container, .docs #container {font-size:90%;}
+.glossary #container h1, .docs #container h1 {margin:0.5em 0;}
+.glossary header h1, .glossary #header h1, .docs header h1, .docs #header h1 {margin:0;}
 dl {
 	border-bottom: 1px solid #999;
 	float: left;

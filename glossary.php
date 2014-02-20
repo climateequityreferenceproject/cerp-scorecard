@@ -11,6 +11,7 @@
  */
 
 require_once "class/HWTHelp/HWTHelp.php";
+require_once "functions.php";
 
 ?>
 <!doctype html>
@@ -50,10 +51,12 @@ require_once "class/HWTHelp/HWTHelp.php";
   </head>  
   <body class="glossary group">
     <div id="container" class="group">
-    <header>
-        <h1>Climate Equity Pledge Scorecard Glossary</h1>
-    </header>
+<!--    <div id="header" class="group">
+        <h1>Climate Equity Pledge Scorecard</h1>
+    </div>-->
+    <?php include("includes/sc_branding.inc.php"); ?>
     <div id="main" role="main" class="group">
+        <h1>Glossary</h1>
 
         <?php
             $glossary = new HWTHelp('def_link', 'glossary.php', 'sc_gloss');
