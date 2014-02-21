@@ -51,9 +51,6 @@ require_once "functions.php";
   </head>  
   <body class="glossary group">
     <div id="container" class="group">
-<!--    <div id="header" class="group">
-        <h1>Climate Equity Pledge Scorecard</h1>
-    </div>-->
     <?php include("includes/sc_branding.inc.php"); ?>
     <div id="main" role="main" class="group">
         <h1>Glossary</h1>

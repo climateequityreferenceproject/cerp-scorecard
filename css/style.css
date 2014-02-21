@@ -302,9 +302,8 @@ header h1 span, #header h1 span {
     width:167px;
 }
 nav, #nav { 
-/*    border-bottom:2px solid #4d59a4; */
     font-size:90%; 
-    margin:0 0 0.5em 0; 
+    margin:0 0 1em 0; 
     padding:0.5em 0;
 }
 nav ul, #nav ul {margin:0; padding:0;}
@@ -352,7 +351,8 @@ span.label_right {position:absolute; right:0; text-align:right; top:0;}
 .results_links {margin:1.25em 0 0.5em;}
 .glossary #container, .docs #container {min-width:500px; max-width:900px;}
 .glossary nav {margin:0;}
-.glossary #main div p, .glossary #main div dl {padding-left:1em;}
+.glossary #main div p, .glossary #main div dl, .glossary #main div li {padding-left:1em;}
+.glossary #main div p, .glossary #main div li {line-height:1.4; margin-top:0.75em; padding-top:0;}
 
 img.left {float:left; margin-right:2em;}
 img.right {float:right; margin-left:2em;}
@@ -446,7 +446,6 @@ a:link {-webkit-tap-highlight-color:#dd6e4c;}
 #settings_wrapper, #results, footer, #equity_settings {-moz-border-radius:15px; border-radius:15px;}
 
 .glossary #main, .docs #main {border-top:6px solid #ffce73; margin-top:0.5em;}
-.glossary p {margin-top:0.75em;}
 .glossary h2, .docs h2 {margin-top:1.5em;}
 
 a, a:active, a:visited {color:#6b87c3;}
