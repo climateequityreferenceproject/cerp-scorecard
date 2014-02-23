@@ -11,7 +11,7 @@
  */
 
 if (isset($_GET['debug']) && $_GET['debug'] == 'yes') {
-    ini_set('display_errors',1); 
+    ini_set('display_errors',1);
     error_reporting(E_ALL);
 }
 require_once "functions.php";
@@ -24,31 +24,54 @@ $api = GDRsAPI::connection();
 
 // Collect user parameters from the URL and apply them
 $user_params = array();
-foreach (array_keys($_GET) as $get_var) {
-    $user_params[$get_var] = filter_input(INPUT_GET, $get_var, FILTER_SANITIZE_STRING);
+switch($_SERVER['REQUEST_METHOD'])
+{
+case 'GET':
+    foreach (array_keys($_GET) as $get_var) {
+        $user_params[$get_var] = filter_input(INPUT_GET, $get_var, FILTER_SANITIZE_STRING);
+    }
+    $is_get_request = true;
+    break;
+case 'POST':
+    foreach (array_keys($_POST) as $post_var) {
+        $user_params[$post_var] = filter_input(INPUT_POST, $post_var, FILTER_SANITIZE_STRING);
+    }
+    $is_get_request = false;
+    break;
+default:
+    if (isset($_SESSION['user_params'])) {
+        $user_params = $_SESSION['user_params'];
+    }
+    $is_get_request = false;
 }
 $user_params_clean = $api->set_params($user_params);
+
+// Cascading cases for using or not using the splash
 $use_splash = empty($user_params_clean);
-// This can be inserted in the url query string, if want to override
-if (isset($user_params['splash']) && $user_params['splash'] === 'yes') $use_splash = true;
-if (isset($_POST['equity_cancel_top']) || isset($_POST['equity_cancel'])) {
-    $use_splash = false;
-}
-if (isset($_POST['equity_submit_top']) || isset($_POST['equity_submit'])) {
-    $user_params = array();
-    foreach (array_keys($_POST) as $get_var) {
-        $user_params[$get_var] = filter_input(INPUT_POST, $get_var, FILTER_SANITIZE_STRING);
+
+// This can be inserted in the url query string (splash=yes or splash=no), if want to override
+if (isset($user_params['splash'])) {
+    switch ($user_params['splash']) {
+        case 'yes':
+            $use_splash = true;
+            break;
+        case 'no':
+            $use_splash = false;
+            break;
+        default:
+            // Use the value calculated before
     }
-    $user_params_clean = $api->set_params($user_params);
+}
+if (isset($_POST['equity_submit_top']) || isset($_POST['equity_submit']) || isset($_POST['equity_cancel_top']) || isset($_POST['equity_cancel'])) {
     $use_splash = false;
 }
 
 $ambition = $api->pathwayIds[$api->pathway_default];
-// GET trumps default
+// GET, POST, or session trump default
 if (isset($user_params['emergency_path'])) {
     $ambition = $user_params['emergency_path'];
 }
-// POST trumps GET
+// Can also POST a value from the interface, which trumps other values
 if (isset($_POST['ambition'])) {
     $ambition = $_POST['ambition'];
 }
@@ -62,7 +85,6 @@ if (isset($_POST['country'])) {
 }
 if (!is_null($country)) {
     $html = getResults($country, $ambition);
-    //$html = resultsTest();
 } else {
     $html = $resultsDefault;
 }
@@ -106,7 +128,7 @@ if (!is_null($country)) {
   </head>  
   <body class="group">
             <?php
-            if ($use_splash) {
+                if ($use_splash) {
                 echo '<div id="lightbox"></div>';
                 echo '<div id="equity_settings_container">';
                 include_once 'includes/equity_settings_panel.inc.php';

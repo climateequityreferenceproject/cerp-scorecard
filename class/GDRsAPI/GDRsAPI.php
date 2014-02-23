@@ -109,12 +109,13 @@ class GDRsAPI
         $ok_params = array_keys($this->get('params'));
         $return_params = array();
         foreach (array_keys($new_params) as $param) {
-            if (in_array($param, $ok_params)) {
+            if (in_array($param, $ok_params) && is_numeric($new_params[$param])) {
                 $return_params[$param] = $new_params[$param];
             }
         }
         $this->_user_params = $return_params;
-        $_SESSION['user_params'] = $return_params;
+        $_SESSION['user_params'] = $this->_user_params;
+        $_SESSION['emergency_path'] = $this->_user_pathway;
         return $return_params;
     }
     
