@@ -27,6 +27,8 @@ $(function() {
     
     $("#equity_settings_button a").click(function() {
         var search_string = window.location.search;
+        var user_url = "user_url"; // For replaceState: any serializable object
+        
         // Get rid of any "splash=yes" inserted previously
         search_string = search_string.replace(/splash=yes/gi, '');
         // Might leave double &&s if embedded in the string -- collapse to a single &
@@ -39,7 +41,7 @@ $(function() {
             search_string += '&';
         }
         search_string += 'splash=yes';
-        window.location = window.location.pathname + search_string;
+        history.replaceState(user_url, "", window.location.pathname + search_string);
     });
     
     $('#dev-low, #dev-med').click(function() {
@@ -217,6 +219,8 @@ function rewrite_url(form, show_splash) {
     var form_obj = $(form).serializeArray();
     var have_elem = false;
     var re = / /;
+    var user_url = "user_url"; // For replaceState: any serializable object
+        
     jQuery.each(form_obj, function(i, elem) {
         switch (elem.name) {
             case 'ambition':
@@ -239,7 +243,7 @@ function rewrite_url(form, show_splash) {
         if (!show_splash) {
             search_string = search_string.replace(/splash=yes/gi, '');
         }
-        window.location = window.location.pathname + search_string;
+        history.replaceState(user_url, "", window.location.pathname + search_string);
     }
 }
 
