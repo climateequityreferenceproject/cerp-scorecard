@@ -41,7 +41,7 @@ $(function() {
             search_string += '&';
         }
         search_string += 'splash=yes';
-        history.replaceState(user_url, "", window.location.pathname + search_string);
+        window.location = window.location.pathname + search_string;
     });
     
     $('#dev-low, #dev-med').click(function() {
