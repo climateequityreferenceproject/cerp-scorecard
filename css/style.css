@@ -353,6 +353,7 @@ span.label_right {position:absolute; right:0; text-align:right; top:0;}
 .glossary nav {margin:0;}
 .glossary #main div p, .glossary #main div dl, .glossary #main div li {padding-left:1em;}
 .glossary #main div p, .glossary #main div li {line-height:1.4; margin-top:0.75em; padding-top:0;}
+.glossary #main div ul ul li, .glossary #main div ol ol li  {padding-left:2em;}
 
 img.left {float:left; margin-right:2em;}
 img.right {float:right; margin-left:2em;}
