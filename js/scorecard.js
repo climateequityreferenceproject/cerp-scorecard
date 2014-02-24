@@ -2,6 +2,18 @@ $(function() {
     // We will override this
     $('#submit').hide();
     
+    // Get rid of any "equity_...&" in the URL if a GET
+    if (true) {
+        var search_string = window.location.search;
+        var user_url = "user_url"; // For replaceState: any serializable object
+        search_string = search_string.replace(/equity[^&]*/gi, '');
+        // Might leave double &&s if embedded in the string -- collapse to a single &
+        search_string = search_string.replace(/&&/g, '&');
+        // Or might leave a stranded & at the end of the string -- get rid of it
+        search_string = search_string.replace(/&$/, '');
+        history.replaceState(user_url, "", window.location.pathname + search_string);
+    }
+    
     $("#settings :input").change(update_pledge_controls);
     $("#pledge_controls").change(submit);
     $("#switch_view").click(function() {
@@ -27,7 +39,6 @@ $(function() {
     
     $("#equity_settings_button a").click(function() {
         var search_string = window.location.search;
-        var user_url = "user_url"; // For replaceState: any serializable object
         
         // Get rid of any "splash=yes" inserted previously
         search_string = search_string.replace(/splash=yes/gi, '');
@@ -55,9 +66,17 @@ $(function() {
     
     $('#r100, #r50c50, #c100').click(cbdr_select);
     
-    $("#equity_settings :input").change(function() {
-        // Possibly rewrite the URL to make sure all is in sync
-        rewrite_url('#equity_settings', true);
+    $("#equity_cancel, #equity_cancel_top").click(function() {
+        $('#equity_settings_container, #lightbox').remove();
+        // Short-circuit form submission
+        return false;
+    });
+    
+    $("#equity_submit, #equity_submit_top").click(function() {
+        rewrite_url("#equity_settings", false);
+        location.reload(false);
+        // Short-circuit form submission
+        return false;
     });
     
     $('#equity_reset, #equity_reset_top').click(function() {
@@ -197,27 +216,10 @@ function update_pledge_controls() {
     );
 }
 
-//function rewrite_url(form, show_splash) {
-//    // Possibly rewrite the URL to ensure pathway is in sync
-//    var re = /emergency_path=\d+/;
-//    var search_string = window.location.search;
-//    if (re.test(search_string)) {
-//        var pwID = $('input[name=ambition]:checked', form).val();
-//        search_string = search_string.replace(re, 'emergency_path=' + pwID.toString());
-//        // Get rid of any "splash=yes" inserted previously
-//        if (!show_splash) {
-//            search_string = search_string.replace(/splash=yes/gi, '');
-//        }
-//        window.location = window.location.pathname + search_string;
-//    }
-//    console.log($(form).serializeArray());
-//}
-
 function rewrite_url(form, show_splash) {
     // Possibly rewrite the URL to ensure chosen values are in sync
     var search_string = window.location.search;
     var form_obj = $(form).serializeArray();
-    var have_elem = false;
     var re = / /;
     var user_url = "user_url"; // For replaceState: any serializable object
         
@@ -226,9 +228,6 @@ function rewrite_url(form, show_splash) {
             case 'ambition':
                 name = 'emergency_path';
                 break;
-            case 'country':
-                name = 'iso3';
-                break;
             default:
                 name = elem.name;
         }
@@ -236,15 +235,19 @@ function rewrite_url(form, show_splash) {
         if (re.test(search_string)) {
             have_elem = true;
             search_string = search_string.replace(re, name + '=' + elem.value);
+        } else {
+            search_string += '&' + name + '=' + elem.value;
         }
     });
-    if (have_elem) {
-        // Get rid of any "splash=yes" inserted previously
-        if (!show_splash) {
-            search_string = search_string.replace(/splash=yes/gi, '');
-        }
-        history.replaceState(user_url, "", window.location.pathname + search_string);
+    // Get rid of any "splash=yes" inserted previously
+    if (!show_splash) {
+        search_string = search_string.replace(/splash=yes/gi, '');
     }
+    // Make sure no double &'s -- collapse to a single &
+    search_string = search_string.replace(/&&/g, '&');
+    // Make sure no trailing &'s
+    search_string = search_string.replace(/&$/, '');
+    history.replaceState(user_url, "", window.location.pathname + search_string);
 }
 
 function submit(cmds) {

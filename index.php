@@ -62,7 +62,7 @@ if (isset($user_params['splash'])) {
             // Use the value calculated before
     }
 }
-if (isset($_POST['equity_submit_top']) || isset($_POST['equity_submit']) || isset($_POST['equity_cancel_top']) || isset($_POST['equity_cancel'])) {
+if (isset($user_params['equity_submit_top']) || isset($user_params['equity_submit']) || isset($user_params['equity_cancel_top']) || isset($user_params['equity_cancel'])) {
     $use_splash = false;
 }
 
@@ -73,15 +73,12 @@ if (isset($user_params['emergency_path'])) {
 }
 // Can also POST a value from the interface, which trumps other values
 if (isset($_POST['ambition'])) {
-    $ambition = $_POST['ambition'];
+    $ambition = (int) $_POST['ambition'];
 }
 
 $country = null;
-if (isset($user_params['country'])) {
+if (isset($user_params['country']) && $user_params['country'] !== 'none') {
     $country = $user_params['country'];
-}
-if (isset($_POST['country'])) {
-    $country = $_POST['country'];
 }
 if (!is_null($country)) {
     $html = getResults($country, $ambition);
