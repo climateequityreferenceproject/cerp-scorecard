@@ -239,7 +239,8 @@ function rewrite_url(form, show_splash) {
             search_string += '&' + name + '=' + elem.value;
         }
     });
-    // Get rid of any "splash=yes" inserted previously
+    // Get rid of any "splash=no" and "splash=yes" inserted previously
+    search_string = search_string.replace(/splash=no/gi, '');
     if (!show_splash) {
         search_string = search_string.replace(/splash=yes/gi, '');
     }
