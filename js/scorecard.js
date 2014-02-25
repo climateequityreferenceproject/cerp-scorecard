@@ -7,10 +7,7 @@ $(function() {
         var search_string = window.location.search;
         var user_url = "user_url"; // For replaceState: any serializable object
         search_string = search_string.replace(/equity[^&]*/gi, '');
-        // Might leave double &&s if embedded in the string -- collapse to a single &
-        search_string = search_string.replace(/&&/g, '&');
-        // Or might leave a stranded & at the end of the string -- get rid of it
-        search_string = search_string.replace(/&$/, '');
+        search_string = clean_query_string(search_string);
         history.replaceState(user_url, "", window.location.pathname + search_string);
     }
     
@@ -42,10 +39,7 @@ $(function() {
         
         // Get rid of any "splash=yes" inserted previously
         search_string = search_string.replace(/splash=yes/gi, '');
-        // Might leave double &&s if embedded in the string -- collapse to a single &
-        search_string = search_string.replace(/&&/g, '&');
-        // Or might leave a stranded & at the end of the string -- get rid of it
-        search_string = search_string.replace(/&$/, '');
+        search_string = clean_query_string(search_string);
         if (search_string === '') {
             search_string = '?';
         } else {
@@ -216,6 +210,23 @@ function update_pledge_controls() {
     );
 }
 
+function clean_query_string(s) {
+    // First trim, just in case
+    s = s.trim();
+    // Temporarily strip leading "?"
+    s = s.replace(/^\?/, '');
+    // Make sure no double &'s -- collapse to a single &
+    s = s.replace(/&&/g, '&');
+    // Make sure no leading or trailing &'s
+    s = s.replace(/^&|&$/, '');
+    // Add the leading "?", if there is anything there
+    if (s !== '') {
+        s = '?' + s;
+    }
+    
+    return s;
+}
+
 function rewrite_url(form, show_splash) {
     // Possibly rewrite the URL to ensure chosen values are in sync
     var search_string = window.location.search;
@@ -244,10 +255,7 @@ function rewrite_url(form, show_splash) {
     if (!show_splash) {
         search_string = search_string.replace(/splash=yes/gi, '');
     }
-    // Make sure no double &'s -- collapse to a single &
-    search_string = search_string.replace(/&&/g, '&');
-    // Make sure no trailing &'s
-    search_string = search_string.replace(/&$/, '');
+    search_string = clean_query_string(search_string);
     history.replaceState(user_url, "", window.location.pathname + search_string);
 }
 
