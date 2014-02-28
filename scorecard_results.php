@@ -186,13 +186,12 @@ EOHTML;
 $simple_text = <<<EOHTML
            <p>Given a $marker_pathway target, the $link_lower[gloss_mitreq] in $by_year is $glob_mit_req_GtCO2 gigatonnes.</p>
 
-            <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] 
-            of this $by_year global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
+            <p><span class="score $score_class">$country</span>&#8217;s $link_lower[gloss_fair] of this $by_year global mitigation requirement is $fair_share_perc%, which is $fair_share_MtCO2 
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge ($pledged_reduction_MtCO2 million tonnes)
             exceeds its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
                 
-            <p>In per-capita terms, $country&#8217;s $by_year fair share of the global mitigation requirement comes to $fair_share_percap tonnes. Its pledge is $pledge_percap 
-            tonnes per person, which exceeds that fair share by $pledge_gap_percap tonnes per person.  Its score is therefore $score.</p>
+            <p>In per-capita terms, $country&#8217;s fair share of the $by_year global mitigation requirement comes to $fair_share_percap tonnes. Its pledge is to reduce emissions by 
+            $pledge_percap tonnes per person, which exceeds that fair share by $pledge_gap_percap tonnes per person.  Its score is therefore $score.</p>
                 
             <p><strong>$weak_ambition_warning</strong></p>
             
@@ -208,7 +207,7 @@ $simple_text = <<<EOHTML
             million tonnes. $country&#8217;s $by_year $condition_string mitigation pledge ($pledged_reduction_MtCO2 tonnes)
             falls short of its fair share of the global effort by $pledge_gap_MtCO2 million tonnes. 
             
-            <p>In per-capita terms, $country&#8217;s $by_year fair share of the global mitigation requirement comes to $fair_share_percap tonnes. Its pledge, however, is only                 
+            <p>In per-capita terms, $country&#8217;s fair share of the $by_year global mitigation requirement comes to $fair_share_percap tonnes. Its reduction pledge, however, is only                 
             $pledge_percap tonnes per person, which falls short of its fair share by $pledge_gap_percap tonnes per person. Its score is therefore $score.</p>
                 
             <p><strong>$weak_ambition_warning</strong></p>
