@@ -150,7 +150,7 @@ function getResults($country_code, $pathway_id)
     $retval .= 'Score: ' . $score . '</span></p>';
 $score_intro_text = <<<EOHTML
     <p class="small_intro">A country&#8217;s pledge is scored against its fair share.  
-        The $link_lower[gloss_score] is given in tons per capita. 
+        The $link_lower[gloss_score] is given in tonnes per capita. 
         If a country&#8217;s pledge (domestic mitigation plus international finance) equals its fair share, its score is zero. 
         If its pledge falls short of its fair share, its score is negative. 
         If its pledge surpasses its fair share, its score is positive.</p>
