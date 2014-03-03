@@ -681,7 +681,7 @@ footer {font-size:80%;}
     text-align:center; 
     width:100%; }
 #equity_settings #cbdr-grid-container #top-label { margin:1em auto 0.25em; text-align:center; }
-#equity_settings #cbdr-grid-container #left-label, 
+#equity_settings #cbdr-grid-container #left-label { margin: 8em 8em; }
 #equity_settings #cbdr-grid-container #right-label { margin:8em 0; }
 #equity_settings #cbdr-grid-container #left-label { text-align:right; }
 #equity_settings #cbdr-grid-container #right-label { text-align:left; }
