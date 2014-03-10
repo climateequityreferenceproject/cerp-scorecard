@@ -14,7 +14,7 @@ if (isDev()) {
     <ul class="group">
         <li><a href="http://gdrights.org/scorecard-info/about" target="_blank">About the Scorecard</a></li> 
         <li><a href="<?php echo $calc_home_url;?>" target="_blank">Climate Equity Reference Calculator</a></li>
-        <li><a href="<?php echo $gloss_url;?>" target="_blank">Glossary</a></li>
-        <li class="last"><a href="http://gdrights.org/about" target="_blank">About Greenhouse Development Rights</a></li>
+        <li class="last"><a href="<?php echo $gloss_url;?>" target="_blank">Glossary</a></li>
+<!--        <li class="last"><a href="http://gdrights.org/about" target="_blank">About Greenhouse Development Rights</a></li>-->
     </ul>
 </div><!-- end #nav -->
