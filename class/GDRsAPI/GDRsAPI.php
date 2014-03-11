@@ -70,6 +70,20 @@ class GDRsAPI
     // TODO allow authors to identify in pathway db which are used here
     
     /**
+     * Say whether the scoreard is being called from a directory with "dev" in the name
+     * @return boolean 
+     */
+    private static function isDev() {
+        // Note: might return "0" (a correct, non-false value)--have to check for false
+        if (strpos($_SERVER['PHP_SELF'], 'dev')===false) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    
+    /**
      * Build a URL for a "GET" call to the API
      * 
      * A helper function for get.
@@ -161,6 +175,9 @@ class GDRsAPI
     public function get($to_get, $pwId=null)
     {
         $req = new HTTP_Request($this->_buildGet($to_get, $pwId));
+        if ($this->isDev()) {
+            $req->setBasicAuth("***REMOVED***", "***REMOVED***");
+        }
         $req->setMethod(HTTP_REQUEST_METHOD_GET);
         if (!PEAR::isError($req->sendRequest())) {
             if ($req->getResponseCode() == 200) {
@@ -183,6 +200,9 @@ class GDRsAPI
     public function db_exists($db) {
         $get_string = $this->_url . '?' . 'q=calc_ver&db=' . $db;
         $req = new HTTP_Request($get_string);
+        if ($this->isDev()) {
+            $req->setBasicAuth("***REMOVED***", "***REMOVED***");
+        }
         $req->setMethod(HTTP_REQUEST_METHOD_GET);
         if (!PEAR::isError($req->sendRequest())) {
             if ($req->getResponseCode() != 410) {
@@ -304,6 +324,9 @@ class GDRsAPI
         // Add in any generally defined user parameters: order matters, and post_array supercedes _user_paramers
         $post_array = array_merge($this->get_params(), $post_array);
         $req = new HTTP_Request($this->_url);
+        if ($this->isDev()) {
+            $req->setBasicAuth("***REMOVED***", "***REMOVED***");
+        }
         $req->setMethod(HTTP_REQUEST_METHOD_POST);
         // If pwId not defined, next line will throw an exception
         $db = $this->_getDB($pwId);
