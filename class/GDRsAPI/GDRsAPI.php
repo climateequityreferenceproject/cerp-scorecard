@@ -180,10 +180,11 @@ class GDRsAPI
         }
         $req->setMethod(HTTP_REQUEST_METHOD_GET);
         if (!PEAR::isError($req->sendRequest())) {
-            if ($req->getResponseCode() == 200) {
+            // if the API has moved to a new place (301) we accept that too...
+            if (($req->getResponseCode() == 200) || ($req->getResponseCode() == 301)) {
                 return (array) json_decode($req->getResponseBody());
             } else {
-                throw new GDRsAPIException('Error code ' . $req->getResponseCode());
+                throw new GDRsAPIException('Error code=' . $req->getResponseCode());
             }
         } else {
             throw new GDRsAPIException($req->getMessage());
@@ -224,9 +225,11 @@ class GDRsAPI
     private function __construct()
     {
         if (strpos($_SERVER['PHP_SELF'], 'dev')!==false) {
-            $this->_url = "http://gdrights.org/calculator_dev/api/";
+//            $this->_url = "http://gdrights.org/calculator_dev/api/";
+            $this->_url = "http://calculator-dev.climateequityreference.org/api/";
         } else {
-            $this->_url = "http://gdrights.org/calculator/api/";
+//            $this->_url = "http://gdrights.org/calculator/api/";
+            $this->_url = "http://calculator.climateequityreference.org/api/";
         }
         $response = $this->get('pathways');
         foreach ($this->_pathway_array as $key => $val) {
